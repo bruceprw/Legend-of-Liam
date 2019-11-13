@@ -39,19 +39,8 @@ public class FileReader
 				break;
 			Scanner addLine = new Scanner(temp);
 			subAdd(addLine);
-		}
-
-		for (int j = 0; j < board.length; j++)
-		{
-			for (int i = 0; i < board[j].length; i++)
-			{
-				System.out.print(board[j][i].getString());
-			}
-			System.out.println();
-		}
-		
+		}	
 		return board;
-
 	}
 
 	public void subAdd(Scanner line)
