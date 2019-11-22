@@ -10,8 +10,12 @@ public class FileReader
 	private int mapSizeY;
 	private String[] map;
 	private Elements[][] board;
+	private Elements[][] background;
+	private int playerX;
+	private int playerY;
+	
 
-	public Elements[][] read(String filePath) throws FileNotFoundException
+	public FileReader(String filePath) throws FileNotFoundException
 	{
 		File file = new File(filePath);
 		Scanner in = new Scanner(file);
@@ -21,9 +25,8 @@ public class FileReader
 		sizeScan.useDelimiter(",");
 		mapSizeX = sizeScan.nextInt();
 		mapSizeY = sizeScan.nextInt();
-		System.out.println(mapSizeX);
-		System.out.println(mapSizeY);
 		board = new Elements[mapSizeY][mapSizeX];
+		background = new Elements[mapSizeY][mapSizeX];
 		map = new String[mapSizeY];
 		for (int i = 0; i < mapSizeY; i++)
 		{
@@ -40,10 +43,52 @@ public class FileReader
 			Scanner addLine = new Scanner(temp);
 			subAdd(addLine);
 		}	
-		System.out.println(board[5][9]);
-		return board;
+		for(int y=0;y<board.length;y++)
+		{
+			for(int x=0;x<board[y].length;x++)
+			{
+				if (board[y][x]==null)
+					board[y][x]=new Empty();
+			}
+		}
+		for(int y=0;y<background.length;y++)
+		{
+			for(int x=0;x<background[y].length;x++)
+			{
+				if (background[y][x]==null)
+					background[y][x]=new Empty();
+			}
+		}
+		
+		for(int y = 0;y<board.length;y++)
+		{
+			for(int x =0; x<board[y].length;x++)
+			{
+				System.out.print(board[y][x].getString());
+			}
+			System.out.println();
+		}
+		for(int y = 0;y<background.length;y++)
+		{
+			for(int x =0; x<background[y].length;x++)
+			{
+				System.out.print(background[y][x].getString());
+			}
+			System.out.println();
+		}
+		
 	}
 
+	public Elements[][] getBackground()
+	{
+		return this.background;
+	}
+	
+	public Elements[][] getBoard()
+	{
+		return this.board;
+	}
+	
 	public void subAdd(Scanner line)
 	{
 		line.useDelimiter(",");
@@ -53,18 +98,50 @@ public class FileReader
 		switch (feature)
 		{
 		case "START":
-			System.out.println(x);
-			System.out.println(y);
+			playerX = x;
+			playerY = y;
 			board[y][x] = new Player();
 			break;
 		case "ENEMY":
 			String type = line.next();
-			String way = line.next();
 			if(type.equals("STRAIGHT"))
+			{
+				String way = line.next();
 				board[y][x] = new StraightEnemy(way);
+			}
+			else if(type.equals("WALLHUG"))
+			{
+				String way = line.next();
+				board[y][x] = new WallHuggingEnemy(way);
+			}
+			else if (type.equals("DUMB"))
+				board[y][x] = new DumbEnemy();
+			else if (type.equals("SMART"))
+				board[y][x] = new SmartEnemy();
 			break;
-		case "WATER":
-			board[y][x] = new Water();
+		case "RKEY":
+			board[y][x] = new RedKey();
+			break;
+		case "GKEY":
+			board[y][x] = new GreenKey();
+			break;
+		case "BKEY":
+			board[y][x] = new BlueKey();
+			break;
+		case "YKEY":
+			board[y][x] = new YellowKey();
+			break;
+		case "REDDOOR":
+			background[y][x] = new RedDoor();
+			break;
+		case "GREENDOOR":
+			background[y][x] = new GreenDoor();
+			break;
+		case "BLUEDOOR":
+			background[y][x] = new BlueDoor();
+			break;
+		case "YELLOWDOOR":
+			background[y][x] = new YellowDoor();
 			break;
 		}
 	}
@@ -74,47 +151,41 @@ public class FileReader
 		
 		for (int j = 0; j < temp.length; j++)
 		{
-			System.out.println(temp[j]);
 			for (int i = 0; i < temp[j].length(); i++)
 			{
-				System.out.println(i);
 				char temp1 = temp[j].charAt(i);
 				switch (temp1)
 				{
 				case '#':
-					board[j][i] = new Wall();
+					background[j][i] = new Wall();
 					break;
 				case ' ':
-					board[j][i] = new Space();
+					background[j][i] = new Space();
 					break;
 				case 'D':
-					board[j][i] = new Door();
+					background[j][i] = new Door();
 					break;
 				case 'G':
-					board[j][i] = new Goal();
+					background[j][i] = new Goal();
 					break;
 				case 'L':
-					board[j][i] = new Lava();
+					background[j][i] = new Lava();
 					break;
 				case 'W':
-					board[j][i] = new Water();
+					background[j][i] = new Water();
 					break;
 				case '@':
-					board[j][i] = new Teleporter();
+					background[j][i] = new Teleporter();
 					break;
 				case 'T':
 					board[j][i] = new Token();
 					break;
-				case 'K':
-					board[j][i] = new Key();
-					break;
 				case 'B':
-					board[j][i] = new Boot();
+					board[j][i] = new FireBoot();
 					break;
 				case 'F':
 					board[j][i] = new Flipper();
 					break;
-					
 				}
 			}
 		}
