@@ -79,6 +79,16 @@ public class FileReader
 		
 	}
 
+	public int getPlayerX()
+	{
+		return playerX;
+	}
+	
+	public int getPlayerY()
+	{
+		return playerY;
+	}
+	
 	public Element[][] getBackground()
 	{
 		return this.background;
