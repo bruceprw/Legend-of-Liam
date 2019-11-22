@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
  * @author Bruce Williams (972648)
  *
  */
-public class Player {
+public class Player  extends Element{
 	private String name;
 	private Image avatar;
 	private int score;

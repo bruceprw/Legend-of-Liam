@@ -5,7 +5,7 @@
  * @author Miles Singleton
  * @version 0.0
  */
-abstract class Enemy {
+abstract class Enemy  extends Element{
 
     /// the current X and Y position
     protected int currentPositionX;
