@@ -19,9 +19,14 @@ public class GameBoard
 		
 	}
 	
-	public Element[][] getMap()
+	public Element[][] getBoard()
 	{
 		return board;
+	}
+	
+	public Element[][] getBackground()
+	{
+		return background;
 	}
 	
 	
