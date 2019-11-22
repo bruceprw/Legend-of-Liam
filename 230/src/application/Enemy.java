@@ -1,3 +1,4 @@
+package application;
 
 /**
  * Enemy super class, abstract not be to called

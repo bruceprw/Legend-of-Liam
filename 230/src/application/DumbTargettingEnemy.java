@@ -1,3 +1,5 @@
+package application;
+
 /**
  * DumbTargettingEnemy.java
  * Class for dumb targeting enemy
