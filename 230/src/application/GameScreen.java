@@ -13,8 +13,8 @@ import javafx.scene.paint.Color;
 
 public class GameScreen extends Screen
 {
-	private static final int GAME_WIDTH = 600;
-	private static final int GAME_HEIGHT = 600;
+	private static final int GAME_WIDTH = 700;
+	private static final int GAME_HEIGHT = 700;
 
 	private BorderPane root;
 

@@ -23,9 +23,9 @@ public class GameBoard
 	
 	public void drawGame(GraphicsContext gc) throws FileNotFoundException
 	{
-		for(int y = playerY-3,j=0;y<playerY+3;y++,j+=100)
+		for(int y = playerY-3,j=0;y<playerY+4;y++,j+=100)
 		{
-			for(int x = playerX-3, i=0;x<playerX+3;x++,i+=100)
+			for(int x = playerX-3, i=0;x<playerX+4;x++,i+=100)
 			{
 				background[y][x].draw(gc,i,j);
 				board[y][x].draw(gc, i, j);
