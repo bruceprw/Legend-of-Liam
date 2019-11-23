@@ -47,7 +47,7 @@ public class FileReader
 			for (int x = 0; x < board[y].length; x++)
 			{
 				if(board[y][x] == null)
-					board[y][x] = new Space();
+					board[y][x] = new Ground();
 			}
 		}
 		for (int y = 0; y < background.length; y++)
@@ -55,7 +55,7 @@ public class FileReader
 			for (int x = 0; x < background[y].length; x++)
 			{
 				if(background[y][x] == null)
-					background[y][x] = new Space();
+					background[y][x] = new Ground();
 			}
 		}
 		/*

@@ -1,6 +1,6 @@
 package application;
 
-public class Cell {
+public class Cell extends Element{
 	// whether the cell can kill the user
 	private boolean harmable;
 	// sets if player is allowed to move to cell
