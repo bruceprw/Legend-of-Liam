@@ -20,7 +20,6 @@ public class FileReader
 		File file = new File(filePath);
 		Scanner in = new Scanner(file);
 		String sizeLine = in.nextLine();
-		System.out.println(sizeLine);
 		Scanner sizeScan = new Scanner(sizeLine);
 		sizeScan.useDelimiter(",");
 		mapSizeX = sizeScan.nextInt();
@@ -48,7 +47,7 @@ public class FileReader
 			for (int x = 0; x < board[y].length; x++)
 			{
 				if(board[y][x] == null)
-					board[y][x] = new Empty();
+					board[y][x] = new Space();
 			}
 		}
 		for (int y = 0; y < background.length; y++)
@@ -56,10 +55,10 @@ public class FileReader
 			for (int x = 0; x < background[y].length; x++)
 			{
 				if(background[y][x] == null)
-					background[y][x] = new Empty();
+					background[y][x] = new Space();
 			}
 		}
-
+		/*
 		for (int y = 0; y < board.length; y++)
 		{
 			for (int x = 0; x < board[y].length; x++)
@@ -75,7 +74,7 @@ public class FileReader
 				System.out.print(background[y][x].getString());
 			}
 			System.out.println();
-		}
+		}*/
 
 	}
 
@@ -110,24 +109,24 @@ public class FileReader
 		case "START":
 			playerX = x;
 			playerY = y;
-			board[y][x] = new Player("AA");
+			board[y][x] = new Player();
 			break;
 		case "ENEMY":
 			String type = line.next();
 			if(type.equals("STRAIGHT"))
 			{
 				String way = line.next();
-				board[y][x] = new StraightLineEnemy(x,y,true,way);
+				board[y][x] = new StraightLineEnemy(way);
 			}
 			else if(type.equals("WALLHUG"))
 			{
 				String way = line.next();
-				board[y][x] = new WallFollowingEnemy(x,y,way);
+				board[y][x] = new WallFollowingEnemy(way);
 			}
 			else if(type.equals("DUMB"))
-				board[y][x] = new DumbTargettingEnemy(x,y,true);
+				board[y][x] = new DumbTargettingEnemy();
 			else if(type.equals("SMART"))
-				board[y][x] = new SmartTargettingEnemy(x,y,true);
+				board[y][x] = new SmartTargettingEnemy();
 			break;
 		case "RKEY":
 			board[y][x] = new RedKey();
@@ -161,24 +160,24 @@ public class FileReader
 				switch (collecti)
 				{
 				case "TOKEN":
-					board[playerY][playerX].setInventory(1, num);
+					((Player) board[playerY][playerX]).setInventory(0, num);
 					break;
 				case "RKEY":
-					board[playerY][playerX].setInventory(2, num);
+					((Player) board[playerY][playerX]).setInventory(1, num);
 				case "GKEY":
-					board[playerY][playerX].setInventory(3, num);
+					((Player) board[playerY][playerX]).setInventory(2, num);
 					break;
 				case "BKEY":
-					board[playerY][playerX].setInventory(4, num);
+					((Player) board[playerY][playerX]).setInventory(3, num);
 					break;
 				case "YKEY":
-					board[playerY][playerX].setInventory(5, num);
+					((Player) board[playerY][playerX]).setInventory(4, num);
 					break;
 				case "BOOT":
-					board[playerY][playerX].setInventory(6,num);
+					((Player) board[playerY][playerX]).setInventory(5,num);
 					break;
 				case "FLIPPER":
-					board[playerY][playerX].setInventory(7,num);
+					((Player) board[playerY][playerX]).setInventory(6,num);
 					break;
 				}
 			}
@@ -220,7 +219,7 @@ public class FileReader
 				case 'T':
 					board[j][i] = new Token();
 					break;
-				case 'B':
+				case 'O':
 					board[j][i] = new FireBoot();
 					break;
 				case 'F':
