@@ -42,6 +42,35 @@ public class GameBoard
 		return playerY;
 	}
 	
+	public void move(String way)
+	{
+		switch (way)
+		{
+		case "right":
+			board[playerY][playerX+1]=board[playerY][playerX];
+			board[playerY][playerX]=new Empty();
+			playerX=playerX+1;
+			break;
+		case "left":
+			
+			board[playerY][playerX-1]=board[playerY][playerX];
+			board[playerY][playerX]=new Empty();
+			playerX =playerX-1;
+			break;
+		case "up":
+			board[playerY-1][playerX]=board[playerY][playerX];
+			board[playerY][playerX]=new Empty();
+			playerY = playerY-1;
+			break;
+		case "down":
+			board[playerY+1][playerX]=board[playerY][playerX];
+			board[playerY][playerX]=new Empty();
+			playerY=playerY+1;
+			break;
+		}
+		
+	}
+	
 	public Element[][] getBoard()
 	{
 		return this.board;

@@ -1,5 +1,11 @@
 package application;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
 /**
  * Smart targeting enemies
  * uses BFS to find player and chase
@@ -9,6 +15,8 @@ package application;
  */
 public class SmartTargettingEnemy extends Enemy
 {
+	private String path = "Images\\smart.jpg";
+	
     public SmartTargettingEnemy(int currentX,int currentY, boolean HV)
     {
         this.currentPositionX = currentX;
@@ -27,5 +35,11 @@ public class SmartTargettingEnemy extends Enemy
     public String getString()
     {
     	return"SMART";
+    }
+    
+    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+    {
+    	Image image = new Image(new FileInputStream(path));
+    	gc.drawImage(image, x, y);
     }
 }

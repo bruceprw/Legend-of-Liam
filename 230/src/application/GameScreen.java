@@ -68,15 +68,19 @@ public class GameScreen extends Screen
 		switch (event.getCode())
 		{
 		case RIGHT:
+			level.move("right");
 			break;
 
 		case LEFT:
+			level.move("left");
 			break;
 
 		case UP:
+			level.move("up");
 			break;
 
 		case DOWN:
+			level.move("down");
 			break;
 
 		default:
