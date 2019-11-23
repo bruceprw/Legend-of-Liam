@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import Collectibles.*;
 
 public class FileReader
 {
@@ -75,7 +76,8 @@ public class FileReader
 			}
 			System.out.println();
 		}*/
-
+		sizeScan.close();
+		in.close();
 	}
 
 	public int getPlayerX()
@@ -202,7 +204,7 @@ public class FileReader
 					background[j][i] = new Ground();
 					break;
 				case 'D':
-					background[j][i] = new Door();
+					background[j][i] = new TokenDoor();
 					break;
 				case 'G':
 					background[j][i] = new Goal();
