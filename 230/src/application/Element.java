@@ -6,4 +6,9 @@ public class Element
 	{
 		return"";
 	}
+	
+	public void draw()
+	{
+		
+	}
 }
