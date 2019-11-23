@@ -21,4 +21,6 @@ public class TokenDoor extends Cell {
     {
     	return tokenNumToUnlockDoor;
     }
+    
+    
 }
