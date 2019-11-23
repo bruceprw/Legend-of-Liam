@@ -38,9 +38,7 @@ public class LevelScreen extends Screen {
 			
 			Button b = new Button("" + (levelNo));
 			b.setOnAction(event -> {
-				Scene s = new GameScreen(levelNo).getScene();
-				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-				primaryStage.setScene(s);
+				switchScreen(new GameScreen(levelNo));
 			});
 			
 			b.setMinSize(LEVEL_BUTTON_SIZE, LEVEL_BUTTON_SIZE);

@@ -29,8 +29,8 @@ public class DailyMessage {
 		Scanner scan = new Scanner(connect.getInputStream());
 		String puzzle = scan.nextLine();
 		scan.close();
-		return puzzle;
 		
+		return puzzle;
 	}
 	
 	private static String solvePuzzle(String puzzle) {
