@@ -1,8 +1,8 @@
 package application;
 
-public class Fire extends Cell {
+public class Lava extends Cell {
 
-    public Fire() {
+    public Lava() {
         super(true, true, false, "", Item.FIRE_BOOTS);
     }
 

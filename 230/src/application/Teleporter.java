@@ -1,5 +1,5 @@
 package application;
 
-public class Teleporter {
+public class Teleporter extends Element{
 
 }

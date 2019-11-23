@@ -30,7 +30,7 @@ public class FileOutputer
 		
 		try
 		{
-			File outputFile = new File("C:\\Users\\user\\Desktop\\AndyLvl1.txt");
+			File outputFile = new File("LevelFiles\\AndyLvl1.txt");
 			PrintWriter out = new PrintWriter(outputFile);
 			out.print(output+temp);
 			out.close();
