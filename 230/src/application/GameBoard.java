@@ -12,22 +12,29 @@ public class GameBoard
 	public GameBoard(String filePath) throws FileNotFoundException
 	{
 		FileReader lvl = new FileReader(filePath);
-		board = lvl.getBoard();
-		background = lvl.getBackground();
-		playerX = lvl.getPlayerX();
-		playerY = lvl.getPlayerY();
+		this.board = lvl.getBoard();
+		this.background = lvl.getBackground();
+		playerX=lvl.getPlayerX();
+		playerY=lvl.getPlayerY();
 		
+	}
+	
+	public int getPlayerX()
+	{
+		return playerX;
+	}
+	public int getPlayerY()
+	{
+		return playerY;
 	}
 	
 	public Element[][] getBoard()
 	{
-		return board;
+		return this.board;
 	}
 	
 	public Element[][] getBackground()
 	{
-		return background;
+		return this.background;
 	}
-	
-	
 }

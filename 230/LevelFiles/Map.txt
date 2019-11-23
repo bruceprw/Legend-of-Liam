@@ -1,0 +1,23 @@
+10,7
+##########
+#L@  W  G#
+#D########
+# ### #B##
+# @TTT   #
+# ###F# ##
+##########
+1,5,START
+1,3,ENEMY,STRAIGHT,UP
+5,3,ENEMY,WALLHUG,UP
+6,4,ENEMY,DUMB
+7,4,ENEMY,SMART
+8,4,RKEY
+7,5,GKEY
+2,5,BKEY
+3,5,YKEY
+3,1,REDDOOR
+4,1,GREENDOOR
+6,1,BLUEDOOR
+7,1,YELLOWDOOR
+1,1,DOOR,3
+////

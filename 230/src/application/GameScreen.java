@@ -1,5 +1,7 @@
 package application;
 
+import java.io.FileNotFoundException;
+
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,11 +24,21 @@ public class GameScreen extends Screen{
 	private Button save;
 	private Button levelSelect;
 	
+	private GameBoard level;
+	
 	/**
 	 * 
 	 * @param levelNo Number of the level to be loaded.
 	 */
 	public GameScreen(int levelNo) {
+		try
+		{
+			level = new GameBoard("LevelFiles\\1.txt");
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 		root = new BorderPane();
 		game = new Canvas(GAME_WIDTH, GAME_HEIGHT);
 		buttonsPane = new HBox();

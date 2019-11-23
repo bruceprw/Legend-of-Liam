@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import Collectibles.*;
 
 import cell.Goal;
+import cell.Lava;
 import cell.Teleporter;
 import cell.Wall;
 import cell.Water;
@@ -25,7 +27,6 @@ public class FileReader
 		File file = new File(filePath);
 		Scanner in = new Scanner(file);
 		String sizeLine = in.nextLine();
-		System.out.println(sizeLine);
 		Scanner sizeScan = new Scanner(sizeLine);
 		sizeScan.useDelimiter(",");
 		mapSizeX = sizeScan.nextInt();
@@ -53,7 +54,7 @@ public class FileReader
 			for (int x = 0; x < board[y].length; x++)
 			{
 				if(board[y][x] == null)
-					board[y][x] = new Empty();
+					board[y][x] = new Ground();
 			}
 		}
 		for (int y = 0; y < background.length; y++)
@@ -61,10 +62,10 @@ public class FileReader
 			for (int x = 0; x < background[y].length; x++)
 			{
 				if(background[y][x] == null)
-					background[y][x] = new Empty();
+					background[y][x] = new Ground();
 			}
 		}
-
+		/*
 		for (int y = 0; y < board.length; y++)
 		{
 			for (int x = 0; x < board[y].length; x++)
@@ -80,8 +81,9 @@ public class FileReader
 				System.out.print(background[y][x].getString());
 			}
 			System.out.println();
-		}
-
+		}*/
+		sizeScan.close();
+		in.close();
 	}
 
 	public int getPlayerX()
@@ -115,24 +117,24 @@ public class FileReader
 		case "START":
 			playerX = x;
 			playerY = y;
-			board[y][x] = new Player();
+			board[y][x] = new Player("Name");
 			break;
 		case "ENEMY":
 			String type = line.next();
 			if(type.equals("STRAIGHT"))
 			{
 				String way = line.next();
-				board[y][x] = new StraightLineEnemy(way);
+				board[y][x] = new StraightLineEnemy(x,y,true,way);
 			}
 			else if(type.equals("WALLHUG"))
 			{
 				String way = line.next();
-				board[y][x] = new WallFollowingEnemy(way);
+				board[y][x] = new WallFollowingEnemy(x,y,way);
 			}
 			else if(type.equals("DUMB"))
-				board[y][x] = new DumbTargettingEnemy();
+				board[y][x] = new DumbTargettingEnemy(x,y,true);
 			else if(type.equals("SMART"))
-				board[y][x] = new SmartTargettingEnemy();
+				board[y][x] = new SmartTargettingEnemy(x,y,true);
 			break;
 		case "RKEY":
 			board[y][x] = new RedKey();
@@ -147,16 +149,20 @@ public class FileReader
 			board[y][x] = new YellowKey();
 			break;
 		case "REDDOOR":
-			background[y][x] = new RedDoor();
+			background[y][x] = new ColouredDoor("Red");
 			break;
 		case "GREENDOOR":
-			background[y][x] = new GreenDoor();
+			background[y][x] = new ColouredDoor("Green");
 			break;
 		case "BLUEDOOR":
-			background[y][x] = new BlueDoor();
+			background[y][x] = new ColouredDoor("Blue");
 			break;
 		case "YELLOWDOOR":
-			background[y][x] = new YellowDoor();
+			background[y][x] = new ColouredDoor("Yellow");
+			break;
+		case "DOOR":
+			int a = line.nextInt();
+			background[y][x] = new TokenDoor(a);
 			break;
 		case "INVENTORY":
 			while (line.hasNext())
@@ -166,24 +172,24 @@ public class FileReader
 				switch (collecti)
 				{
 				case "TOKEN":
-					board[playerY][playerX].setInventory(1, num);
+					((Player) board[playerY][playerX]).setInventory(0, num);
 					break;
 				case "RKEY":
-					board[playerY][playerX].setInventory(2, num);
+					((Player) board[playerY][playerX]).setInventory(1, num);
 				case "GKEY":
-					board[playerY][playerX].setInventory(3, num);
+					((Player) board[playerY][playerX]).setInventory(2, num);
 					break;
 				case "BKEY":
-					board[playerY][playerX].setInventory(4, num);
+					((Player) board[playerY][playerX]).setInventory(3, num);
 					break;
 				case "YKEY":
-					board[playerY][playerX].setInventory(5, num);
+					((Player) board[playerY][playerX]).setInventory(4, num);
 					break;
 				case "BOOT":
-					board[playerY][playerX].setInventory(6,num);
+					((Player) board[playerY][playerX]).setInventory(5,num);
 					break;
 				case "FLIPPER":
-					board[playerY][playerX].setInventory(7,num);
+					((Player) board[playerY][playerX]).setInventory(6,num);
 					break;
 				}
 			}
@@ -205,10 +211,7 @@ public class FileReader
 					background[j][i] = new Wall();
 					break;
 				case ' ':
-					background[j][i] = new Space();
-					break;
-				case 'D':
-					background[j][i] = new Door();
+					background[j][i] = new Ground();
 					break;
 				case 'G':
 					background[j][i] = new Goal();
@@ -225,7 +228,7 @@ public class FileReader
 				case 'T':
 					board[j][i] = new Token();
 					break;
-				case 'B':
+				case 'O':
 					board[j][i] = new FireBoot();
 					break;
 				case 'F':
