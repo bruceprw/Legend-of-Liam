@@ -63,6 +63,18 @@ public class FileOutputer
 	
 	public String setOutput(String output,String temp, Element[][] board, Element[][] background)
 	{
+		getSwitch(output,temp,board,background);
+
+		return output;
+	}
+	public String setTemp(String output,String temp, Element[][] board, Element[][] background)
+	{
+		getSwitch(output,temp,board,background);
+		return temp;
+	}
+	
+	public void getSwitch(String output,String temp,Element[][] board,Element[][] background)
+	{
 		for (int y = 0; y < board.length; y++)
 		{
 			for (int x = 0; x < board[y].length; x++)
@@ -166,113 +178,5 @@ public class FileOutputer
 			}
 			output += "\r\n";
 		}
-		return output;
-	}
-	public String setTemp(String output,String temp, Element[][] board, Element[][] background)
-	{
-		for (int y = 0; y < board.length; y++)
-		{
-			for (int x = 0; x < board[y].length; x++)
-			{
-				switch (board[y][x].getString())
-				{
-				case "T":
-					background[y][x] = board[y][x];
-					break;
-				case "RKEY":
-					temp += "" + x + "," + y + ",RKEY" + "\r\n";
-					break;
-				case "GKEY":
-					temp += "" + x + "," + y + ",GKEY" + "\r\n";
-					break;
-				case "BKEY":
-					temp += "" + x + "," + y + ",BKEY" + "\r\n";
-					break;
-				case "YKEY":
-					temp += "" + x + "," + y + ",YKEY" + "\r\n";
-					break;
-				case "F":
-					background[y][x] = board[y][x];
-					break;
-				case "O":
-					background[y][x] = board[y][x];
-					break;
-				case "START":
-					temp+=""+x+","+y+",START"+"\r\n";
-					break;
-				case "STRAIGHT":
-					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + ((StraightLineEnemy) board[y][x]).getDirection() + "\r\n";
-					break;
-				case "WALLHUG":
-					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + ((WallFollowingEnemy) board[y][x]).getDirection() + "\r\n";
-					break;
-				case "DUMB":
-					temp += "" + x + "," + y + ",ENEMY,DUMB" + "\r\n";
-					break;
-				case "SMART":
-					temp += "" + x + "," + y + ",ENEMY,SMART" + "\r\n";
-					break;
-				}
-			}
-
-		}
-
-		for (int y = 0; y < background.length; y++)
-		{
-			for (int x = 0; x < background[y].length; x++)
-			{
-				switch (background[y][x].getString())
-				{
-				case "#":
-					output += "#";
-					break;
-				case " ":
-					output += " ";
-					break;
-				case "D":
-					output += "D";
-					break;
-				case "G":
-					output += "G";
-					break;
-				case "L":
-					output += "L";
-					break;
-				case "W":
-					output += "W";
-					break;
-				case "@":
-					output += "@";
-					break;
-				case "REDDOOR":
-					output += " ";
-					temp += "" + x + "," + y + ",REDDOOR\r\n";
-					break;
-				case "GREENDOOR":
-					output += " ";
-					temp += "" + x + "," + y + ",GREENDOOR\r\n";
-					break;
-				case "BLUEDOOR":
-					output += " ";
-					temp += "" + x + "," + y + ",BLUEDOOR\r\n";
-					break;
-				case "YELLOWDOOR":
-					output += " ";
-					temp += "" + x + "," + y + ",YELLOWDOOR\r\n";
-					break;
-				case "T":
-					output += "T";
-					break;
-				case "F":
-					output += "F";
-					break;
-				case "O":
-					output += "O";
-					break;
-				}
-			}
-			output += "\r\n";
-		}
-		return temp;
 	}
 }
