@@ -6,4 +6,8 @@ public class Lava extends Cell {
         super(true, true, false, "", Item.FIRE_BOOTS);
     }
 
+    public String getString()
+    {
+    	return"L";
+    }
 }

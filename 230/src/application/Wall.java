@@ -6,4 +6,8 @@ public class Wall extends Cell {
         super(false, false, false, "", Item.NONE);
         
     } 
+    public String getString()
+    {
+    	return"#";
+    }
 }

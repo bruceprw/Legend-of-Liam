@@ -17,4 +17,8 @@ public class WallFollowingEnemy extends Enemy {
     {
     	return movDirection;
     }
+    public String getString()
+    {
+    	return"WALLHUG";
+    }
 }

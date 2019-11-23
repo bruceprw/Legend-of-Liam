@@ -30,6 +30,11 @@ public class Player  extends Element{
 		return name;
 	}
 
+    public String getString()
+    {
+    	return"START";
+    }
+	
 	public void setInventory(int position,int num)
 	{
 		inventory[position]=num;

@@ -6,4 +6,8 @@ public class Water extends Cell {
         super(true, true, false, "", Item.FLIPPER);
     }
 	
+    public String getString()
+    {
+    	return"W";
+    }
 }

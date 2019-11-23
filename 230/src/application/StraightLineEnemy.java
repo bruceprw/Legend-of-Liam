@@ -26,5 +26,10 @@ public class StraightLineEnemy extends Enemy {
     {
     	return movDirection;
     }
+    
+    public String getString()
+    {
+    	return"STRAIGHT";
+    }
 
 }

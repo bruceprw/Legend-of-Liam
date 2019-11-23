@@ -29,4 +29,8 @@ public class DumbTargettingEnemy extends Enemy
 
         //random direction
     }
+    public String getString()
+    {
+    	return"DUMB";
+    }
 }

@@ -23,4 +23,9 @@ public class SmartTargettingEnemy extends Enemy
         //move to nearest tile to player
         //see spaces as nodes to traverse
     }
+    
+    public String getString()
+    {
+    	return"SMART";
+    }
 }

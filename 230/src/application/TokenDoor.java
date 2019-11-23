@@ -11,4 +11,9 @@ public class TokenDoor extends Cell {
     @Override
     public boolean isPlayerMoved() {
     }
+    
+    public String getString()
+    {
+    	return"D";
+    }
 }

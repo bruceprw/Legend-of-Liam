@@ -10,4 +10,9 @@ public class Ground extends Cell {
     public boolean moveToCell() {
         return true;
     }
+    
+    public String getString()
+    {
+    	return " ";
+    }
 }
