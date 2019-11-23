@@ -104,6 +104,9 @@ public class FileOutputer
 				case "SMART":
 					temp += "" + x + "," + y + ",ENEMY,SMART" + "\r\n";
 					break;
+				case "D":
+					temp+= "" + x + "," + y + ",DOOR,"+((TokenDoor)board[y][x]).getTokenNum()+"\r\n";
+					break;
 				}
 			}
 
@@ -120,9 +123,6 @@ public class FileOutputer
 					break;
 				case " ":
 					output += " ";
-					break;
-				case "D":
-					output += "D";
 					break;
 				case "G":
 					output += "G";

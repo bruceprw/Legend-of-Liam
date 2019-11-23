@@ -143,16 +143,20 @@ public class FileReader
 			board[y][x] = new YellowKey();
 			break;
 		case "REDDOOR":
-			background[y][x] = new RedDoor();
+			background[y][x] = new ColouredDoor("Red");
 			break;
 		case "GREENDOOR":
-			background[y][x] = new GreenDoor();
+			background[y][x] = new ColouredDoor("Green");
 			break;
 		case "BLUEDOOR":
-			background[y][x] = new BlueDoor();
+			background[y][x] = new ColouredDoor("Blue");
 			break;
 		case "YELLOWDOOR":
-			background[y][x] = new YellowDoor();
+			background[y][x] = new ColouredDoor("Yellow");
+			break;
+		case "DOOR":
+			int a = line.nextInt();
+			background[y][x] = new TokenDoor(a);
 			break;
 		case "INVENTORY":
 			while (line.hasNext())
@@ -202,9 +206,6 @@ public class FileReader
 					break;
 				case ' ':
 					background[j][i] = new Ground();
-					break;
-				case 'D':
-					background[j][i] = new TokenDoor();
 					break;
 				case 'G':
 					background[j][i] = new Goal();

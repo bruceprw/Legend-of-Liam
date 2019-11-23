@@ -1,9 +1,10 @@
 package application;
 
 public class ColouredDoor extends Cell {
-
-    public ColouredDoor(Item colouredKey) {
+	private String colour;
+	
+    public ColouredDoor(String colour) {
         super(false, true, false, "", colouredKey);
+        this.colour = colour;
     }
-
 }

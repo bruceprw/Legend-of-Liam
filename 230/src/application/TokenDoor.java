@@ -16,4 +16,9 @@ public class TokenDoor extends Cell {
     {
     	return"D";
     }
+    
+    public int getTokenNum()
+    {
+    	return tokenNumToUnlockDoor;
+    }
 }
