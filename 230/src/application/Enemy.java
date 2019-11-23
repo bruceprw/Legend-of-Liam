@@ -17,6 +17,7 @@ abstract class Enemy  extends Element{
     protected int nextPositionY;
 
     protected boolean direction;
+    protected String movDirection;
     // TODO rename this
     protected boolean bounce;
 

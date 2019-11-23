@@ -110,24 +110,24 @@ public class FileReader
 		case "START":
 			playerX = x;
 			playerY = y;
-			board[y][x] = new Player();
+			board[y][x] = new Player("AA");
 			break;
 		case "ENEMY":
 			String type = line.next();
 			if(type.equals("STRAIGHT"))
 			{
 				String way = line.next();
-				board[y][x] = new StraightLineEnemy(way);
+				board[y][x] = new StraightLineEnemy(x,y,true,way);
 			}
 			else if(type.equals("WALLHUG"))
 			{
 				String way = line.next();
-				board[y][x] = new WallFollowingEnemy(way);
+				board[y][x] = new WallFollowingEnemy(x,y,way);
 			}
 			else if(type.equals("DUMB"))
-				board[y][x] = new DumbTargettingEnemy();
+				board[y][x] = new DumbTargettingEnemy(x,y,true);
 			else if(type.equals("SMART"))
-				board[y][x] = new SmartTargettingEnemy();
+				board[y][x] = new SmartTargettingEnemy(x,y,true);
 			break;
 		case "RKEY":
 			board[y][x] = new RedKey();

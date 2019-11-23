@@ -13,7 +13,7 @@ public class Player  extends Element{
 	private String name;
 	private Image avatar;
 	private int score;
-	private int[] inventory; // Size of inventory size finalised when number of items finalised.
+	private int[] inventory= {0,0,0,0,0,0,0}; // Size of inventory size finalised when number of items finalised.
 	private int[][] pos;
 
 	public Player(String name) {
@@ -30,6 +30,16 @@ public class Player  extends Element{
 		return name;
 	}
 
+	public void setInventory(int position,int num)
+	{
+		inventory[position]=num;
+	}
+	
+	public int[] getInventory()
+	{
+		return inventory;
+	}
+	
 	public void setAvatar(Image avatar) {
 		this.avatar = avatar;
 	}
