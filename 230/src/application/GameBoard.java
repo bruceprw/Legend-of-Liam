@@ -19,6 +19,11 @@ public class GameBoard
 		
 	}
 	
+	public void drawGame()
+	{
+		
+	}
+	
 	public int getPlayerX()
 	{
 		return playerX;

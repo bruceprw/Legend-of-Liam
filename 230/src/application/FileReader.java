@@ -5,12 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Collectibles.*;
+import cell.*;
 
-import cell.Goal;
-import cell.Lava;
-import cell.Teleporter;
-import cell.Wall;
-import cell.Water;
 
 public class FileReader
 {
