@@ -1,5 +1,9 @@
 package application;
 
+import java.io.FileNotFoundException;
+
+import javafx.scene.canvas.GraphicsContext;
+
 public class Element
 {
 	public String getString()
@@ -7,7 +11,7 @@ public class Element
 		return"";
 	}
 	
-	public void draw()
+	public void draw(GraphicsContext gc, int x,int y) throws FileNotFoundException
 	{
 		
 	}

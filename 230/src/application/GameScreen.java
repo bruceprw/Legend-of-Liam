@@ -94,6 +94,16 @@ public class GameScreen extends Screen
 		GraphicsContext gc = game.getGraphicsContext2D();
 		gc.clearRect(0, 0, game.getWidth(), game.getHeight());
 
+		try
+		{
+			level.drawGame(gc);
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		// TEST - get rid of this
 		gc.setFill(Color.BLACK);
 		gc.strokeRect(0, 0, game.getWidth(), game.getHeight());
