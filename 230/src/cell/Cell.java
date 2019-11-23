@@ -28,6 +28,7 @@ public class Cell extends Element{
 		item = Item.NONE;
 	}
 
+	/*
 	public boolean isItemAdded() {
 		
 	}
@@ -42,7 +43,7 @@ public class Cell extends Element{
 	
 	public boolean isPlayerKilled() {
 
-	}
+	}*/
 
 	public boolean getIsHarmable() {
 		return harmable;

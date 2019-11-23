@@ -21,6 +21,14 @@ public class GameBoard
 	
 	public void drawGame()
 	{
+		int zero = 0;
+		int first = 100;
+		int second = 200;
+		int third = 300;
+		int forth = 400;
+		int fifth = 500;
+		
+		
 		
 	}
 	

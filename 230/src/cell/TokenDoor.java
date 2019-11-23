@@ -14,12 +14,12 @@ public class TokenDoor extends Cell {
         super(false, true, false, "", Item.NONE);
         this.tokenNumToUnlockDoor = tokenNumToUnlockDoor;
     }
-
+    /*
     @Override
     public boolean isPlayerMoved() {
-    }
+    }*/
 
-	public String getTokenNum()
+	public int getTokenNum()
 	{
 		
 		return tokenNumToUnlockDoor;
