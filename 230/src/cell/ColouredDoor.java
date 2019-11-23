@@ -34,15 +34,15 @@ public class ColouredDoor extends Cell {
     		gc.drawImage(image,x,y,50,50);
     		break;
     	case "Red":
-    		Image image1 = new Image(new FileInputStream(greenPath));
+    		Image image1 = new Image(new FileInputStream(redPath));
     		gc.drawImage(image1,x,y,50,50);
     		break;
     	case "Yellow":
-    		Image image2 = new Image(new FileInputStream(greenPath));
+    		Image image2 = new Image(new FileInputStream(yellowPath));
     		gc.drawImage(image2,x,y,50,50);
     		break;
     	case "Blue":
-    		Image image3 = new Image(new FileInputStream(greenPath));
+    		Image image3 = new Image(new FileInputStream(bluePath));
     		gc.drawImage(image3,x,y,50,50);
     		break;
     	}
