@@ -14,6 +14,6 @@ public class Token extends Element
     public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
     {
 		Image image = new Image(new FileInputStream(path));
-		gc.drawImage(image,x,y,50,50);
+		gc.drawImage(image,x,y,100,100);
     }
 }

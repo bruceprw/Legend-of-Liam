@@ -40,6 +40,6 @@ public class SmartTargettingEnemy extends Enemy
     public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
     {
     	Image image = new Image(new FileInputStream(path));
-    	gc.drawImage(image, x, y);
+    	gc.drawImage(image, x, y,100,100);
     }
 }

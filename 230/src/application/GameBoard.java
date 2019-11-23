@@ -2,12 +2,14 @@ package application;
 
 import java.io.FileNotFoundException;
 
+import cell.Fog;
 import javafx.scene.canvas.GraphicsContext;
 
 public class GameBoard
 {
 	private Element[][] board;
 	private Element[][] background;
+	private Fog[][] fog;
 	private int playerX;
 	private int playerY;
 	
@@ -52,7 +54,6 @@ public class GameBoard
 			playerX=playerX+1;
 			break;
 		case "left":
-			
 			board[playerY][playerX-1]=board[playerY][playerX];
 			board[playerY][playerX]=new Empty();
 			playerX =playerX-1;
@@ -68,7 +69,6 @@ public class GameBoard
 			playerY=playerY+1;
 			break;
 		}
-		
 	}
 	
 	public Element[][] getBoard()
