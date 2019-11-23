@@ -5,6 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import cell.Goal;
+import cell.Teleporter;
+import cell.Wall;
+import cell.Water;
+
 public class FileReader
 {
 	private int mapSizeX;

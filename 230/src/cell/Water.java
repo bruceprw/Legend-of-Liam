@@ -1,4 +1,4 @@
-package application;
+package cell;
 
 public class Water extends Cell {
 	

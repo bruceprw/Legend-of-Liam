@@ -1,4 +1,4 @@
-package application;
+package cell;
 
 public class TokenDoor extends Cell {
     private int tokenNumToUnlockDoor;

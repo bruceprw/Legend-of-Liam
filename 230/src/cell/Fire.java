@@ -1,4 +1,4 @@
-package application;
+package cell;
 
 public class Fire extends Cell {
 

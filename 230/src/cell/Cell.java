@@ -1,4 +1,4 @@
-package application;
+package cell;
 
 public class Cell {
 	// whether the cell can kill the user
