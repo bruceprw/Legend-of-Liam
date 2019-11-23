@@ -222,12 +222,15 @@ public class FileReader
 					background[j][i] = new Teleporter();
 					break;
 				case 'T':
+					background[j][i]=new Ground();
 					board[j][i] = new Token();
 					break;
 				case 'O':
+					background[j][i]=new Ground();
 					board[j][i] = new FireBoot();
 					break;
 				case 'F':
+					background[j][i]=new Ground();
 					board[j][i] = new Flipper();
 					break;
 				}

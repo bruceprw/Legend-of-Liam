@@ -34,7 +34,7 @@ public class GameScreen extends Screen
 	{
 		try
 		{
-			level = new GameBoard("LevelFiles\\1.txt");
+			level = new GameBoard("LevelFiles\\"+levelNo+".txt");
 		}
 		catch (FileNotFoundException e)
 		{
