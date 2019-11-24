@@ -4,14 +4,9 @@ import java.io.FileNotFoundException;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class Element
+public class Empty extends Element
 {
-	public String getString()
-	{
-		return"";
-	}
-	
-	public void draw(GraphicsContext gc, int x,int y)
+	public void draw(GraphicsContext gc,int x, int y)
 	{
 		
 	}

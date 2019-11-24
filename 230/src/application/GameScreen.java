@@ -13,8 +13,8 @@ import javafx.scene.paint.Color;
 
 public class GameScreen extends Screen
 {
-	private static final int GAME_WIDTH = 600;
-	private static final int GAME_HEIGHT = 600;
+	private static final int GAME_WIDTH = 700;
+	private static final int GAME_HEIGHT = 700;
 
 	private BorderPane root;
 
@@ -29,12 +29,13 @@ public class GameScreen extends Screen
 	/**
 	 * 
 	 * @param levelNo Number of the level to be loaded.
+	 * @throws InterruptedException 
 	 */
 	public GameScreen(int levelNo)
 	{
 		try
 		{
-			level = new GameBoard("LevelFiles\\1.txt");
+			level = new GameBoard("LevelFiles\\"+levelNo+".txt");
 		}
 		catch (FileNotFoundException e)
 		{
@@ -68,15 +69,19 @@ public class GameScreen extends Screen
 		switch (event.getCode())
 		{
 		case RIGHT:
+			level.move("right");
 			break;
 
 		case LEFT:
+			level.move("left");
 			break;
 
 		case UP:
+			level.move("up");
 			break;
 
 		case DOWN:
+			level.move("down");
 			break;
 
 		default:
@@ -94,6 +99,16 @@ public class GameScreen extends Screen
 		GraphicsContext gc = game.getGraphicsContext2D();
 		gc.clearRect(0, 0, game.getWidth(), game.getHeight());
 
+		try
+		{
+			level.drawGame(gc);
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		// TEST - get rid of this
 		gc.setFill(Color.BLACK);
 		gc.strokeRect(0, 0, game.getWidth(), game.getHeight());
