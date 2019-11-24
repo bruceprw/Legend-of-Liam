@@ -31,4 +31,5 @@ public class BlueKey extends Element
     {
 		gc.drawImage(image,x,y,100,100);
     }
+    
 }

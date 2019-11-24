@@ -1,8 +1,11 @@
 package application;
 
 import java.io.FileNotFoundException;
+
+import Collectibles.Token;
 import cell.Fog;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.text.Font;
 
 public class GameBoard
 {
@@ -47,7 +50,7 @@ public class GameBoard
 	public void drawGame(GraphicsContext gc) throws FileNotFoundException
 	{
 
-		for (int y = playerY - 3, j = 0; y < playerY + 4; y++, j += 100)
+		for (int y = playerY - 2, j = 0; y < playerY + 3; y++, j += 100)
 		{
 			for (int x = playerX - 3, i = 0; x < playerX + 4; x++, i += 100)
 			{
@@ -57,7 +60,8 @@ public class GameBoard
 		}
 		// TimeUnit.SECONDS.sleep(2);
 		setFog();
-		drawFog(gc);
+		//drawItem(gc);
+		//drawFog(gc);
 	}
 
 	public int getPlayerX()
@@ -69,6 +73,15 @@ public class GameBoard
 	{
 		return playerY;
 	}
+	
+	public void drawItem(GraphicsContext gc) throws FileNotFoundException
+	{
+		int [] temp = ((Player)board[playerY][playerX]).getInventory();
+		Token token = new Token();
+		gc.drawImage(token.getImage(), 0, 500,100,100);
+		gc.setFont(new Font("Arial",50));
+		gc.strokeText(": "+temp[0], 100,560 );
+	}
 
 	public void move(String way)
 	{
@@ -76,7 +89,7 @@ public class GameBoard
 		switch (way)
 		{
 		case "right":
-			if(playerX != board[0].length - 4)
+			if(playerX != board[0].length - 6)
 			{
 				board[playerY][playerX + 1] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
@@ -85,7 +98,7 @@ public class GameBoard
 			break;
 
 		case "left":
-			if(playerX != 3)
+			if(playerX != 5)
 			{
 				board[playerY][playerX - 1] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();

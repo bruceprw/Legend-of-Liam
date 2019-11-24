@@ -17,6 +17,11 @@ public class Token extends Element
 		setImage();
 	}
 	
+	public Image getImage()
+	{
+		return image;
+	}
+	
 	public void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
