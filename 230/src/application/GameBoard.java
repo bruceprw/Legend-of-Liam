@@ -11,7 +11,6 @@ import Collectibles.RedKey;
 import Collectibles.Token;
 import Collectibles.YellowKey;
 import cell.Cell;
-import cell.Fog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
 
@@ -75,7 +74,7 @@ public class GameBoard
 			System.out.print(temp[i]);
 		}
 		System.out.println();
-		 drawItem(gc);
+		drawItem(gc);
 		// drawFog(gc);
 	}
 
