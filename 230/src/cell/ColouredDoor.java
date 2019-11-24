@@ -15,10 +15,13 @@ public class ColouredDoor extends Cell {
 	private String yellowPath = "Images\\yellow_door.jpg";
 	private String bluePath = "Images\\blue_door.jpg";
 	private Image image;
+	private boolean opened;
+	
 	
     public ColouredDoor(String colour) throws FileNotFoundException {
         super(false, true, false, "", Item.GREEN_KEY);
         this.colour = colour;
+        this.opened=false;
         setImage(colour);
     }
     
@@ -26,6 +29,16 @@ public class ColouredDoor extends Cell {
     {
     	return colour;
     }
+    
+    public void openDoor()
+    {
+    	opened=true;
+    }
+    
+	public boolean getOpened()
+	{
+		return opened;
+	}
     
     public void draw(GraphicsContext gc,int x,int y)
     {

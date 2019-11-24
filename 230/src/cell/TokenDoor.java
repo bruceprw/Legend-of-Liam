@@ -10,10 +10,12 @@ public class TokenDoor extends Cell {
     private int tokenNumToUnlockDoor;
     private String path = "Images\\token_door.jpg";
     private Image image;
+    private boolean opened;
 
     public TokenDoor(int tokenNumToUnlockDoor) throws FileNotFoundException {
         super(false, true, false, "", Item.NONE);
         this.tokenNumToUnlockDoor = tokenNumToUnlockDoor;
+        this.opened=false;
         setImage();
     }
     /*
@@ -25,6 +27,16 @@ public class TokenDoor extends Cell {
 	{
 		
 		return tokenNumToUnlockDoor;
+	}
+	
+	public void openDoor()
+	{
+		this.opened=true;
+	}
+	
+	public boolean getOpened()
+	{
+		return opened;
 	}
 	
 	public void setImage() throws FileNotFoundException

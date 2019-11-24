@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 
 import Collectibles.Collectible;
 import cell.Cell;
+import cell.ColouredDoor;
+import cell.TokenDoor;
 import javafx.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -110,37 +112,73 @@ public class Player extends Element
 		switch (cell.getString())
 		{
 		case "GREENDOOR":
-			if(checkInventory(2))
+			if(((ColouredDoor) cell).getOpened())
 			{
-				dropCol(2);
 				return true;
 			}
 			else
-				return false;
+			{
+				if(checkInventory(2))
+				{
+					dropCol(2);
+					((ColouredDoor)cell).openDoor();
+					return true;
+				}
+				else
+					return false;
+			}
+
 		case "REDDOOR":
-			if(checkInventory(1))
+			if(((ColouredDoor) cell).getOpened())
 			{
-				dropCol(1);
 				return true;
 			}
 			else
-				return false;
+			{
+				if(checkInventory(1))
+				{
+					dropCol(1);
+					((ColouredDoor)cell).openDoor();
+					return true;
+				}
+				else
+					return false;
+			}
+
 		case "YELLOWDOOR":
-			if(checkInventory(4))
+			if(((ColouredDoor) cell).getOpened())
 			{
-				dropCol(4);
 				return true;
 			}
 			else
-				return false;
+			{
+				if(checkInventory(4))
+				{
+					dropCol(4);
+					((ColouredDoor)cell).openDoor();
+					return true;
+				}
+				else
+					return false;
+			}
+
 		case "BLUEDOOR":
-			if(checkInventory(3))
+			if (((ColouredDoor)cell).getOpened())
 			{
-				dropCol(3);
 				return true;
 			}
 			else
-				return false;
+			{
+				if(checkInventory(3))
+				{
+					dropCol(3);
+					((ColouredDoor)cell).openDoor();
+					return true;
+				}
+				else
+					return false;
+			}
+
 		case "W":
 			if(checkInventory(6))
 			{
@@ -152,13 +190,22 @@ public class Player extends Element
 		case "#":
 			return false;
 		case "D":
-			if(checkInventory(0))
+			if (((ColouredDoor)cell).getOpened())
 			{
-				dropCol(0);
 				return true;
 			}
 			else
-				return false;
+			{
+				if(checkInventory(0))
+				{
+					dropCol(0);
+					((TokenDoor)cell).openDoor();
+					return true;
+				}
+				else
+					return false;
+			}
+
 		case "@":
 			return true;
 		case "L":
