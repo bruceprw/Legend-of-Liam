@@ -1,17 +1,14 @@
 package application;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.Writer;
 import cell.*;
 
 public class FileOutputer
 {
 	private GameBoard lvl;
 	private String output = "";
+	private String temp = "";
 	private Element[][] background;
 	private Element[][] board;
 
@@ -22,12 +19,11 @@ public class FileOutputer
 		background = lvl.getBackground();
 		board = lvl.getBoard();
 		output += "" + background[0].length + "," + background.length + "\r\n";
-		String temp = "";
 		
-		output = setOutput(output,temp,board,background);
-		temp = setTemp(output,temp,board,background);
+		setOutput(board,background);
+		//setTemp(board,background);
 
-		temp=setRemain(temp,lvl,board);
+		setRemain(lvl,board);
 		
 		try
 		{
@@ -41,12 +37,12 @@ public class FileOutputer
 		}
 		
 		
-		//String finalOutput = output + temp;
-		//System.out.println(finalOutput);
+		String finalOutput = output + temp;
+		System.out.println(finalOutput);
 		//System.out.println(temp);
 	}
 	
-	public String setRemain(String temp, GameBoard lvl, Element[][] board)
+	public void setRemain(GameBoard lvl, Element[][] board)
 	{
 		int[] inventory = ((Player) board[lvl.getPlayerY()][lvl.getPlayerX()]).getInventory();
 		temp+="0,0,INVENTORY,";
@@ -58,22 +54,19 @@ public class FileOutputer
 		temp+="BOOT,"+inventory[5]+",";
 		temp+="FLIPPER,"+inventory[6]+"\r\n";
 		temp+="////";
-		return temp;
 	}
 	
-	public String setOutput(String output,String temp, Element[][] board, Element[][] background)
+	public void setOutput(Element[][] board, Element[][] background)
 	{
-		getSwitch(output,temp,board,background);
-
-		return output;
-	}
-	public String setTemp(String output,String temp, Element[][] board, Element[][] background)
-	{
-		getSwitch(output,temp,board,background);
-		return temp;
+		getSwitch(board,background);
 	}
 	
-	public void getSwitch(String output,String temp,Element[][] board,Element[][] background)
+	public void setTemp(Element[][] board, Element[][] background)
+	{
+		getSwitch(board,background);
+	}
+	
+	public void getSwitch(Element[][] board,Element[][] background)
 	{
 		for (int y = 0; y < board.length; y++)
 		{
@@ -118,11 +111,10 @@ public class FileOutputer
 					temp += "" + x + "," + y + ",ENEMY,SMART" + "\r\n";
 					break;
 				case "D":
-					temp+= "" + x + "," + y + ",DOOR,"+((TokenDoor)board[y][x]).getTokenNum()+"\r\n";
+					
 					break;
 				}
 			}
-
 		}
 
 		for (int y = 0; y < background.length; y++)
@@ -148,6 +140,10 @@ public class FileOutputer
 					break;
 				case "@":
 					output += "@";
+					break;
+				case "D":
+					output+=" ";
+					temp+= "" + x + "," + y + ",DOOR,"+((TokenDoor)background[y][x]).getTokenNum()+"\r\n";
 					break;
 				case "REDDOOR":
 					output += " ";

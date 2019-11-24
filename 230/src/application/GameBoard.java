@@ -17,7 +17,7 @@ import javafx.scene.text.Font;
 public class GameBoard
 {
 	private Element[][] board;
-	private Cell[][] background;
+	private Element[][] background;
 	private Element[][] fog;
 	private int playerX;
 	private int playerY;
@@ -120,7 +120,7 @@ public class GameBoard
 		switch (way)
 		{
 		case "right":
-			if(((Player) board[playerY][playerX]).movable(background[playerY][playerX + 1]))
+			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1]))
 			{
 				if(board[playerY][playerX + 1] instanceof Collectible)
 					acquire((Collectible) board[playerY][playerX + 1]);
@@ -130,7 +130,7 @@ public class GameBoard
 			}
 			break;
 		case "left":
-			if(((Player) board[playerY][playerX]).movable(background[playerY][playerX - 1]))
+			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1]))
 			{
 				if(board[playerY][playerX - 1] instanceof Collectible)
 					acquire((Collectible) board[playerY][playerX - 1]);
@@ -141,7 +141,7 @@ public class GameBoard
 			}
 			break;
 		case "up":
-			if(((Player) board[playerY][playerX]).movable(background[playerY - 1][playerX]))
+			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX]))
 			{
 				if(board[playerY - 1][playerX] instanceof Collectible)
 					acquire((Collectible) board[playerY - 1][playerX]);
@@ -152,7 +152,7 @@ public class GameBoard
 			}
 			break;
 		case "down":
-			if(((Player) board[playerY][playerX]).movable(background[playerY + 1][playerX]))
+			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX]))
 			{
 				if(board[playerY + 1][playerX] instanceof Collectible)
 					acquire((Collectible) board[playerY + 1][playerX]);

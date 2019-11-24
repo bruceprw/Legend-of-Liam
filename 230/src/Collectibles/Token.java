@@ -29,5 +29,9 @@ public class Token extends Collectible
 		image = new Image(new FileInputStream(path));
 	}
 	
+	public String getString()
+	{
+		return "T";
+	}
 
 }
