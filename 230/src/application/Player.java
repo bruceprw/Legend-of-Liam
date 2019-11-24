@@ -41,10 +41,15 @@ public class Player  extends Element{
     {
     	return"START";
     }
+    
+    public void acquireInventory(int position)
+    {
+    	inventory[position]++;
+    }
 	
 	public void setInventory(int position,int num)
 	{
-		inventory[position]=num;
+		inventory[position]+=num;
 	}
 	
 	public int[] getInventory()

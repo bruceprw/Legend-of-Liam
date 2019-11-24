@@ -7,13 +7,14 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Teleporter extends Element{
+public class Teleporter extends Cell{
 	
 	private String path = "Images\\teleporter.jpg";
 	private Image image;
 
 	public Teleporter() throws FileNotFoundException
 	{
+		super(false, true, true, "", Item.NONE);
 		setImage();
 	}
 	

@@ -2,7 +2,9 @@ package application;
 
 import java.io.FileNotFoundException;
 
+import Collectibles.Collectibles;
 import Collectibles.Token;
+import cell.Cell;
 import cell.Fog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
@@ -60,6 +62,13 @@ public class GameBoard
 		}
 		// TimeUnit.SECONDS.sleep(2);
 		setFog();
+		
+		int[] temp = ((Player)board[playerY][playerX]).getInventory();
+		for(int i=0;i<7;i++)
+		{
+			System.out.print(temp[i]);
+		}
+		System.out.println();
 		//drawItem(gc);
 		//drawFog(gc);
 	}
@@ -85,37 +94,47 @@ public class GameBoard
 
 	public void move(String way)
 	{
-
 		switch (way)
 		{
 		case "right":
-			if(playerX != board[0].length - 6)
+			if(((Cell) background[playerY][playerX+1]).getIsPlayerAllowed())
 			{
+				if (board[playerY][playerX+1] instanceof Collectibles)
+					acquire((Collectibles)board[playerY][playerX+1]);
+				
 				board[playerY][playerX + 1] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
 				playerX = playerX + 1;
 			}
 			break;
-
 		case "left":
-			if(playerX != 5)
+			if(((Cell) background[playerY][playerX-1]).getIsPlayerAllowed())
 			{
+				if (board[playerY][playerX-1] instanceof Collectibles)
+					acquire((Collectibles)board[playerY][playerX-1]);
+
 				board[playerY][playerX - 1] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
 				playerX = playerX - 1;
 			}
 			break;
 		case "up":
-			if(playerY != 3)
+			if(((Cell) background[playerY-1][playerX]).getIsPlayerAllowed())
 			{
+				if (board[playerY-1][playerX] instanceof Collectibles)
+					acquire((Collectibles)board[playerY-1][playerX]);
+
 				board[playerY - 1][playerX] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
 				playerY = playerY - 1;
 			}
 			break;
 		case "down":
-			if(playerY != board.length - 4)
+			if(((Cell) background[playerY+1][playerX]).getIsPlayerAllowed())
 			{
+				if (board[playerY+1][playerX] instanceof Collectibles)
+					acquire((Collectibles)board[playerY+1][playerX]);
+
 				board[playerY + 1][playerX] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
 				playerY = playerY + 1;
@@ -123,6 +142,11 @@ public class GameBoard
 			break;
 		}
 	}
+    
+    public void acquire(Collectibles co)
+    {
+    	((Player)board[playerY][playerX]).acquireInventory(co.getIndex());
+    }
 
 	public Element[][] getBoard()
 	{

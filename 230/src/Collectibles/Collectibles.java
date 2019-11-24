@@ -20,8 +20,11 @@ public class Collectibles extends Element
 		gc.drawImage(image,x,y,100,100);
     }
     
-    public void acquire(Player player)
+    public int getIndex()
     {
-    	player.getInventory()[index]++;
+    	return index;
     }
+    
+
+
 }
