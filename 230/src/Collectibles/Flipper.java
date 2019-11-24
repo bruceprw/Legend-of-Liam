@@ -7,7 +7,7 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Flipper extends Collectibles
+public class Flipper extends Collectible
 {
 	private String path = "Images\\flipper.jpg";
 

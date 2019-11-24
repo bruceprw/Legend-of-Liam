@@ -7,7 +7,7 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Token extends Collectibles
+public class Token extends Collectible
 {
 	private String path = "Images\\token.png";
 	

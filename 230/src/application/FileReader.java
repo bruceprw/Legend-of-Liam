@@ -166,16 +166,16 @@ public class FileReader
 			board[y][x] = new YellowKey();
 			break;
 		case "REDDOOR":
-			background[y][x] = new ColouredDoor("Red");
+			background[y][x] = new ColouredDoor("REDDOOR");
 			break;
 		case "GREENDOOR":
-			background[y][x] = new ColouredDoor("Green");
+			background[y][x] = new ColouredDoor("GREENDOOR");
 			break;
 		case "BLUEDOOR":
-			background[y][x] = new ColouredDoor("Blue");
+			background[y][x] = new ColouredDoor("BLUEDOOR");
 			break;
 		case "YELLOWDOOR":
-			background[y][x] = new ColouredDoor("Yellow");
+			background[y][x] = new ColouredDoor("YELLOWDOOR");
 			break;
 		case "DOOR":
 			int a = line.nextInt();

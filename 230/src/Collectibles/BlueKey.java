@@ -7,7 +7,7 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class BlueKey extends Collectibles
+public class BlueKey extends Collectible
 {
 	private String path = "Images\\BK.png";
 	

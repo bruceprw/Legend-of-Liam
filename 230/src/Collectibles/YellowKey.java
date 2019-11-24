@@ -7,7 +7,7 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class YellowKey extends Collectibles
+public class YellowKey extends Collectible
 {
 	private String path = "Images\\YK.png";
 

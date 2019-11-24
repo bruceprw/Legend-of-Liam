@@ -30,4 +30,9 @@ public class Ground extends Cell {
     {
 		gc.drawImage(image,x,y,100,100);
     }
+    
+    public String getString()
+    {
+    	return " ";
+    }
 }

@@ -2,7 +2,7 @@ package application;
 
 import java.io.FileNotFoundException;
 
-import Collectibles.Collectibles;
+import Collectibles.Collectible;
 import Collectibles.Token;
 import cell.Cell;
 import cell.Fog;
@@ -97,10 +97,10 @@ public class GameBoard
 		switch (way)
 		{
 		case "right":
-			if(((Cell) background[playerY][playerX+1]).getIsPlayerAllowed())
+			if(((Player)board[playerY][playerX]).movable((Cell) background[playerY][playerX+1]))
 			{
-				if (board[playerY][playerX+1] instanceof Collectibles)
-					acquire((Collectibles)board[playerY][playerX+1]);
+				if (board[playerY][playerX+1] instanceof Collectible)
+					acquire((Collectible)board[playerY][playerX+1]);
 				
 				board[playerY][playerX + 1] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
@@ -108,10 +108,10 @@ public class GameBoard
 			}
 			break;
 		case "left":
-			if(((Cell) background[playerY][playerX-1]).getIsPlayerAllowed())
+			if(((Player)board[playerY][playerX]).movable((Cell) background[playerY][playerX-1]))
 			{
-				if (board[playerY][playerX-1] instanceof Collectibles)
-					acquire((Collectibles)board[playerY][playerX-1]);
+				if (board[playerY][playerX-1] instanceof Collectible)
+					acquire((Collectible)board[playerY][playerX-1]);
 
 				board[playerY][playerX - 1] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
@@ -119,10 +119,10 @@ public class GameBoard
 			}
 			break;
 		case "up":
-			if(((Cell) background[playerY-1][playerX]).getIsPlayerAllowed())
+			if(((Player)board[playerY][playerX]).movable((Cell) background[playerY-1][playerX]))
 			{
-				if (board[playerY-1][playerX] instanceof Collectibles)
-					acquire((Collectibles)board[playerY-1][playerX]);
+				if (board[playerY-1][playerX] instanceof Collectible)
+					acquire((Collectible)board[playerY-1][playerX]);
 
 				board[playerY - 1][playerX] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
@@ -130,10 +130,10 @@ public class GameBoard
 			}
 			break;
 		case "down":
-			if(((Cell) background[playerY+1][playerX]).getIsPlayerAllowed())
+			if(((Player)board[playerY][playerX]).movable((Cell) background[playerY+1][playerX]))
 			{
-				if (board[playerY+1][playerX] instanceof Collectibles)
-					acquire((Collectibles)board[playerY+1][playerX]);
+				if (board[playerY+1][playerX] instanceof Collectible)
+					acquire((Collectible)board[playerY+1][playerX]);
 
 				board[playerY + 1][playerX] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
@@ -143,7 +143,7 @@ public class GameBoard
 		}
 	}
     
-    public void acquire(Collectibles co)
+    public void acquire(Collectible co)
     {
     	((Player)board[playerY][playerX]).acquireInventory(co.getIndex());
     }

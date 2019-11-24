@@ -31,35 +31,40 @@ public class ColouredDoor extends Cell {
     {
     	switch(colour)
     	{
-    	case "Green":
+    	case "GREENDOOR":
     		gc.drawImage(image,x,y,100,100);
     		break;
-    	case "Red":
+    	case "REDDOOR":
     		gc.drawImage(image,x,y,100,100);
     		break;
-    	case "Yellow":
+    	case "YELLOWDOOR":
     		gc.drawImage(image,x,y,100,100);
     		break;
-    	case "Blue":
+    	case "BLUEDOOR":
     		gc.drawImage(image,x,y,100,100);
     		break;
     	}
+    }
+    
+    public String getString()
+    {
+    	return colour;
     }
     
     public void setImage (String colour) throws FileNotFoundException
     {
     	switch(colour)
     	{
-    	case "Green":
+    	case "GREENDOOR":
     		image = new Image(new FileInputStream(greenPath));
     		break;
-    	case "Red":
+    	case "REDDOOR":
     		image = new Image(new FileInputStream(redPath));
     		break;
-    	case "Yellow":
+    	case "YELLOWDOOR":
     		image = new Image(new FileInputStream(yellowPath));
     		break;
-    	case "Blue":
+    	case "BLUEDOOR":
     		image = new Image(new FileInputStream(bluePath));
     		break;
     	}

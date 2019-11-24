@@ -5,7 +5,7 @@ import application.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Collectibles extends Element
+public class Collectible extends Element
 {
 	protected Image image;
 	protected int index;

@@ -7,7 +7,7 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class FireBoot extends Collectibles
+public class FireBoot extends Collectible
 {
 	private String path = "Images\\Fireboot.jpg";
 	

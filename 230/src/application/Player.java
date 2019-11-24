@@ -3,6 +3,7 @@ package application;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import Collectibles.Collectible;
 import cell.Cell;
 import javafx.*;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,79 +15,167 @@ import javafx.scene.image.Image;
  * @author Bruce Williams (972648)
  *
  */
-public class Player  extends Element{
+public class Player extends Element
+{
 	private String name;
 	private Image avatar;
 	private int score;
-	private int[] inventory= {0,0,0,0,0,0,0}; // Size of inventory size finalised when number of items finalised.
+	private int[] inventory =
+	{ 0, 0, 0, 0, 0, 0, 0 }; // Size of inventory size finalised when number of items finalised.
 	private int[][] pos;
 	private Image image;
-	
+
 	private String path = "Images\\player.jpg";
 
-	public Player(String name) throws FileNotFoundException {
+	public Player(String name) throws FileNotFoundException
+	{
 		setName(name);
 		setAvatar(avatar);
 		setImage();
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-    public String getString()
-    {
-    	return"START";
-    }
-    
-    public void acquireInventory(int position)
-    {
-    	inventory[position]++;
-    }
-	
-	public void setInventory(int position,int num)
+	public String getString()
 	{
-		inventory[position]+=num;
+		return "START";
 	}
-	
+
+	public void acquireInventory(int position)
+	{
+		inventory[position]++;
+	}
+
+	public void setInventory(int position, int num)
+	{
+		inventory[position] += num;
+	}
+
 	public int[] getInventory()
 	{
 		return inventory;
 	}
-	
-	public void setAvatar(Image avatar) {
+
+	public void setAvatar(Image avatar)
+	{
 		this.avatar = avatar;
 	}
 
-	public Image getAvatar() {
+	public Image getAvatar()
+	{
 		return avatar;
 	}
 
-	public void setPos(int[][] pos) {
+	public void setPos(int[][] pos)
+	{
 		this.pos = pos;
 
 	}
-	
-	public int[][] getPos() {
+
+	public int[][] getPos()
+	{
 		return pos;
 	}
-	
+
 	public void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
 	}
-	
+
 	public void draw(GraphicsContext gc, int x, int y)
 	{
 		gc.drawImage(image, x, y);
 	}
-	/*
-	public boolean isAllowed(Cell cell)
+
+	public boolean checkInventory(int i)
 	{
-		return cell.getIsPlayerAllowed();
-	}*/
+		return inventory[i] > 0;
+	}
+
+	public void dropCol(int i)
+	{
+		inventory[i]--;
+	}
+
+	public boolean movable(Cell cell)
+	{
+		switch (cell.getString())
+		{
+		case "GREENDOOR":
+			if(checkInventory(2))
+			{
+				dropCol(2);
+				return true;
+			}
+			else
+				return false;
+		case "REDDOOR":
+			if(checkInventory(1))
+			{
+				dropCol(1);
+				return true;
+			}
+			else
+				return false;
+		case "YELLOWDOOR":
+			if(checkInventory(4))
+			{
+				dropCol(4);
+				return true;
+			}
+			else
+				return false;
+		case "BLUEDOOR":
+			if(checkInventory(3))
+			{
+				dropCol(3);
+				return true;
+			}
+			else
+				return false;
+		case "W":
+			if(checkInventory(6))
+			{
+				dropCol(6);
+				return true;
+			}
+			else
+				return false;
+		case "#":
+			return false;
+		case "D":
+			if(checkInventory(0))
+			{
+				dropCol(0);
+				return true;
+			}
+			else
+				return false;
+		case "@":
+			return true;
+		case "L":
+			if(checkInventory(5))
+			{
+				dropCol(5);
+				return true;
+			}
+			else
+				return false;
+		case " ":
+			return true;
+		case "G":
+			return true;
+		default:
+			return false;
+		}
+	}
+
 }

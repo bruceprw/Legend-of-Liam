@@ -7,7 +7,7 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class RedKey extends Collectibles
+public class RedKey extends Collectible
 {
 	private String path = "Images\\RK.png";
 
