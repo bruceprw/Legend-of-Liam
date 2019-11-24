@@ -10,10 +10,20 @@ import javafx.scene.image.Image;
 public class Token extends Element
 {
 	private String path = "Images\\token.png";
+	private Image image;
 	
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+	public Token() throws FileNotFoundException
+	{
+		setImage();
+	}
+	
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image(new FileInputStream(path));
+	}
+	
+    public void draw(GraphicsContext gc,int x,int y)
     {
-		Image image = new Image(new FileInputStream(path));
 		gc.drawImage(image,x,y,100,100);
     }
 }

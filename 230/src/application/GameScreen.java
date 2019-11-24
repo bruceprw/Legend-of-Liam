@@ -29,6 +29,7 @@ public class GameScreen extends Screen
 	/**
 	 * 
 	 * @param levelNo Number of the level to be loaded.
+	 * @throws InterruptedException 
 	 */
 	public GameScreen(int levelNo)
 	{

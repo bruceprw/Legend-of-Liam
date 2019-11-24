@@ -2,7 +2,6 @@ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import Collectibles.*;
 import cell.*;
@@ -17,6 +16,7 @@ public class FileReader
 	private Element[][] background;
 	private int playerX;
 	private int playerY;
+	private Element[][] fog; 
 
 	public FileReader(String filePath) throws FileNotFoundException
 	{
@@ -61,6 +61,8 @@ public class FileReader
 					background[y][x] = new Empty();
 			}
 		}
+		fog = new Element[mapSizeY][mapSizeX];
+		setFog();
 		/*
 		for (int y = 0; y < board.length; y++)
 		{
@@ -82,6 +84,22 @@ public class FileReader
 		in.close();
 	}
 
+	public Element[][] getFog()
+	{
+		return fog;
+	}
+	
+	public void setFog() throws FileNotFoundException
+	{
+		for(int y=0;y<background.length;y++)
+		{
+			for(int x=0;x<background[y].length;x++)
+			{
+				fog[y][x]=new Fog();
+			}
+		}
+	}
+	
 	public int getPlayerX()
 	{
 		return playerX;
@@ -102,7 +120,7 @@ public class FileReader
 		return this.board;
 	}
 
-	public void subAdd(Scanner line)
+	public void subAdd(Scanner line) throws FileNotFoundException
 	{
 		line.useDelimiter(",");
 		int x = line.nextInt();
@@ -193,7 +211,7 @@ public class FileReader
 		}
 	}
 
-	public void subMap(String[] temp)
+	public void subMap(String[] temp) throws FileNotFoundException
 	{
 
 		for (int j = 0; j < temp.length; j++)

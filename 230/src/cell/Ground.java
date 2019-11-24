@@ -9,9 +9,11 @@ import javafx.scene.image.Image;
 public class Ground extends Cell {
 
 	private String path = "Images\\ground.jpg";
+	private Image image;
 	
-    public Ground(){
+    public Ground() throws FileNotFoundException{
         super(false, true, true, "", Item.NONE);
+        setImage();
     }
 
     
@@ -19,9 +21,13 @@ public class Ground extends Cell {
         return true;
     }
     
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image (new FileInputStream(path));
+	}
+    
+    public void draw(GraphicsContext gc,int x,int y) 
     {
-		Image image = new Image(new FileInputStream(path));
 		gc.drawImage(image,x,y,100,100);
     }
 }

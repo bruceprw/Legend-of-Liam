@@ -11,16 +11,22 @@ public class Fog extends Cell
 {
 
 	private String path = "Images\\fog.jpg";
+	private Image image;
 	
-	public Fog(Item itemRequiredForCell)
+	public Fog() throws FileNotFoundException
 	{
-		super(false, false, false, "", itemRequiredForCell);
+		super(false, false, false, "",Item.FIRE_BOOTS);
+		setImage();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void draw(GraphicsContext gc, int x, int y) throws FileNotFoundException
+	public void setImage() throws FileNotFoundException
 	{
-		Image image = new Image(new FileInputStream(path));
+		image = new Image(new FileInputStream(path));
+	}
+	
+	public void draw(GraphicsContext gc, int x, int y) 
+	{
 		gc.drawImage(image, x, y,100,100);
 	}
 	

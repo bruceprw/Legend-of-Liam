@@ -1,37 +1,41 @@
-20,20
-####################
-# GLW@TFO          #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-#                  #
-####################
-3,4,START
-1,3,RKEY
-2,3,GKEY
-3,3,BKEY
-4,3,YKEY
-5,3,ENEMY,STRAIGHT,DOWN
-6,3,ENEMY,WALLHUG,DOWN
-7,3,ENEMY,DUMB
-8,3,ENEMY,SMART
-9,3,REDDOOR
-10,3,GREENDOOR
-11,3,BLUEDOOR
-12,3,YELLOWDOOR
-1,1,DOOR,3
+24,24
+########################
+########################
+########################
+### GLW@TFO          ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+###                  ###
+########################
+########################
+########################
+3,7,START
+4,5,RKEY
+5,5,GKEY
+6,5,BKEY
+7,5,YKEY
+8,5,ENEMY,STRAIGHT,DOWN
+9,5,ENEMY,WALLHUG,DOWN
+10,5,ENEMY,DUMB
+11,5,ENEMY,SMART
+12,5,REDDOOR
+13,5,GREENDOOR
+14,5,BLUEDOOR
+15,5,YELLOWDOOR
+3,3,DOOR,3
 0,0,INVENTORY,TOKEN,2,RKEY,2,GKEY,2,BKEY,2,YKEY,2,BOOT,2,FLIPPER,2
 ////

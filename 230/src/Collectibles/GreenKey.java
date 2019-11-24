@@ -10,13 +10,25 @@ import javafx.scene.image.Image;
 public class GreenKey extends Element
 {
 	private String path = "Images\\GK.png";
+	private Image image;
+	
+	public GreenKey() throws FileNotFoundException
+	{
+		setImage();
+	}
+	
 	public String getString()
 	{
 		return "GKEY";
 	}
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+	
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image(new FileInputStream(path));
+	}
+	
+    public void draw(GraphicsContext gc,int x,int y)
     {
-		Image image = new Image(new FileInputStream(path));
 		gc.drawImage(image,x,y,100,100);
     }
 }

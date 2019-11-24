@@ -9,10 +9,12 @@ import javafx.scene.image.Image;
 public class TokenDoor extends Cell {
     private int tokenNumToUnlockDoor;
     private String path = "Images\\token_door.jpg";
+    private Image image;
 
-    public TokenDoor(int tokenNumToUnlockDoor) {
+    public TokenDoor(int tokenNumToUnlockDoor) throws FileNotFoundException {
         super(false, true, false, "", Item.NONE);
         this.tokenNumToUnlockDoor = tokenNumToUnlockDoor;
+        setImage();
     }
     /*
     @Override
@@ -25,9 +27,13 @@ public class TokenDoor extends Cell {
 		return tokenNumToUnlockDoor;
 	}
 	
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image (new FileInputStream(path));
+	}
+	
+    public void draw(GraphicsContext gc,int x,int y)
     {
-		Image image = new Image(new FileInputStream(path));
 		gc.drawImage(image,x,y,100,100);
     }
 }

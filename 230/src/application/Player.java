@@ -19,13 +19,14 @@ public class Player  extends Element{
 	private int score;
 	private int[] inventory= {0,0,0,0,0,0,0}; // Size of inventory size finalised when number of items finalised.
 	private int[][] pos;
+	private Image image;
 	
 	private String path = "Images\\player.jpg";
 
-	public Player(String name) {
+	public Player(String name) throws FileNotFoundException {
 		setName(name);
 		setAvatar(avatar);
-
+		setImage();
 	}
 
 	public void setName(String name) {
@@ -68,9 +69,13 @@ public class Player  extends Element{
 		return pos;
 	}
 	
-	public void draw(GraphicsContext gc, int x, int y) throws FileNotFoundException
+	public void setImage() throws FileNotFoundException
 	{
-		Image image = new Image(new FileInputStream(path));
+		image = new Image(new FileInputStream(path));
+	}
+	
+	public void draw(GraphicsContext gc, int x, int y)
+	{
 		gc.drawImage(image, x, y);
 	}
 }

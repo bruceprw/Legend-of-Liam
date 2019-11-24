@@ -11,7 +11,7 @@ public class Element
 		return"";
 	}
 	
-	public void draw(GraphicsContext gc, int x,int y) throws FileNotFoundException
+	public void draw(GraphicsContext gc, int x,int y)
 	{
 		
 	}

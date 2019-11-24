@@ -16,13 +16,15 @@ import javafx.scene.image.Image;
 public class StraightLineEnemy extends Enemy {
 	
 	private String path = "Images\\straightE.jpg";
+	private Image image;
 	
-    public StraightLineEnemy(int currentX, int currentY, boolean HV, String movDirection) {
+    public StraightLineEnemy(int currentX, int currentY, boolean HV, String movDirection) throws FileNotFoundException {
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
 
         this.direction = HV;
         this.movDirection = movDirection;
+        setImage();
     }
 
     //TODO write code for this 
@@ -41,9 +43,13 @@ public class StraightLineEnemy extends Enemy {
     	return"STRAIGHT";
     }
     
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+    public void setImage() throws FileNotFoundException
     {
-    	Image image = new Image(new FileInputStream(path));
+    	image = new Image(new FileInputStream(path));
+    }
+    
+    public void draw(GraphicsContext gc,int x,int y)
+    {
     	gc.drawImage(image, x, y,100,100);
     }
 

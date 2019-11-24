@@ -10,14 +10,24 @@ import javafx.scene.image.Image;
 public class YellowKey extends Element
 {
 	private String path = "Images\\YK.png";
+	private Image image;
+	
+	public YellowKey() throws FileNotFoundException
+	{
+		setImage();
+	}
 	
 	public String getString()
 	{
 		return "YKEY";
 	}
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image(new FileInputStream(path));
+	}
+	
+    public void draw(GraphicsContext gc,int x,int y)
     {
-		Image image = new Image(new FileInputStream(path));
 		gc.drawImage(image,x,y,100,100);
     }
 }

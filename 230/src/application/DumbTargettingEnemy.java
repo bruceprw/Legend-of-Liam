@@ -19,7 +19,7 @@ public class DumbTargettingEnemy extends Enemy
 {
 	
 	private String path = "Images\\idiot.png";
-
+	private Image image;
 	
     public DumbTargettingEnemy(int currentX,int currentY, boolean HV)
     {
@@ -27,6 +27,15 @@ public class DumbTargettingEnemy extends Enemy
         this.currentPositionY = currentY;
 
         this.direction = HV;
+        try
+		{
+			setImage();
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @Override
@@ -44,9 +53,13 @@ public class DumbTargettingEnemy extends Enemy
     	return"DUMB";
     }
     
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+    public void setImage() throws FileNotFoundException
     {
-    	Image image = new Image(new FileInputStream(path));
+    	image = new Image(new FileInputStream(path));
+    }
+    
+    public void draw(GraphicsContext gc,int x,int y)
+    {
     	gc.drawImage(image, x, y,100,100);
     }
 }

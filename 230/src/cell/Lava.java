@@ -9,9 +9,11 @@ import javafx.scene.image.Image;
 public class Lava extends Cell {
 
 	private String path = "Images\\fire.jpg";
+	private Image image;
 	
-    public Lava() {
+    public Lava() throws FileNotFoundException {
         super(true, true, false, "", Item.FIRE_BOOTS);
+        setImage();
     }
 
     public String getString()
@@ -19,9 +21,13 @@ public class Lava extends Cell {
     	return"L";
     }
     
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image (new FileInputStream(path));
+	}
+    
+    public void draw(GraphicsContext gc,int x,int y)
     {
-		Image image = new Image(new FileInputStream(path));
 		gc.drawImage(image,x,y,100,100);
     }
 }

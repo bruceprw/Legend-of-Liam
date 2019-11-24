@@ -16,13 +16,15 @@ import javafx.scene.image.Image;
 public class SmartTargettingEnemy extends Enemy
 {
 	private String path = "Images\\smart.jpg";
+	private Image image;
 	
-    public SmartTargettingEnemy(int currentX,int currentY, boolean HV)
+    public SmartTargettingEnemy(int currentX,int currentY, boolean HV) throws FileNotFoundException
     {
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
 
         this.direction = HV;
+        setImage();
     }
 
     @Override
@@ -37,9 +39,13 @@ public class SmartTargettingEnemy extends Enemy
     	return"SMART";
     }
     
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+    public void setImage() throws FileNotFoundException
     {
-    	Image image = new Image(new FileInputStream(path));
+    	image = new Image(new FileInputStream(path));
+    }
+    
+    public void draw(GraphicsContext gc,int x,int y)
+    {
     	gc.drawImage(image, x, y,100,100);
     }
 }

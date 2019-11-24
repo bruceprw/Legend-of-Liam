@@ -14,10 +14,12 @@ public class ColouredDoor extends Cell {
 	private String redPath = "Images\\red_door.jpg";
 	private String yellowPath = "Images\\yellow_door.jpg";
 	private String bluePath = "Images\\blue_door.jpg";
+	private Image image;
 	
-    public ColouredDoor(String colour) {
+    public ColouredDoor(String colour) throws FileNotFoundException {
         super(false, true, false, "", Item.GREEN_KEY);
         this.colour = colour;
+        setImage(colour);
     }
     
     public String getColour()
@@ -25,25 +27,40 @@ public class ColouredDoor extends Cell {
     	return colour;
     }
     
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+    public void draw(GraphicsContext gc,int x,int y)
     {
     	switch(colour)
     	{
     	case "Green":
-    		Image image = new Image(new FileInputStream(greenPath));
     		gc.drawImage(image,x,y,100,100);
     		break;
     	case "Red":
-    		Image image1 = new Image(new FileInputStream(redPath));
-    		gc.drawImage(image1,x,y,100,100);
+    		gc.drawImage(image,x,y,100,100);
     		break;
     	case "Yellow":
-    		Image image2 = new Image(new FileInputStream(yellowPath));
-    		gc.drawImage(image2,x,y,100,100);
+    		gc.drawImage(image,x,y,100,100);
     		break;
     	case "Blue":
-    		Image image3 = new Image(new FileInputStream(bluePath));
-    		gc.drawImage(image3,x,y,100,100);
+    		gc.drawImage(image,x,y,100,100);
+    		break;
+    	}
+    }
+    
+    public void setImage (String colour) throws FileNotFoundException
+    {
+    	switch(colour)
+    	{
+    	case "Green":
+    		image = new Image(new FileInputStream(greenPath));
+    		break;
+    	case "Red":
+    		image = new Image(new FileInputStream(redPath));
+    		break;
+    	case "Yellow":
+    		image = new Image(new FileInputStream(yellowPath));
+    		break;
+    	case "Blue":
+    		image = new Image(new FileInputStream(bluePath));
     		break;
     	}
     }

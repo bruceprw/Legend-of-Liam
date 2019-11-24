@@ -9,15 +9,21 @@ import javafx.scene.image.Image;
 public class Water extends Cell {
 	
 	private String path = "Images\\water.jpg";
+	private Image image;
 	
-    public Water() {
+    public Water() throws FileNotFoundException {
         super(true, true, false, "", Item.FLIPPER);
+        setImage();
     }
 	
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image (new FileInputStream(path));
+	}
     
-    public void draw(GraphicsContext gc,int x,int y) throws FileNotFoundException
+    
+    public void draw(GraphicsContext gc,int x,int y)
     {
-		Image image = new Image(new FileInputStream(path));
 		gc.drawImage(image,x,y,100,100);
     }
 }
