@@ -3,6 +3,7 @@ package application;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import cell.Cell;
 import javafx.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -83,4 +84,9 @@ public class Player  extends Element{
 	{
 		gc.drawImage(image, x, y);
 	}
+	/*
+	public boolean isAllowed(Cell cell)
+	{
+		return cell.getIsPlayerAllowed();
+	}*/
 }
