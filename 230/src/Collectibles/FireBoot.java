@@ -7,13 +7,13 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class FireBoot extends Element
+public class FireBoot extends Collectibles
 {
 	private String path = "Images\\Fireboot.jpg";
-	private Image image;
 	
 	public FireBoot() throws FileNotFoundException
 	{
+		index=5;
 		setImage();
 	}
 	
@@ -27,8 +27,4 @@ public class FireBoot extends Element
 		image = new Image (new FileInputStream(path));
 	}
 	
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
 }

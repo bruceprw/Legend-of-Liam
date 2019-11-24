@@ -7,13 +7,14 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Flipper extends Element
+public class Flipper extends Collectibles
 {
 	private String path = "Images\\flipper.jpg";
-	private Image image;
+
 	
 	public Flipper() throws FileNotFoundException
 	{
+		index=6;
 		setImage();
 	}
 	
@@ -28,8 +29,5 @@ public class Flipper extends Element
 	}
 	
 	
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
+
 }

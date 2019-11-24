@@ -7,13 +7,14 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class RedKey extends Element
+public class RedKey extends Collectibles
 {
 	private String path = "Images\\RK.png";
-	private Image image;
+
 	
 	public RedKey() throws FileNotFoundException
 	{
+		index=1;
 		setImage();
 	}
 	
@@ -26,9 +27,5 @@ public class RedKey extends Element
 	{
 		image = new Image(new FileInputStream(path));
 	}
-	
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
+
 }

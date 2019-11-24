@@ -7,13 +7,15 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Token extends Element
+public class Token extends Collectibles
 {
 	private String path = "Images\\token.png";
-	private Image image;
+	
+
 	
 	public Token() throws FileNotFoundException
 	{
+		index=0;
 		setImage();
 	}
 	
@@ -27,8 +29,5 @@ public class Token extends Element
 		image = new Image(new FileInputStream(path));
 	}
 	
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
+
 }

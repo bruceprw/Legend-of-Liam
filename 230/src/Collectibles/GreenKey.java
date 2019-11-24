@@ -7,13 +7,14 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class GreenKey extends Element
+public class GreenKey extends Collectibles
 {
 	private String path = "Images\\GK.png";
-	private Image image;
+
 	
 	public GreenKey() throws FileNotFoundException
 	{
+		index=2;
 		setImage();
 	}
 	
@@ -27,8 +28,5 @@ public class GreenKey extends Element
 		image = new Image(new FileInputStream(path));
 	}
 	
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
+
 }

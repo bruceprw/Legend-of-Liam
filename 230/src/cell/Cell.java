@@ -16,7 +16,7 @@ public class Cell extends Element
 	private Item itemRequiredForCell;
 	private boolean consumeableItem;
 	// item the cell contains, if no item then it item will equal Item.NONE
-	private Item item;
+	//private Item item;
 
 	public Cell(boolean harmable, boolean playerAllowed, boolean enemyAllowed, String texturePath, Item itemRequiredForCell)
 	{
@@ -26,7 +26,7 @@ public class Cell extends Element
 		this.texturePath = texturePath;
 		this.itemRequiredForCell = itemRequiredForCell;
 		
-		item = Item.NONE;
+		//item = Item.NONE;
 	}
 
 	/*
@@ -86,9 +86,9 @@ public class Cell extends Element
 	{
 		enemyAllowed = enemyAllowed;
 	}
-
+/*
 	public void setItem(Item item)
 	{
 		this.item = item;
-	}
+	}*/
 }

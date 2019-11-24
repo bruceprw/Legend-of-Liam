@@ -7,13 +7,14 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class YellowKey extends Element
+public class YellowKey extends Collectibles
 {
 	private String path = "Images\\YK.png";
-	private Image image;
+
 	
 	public YellowKey() throws FileNotFoundException
 	{
+		index=4;
 		setImage();
 	}
 	
@@ -25,9 +26,6 @@ public class YellowKey extends Element
 	{
 		image = new Image(new FileInputStream(path));
 	}
-	
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
+
+    
 }

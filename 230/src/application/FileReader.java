@@ -126,12 +126,12 @@ public class FileReader
 		int x = line.nextInt();
 		int y = line.nextInt();
 		String feature = line.next();
-		System.out.println(feature);
+		//System.out.println(feature);
 		switch (feature)
 		{
 		case "START":
-			System.out.println(playerY);
-			System.out.println(playerX);
+			//System.out.println(playerY);
+			//System.out.println(playerX);
 			playerX = x;
 			playerY = y;
 			board[y][x] = new Player("Name");
@@ -186,8 +186,8 @@ public class FileReader
 			{
 				String collecti = line.next();
 				int num = line.nextInt();
-				System.out.println(playerY);
-				System.out.println(playerX);
+				//System.out.println(playerY);
+				//System.out.println(playerX);
 				switch (collecti)
 				{
 				case "TOKEN":

@@ -7,13 +7,13 @@ import application.Element;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class BlueKey extends Element
+public class BlueKey extends Collectibles
 {
 	private String path = "Images\\BK.png";
-	private Image image;
 	
 	public BlueKey() throws FileNotFoundException
 	{
+		index=3;
 		setImage();
 	}
 	
@@ -24,12 +24,9 @@ public class BlueKey extends Element
 	
 	public void setImage() throws FileNotFoundException
 	{
-		image = new Image (new FileInputStream(path));
+		this.image = new Image (new FileInputStream(path));
 	}
 	
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
+
     
 }
