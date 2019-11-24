@@ -13,7 +13,7 @@ public class FileReader
 	private int mapSizeY;
 	private String[] map;
 	private Element[][] board;
-	private Element[][] background;
+	private Cell[][] background;
 	private int playerX;
 	private int playerY;
 	private Element[][] fog; 
@@ -28,7 +28,7 @@ public class FileReader
 		mapSizeX = sizeScan.nextInt();
 		mapSizeY = sizeScan.nextInt();
 		board = new Element[mapSizeY][mapSizeX];
-		background = new Element[mapSizeY][mapSizeX];
+		background = new Cell[mapSizeY][mapSizeX];
 		map = new String[mapSizeY];
 		for (int i = 0; i < mapSizeY; i++)
 		{
@@ -110,7 +110,7 @@ public class FileReader
 		return playerY;
 	}
 
-	public Element[][] getBackground()
+	public Cell[][] getBackground()
 	{
 		return this.background;
 	}

@@ -2,8 +2,14 @@ package application;
 
 import java.io.FileNotFoundException;
 
+import Collectibles.BlueKey;
 import Collectibles.Collectible;
+import Collectibles.FireBoot;
+import Collectibles.Flipper;
+import Collectibles.GreenKey;
+import Collectibles.RedKey;
 import Collectibles.Token;
+import Collectibles.YellowKey;
 import cell.Cell;
 import cell.Fog;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,7 +18,7 @@ import javafx.scene.text.Font;
 public class GameBoard
 {
 	private Element[][] board;
-	private Element[][] background;
+	private Cell[][] background;
 	private Element[][] fog;
 	private int playerX;
 	private int playerY;
@@ -62,15 +68,15 @@ public class GameBoard
 		}
 		// TimeUnit.SECONDS.sleep(2);
 		setFog();
-		
-		int[] temp = ((Player)board[playerY][playerX]).getInventory();
-		for(int i=0;i<7;i++)
+
+		int[] temp = ((Player) board[playerY][playerX]).getInventory();
+		for (int i = 0; i < 7; i++)
 		{
 			System.out.print(temp[i]);
 		}
 		System.out.println();
-		//drawItem(gc);
-		//drawFog(gc);
+		 drawItem(gc);
+		// drawFog(gc);
 	}
 
 	public int getPlayerX()
@@ -82,14 +88,32 @@ public class GameBoard
 	{
 		return playerY;
 	}
-	
+
 	public void drawItem(GraphicsContext gc) throws FileNotFoundException
 	{
-		int [] temp = ((Player)board[playerY][playerX]).getInventory();
+		int[] temp = ((Player) board[playerY][playerX]).getInventory();
 		Token token = new Token();
-		gc.drawImage(token.getImage(), 0, 500,100,100);
-		gc.setFont(new Font("Arial",50));
-		gc.strokeText(": "+temp[0], 100,560 );
+		RedKey r = new RedKey();
+		GreenKey g = new GreenKey();
+		BlueKey b = new BlueKey();
+		YellowKey y = new YellowKey();
+		FireBoot f = new FireBoot();
+		Flipper fl = new Flipper();
+		gc.drawImage(token.getImage(), 0, 500, 75, 75);
+		gc.drawImage(r.getImage(), 150, 500, 75, 75);
+		gc.drawImage(g.getImage(), 275, 500, 75, 75);
+		gc.drawImage(b.getImage(), 400, 500, 75, 75);
+		gc.drawImage(y.getImage(), 525, 500, 75, 75);
+		gc.drawImage(f.getImage(), 0, 600, 75, 75);
+		gc.drawImage(fl.getImage(), 150, 600, 75, 75);
+		gc.setFont(new Font("Arial", 50));
+		gc.strokeText(": " + temp[0], 75, 560);
+		gc.strokeText(": " + temp[1], 225, 560);
+		gc.strokeText(": " + temp[2], 350, 560);
+		gc.strokeText(": " + temp[3], 475, 560);
+		gc.strokeText(": " + temp[4], 600, 560);
+		gc.strokeText(": " + temp[5], 75, 660);
+		gc.strokeText(": " + temp[6], 225, 660);
 	}
 
 	public void move(String way)
@@ -97,21 +121,20 @@ public class GameBoard
 		switch (way)
 		{
 		case "right":
-			if(((Player)board[playerY][playerX]).movable((Cell) background[playerY][playerX+1]))
+			if(((Player) board[playerY][playerX]).movable(background[playerY][playerX + 1]))
 			{
-				if (board[playerY][playerX+1] instanceof Collectible)
-					acquire((Collectible)board[playerY][playerX+1]);
-				
+				if(board[playerY][playerX + 1] instanceof Collectible)
+					acquire((Collectible) board[playerY][playerX + 1]);
 				board[playerY][playerX + 1] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
 				playerX = playerX + 1;
 			}
 			break;
 		case "left":
-			if(((Player)board[playerY][playerX]).movable((Cell) background[playerY][playerX-1]))
+			if(((Player) board[playerY][playerX]).movable(background[playerY][playerX - 1]))
 			{
-				if (board[playerY][playerX-1] instanceof Collectible)
-					acquire((Collectible)board[playerY][playerX-1]);
+				if(board[playerY][playerX - 1] instanceof Collectible)
+					acquire((Collectible) board[playerY][playerX - 1]);
 
 				board[playerY][playerX - 1] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
@@ -119,10 +142,10 @@ public class GameBoard
 			}
 			break;
 		case "up":
-			if(((Player)board[playerY][playerX]).movable((Cell) background[playerY-1][playerX]))
+			if(((Player) board[playerY][playerX]).movable(background[playerY - 1][playerX]))
 			{
-				if (board[playerY-1][playerX] instanceof Collectible)
-					acquire((Collectible)board[playerY-1][playerX]);
+				if(board[playerY - 1][playerX] instanceof Collectible)
+					acquire((Collectible) board[playerY - 1][playerX]);
 
 				board[playerY - 1][playerX] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
@@ -130,10 +153,10 @@ public class GameBoard
 			}
 			break;
 		case "down":
-			if(((Player)board[playerY][playerX]).movable((Cell) background[playerY+1][playerX]))
+			if(((Player) board[playerY][playerX]).movable(background[playerY + 1][playerX]))
 			{
-				if (board[playerY+1][playerX] instanceof Collectible)
-					acquire((Collectible)board[playerY+1][playerX]);
+				if(board[playerY + 1][playerX] instanceof Collectible)
+					acquire((Collectible) board[playerY + 1][playerX]);
 
 				board[playerY + 1][playerX] = board[playerY][playerX];
 				board[playerY][playerX] = new Empty();
@@ -142,11 +165,11 @@ public class GameBoard
 			break;
 		}
 	}
-    
-    public void acquire(Collectible co)
-    {
-    	((Player)board[playerY][playerX]).acquireInventory(co.getIndex());
-    }
+
+	public void acquire(Collectible co)
+	{
+		((Player) board[playerY][playerX]).acquireInventory(co.getIndex());
+	}
 
 	public Element[][] getBoard()
 	{
