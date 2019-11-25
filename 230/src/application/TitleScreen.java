@@ -1,22 +1,14 @@
 package application;
 
+import application.DailyMessage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class TitleScreen extends Screen{	
 	private BorderPane root;
@@ -62,7 +54,7 @@ public class TitleScreen extends Screen{
 	private void buildButtons() {
 		newProfile = new Button("Create Profile");
 		newProfile.setOnAction(event -> {
-			createPopup(new NewUserScreen());
+			//createPopup(new NewUserScreen());
 		});
 		
 		// TODO: Change from "Select Level" to "Load Profile"
@@ -76,10 +68,12 @@ public class TitleScreen extends Screen{
 		});
 		
 		leaderboards = new Button("Leaderboards");
-		leaderboards.setDisable(true);
 		leaderboards.setOnAction(event -> {
-			// TODO: Leaderboards not yet done
-			//switchScreen(new LeaderboardsScreen());
+			switchScreen(new LeaderboardsScreen());
 		});
+		
+		newProfile.setId("titleButton");
+		loadProfile.setId("titleButton");
+		leaderboards.setId("titleButton");
 	}
 }
