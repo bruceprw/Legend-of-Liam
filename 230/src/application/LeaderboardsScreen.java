@@ -105,6 +105,8 @@ public class LeaderboardsScreen extends Screen {
 		TableColumn<LevelTime, String> time = new TableColumn<LevelTime, String>("Time");
 		time.setCellValueFactory(new PropertyValueFactory<LevelTime, String>("Time"));
 
+		//let's not use the rank. the list is sorted by insertion sort. so there is no reason to show an extra"rank" column...
+		
 		leaderboard.getColumns().addAll(rank, username, time);
 	}
 
@@ -112,8 +114,10 @@ public class LeaderboardsScreen extends Screen {
 		// TODO: Load list of users function.
 
 		// E.g., Delete when you need to
-		leaderboard.getItems().add(new LevelTime("jim", "1:36:00"));
-		leaderboard.getItems().add(new LevelTime("jimbob", "1:36:01"));
-		leaderboard.getItems().add(new LevelTime("jimbobjones", "1:36:02"));
+		
+		for(int i=0;i<ld.getList().size();i++)
+		{
+			leaderboard.getItems().add(ld.getList().get(i));
+		}
 	}
 }

@@ -38,6 +38,7 @@ public class NewUserScreen extends Screen
 	PasswordField checkPassword;
 	Text passwordEnter = new Text("Please enter your password: ");
 	Text passwordConfirm = new Text("Please confirm your password: ");
+	private UserProfile user;
 
 	HBox bottomBorder;
 	Button submit;
@@ -99,18 +100,16 @@ public class NewUserScreen extends Screen
 				passwordWarning.setVisible(true);	
 			else
 			{
-
-				UserProfile user = new UserProfile(username.getText(), password.getText(), 0);
 				try
 				{
-					user.createUserProfile();
+					UserProfile.createUserProfile(username.getText(),password.getText(),0);
 				} catch (FileNotFoundException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
-				switchScreen(new LevelScreen());
+				user = new UserProfile(username.getText(),password.getText(),0);
+				switchScreen(new LevelScreen(user));
 				Stage popup = (Stage) this.scene.getWindow();
 				popup.close();// Closes the popup
 

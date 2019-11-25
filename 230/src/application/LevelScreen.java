@@ -25,8 +25,10 @@ public class LevelScreen extends Screen {
 
 	private ArrayList<Button> levelButtons;
 	private Button back;
+	private UserProfile user;
 
-	public LevelScreen() {
+	public LevelScreen(UserProfile user) {
+		this.user=user;
 		root = new BorderPane();
 		levels = new ScrollPane();
 		grid = new GridPane();
@@ -38,7 +40,7 @@ public class LevelScreen extends Screen {
 			
 			Button b = new Button("" + (levelNo));
 			b.setOnAction(event -> {
-				switchScreen(new GameScreen(levelNo));
+				switchScreen(new GameScreen(levelNo,user));
 			});
 			
 			b.setMinSize(LEVEL_BUTTON_SIZE, LEVEL_BUTTON_SIZE);

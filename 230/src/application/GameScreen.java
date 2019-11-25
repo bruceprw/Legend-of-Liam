@@ -34,24 +34,31 @@ public class GameScreen extends Screen
 	private HBox buttonsPane;
 	private Button save;
 	private Button levelSelect;
-
+	private long time;
 	private GameBoard level;
-	int time=0;
+	private UserProfile user;
+	private Leaderboard leaderboard;
+	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	//int time = 0;
 
 	/**
 	 * 
 	 * @param levelNo Number of the level to be loaded.
 	 * @throws InterruptedException
 	 */
-	public GameScreen(int levelNo)
+	public GameScreen(int levelNo, UserProfile user)
 	{
+		this.user=user;
 		Label timeLabel = new Label();
 		long startTime = System.currentTimeMillis();
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		new AnimationTimer() {
-			public void handle(long now) {
-				long elapsedMillis = System.currentTimeMillis()-startTime;
-				//System.out.println(elapsedMillis);
+		
+		new AnimationTimer()
+		{
+			public void handle(long now)
+			{
+				long elapsedMillis = System.currentTimeMillis() - startTime;
+				time = elapsedMillis;
+				// System.out.println(elapsedMillis);
 				Date d = new Date(elapsedMillis);
 				timeLabel.setText(sdf.format(d));
 			}
@@ -60,7 +67,8 @@ public class GameScreen extends Screen
 		try
 		{
 			level = new GameBoard("LevelFiles\\" + levelNo + ".txt");
-		} catch (FileNotFoundException e)
+		}
+		catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
 		}
@@ -92,47 +100,54 @@ public class GameScreen extends Screen
 		switch (event.getCode())
 		{
 		case RIGHT:
-			end =level.move("right");
-			
-			if (end)
+			end = level.move("right");
+			if(end)
 			{
-				Scene s = new LevelScreen().getScene();
+				Scene s = new LevelScreen(user).getScene();
 				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
 				primaryStage.setScene(s);
-				
+				leaderboard=new Leaderboard();
+				Date temp = new Date(time);
+				leaderboard.addLevelTime(user.getName(), sdf.format(temp));
 			}
 			break;
 
 		case LEFT:
-			end=level.move("left");
-			if (end)
+			end = level.move("left");
+			if(end)
 			{
-				Scene s = new LevelScreen().getScene();
+				Scene s = new LevelScreen(user).getScene();
 				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
 				primaryStage.setScene(s);
-				
+				leaderboard=new Leaderboard();
+				Date temp = new Date(time);
+				leaderboard.addLevelTime(user.getName(), sdf.format(temp));
 			}
 			break;
 
 		case UP:
-			end=level.move("up");
-			if (end)
+			end = level.move("up");
+			if(end)
 			{
-				Scene s = new LevelScreen().getScene();
+				Scene s = new LevelScreen(user).getScene();
 				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
 				primaryStage.setScene(s);
-				
+				leaderboard=new Leaderboard();
+				Date temp = new Date(time);
+				leaderboard.addLevelTime(user.getName(), sdf.format(temp));
 			}
 			break;
 
 		case DOWN:
 			end = level.move("down");
-			if (end)
+			if(end)
 			{
-				Scene s = new LevelScreen().getScene();
+				Scene s = new LevelScreen(user).getScene();
 				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
 				primaryStage.setScene(s);
-				
+				leaderboard=new Leaderboard();
+				Date temp = new Date(time);
+				leaderboard.addLevelTime(user.getName(), sdf.format(temp));
 			}
 			break;
 
@@ -154,7 +169,8 @@ public class GameScreen extends Screen
 		try
 		{
 			level.drawGame(gc);
-		} catch (FileNotFoundException e)
+		}
+		catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -182,7 +198,7 @@ public class GameScreen extends Screen
 		levelSelect.setOnAction(event ->
 		{
 			// Switch to Level Select Screen
-			Scene s = new LevelScreen().getScene();
+			Scene s = new LevelScreen(user).getScene();
 			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
 			primaryStage.setScene(s);
 		});

@@ -10,7 +10,7 @@ public class UserProfile
 	private String name;
 	private String password;
 	private int levelProg;
-	private String filePath = "UserProfiles\\profiles.txt";
+	private static String filePath = "UserProfiles\\profiles.txt";
 	
 	
 	public UserProfile(String name, String password, int levelProg)
@@ -20,7 +20,20 @@ public class UserProfile
 		this.levelProg=levelProg;
 	}
 	
-	public void createUserProfile() throws FileNotFoundException
+	public void getUserProfile()
+	{
+		try {
+			File file = new File(filePath);
+			Scanner in = new Scanner(file);
+			//while()
+		}
+		catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static void createUserProfile(String name,String password,int levelProg) throws FileNotFoundException
 	{
 		File file = new File(filePath);
 		Scanner in = new Scanner(file);
@@ -31,7 +44,7 @@ public class UserProfile
 			temp+=in.nextLine();
 			temp+="\r\n";
 		}
-		System.out.println(temp);
+		//System.out.println(temp);
 		temp+=output;
 		PrintWriter out = new PrintWriter(file);
 		out.print(temp);
