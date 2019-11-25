@@ -20,6 +20,8 @@ public class FileReader
 	private Element[][] fog; 
 	private ArrayList<Integer> enemyX=new ArrayList<Integer>();
 	private ArrayList<Integer> enemyY=new ArrayList<Integer>();
+	private int goalX;
+	private int goalY;
 
 	public FileReader(String filePath) throws FileNotFoundException
 	{
@@ -154,7 +156,7 @@ public class FileReader
 			if(type.equals("STRAIGHT"))
 			{
 				String way = line.next();
-				board[y][x] = new StraightLineEnemy(x,y,true,way);
+				board[y][x] = new StraightLineEnemy(x,y,way);
 				enemyX.add(x);
 				enemyY.add(y);
 			}
@@ -247,6 +249,15 @@ public class FileReader
 		}
 	}
 
+	public int getGoalX()
+	{
+		return goalX;
+	}
+	public int getGoalY()
+	{
+		return goalY;
+	}
+	
 	public void subMap(String[] temp) throws FileNotFoundException
 	{
 
@@ -264,6 +275,8 @@ public class FileReader
 					background[j][i] = new Ground();
 					break;
 				case 'G':
+					this.goalX=i;
+					this.goalY=j;
 					background[j][i] = new Goal();
 					break;
 				case 'L':

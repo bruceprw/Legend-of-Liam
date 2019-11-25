@@ -1,5 +1,7 @@
 package application;
 
+import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import application.LevelTime;
@@ -35,11 +37,14 @@ public class LeaderboardsScreen extends Screen {
 	private ScrollPane levels;
 	private GridPane levelGrid;
 	private TableView<LevelTime> leaderboard;
-
+	private ArrayList<LevelTime> list;
 	private ArrayList<Button> levelButtons;
 	private Button back;
+	private Leaderboard ld;
 
-	public LeaderboardsScreen() {
+	public LeaderboardsScreen(){
+		ld=new Leaderboard();
+		list=ld.getList();
 		root = new BorderPane();
 		centerBox = new HBox();
 		scrollBox = new VBox();
@@ -107,8 +112,8 @@ public class LeaderboardsScreen extends Screen {
 		// TODO: Load list of users function.
 
 		// E.g., Delete when you need to
-		leaderboard.getItems().add(new LevelTime(1, "jim", "1:36:00"));
-		leaderboard.getItems().add(new LevelTime(2, "jimbob", "1:36:01"));
-		leaderboard.getItems().add(new LevelTime(3, "jimbobjones", "1:36:02"));
+		leaderboard.getItems().add(new LevelTime("jim", "1:36:00"));
+		leaderboard.getItems().add(new LevelTime("jimbob", "1:36:01"));
+		leaderboard.getItems().add(new LevelTime("jimbobjones", "1:36:02"));
 	}
 }
