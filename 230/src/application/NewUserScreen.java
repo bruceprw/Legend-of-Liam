@@ -1,5 +1,7 @@
 package application;
 
+import java.io.FileNotFoundException;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -65,7 +67,15 @@ public class NewUserScreen extends Screen{
 		submit.setOnAction(event -> {
 			// TODO: CREATE USER FUNCTION GOES HERE
 			
-			
+			UserProfile user = new UserProfile(username.getText(),password.getText(),0);
+			try
+			{
+				user.createUserProfile();
+			} catch (FileNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			switchScreen(new LevelScreen());
 			
