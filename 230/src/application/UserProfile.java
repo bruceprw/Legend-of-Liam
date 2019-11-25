@@ -29,7 +29,9 @@ public class UserProfile
 		while (in.hasNext())
 		{
 			temp+=in.nextLine();
+			temp+="\r\n";
 		}
+		System.out.println(temp);
 		temp+=output;
 		PrintWriter out = new PrintWriter(file);
 		out.print(temp);
