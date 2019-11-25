@@ -54,7 +54,7 @@ public class TitleScreen extends Screen{
 	private void buildButtons() {
 		newProfile = new Button("Create Profile");
 		newProfile.setOnAction(event -> {
-			//createPopup(new NewUserScreen());
+			createPopup(new NewUserScreen());
 		});
 		
 		// TODO: Change from "Select Level" to "Load Profile"
