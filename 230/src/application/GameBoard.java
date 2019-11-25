@@ -23,6 +23,8 @@ public class GameBoard
 	private Element[][] fog;
 	private int playerX;
 	private int playerY;
+	private int goalX;
+	private int goalY;
 	
 	private ArrayList<Integer> enemyX;
 	private ArrayList<Integer> enemyY;
@@ -42,6 +44,8 @@ public class GameBoard
 		fog = lvl.getFog();
 		enemyX = lvl.getEnemyX();
 		enemyY = lvl.getEnemyY();
+		goalX=lvl.getGoalX();
+		goalY=lvl.getGoalY();
 	}
 
 	public void drawFog(GraphicsContext gc)
@@ -99,6 +103,11 @@ public class GameBoard
 	{
 		return playerY;
 	}
+	
+	public boolean end()
+	{
+		return playerY==goalY&&playerX==goalX;
+	}
 
 	public void drawItem(GraphicsContext gc) throws FileNotFoundException
 	{
@@ -127,7 +136,7 @@ public class GameBoard
 		gc.strokeText(": " + temp[6], 225, 660);
 	}
 
-	public void move(String way)
+	public boolean move(String way)
 	{
 		switch (way)
 		{
@@ -228,8 +237,11 @@ public class GameBoard
 					playerY = playerY + 1;
 				}
 			}
+			if (playerX==goalX&&playerY==goalY)
+				
 			break;
 		}
+		return end();
 	}
 	
 	/**

@@ -65,23 +65,52 @@ public class GameScreen extends Screen
 
 	private void keyPressed(KeyEvent event)
 	{
-
+		boolean end;
 		switch (event.getCode())
 		{
 		case RIGHT:
-			level.move("right");
+			end =level.move("right");
+			
+			if (end)
+			{
+				Scene s = new LevelScreen().getScene();
+				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
+				primaryStage.setScene(s);
+				
+			}
 			break;
 
 		case LEFT:
-			level.move("left");
+			end=level.move("left");
+			if (end)
+			{
+				Scene s = new LevelScreen().getScene();
+				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
+				primaryStage.setScene(s);
+				
+			}
 			break;
 
 		case UP:
-			level.move("up");
+			end=level.move("up");
+			if (end)
+			{
+				Scene s = new LevelScreen().getScene();
+				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
+				primaryStage.setScene(s);
+				
+			}
 			break;
 
 		case DOWN:
-			level.move("down");
+			end = level.move("down");
+			if (end)
+			{
+				Scene s = new LevelScreen().getScene();
+				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
+				primaryStage.setScene(s);
+				
+			}
 			break;
 
 		default:

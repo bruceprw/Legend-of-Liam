@@ -26,7 +26,7 @@ public class DumbTargettingEnemy extends Enemy
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
 
-        this.direction = HV;
+       // this.direction = HV;
         try
 		{
 			setImage();
