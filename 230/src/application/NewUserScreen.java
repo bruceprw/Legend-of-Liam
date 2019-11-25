@@ -6,11 +6,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -18,14 +18,13 @@ public class NewUserScreen extends Screen{
 	BorderPane root;
 	
 	GridPane top;
-	//VBox topBorder;
 	Text prompt;
 	Text usernameLabel;
 	Text passwordLabel;
 	Text checkPassLabel;
 	TextField username;
-	TextField password;
-	TextField checkPassword;
+	PasswordField password;
+	PasswordField checkPassword;
 	Text passwordEnter = new Text("Please enter your password: ");
 	Text passwordConfirm = new Text("Please confirm your password: ");
 	
@@ -40,9 +39,6 @@ public class NewUserScreen extends Screen{
 		top.setVgap(20);
 		top.setHgap(30);
 		
-		//topBorder = new VBox();
-		//topBorder.setAlignment(Pos.BASELINE_LEFT);
-		
 		bottomBorder = new HBox();
 		bottomBorder.setAlignment(Pos.BASELINE_RIGHT);
 		
@@ -54,18 +50,16 @@ public class NewUserScreen extends Screen{
 		username = new TextField();
 		username.setMaxWidth(POPUP_WIDTH);
 		
-		password = new TextField();
+		password = new PasswordField();
 		password.setMaxWidth(POPUP_WIDTH);
 		
-		checkPassword = new TextField();
+		checkPassword = new PasswordField();
 		checkPassword.setMaxWidth(POPUP_WIDTH);
 		
 		submit = new Button("Submit");
 		cancel = new Button("Cancel");
-		//UserProfile user = new UserProfile(input,);
 		
 		submit.setOnAction(event -> {
-			// TODO: CREATE USER FUNCTION GOES HERE
 			
 			UserProfile user = new UserProfile(username.getText(),password.getText(),0);
 			try
@@ -73,7 +67,6 @@ public class NewUserScreen extends Screen{
 				user.createUserProfile();
 			} catch (FileNotFoundException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -96,7 +89,6 @@ public class NewUserScreen extends Screen{
 
 		bottomBorder.getChildren().addAll(submit, cancel);
 		
-		//root.setTop(topBorder);
 		root.setCenter(top);
 		root.setBottom(bottomBorder);
 		root.setPadding(new Insets(20, 20, 20, 20));
