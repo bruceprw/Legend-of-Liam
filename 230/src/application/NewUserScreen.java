@@ -6,10 +6,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -20,15 +22,22 @@ public class NewUserScreen extends Screen
 	BorderPane root;
 
 	GridPane top;
+
 	// VBox topBorder;
 	Text prompt;
 	Text usernameLabel;
 	Text passwordLabel;
 	Text checkPassLabel;
 	TextField username;
-	TextField password;
-	TextField checkPassword;
+
+	// TextField password;
+	// TextField checkPassword;
 	Text passwordWarning = new Text("Password not the same...");
+
+	PasswordField password;
+	PasswordField checkPassword;
+	Text passwordEnter = new Text("Please enter your password: ");
+	Text passwordConfirm = new Text("Please confirm your password: ");
 
 	HBox bottomBorder;
 	Button submit;
@@ -42,8 +51,12 @@ public class NewUserScreen extends Screen
 		top.setVgap(20);
 		top.setHgap(30);
 
+
 		// topBorder = new VBox();
 		// topBorder.setAlignment(Pos.BASELINE_LEFT);
+
+
+		
 
 		bottomBorder = new HBox();
 		bottomBorder.setAlignment(Pos.BASELINE_RIGHT);
@@ -58,25 +71,35 @@ public class NewUserScreen extends Screen
 		username = new TextField();
 		username.setMaxWidth(POPUP_WIDTH);
 
-		password = new TextField();
+
+		password = new PasswordField();
+
+		
+		password = new PasswordField();
+
 		password.setMaxWidth(POPUP_WIDTH);
 
-		checkPassword = new TextField();
+
+		checkPassword = new PasswordField();
+
+		
+		checkPassword = new PasswordField();
+
 		checkPassword.setMaxWidth(POPUP_WIDTH);
 
 		submit = new Button("Submit");
 		cancel = new Button("Cancel");
+
 		// UserProfile user = new UserProfile(input,);
 
 		submit.setOnAction(event ->
 		{
 			// TODO: CREATE USER FUNCTION GOES HERE
 			if (!passwordConfirm())
-			{
-				passwordWarning.setVisible(true);
-			}
+				passwordWarning.setVisible(true);	
 			else
 			{
+
 				UserProfile user = new UserProfile(username.getText(), password.getText(), 0);
 				try
 				{
@@ -90,13 +113,17 @@ public class NewUserScreen extends Screen
 				switchScreen(new LevelScreen());
 				Stage popup = (Stage) this.scene.getWindow();
 				popup.close();// Closes the popup
+
+
 			}
 			
+
 
 		});
 
 		cancel.setOnAction(event ->
 		{
+
 			// Closes the popup
 			Stage popup = (Stage) this.scene.getWindow();
 			popup.close();
@@ -117,7 +144,7 @@ public class NewUserScreen extends Screen
 
 		scene = new Scene(root, POPUP_WIDTH, POPUP_HEIGHT);
 	}
-	
+
 	public boolean passwordConfirm()
 	{
 		return this.checkPassword.getText().equals(password.getText());
