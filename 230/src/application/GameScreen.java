@@ -1,15 +1,26 @@
- package application;
+package application;
 
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class GameScreen extends Screen
 {
@@ -25,23 +36,35 @@ public class GameScreen extends Screen
 	private Button levelSelect;
 
 	private GameBoard level;
+	int time=0;
 
 	/**
 	 * 
 	 * @param levelNo Number of the level to be loaded.
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	public GameScreen(int levelNo)
 	{
+		Label timeLabel = new Label();
+		long startTime = System.currentTimeMillis();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		new AnimationTimer() {
+			public void handle(long now) {
+				long elapsedMillis = System.currentTimeMillis()-startTime;
+				//System.out.println(elapsedMillis);
+				Date d = new Date(elapsedMillis);
+				timeLabel.setText(sdf.format(d));
+			}
+		}.start();
+
 		try
 		{
-			level = new GameBoard("LevelFiles\\"+levelNo+".txt");
-		}
-		catch (FileNotFoundException e)
+			level = new GameBoard("LevelFiles\\" + levelNo + ".txt");
+		} catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
 		}
-		
+
 		root = new BorderPane();
 		game = new Canvas(GAME_WIDTH, GAME_HEIGHT);
 		buttonsPane = new HBox();
@@ -53,7 +76,7 @@ public class GameScreen extends Screen
 		buildButtons();
 
 		// Add buttons to buttonsPane
-		buttonsPane.getChildren().addAll(levelSelect, save);
+		buttonsPane.getChildren().addAll(levelSelect, save, timeLabel);
 
 		// Put canvas and buttons into root.
 		root.setCenter(game);
@@ -102,13 +125,12 @@ public class GameScreen extends Screen
 		try
 		{
 			level.drawGame(gc);
-		}
-		catch (FileNotFoundException e)
+		} catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		// TEST - get rid of this
 		gc.setFill(Color.BLACK);
 		gc.strokeRect(0, 0, game.getWidth(), game.getHeight());
@@ -120,7 +142,7 @@ public class GameScreen extends Screen
 		save.setOnAction(event ->
 		{
 			// TODO: Create Save and add to User.
-			//FileOutputer f = new FileOutputer(level);
+			// FileOutputer f = new FileOutputer(level);
 			// Switch to Title Screen
 			Scene s = new TitleScreen().getScene();
 			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
