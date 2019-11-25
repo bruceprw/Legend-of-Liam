@@ -1,166 +1,167 @@
 package application;
 
-import cell.Cell;
-import cell.ColouredDoor;
-
 /**
  * Enemy super class, abstract not be to called
  * 
  * @author Miles Singleton
  * @version 0.0
  */
-abstract class Enemy extends Element {
+abstract class Enemy  extends Element{
 
-	/// the current X and Y position
-	protected int currentPositionX;
-	protected int currentPositionY;
+    /// the current X and Y position
+    protected int currentPositionX;
+    protected int currentPositionY;
 
-	/// the next position for the enemy
-	protected int nextPositionX;
-	protected int nextPositionY;
+    /// the next position for the enemy
+    protected int nextPositionX;
+    protected int nextPositionY;
 
-	protected String movDirection;
+    protected boolean direction;
+    protected String movDirection;
+    // TODO rename this
+    protected boolean bounce;
 
-	//Constants
-	///Directions
-	final private String UP = "North";
-	final private String LEFT = "East";
-	final private String DOWN = "South";
-	final private String RIGHT = "West";
-	
-	final private int ONE = 1;
+    // TODO rename this
+    final private int ONE = 1;
+    final private int TWO = 1;
 
-	/**
-	 * @return the movDirection
-	 */
-	public String getMovDirection() {
-		return movDirection;
-	}
+    /**
+     * Works out where the enemy needs to move and 
+     * changes current position to where it should be moved to
+     * 
+     * @return The new position on game board
+     */
+    public int[][] move() {
+        findNewPosition();
+        setNewPositions();
+        return getCurrentPosition();
+    }
 
-	/**
-	 * @param movDirection the movDirection to set
-	 */
-	public void setMovDirection(String movDirection) {
-		this.movDirection = movDirection;
-	}
+    /**
+     * Checks if next tile is a space
+     * @return x True if can move to new position, else False
+     */
+    private boolean findNextTile() {
+        // get game board
+        // find out if x+1,(Y+1 || Y -1) is a wall tile
+        // if yes continue
 
-	
+        boolean x = true;
+        // else reverse direction
+        return x;
+    }
 
-	public int[] moveTo(int currentX, int currentY, Cell cell) {
-		switch (this.getMovDirection()) {
-		case (UP):
-			// TODO break this into a method
-			if (this.isMovable(cell)) {
-				int[] a = { currentX + ONE, currentY };
-				return a;
-			} else {
-				this.reverseDirection();
-				int[] a = {};
-				return a;
-			}
-		case (LEFT):
-			if (this.isMovable(cell)) {
-				int[] a = { currentX, currentY + ONE };
-				return a;
-			} else {
-				this.reverseDirection();
-				// TODO get opposite cell
-				this.moveTo(currentX, currentY, cell);
-			}
-		case (DOWN):
-			if (this.isMovable(cell)) {
-				int[] a = { currentX - ONE, currentY };
-				return a;
-			} else {
-				this.reverseDirection();
-				// TODO get opposite cell
-				this.moveTo(currentX, currentY, cell);
-			}
-		case (RIGHT):
-			if (this.isMovable(cell)) {
-				int[] a = { currentX, currentY - ONE };
-				return a;
-			} else {
-				this.reverseDirection();
-				// TODO get opposite cell
-				this.moveTo(currentX, currentY, cell);
-			}
-		default:
-			throw new IllegalStateException("Undifened direction");
+    /**
+     * checks if next space movable and 
+     * calls methods based on said checks
+     */
+    protected void findNewPosition() {
+        // check next tile see if its not valid
+        if (!findNextTile()) {
+            // if not valid check corner
+            if (checkCorner()) // does not apply to straight enemies
+            {
+                // if corner move to corner
+                cornerMoveTo();
 
-		}
-	}
+            } else {
+                // if not corner reverse bounce and move
+                setBounce(!getBounce());
+                moveTo();
+            }
+        }
+    }
 
-	public void reverseDirection() {
-		switch (this.getMovDirection()) {
-		case (UP):
-			this.setMovDirection(DOWN);
-			break;
-		case (LEFT):
-			this.setMovDirection(RIGHT);
-			break;
-		case (DOWN):
-			this.setMovDirection(UP);
-			break;
-		case (RIGHT):
-			this.setMovDirection(LEFT);
-			break;
-		default:
-			throw new IllegalStateException("Undifened direction");
-		}
-	}
+    /**
+     * Moves enemy to next space
+     */
+    private void moveTo() {
+        if (getDirection()) {
+            if (getBounce()) {
+                this.nextPositionX = currentPositionX - ONE;
+            } else {
+                this.nextPositionX = currentPositionX + ONE;
+            }
+        } else {
+            if (getBounce()) {
+                this.nextPositionY = currentPositionY - ONE;
+            } else {
+                this.nextPositionY = currentPositionY + ONE;
+            }
+        }
+    }
 
-	public boolean isMovable(Cell cell) {
-		switch (cell.getString()) {
-		case "GREENDOOR":
-			if (((ColouredDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
+    /**
+     * Movies enemy to a corner
+     */
+    private void cornerMoveTo() {
+        if (getDirection()) {
+            this.nextPositionX = currentPositionX + ONE;
+            this.nextPositionY = currentPositionY + TWO;
+        } else {
+            this.nextPositionX = currentPositionX + TWO;
+            this.nextPositionY = currentPositionY + ONE;
+        }
 
-		case "REDDOOR":
-			if (((ColouredDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
+        setDirection(!getDirection());
+    }
 
-		case "YELLOWDOOR":
-			if (((ColouredDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
+    /**
+     * returns the direction of enemy
+     * @return direction
+     */
+    private boolean getDirection() {
+        return this.direction;
+    }
 
-		case "BLUEDOOR":
-			if (((ColouredDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
+    /**
+     * returns the bounce of the enemy
+     * @return bounce
+     */
+    private boolean getBounce() {
+        return this.bounce;
+    }
 
-		case "W":
-			return false;
-		case "#":
-			return false;
-		case "D":
-			if (((ColouredDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
+    /**
+     * sets the bounce of the enemy
+     * @param hold 
+     */
+    private void setBounce(boolean hold) {
+        this.bounce = hold;
+    }
 
-		case "@":
-			return true;
-		case "L":
-			return false;
-		case " ":
-			return true;
-		case "G":
-			return true;
-		default:
-			return false;
-		}
-	}
+    /**
+     * sets the direction of the enemy
+     * @param hold 
+     */
+    private void setDirection(boolean hold) {
+        this.bounce = hold;
+    }
+
+    /**
+     * checks if there is a movable corner
+     * @return True if there is a movable corner
+     */
+    private boolean checkCorner() {
+        // else if (x+1,y+2) == wall
+        // move x+1,y+1
+
+        return false;
+    }
+
+    /**
+     * returns 2D int array of current location
+     * @return 2D int array of current position
+     */
+    public int[][] getCurrentPosition() {
+        return new int[currentPositionX][currentPositionY];
+    }
+
+    /**
+     * changes current position to next position variable
+     */
+    public void setNewPositions() {
+        this.currentPositionX = nextPositionX;
+        this.currentPositionY = nextPositionY;
+    }
 }
