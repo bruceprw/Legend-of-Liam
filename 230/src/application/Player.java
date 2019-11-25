@@ -60,6 +60,11 @@ public class Player extends Element
 	{
 		inventory[position] += num;
 	}
+	
+	public int getTokenNum()
+	{
+		return inventory[0];
+	}
 
 	public int[] getInventory()
 	{
@@ -182,7 +187,6 @@ public class Player extends Element
 		case "W":
 			if(checkInventory(6))
 			{
-				dropCol(6);
 				return true;
 			}
 			else
@@ -190,15 +194,17 @@ public class Player extends Element
 		case "#":
 			return false;
 		case "D":
-			if (((ColouredDoor)cell).getOpened())
+			if (((TokenDoor)cell).getOpened())
 			{
 				return true;
 			}
 			else
 			{
-				if(checkInventory(0))
+				if(getTokenNum()==(((TokenDoor)cell).getTokenNum()))
 				{
-					dropCol(0);
+					for (int i=0; i<(((TokenDoor)cell).getTokenNum()); i++){
+						dropCol(0);
+					}
 					((TokenDoor)cell).openDoor();
 					return true;
 				}
@@ -211,7 +217,6 @@ public class Player extends Element
 		case "L":
 			if(checkInventory(5))
 			{
-				dropCol(5);
 				return true;
 			}
 			else

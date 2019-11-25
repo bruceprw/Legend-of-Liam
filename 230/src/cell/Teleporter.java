@@ -11,11 +11,25 @@ public class Teleporter extends Cell{
 	
 	private String path = "Images\\teleporter.jpg";
 	private Image image;
+	private int pairX;
+	private int pairY;
 
-	public Teleporter() throws FileNotFoundException
+	public Teleporter(int pairX,int pairY) throws FileNotFoundException
 	{
 		super(false, true, true, "", Item.NONE);
 		setImage();
+		this.pairX=pairX;
+		this.pairY=pairY;
+	}
+	
+	public int getPairX()
+	{
+		return pairX;
+	}
+	
+	public int getPairY()
+	{
+		return pairY;
 	}
 	
 	public void setImage() throws FileNotFoundException
