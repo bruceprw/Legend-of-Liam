@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import Collectibles.BlueKey;
 import Collectibles.Collectible;
@@ -22,6 +23,14 @@ public class GameBoard
 	private Element[][] fog;
 	private int playerX;
 	private int playerY;
+	
+	private ArrayList<Integer> enemyX;
+	private ArrayList<Integer> enemyY;
+
+	final private String UP = "North";
+	final private String LEFT = "East";
+	final private String DOWN = "South";
+	final private String RIGHT = "West";
 
 	public GameBoard(String filePath) throws FileNotFoundException
 	{
@@ -31,6 +40,8 @@ public class GameBoard
 		playerX = lvl.getPlayerX();
 		playerY = lvl.getPlayerY();
 		fog = lvl.getFog();
+		enemyX = lvl.getEnemyX();
+		enemyY = lvl.getEnemyY();
 	}
 
 	public void drawFog(GraphicsContext gc)
@@ -219,6 +230,78 @@ public class GameBoard
 			}
 			break;
 		}
+	}
+	
+	/**
+	 * method for moving enemy
+	 * 
+	 */
+	private void moveEnemy() {
+		// get each enemy
+
+		for (int i = 0; i < enemyX.size(); i++) {
+			// store enemy
+			try {
+				int currentX = enemyX.get(i);
+				int currentY = enemyY.get(i);
+				Enemy enemyHold = (Enemy) this.board[currentX][currentY];
+
+				// find sub class of enemy
+				switch (enemyHold.getString()) {
+				case "DUMB":
+					// TODO fill this in
+					break;
+				case "SMART":
+					// TODO fill this in
+					break;
+				case "STRAIGHT":
+					try {
+						int[] XY = enemyHold.moveTo(currentX, currentY,
+								this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
+						board[currentX][currentY] = board[XY[0]][XY[1]];
+					} catch (IndexOutOfBoundsException e) {
+						int[] XY = enemyHold.moveTo(currentX, currentY,
+								this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
+						board[currentX][currentY] = board[XY[0]][XY[1]];
+					}
+
+					break;
+				case "WALLHUG":
+					// TODO fill this in
+					break;
+				}
+			} catch (ClassCastException exc) {
+				// not a enemy class
+				exc.printStackTrace();
+			}
+
+		}
+	}
+
+	/**
+	 * Returns the next cell based off movDirection of element
+	 * 
+	 * @param X            the X coordinates
+	 * @param Y            the Y coordinates
+	 * @param movDirection the move direction of the element
+	 * @return the Cell next to given X Y
+	 */
+	private Cell getNextCell(int X, int Y, String movDirection) {
+		switch (movDirection) {
+		case (UP):
+			// TODO make method to get element from board & background
+			return (Cell) background[X][Y + 1];
+		case (DOWN):
+			return (Cell) background[X][Y - 1];
+		case (LEFT):
+			return (Cell) background[X + 1][Y];
+		case (RIGHT):
+			return (Cell) background[X - 1][Y];
+		default:
+			throw new IllegalStateException("Undifened direction");
+
+		}
+
 	}
 
 	public void acquire(Collectible co)

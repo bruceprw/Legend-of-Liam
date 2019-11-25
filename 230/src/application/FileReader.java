@@ -154,7 +154,7 @@ public class FileReader
 			if(type.equals("STRAIGHT"))
 			{
 				String way = line.next();
-				board[y][x] = new StraightLineEnemy(x,y,true,way);
+				board[y][x] = new StraightLineEnemy(x,y,way);
 				enemyX.add(x);
 				enemyY.add(y);
 			}
