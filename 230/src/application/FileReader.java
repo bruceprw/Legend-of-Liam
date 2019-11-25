@@ -2,6 +2,7 @@ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import Collectibles.*;
 import cell.*;
@@ -17,6 +18,8 @@ public class FileReader
 	private int playerX;
 	private int playerY;
 	private Element[][] fog; 
+	private ArrayList<Integer> enemyX=new ArrayList<Integer>();
+	private ArrayList<Integer> enemyY=new ArrayList<Integer>();
 
 	public FileReader(String filePath) throws FileNotFoundException
 	{
@@ -84,6 +87,16 @@ public class FileReader
 		in.close();
 	}
 
+	public ArrayList<Integer> getEnemyX()
+	{
+		return enemyX;
+	}
+	
+	public ArrayList<Integer> getEnemyY()
+	{
+		return enemyY;
+	}
+	
 	public Element[][] getFog()
 	{
 		return fog;
@@ -142,16 +155,28 @@ public class FileReader
 			{
 				String way = line.next();
 				board[y][x] = new StraightLineEnemy(x,y,true,way);
+				enemyX.add(x);
+				enemyY.add(y);
 			}
 			else if(type.equals("WALLHUG"))
 			{
 				String way = line.next();
 				board[y][x] = new WallFollowingEnemy(x,y,way);
+				enemyX.add(x);
+				enemyY.add(y);
 			}
 			else if(type.equals("DUMB"))
+			{
 				board[y][x] = new DumbTargettingEnemy(x,y,true);
+				enemyX.add(x);
+				enemyY.add(y);
+			}
 			else if(type.equals("SMART"))
+			{
 				board[y][x] = new SmartTargettingEnemy(x,y,true);
+				enemyX.add(x);
+				enemyY.add(y);
+			}
 			break;
 		case "RKEY":
 			board[y][x] = new RedKey();

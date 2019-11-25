@@ -4,6 +4,7 @@ public class UserProfile
 {
 	private String name;
 	private String password;
+	private UserProfile[] users;
 	
 	
 	public UserProfile(String name, String password)
@@ -11,6 +12,8 @@ public class UserProfile
 		this.name = name;
 		this.password = password;
 	}
+	
+	
 	
 	public void setName(String name)
 	{
@@ -23,7 +26,7 @@ public class UserProfile
 		
 	}
 	
-	public void setPassword()
+	public void setPassword(String password)
 	{
 		this.password = password;
 	}

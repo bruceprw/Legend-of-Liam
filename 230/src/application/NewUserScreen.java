@@ -19,6 +19,8 @@ public class NewUserScreen extends Screen{
 	TextField username;
 	TextField password;
 	TextField checkPassword;
+	Text passwordEnter = new Text("Please enter your password: ");
+	Text passwordConfirm = new Text("Please confirm your password: ");
 	
 	HBox bottomBorder;
 	Button submit;
@@ -49,6 +51,9 @@ public class NewUserScreen extends Screen{
 		
 		submit.setOnAction(event -> {
 			// TODO: CREATE USER FUNCTION GOES HERE
+			
+			
+			
 			switchScreen(new LevelScreen());
 			
 			// Closes the popup
@@ -62,7 +67,7 @@ public class NewUserScreen extends Screen{
 			popup.close();
 		});
 		
-		topBorder.getChildren().addAll(prompt, username, password, checkPassword);
+		topBorder.getChildren().addAll(prompt, username, passwordEnter,password,passwordConfirm, checkPassword);
 		bottomBorder.getChildren().addAll(submit, cancel);
 		
 		root.setTop(topBorder);
