@@ -20,17 +20,19 @@ public class UserProfile
 		this.levelProg=levelProg;
 	}
 	
-	public void getUserProfile()
+	public static void updateUserProfile(String username, String password,int levelProg)
 	{
-		try {
-			File file = new File(filePath);
-			Scanner in = new Scanner(file);
-			//while()
+		File file = new File(filePath);
+		Scanner in = null;
+		try
+		{
+			in = new Scanner(file);
 		}
 		catch(FileNotFoundException e)
 		{
 			e.printStackTrace();
 		}
+		//make it something like leaderboard;
 	}
 	
 	public static void createUserProfile(String name,String password,int levelProg) throws FileNotFoundException
@@ -50,7 +52,11 @@ public class UserProfile
 		out.print(temp);
 		out.close();
 		in.close();
-		
+	}
+	
+	public void setLevelProg(int l)
+	{
+		this.levelProg=l;
 	}
 	
 	public void setName(String name)

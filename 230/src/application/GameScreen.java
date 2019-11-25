@@ -38,7 +38,7 @@ public class GameScreen extends Screen
 	private GameBoard level;
 	private UserProfile user;
 	private Leaderboard leaderboard;
-	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 	//int time = 0;
 
 	/**

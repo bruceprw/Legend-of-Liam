@@ -89,10 +89,11 @@ public class TitleScreen extends Screen
 		username = new TextField();
 		password = new PasswordField();
 		submit = new Button("Submit");
+		//let's let the user allowed to press "Enter key" to login
 		submit.setOnAction(event ->
 		{
 			boolean found = false;
-
+			
 			File f = new File("UserProfiles\\profiles.txt");
 			Scanner s = null;
 			try
