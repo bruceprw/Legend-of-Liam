@@ -181,6 +181,11 @@ public class FileReader
 			int a = line.nextInt();
 			background[y][x] = new TokenDoor(a);
 			break;
+		case "TELEPORTER":
+			int tempX = line.nextInt();
+			int tempY = line.nextInt();
+			background[y][x] = new Teleporter(tempX,tempY);
+			break;
 		case "INVENTORY":
 			while (line.hasNext())
 			{
@@ -210,6 +215,7 @@ public class FileReader
 				case "FLIPPER":
 					((Player) board[playerY][playerX]).setInventory(6,num);
 					break;
+
 				}
 			}
 			break;
@@ -241,9 +247,10 @@ public class FileReader
 				case 'W':
 					background[j][i] = new Water();
 					break;
+					/*
 				case '@':
 					background[j][i] = new Teleporter();
-					break;
+					break;*/
 				case 'T':
 					background[j][i]=new Ground();
 					board[j][i] = new Token();

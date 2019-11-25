@@ -35,6 +35,7 @@ public class NewUserScreen extends Screen{
 		input.setMaxWidth(POPUP_WIDTH);
 		submit = new Button("Submit");
 		cancel = new Button("Cancel");
+		//UserProfile user = new UserProfile(input,);
 		
 		submit.setOnAction(event -> {
 			// TODO: CREATE USER FUNCTION GOES HERE

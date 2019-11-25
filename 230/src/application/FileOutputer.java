@@ -139,7 +139,10 @@ public class FileOutputer
 					output += "W";
 					break;
 				case "@":
-					output += "@";
+					output += " ";
+					int tempX = ((Teleporter)background[y][x]).getPairX();
+					int tempY = ((Teleporter)background[y][x]).getPairY();
+					temp+=""+x+","+y+"TELEPORTER"+tempX+","+tempY+"\r\n";
 					break;
 				case "D":
 					output+=" ";
