@@ -2,7 +2,7 @@
 ############################
 ############################
 ############################
-##### GLW  TFO         #####
+##### GLWTTTFO         #####
 #####                  #####
 #####                  #####
 #####                  #####
@@ -29,7 +29,7 @@
 8,5,BKEY
 9,5,YKEY
 10,5,ENEMY,STRAIGHT,DOWN
-11,5,ENEMY,WALLHUG,DOWN
+16,3,ENEMY,WALLHUG,DOWN
 16,16,TELEPORTER,17,17
 17,17,TELEPORTER,16,16
 12,5,ENEMY,DUMB
