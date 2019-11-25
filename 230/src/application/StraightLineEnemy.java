@@ -18,24 +18,12 @@ public class StraightLineEnemy extends Enemy {
 	private String path = "Images\\straightE.jpg";
 	private Image image;
 	
-    public StraightLineEnemy(int currentX, int currentY, boolean HV, String movDirection) throws FileNotFoundException {
+    public StraightLineEnemy(int currentX, int currentY, String movDirection) throws FileNotFoundException {
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
 
-        this.direction = HV;
         this.movDirection = movDirection;
         setImage();
-    }
-
-    //TODO write code for this 
-    private boolean checkCorner()
-    {
-        return false;
-    }
-    
-    String getDirection()
-    {
-    	return movDirection;
     }
     
     public String getString()

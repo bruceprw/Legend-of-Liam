@@ -3,6 +3,7 @@ package application;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import cell.Cell;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -21,12 +22,15 @@ public class DumbTargettingEnemy extends Enemy
 	private String path = "Images\\idiot.png";
 	private Image image;
 	
+	@Override
+	protected 
+	
     public DumbTargettingEnemy(int currentX,int currentY, boolean HV)
     {
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
 
-        this.direction = HV;
+        this.verticalDirection = HV;
         try
 		{
 			setImage();
@@ -39,15 +43,12 @@ public class DumbTargettingEnemy extends Enemy
     }
 
     @Override
-    protected void findNewPosition() {
-        //find player location
-        //move in said direction 
-            //if wall stationary
-        
-        //if gone
-
-        //random direction
+    protected void move(Cell cell)
+    {
+    	
     }
+    
+    
     public String getString()
     {
     	return"DUMB";

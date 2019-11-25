@@ -23,15 +23,15 @@ public class SmartTargettingEnemy extends Enemy
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
 
-        this.direction = HV;
+        this.verticalDirection = HV;
         setImage();
     }
 
     @Override
     protected void findNewPosition() {
-        //will need to apply BFS
-        //move to nearest tile to player
-        //see spaces as nodes to traverse
+        //get gameboard
+    	//apply BFS to gameboard
+    	//traverse shortest path
     }
     
     public String getString()

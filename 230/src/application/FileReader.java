@@ -2,13 +2,12 @@ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import Collectibles.*;
 import cell.*;
 
-
-public class FileReader
-{
+public class FileReader {
 	private int mapSizeX;
 	private int mapSizeY;
 	private String[] map;
@@ -16,10 +15,12 @@ public class FileReader
 	private Element[][] background;
 	private int playerX;
 	private int playerY;
-	private Element[][] fog; 
+	private Element[][] fog;
 
-	public FileReader(String filePath) throws FileNotFoundException
-	{
+	private ArrayList<Integer> enemyX;
+	private ArrayList<Integer> enemyY;
+
+	public FileReader(String filePath) throws FileNotFoundException {
 		File file = new File(filePath);
 		Scanner in = new Scanner(file);
 		String sizeLine = in.nextLine();
@@ -30,128 +31,114 @@ public class FileReader
 		board = new Element[mapSizeY][mapSizeX];
 		background = new Element[mapSizeY][mapSizeX];
 		map = new String[mapSizeY];
-		for (int i = 0; i < mapSizeY; i++)
-		{
+		for (int i = 0; i < mapSizeY; i++) {
 			map[i] = in.nextLine();
 		}
 
 		subMap(map);
 
-		while (in.hasNext())
-		{
+		while (in.hasNext()) {
 			String temp = in.nextLine();
-			if(temp.equals("////"))
+			if (temp.equals("////"))
 				break;
 			Scanner addLine = new Scanner(temp);
 			subAdd(addLine);
 		}
-		for (int y = 0; y < board.length; y++)
-		{
-			for (int x = 0; x < board[y].length; x++)
-			{
-				if(board[y][x] == null)
+		for (int y = 0; y < board.length; y++) {
+			for (int x = 0; x < board[y].length; x++) {
+				if (board[y][x] == null)
 					board[y][x] = new Empty();
 			}
 		}
-		for (int y = 0; y < background.length; y++)
-		{
-			for (int x = 0; x < background[y].length; x++)
-			{
-				if(background[y][x] == null)
+		for (int y = 0; y < background.length; y++) {
+			for (int x = 0; x < background[y].length; x++) {
+				if (background[y][x] == null)
 					background[y][x] = new Empty();
 			}
 		}
 		fog = new Element[mapSizeY][mapSizeX];
 		setFog();
 		/*
-		for (int y = 0; y < board.length; y++)
-		{
-			for (int x = 0; x < board[y].length; x++)
-			{
-				System.out.print(board[y][x].getString());
-			}
-			System.out.println();
-		}
-		for (int y = 0; y < background.length; y++)
-		{
-			for (int x = 0; x < background[y].length; x++)
-			{
-				System.out.print(background[y][x].getString());
-			}
-			System.out.println();
-		}*/
+		 * for (int y = 0; y < board.length; y++) { for (int x = 0; x < board[y].length;
+		 * x++) { System.out.print(board[y][x].getString()); } System.out.println(); }
+		 * for (int y = 0; y < background.length; y++) { for (int x = 0; x <
+		 * background[y].length; x++) { System.out.print(background[y][x].getString());
+		 * } System.out.println(); }
+		 */
 		sizeScan.close();
 		in.close();
 	}
 
-	public Element[][] getFog()
-	{
+	public Element[][] getFog() {
 		return fog;
 	}
-	
-	public void setFog() throws FileNotFoundException
-	{
-		for(int y=0;y<background.length;y++)
-		{
-			for(int x=0;x<background[y].length;x++)
-			{
-				fog[y][x]=new Fog();
+
+	public void setFog() throws FileNotFoundException {
+		for (int y = 0; y < background.length; y++) {
+			for (int x = 0; x < background[y].length; x++) {
+				fog[y][x] = new Fog();
 			}
 		}
 	}
-	
-	public int getPlayerX()
-	{
+
+	public int getPlayerX() {
 		return playerX;
 	}
 
-	public int getPlayerY()
-	{
+	public int getPlayerY() {
 		return playerY;
 	}
 
-	public Element[][] getBackground()
-	{
+	public Element[][] getBackground() {
 		return this.background;
 	}
 
-	public Element[][] getBoard()
-	{
+	public Element[][] getBoard() {
 		return this.board;
 	}
 
-	public void subAdd(Scanner line) throws FileNotFoundException
-	{
+	public void subAdd(Scanner line) throws FileNotFoundException {
 		line.useDelimiter(",");
 		int x = line.nextInt();
 		int y = line.nextInt();
 		String feature = line.next();
-		//System.out.println(feature);
-		switch (feature)
-		{
+		// System.out.println(feature);
+		switch (feature) {
 		case "START":
-			//System.out.println(playerY);
-			//System.out.println(playerX);
+			// System.out.println(playerY);
+			// System.out.println(playerX);
 			playerX = x;
 			playerY = y;
 			board[y][x] = new Player("Name");
 			break;
 		case "ENEMY":
 			String type = line.next();
-			if(type.equals("STRAIGHT"))
-			{
+			if (type.equals("STRAIGHT")) {
 				String way = line.next();
-				board[y][x] = new StraightLineEnemy(x,y,true,way);
-			}
-			else if(type.equals("WALLHUG"))
-			{
+				board[y][x] = new StraightLineEnemy(x, y, way);
+
+				enemyX.add(x);
+				enemyY.add(y);
+			} else if (type.equals("WALLHUG")) {
 				String way = line.next();
-				board[y][x] = new WallFollowingEnemy(x,y,way);
+				board[y][x] = new WallFollowingEnemy(x, y, way);
+
+				enemyX.add(x);
+				enemyY.add(y);
+			} else if (type.equals("DUMB")) {
+				board[y][x] = new DumbTargettingEnemy(x, y, true);
+
+				enemyX.add(x);
+				enemyY.add(y);
 			}
-			else if(type.equals("DUMB"))
-				board[y][x] = new DumbTargettingEnemy(x,y,true);
-			else if(type.equals("SMART"))
-				board[y][x] = new SmartTargettingEnemy(x,y,true);
+
+			else if (type.equals("SMART")) {
+				board[y][x] = new SmartTargettingEnemy(x, y, true);
+			
+				enemyX.add(x);
+				enemyY.add(y);
+			}
+
 			break;
 		case "RKEY":
 			board[y][x] = new RedKey();
@@ -182,14 +169,12 @@ public class FileReader
 			background[y][x] = new TokenDoor(a);
 			break;
 		case "INVENTORY":
-			while (line.hasNext())
-			{
+			while (line.hasNext()) {
 				String collecti = line.next();
 				int num = line.nextInt();
-				//System.out.println(playerY);
-				//System.out.println(playerX);
-				switch (collecti)
-				{
+				// System.out.println(playerY);
+				// System.out.println(playerX);
+				switch (collecti) {
 				case "TOKEN":
 					((Player) board[playerY][playerX]).setInventory(0, num);
 					break;
@@ -205,10 +190,10 @@ public class FileReader
 					((Player) board[playerY][playerX]).setInventory(4, num);
 					break;
 				case "BOOT":
-					((Player) board[playerY][playerX]).setInventory(5,num);
+					((Player) board[playerY][playerX]).setInventory(5, num);
 					break;
 				case "FLIPPER":
-					((Player) board[playerY][playerX]).setInventory(6,num);
+					((Player) board[playerY][playerX]).setInventory(6, num);
 					break;
 				}
 			}
@@ -216,16 +201,12 @@ public class FileReader
 		}
 	}
 
-	public void subMap(String[] temp) throws FileNotFoundException
-	{
+	public void subMap(String[] temp) throws FileNotFoundException {
 
-		for (int j = 0; j < temp.length; j++)
-		{
-			for (int i = 0; i < temp[j].length(); i++)
-			{
+		for (int j = 0; j < temp.length; j++) {
+			for (int i = 0; i < temp[j].length(); i++) {
 				char temp1 = temp[j].charAt(i);
-				switch (temp1)
-				{
+				switch (temp1) {
 				case '#':
 					background[j][i] = new Wall();
 					break;
@@ -245,19 +226,27 @@ public class FileReader
 					background[j][i] = new Teleporter();
 					break;
 				case 'T':
-					background[j][i]=new Ground();
+					background[j][i] = new Ground();
 					board[j][i] = new Token();
 					break;
 				case 'O':
-					background[j][i]=new Ground();
+					background[j][i] = new Ground();
 					board[j][i] = new FireBoot();
 					break;
 				case 'F':
-					background[j][i]=new Ground();
+					background[j][i] = new Ground();
 					board[j][i] = new Flipper();
 					break;
 				}
 			}
 		}
+	}
+
+	public ArrayList<Integer> getEnemyX() {
+		return this.enemyX;
+	}
+
+	public ArrayList<Integer> getEnemyY() {
+		return this.enemyY;
 	}
 }
