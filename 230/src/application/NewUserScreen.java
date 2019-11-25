@@ -16,7 +16,9 @@ public class NewUserScreen extends Screen{
 	
 	VBox topBorder;
 	Text prompt;
-	TextField input;
+	TextField username;
+	TextField password;
+	TextField checkPassword;
 	
 	HBox bottomBorder;
 	Button submit;
@@ -31,15 +33,23 @@ public class NewUserScreen extends Screen{
 		bottomBorder.setAlignment(Pos.BASELINE_RIGHT);
 		
 		prompt = new Text("Please enter a new username.");
-		input = new TextField();
-		input.setMaxWidth(POPUP_WIDTH);
+		
+		username = new TextField();
+		username.setMaxWidth(POPUP_WIDTH);
+		
+		password = new TextField();
+		password.setMaxWidth(POPUP_WIDTH);
+		
+		checkPassword = new TextField();
+		checkPassword.setMaxWidth(POPUP_WIDTH);
+		
 		submit = new Button("Submit");
 		cancel = new Button("Cancel");
 		//UserProfile user = new UserProfile(input,);
 		
 		submit.setOnAction(event -> {
 			// TODO: CREATE USER FUNCTION GOES HERE
-			// TODO: LINK TO LEVEL SELECT SCREEN
+			switchScreen(new LevelScreen());
 			
 			// Closes the popup
 			Stage popup = (Stage) this.scene.getWindow();
@@ -52,7 +62,7 @@ public class NewUserScreen extends Screen{
 			popup.close();
 		});
 		
-		topBorder.getChildren().addAll(prompt, input);
+		topBorder.getChildren().addAll(prompt, username, password, checkPassword);
 		bottomBorder.getChildren().addAll(submit, cancel);
 		
 		root.setTop(topBorder);

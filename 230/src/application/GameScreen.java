@@ -1,4 +1,4 @@
-package application;
+ package application;
 
 import java.io.FileNotFoundException;
 
@@ -120,7 +120,7 @@ public class GameScreen extends Screen
 		save.setOnAction(event ->
 		{
 			// TODO: Create Save and add to User.
-			FileOutputer f = new FileOutputer(level);
+			//FileOutputer f = new FileOutputer(level);
 			// Switch to Title Screen
 			Scene s = new TitleScreen().getScene();
 			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());

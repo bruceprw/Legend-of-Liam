@@ -5,8 +5,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public abstract class Screen {
-	protected final static int WINDOW_WIDTH = 800;
-	protected final static int WINDOW_HEIGHT = 700;
+	protected final static int WINDOW_WIDTH = 900;
+	protected final static int WINDOW_HEIGHT = 900;
 	protected final static int POPUP_WIDTH = 400;
 	protected final static int POPUP_HEIGHT = 300;
 	protected final static String STYLESHEET = "application.css";
