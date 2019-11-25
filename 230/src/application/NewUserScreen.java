@@ -77,8 +77,6 @@ public class NewUserScreen extends Screen{
 				e.printStackTrace();
 			}
 			
-			switchScreen(new LevelScreen());
-			
 			// Closes the popup
 			Stage popup = (Stage) this.scene.getWindow();
 			popup.close();
