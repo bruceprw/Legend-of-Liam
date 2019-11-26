@@ -35,6 +35,7 @@ public class GameScreen extends Screen
 
 	private HBox buttonsPane;
 	private Button save;
+	private int levelNo;
 	private Button levelSelect;
 	private long time;
 	private GameBoard level;
@@ -51,6 +52,7 @@ public class GameScreen extends Screen
 	
 	public GameScreen(int levelNo, UserProfile user)
 	{
+		this.levelNo = levelNo;
 		this.user=user;
 		Label timeLabel = new Label();
 		long startTime = System.currentTimeMillis();
@@ -110,9 +112,10 @@ public class GameScreen extends Screen
 		ft.setFromValue(1);
 		ft.setToValue(0);
 		ft.play();
-		Scene s = new TitleScreen().getScene();
-		scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-		primaryStage.setScene(s);
+		switchScreen(new GameScreen(levelNo,user));
+	}
+	public void NextLevel(){
+		switchScreen(new GameScreen(levelNo + 1,user));
 	}
 	
 

@@ -195,6 +195,7 @@ public class GameBoard {
 		if (playerX == goalX && playerY == goalY)
 				//Win Condition
 				//next level load
+				GameScreen
 				break;
 		}
 		return end();
