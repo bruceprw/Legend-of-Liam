@@ -21,6 +21,17 @@ public class UserProfile
 		this.levelProg = levelProg;
 	}
 
+	public static void deleteUserProfile(String username, String password, int levelProg)
+	{
+		readList();
+		for(int i=0;i<list.size();i++)
+		{
+			if (list.get(i).getName().equals(username))
+				list.remove(i);
+		}
+		outputList();
+	}
+	
 	public static void updateUserProfile(String initialName, String username, String password, int levelProg)
 	{
 		readList();
@@ -33,7 +44,7 @@ public class UserProfile
 				list.get(i).setLevelProg(levelProg);
 			}
 		}
-		
+		outputList();
 		// reset and update
 	}
 	
