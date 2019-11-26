@@ -18,12 +18,4 @@ public class Element
 	{
 		
 	}
-
-    public void playSound(String filepath) throws FileNotFoundException, IOException
-    {
-    	Media music = new Media(new File(filepath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
-    	mediaPlayer.play();
-    
-    }
 }
