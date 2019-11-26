@@ -136,6 +136,74 @@ public class GameBoard
 		gc.strokeText(": " + temp[6], 225, 660);
 	}
 
+	public void playBoardSound(int x, int y)
+	{
+		switch(board[y][x].getString())
+		{
+		case "F": //flipper
+			board[y][x].playSound("");
+			break;
+		case "O": //fireboot
+			board[y][x].playSound("");
+			break;
+		case "RKEY":
+			board[y][x].playSound("");
+			break;
+		case "BKEY":
+			board[y][x].playSound("");
+			break;
+		case "YKEY":
+			board[y][x].playSound("");
+			break;
+		case "GKEY":
+			board[y][x].playSound("");
+			break;
+		case "T": //Token
+			board[y][x].playSound("");
+			break;
+		}
+	}
+	
+	public void playBackSound(int x, int y)
+	{
+		switch(background[y][x].getString())
+		{
+		case "#": //wall
+			background[y][x].playSound("");
+			break;
+		case "W": //water
+			background[y][x].playSound("");
+			break;
+		case "L": //lava
+			background[y][x].playSound("");
+			break;
+		case "D": //token door
+			background[y][x].playSound("");
+			break;
+		case "@": //teleporter
+			background[y][x].playSound("");
+			break;
+		case " ": //ground
+			background[y][x].playSound("");
+			break;
+		case "G": //goal
+			background[y][x].playSound("");
+			break;
+		case "REDDOOR":
+			background[y][x].playSound("");
+			break;
+		case "BLUEDOOR":
+			background[y][x].playSound("");
+			break;
+		case "YELLOWDOOR":
+			background[y][x].playSound("");
+			break;
+		case "GREENDOOR":
+			background[y][x].playSound("");
+			break;
+		}
+	}
+	
 	public boolean move(String way)
 	{
 		switch (way)
@@ -159,6 +227,8 @@ public class GameBoard
 						acquire((Collectible) board[playerY][playerX + 1]);
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
+					//playBoardSound(playerY,playerX+1);
+					//playBackSound(playerY,playerX+1);
 					playerX = playerX + 1;
 				}
 
@@ -185,6 +255,8 @@ public class GameBoard
 
 					board[playerY][playerX - 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
+					//playBoardSound(playerY,playerX+1);
+					//playBackSound(playerY,playerX+1);
 					playerX = playerX - 1;
 				}
 			}
@@ -210,6 +282,8 @@ public class GameBoard
 
 					board[playerY - 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
+					//playBoardSound(playerY,playerX+1);
+					//playBackSound(playerY,playerX+1);
 					playerY = playerY - 1;
 				}
 			}
@@ -234,6 +308,8 @@ public class GameBoard
 
 					board[playerY + 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
+					//playBoardSound(playerY,playerX+1);
+					//playBackSound(playerY,playerX+1);
 					playerY = playerY + 1;
 				}
 			}
