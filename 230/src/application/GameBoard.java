@@ -159,7 +159,7 @@ public class GameBoard {
 				playerX = tempX;
 			} else {
 
-				if (board[playerY - 1][playerX] instanceof Collectible)
+				if (board[playerY - y][playerX] instanceof Collectible)
 					acquire((Collectible) board[playerY - y][playerX]);
 
 				board[playerY - y][playerX] = board[playerY][playerX];
