@@ -1,4 +1,4 @@
-package application;
+ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +14,8 @@ public class Leaderboard
 
 	public Leaderboard()
 	{
-		
+		readLevelTime();
+		sortList();
 	}
 
 	public void readLevelTime()
@@ -34,8 +35,9 @@ public class Leaderboard
 		{
 			String line = in.nextLine();
 			Scanner curLine = new Scanner(line);
+			curLine.useDelimiter(",");
 			String name = curLine.next();
-			String time = curLine.next();
+			long time = curLine.nextLong();
 			addLevelTime(name, time);
 			curLine.close();
 		}
@@ -58,16 +60,17 @@ public class Leaderboard
 		}
 		for(LevelTime t : list)
 		{
-			String temp = t.getUsername()+","+t.getStringTime()+"\r\n";
+			String temp = t.getUsername()+","+t.getTime()+"\r\n";
 			out.print(temp);
 		}
 		out.close();
 	}
 
-	public void addLevelTime(String name, String time)
+	public void addLevelTime(String name, long time)
 	{
 		LevelTime lt = new LevelTime(name, time);
 		list.add(lt);
+		outputList();
 	}
 
 	public ArrayList<LevelTime> getList()
@@ -75,7 +78,7 @@ public class Leaderboard
 		return list;
 	}
 
-	public void sortList() throws ParseException
+	public void sortList()
 	{
 		for (int i = 0; i < list.size(); i++)
 		{

@@ -18,15 +18,32 @@ import javafx.scene.image.Image;
 public class DumbTargettingEnemy extends Enemy
 {
 	
+	
 	private String path = "Images\\idiot.png";
 	private Image image;
 	
-    public DumbTargettingEnemy(int currentX,int currentY, boolean HV)
+	  public DumbTargettingEnemy(int currentX,int currentY,String movDirection)
+	    {
+	        this.currentPositionX = currentX;
+	        this.currentPositionY = currentY;
+	        this.movDirection = UP;
+	        
+	        try
+			{
+				setImage();
+			}
+			catch (FileNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	
+    public DumbTargettingEnemy(int currentX,int currentY)
     {
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
 
-       // this.direction = HV;
         try
 		{
 			setImage();
@@ -37,17 +54,39 @@ public class DumbTargettingEnemy extends Enemy
 			e.printStackTrace();
 		}
     }
-
-    @Override
-    protected void findNewPosition() {
-        //find player location
-        //move in said direction 
-            //if wall stationary
-        
-        //if gone
-
-        //random direction
+    
+    public int moveTowardsPlayerOnX(int enemyX, int playerX)
+    {
+    	if (playerX > enemyX)
+    	{
+    		return enemyX+ONE;
+    	}
+    	else if(playerX < enemyX)
+    	{
+    		return enemyX-ONE;
+    	}
+    	else
+    	{
+    		return enemyX;
+    	}
     }
+    
+    public int moveTowardsPlayerOnY(int enemyY, int playerY)
+    {
+    	if (playerY > enemyY)
+    	{
+    		return enemyY+ONE;
+    	}
+    	else if(playerY < enemyY)
+    	{
+    		return enemyY-ONE;
+    	}
+    	else
+    	{
+    		return enemyY;
+    	}
+    }
+
     public String getString()
     {
     	return"DUMB";

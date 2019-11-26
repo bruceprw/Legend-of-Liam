@@ -22,6 +22,7 @@ public class FileReader
 	private ArrayList<Integer> enemyY=new ArrayList<Integer>();
 	private int goalX;
 	private int goalY;
+	private long time;
 
 	public FileReader(String filePath) throws FileNotFoundException
 	{
@@ -32,6 +33,10 @@ public class FileReader
 		sizeScan.useDelimiter(",");
 		mapSizeX = sizeScan.nextInt();
 		mapSizeY = sizeScan.nextInt();
+		Scanner longScan = new Scanner(in.nextLine());
+		time=longScan .nextLong();
+		//System.out.println(time);
+		longScan.close();
 		board = new Element[mapSizeY][mapSizeX];
 		background = new Element[mapSizeY][mapSizeX];
 		map = new String[mapSizeY];
@@ -89,6 +94,11 @@ public class FileReader
 		in.close();
 	}
 
+	public long getTime()
+	{
+		return time;
+	}
+	
 	public ArrayList<Integer> getEnemyX()
 	{
 		return enemyX;
@@ -139,7 +149,9 @@ public class FileReader
 	{
 		line.useDelimiter(",");
 		int x = line.nextInt();
+		System.out.println(x+" ");
 		int y = line.nextInt();
+		
 		String feature = line.next();
 		//System.out.println(feature);
 		switch (feature)
@@ -169,13 +181,13 @@ public class FileReader
 			}
 			else if(type.equals("DUMB"))
 			{
-				board[y][x] = new DumbTargettingEnemy(x,y,true);
+				board[y][x] = new DumbTargettingEnemy(x,y);
 				enemyX.add(x);
 				enemyY.add(y);
 			}
 			else if(type.equals("SMART"))
 			{
-				board[y][x] = new SmartTargettingEnemy(x,y,true);
+				board[y][x] = new SmartTargettingEnemy(x,y);
 				enemyX.add(x);
 				enemyY.add(y);
 			}
@@ -207,6 +219,10 @@ public class FileReader
 		case "DOOR":
 			int a = line.nextInt();
 			background[y][x] = new TokenDoor(a);
+			break;
+		case "LEVELDOOR":
+			int levelNo = line.nextInt();
+			background[y][x] = new LevelDoor(levelNo);
 			break;
 		case "TELEPORTER":
 			int tempX = line.nextInt();

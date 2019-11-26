@@ -18,20 +18,21 @@ public class SmartTargettingEnemy extends Enemy
 	private String path = "Images\\smart.jpg";
 	private Image image;
 	
-    public SmartTargettingEnemy(int currentX,int currentY, boolean HV) throws FileNotFoundException
+	public SmartTargettingEnemy(int currentX,int currentY,String movDirection) throws FileNotFoundException
     {
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
-
-        //this.direction = HV;
+        this.movDirection = UP;
+        
         setImage();
     }
-
-    @Override
-    protected void findNewPosition() {
-        //will need to apply BFS
-        //move to nearest tile to player
-        //see spaces as nodes to traverse
+	
+    public SmartTargettingEnemy(int currentX,int currentY) throws FileNotFoundException
+    {
+        this.currentPositionX = currentX;
+        this.currentPositionY = currentY;
+        
+        setImage();
     }
     
     public String getString()
