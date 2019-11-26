@@ -107,7 +107,10 @@ public class GameScreen extends Screen
 	}
 
 	//when its a game over it fades back to the title screen
-	public void GameOver(){
+	public void RestartLevel(){
+		leaderboard=new Leaderboard();
+		Date temp = new Date(time);
+		leaderboard.addLevelTime(user.getName(), sdf.format(temp));
 		FadeTransition ft = new FadeTransition(Duration.millis(3000), root);
 		ft.setFromValue(1);
 		ft.setToValue(0);
@@ -127,53 +130,45 @@ public class GameScreen extends Screen
 		{
 		case RIGHT:
 			end = level.move("right");
-			if(end)
+			if(level.playerDead())
 			{
-				Scene s = new LevelScreen(user).getScene();
-				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-				primaryStage.setScene(s);
-				leaderboard=new Leaderboard();
-				Date temp = new Date(time);
-				leaderboard.addLevelTime(user.getName(), sdf.format(temp));
+				RestartLevel();
+			}
+			if (end){
+				 NextLevel();
 			}
 			break;
 
 		case LEFT:
 			end = level.move("left");
-			if(end)
+			if(level.playerDead())
 			{
-				Scene s = new LevelScreen(user).getScene();
-				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-				primaryStage.setScene(s);
-				leaderboard=new Leaderboard();
-				Date temp = new Date(time);
-				leaderboard.addLevelTime(user.getName(), sdf.format(temp));
+				RestartLevel();
+			}
+			if (end){
+				 NextLevel();
 			}
 			break;
 
 		case UP:
 			end = level.move("up");
-			if(end)
+			if(level.playerDead())
 			{
-				Scene s = new LevelScreen(user).getScene();
-				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-				primaryStage.setScene(s);
-				leaderboard=new Leaderboard();
-				Date temp = new Date(time);
-				leaderboard.addLevelTime(user.getName(), sdf.format(temp));
+				RestartLevel();
+			}
+			if (end){
+				 NextLevel();
 			}
 			break;
 
 		case DOWN:
 			end = level.move("down");
-			if(end)
+			if(level.playerDead())
 			{
-				Scene s = new LevelScreen(user).getScene();
-				scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-				primaryStage.setScene(s);
-				leaderboard=new Leaderboard();
-				Date temp = new Date(time);
-				leaderboard.addLevelTime(user.getName(), sdf.format(temp));
+				RestartLevel();
+			}
+			if (end){
+				 NextLevel();
 			}
 			break;
 
