@@ -38,6 +38,7 @@ public class NewUserScreen extends Screen
 	PasswordField checkPassword;
 	Text passwordEnter = new Text("Please enter your password: ");
 	Text passwordConfirm = new Text("Please confirm your password: ");
+	Text error = new Text("Duplicate usernames!!!");
 	private UserProfile user;
 
 	HBox bottomBorder;
@@ -51,13 +52,10 @@ public class NewUserScreen extends Screen
 		top = new GridPane();
 		top.setVgap(20);
 		top.setHgap(30);
-
+		error.setVisible(false);
 
 		// topBorder = new VBox();
 		// topBorder.setAlignment(Pos.BASELINE_LEFT);
-
-
-		
 
 		bottomBorder = new HBox();
 		bottomBorder.setAlignment(Pos.BASELINE_RIGHT);
@@ -72,18 +70,14 @@ public class NewUserScreen extends Screen
 		username = new TextField();
 		username.setMaxWidth(POPUP_WIDTH);
 
-
 		password = new PasswordField();
 
-		
 		password = new PasswordField();
 
 		password.setMaxWidth(POPUP_WIDTH);
 
-
 		checkPassword = new PasswordField();
 
-		
 		checkPassword = new PasswordField();
 
 		checkPassword.setMaxWidth(POPUP_WIDTH);
@@ -95,28 +89,32 @@ public class NewUserScreen extends Screen
 
 		submit.setOnAction(event ->
 		{
+			boolean exists =
+			false;
 			// TODO: CREATE USER FUNCTION GOES HERE
 			if (!passwordConfirm())
-				passwordWarning.setVisible(true);	
+				passwordWarning.setVisible(true);
 			else
 			{
 				try
 				{
-					UserProfile.createUserProfile(username.getText(),password.getText(),0);
+					exists = UserProfile.createUserProfile(username.getText(), password.getText(), 0);
 				} catch (FileNotFoundException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				user = new UserProfile(username.getText(),password.getText(),0);
-				switchScreen(new LevelScreen(user));
-				Stage popup = (Stage) this.scene.getWindow();
-				popup.close();// Closes the popup
-
+				if (exists)
+					error.setVisible(true);
+				else
+				{
+					user = new UserProfile(username.getText(), password.getText(), 0);
+					switchScreen(new LevelScreen(user));
+					Stage popup = (Stage) this.scene.getWindow();
+					popup.close();// Closes the popup
+				}
 
 			}
-			
-
 
 		});
 
@@ -132,9 +130,9 @@ public class NewUserScreen extends Screen
 		top.addRow(1, usernameLabel, username);
 		top.addRow(2, passwordLabel, password);
 		top.addRow(3, checkPassLabel, checkPassword);
-		top.addRow(4,passwordWarning);
+		top.addRow(4, passwordWarning);
 
-		bottomBorder.getChildren().addAll(submit, cancel);
+		bottomBorder.getChildren().addAll(submit, cancel, error);
 
 		// root.setTop(topBorder);
 		root.setCenter(top);
