@@ -65,7 +65,7 @@ public class GameScreen extends Screen
 		}
 		
 		Label timeLabel = new Label();
-		long startTime = System.currentTimeMillis()+ level.getTime();
+		long startTime = System.currentTimeMillis()+ level.getTime()+1000*3600;
 		 
 		new AnimationTimer()
 		{
