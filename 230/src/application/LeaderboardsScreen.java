@@ -2,6 +2,7 @@ package application;
 
 import java.io.FileNotFoundException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import application.LevelTime;
@@ -41,6 +42,7 @@ public class LeaderboardsScreen extends Screen {
 	private ArrayList<Button> levelButtons;
 	private Button back;
 	private Leaderboard ld;
+	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
 	public LeaderboardsScreen(){
 		ld=new Leaderboard();
@@ -103,7 +105,8 @@ public class LeaderboardsScreen extends Screen {
 		username.setCellValueFactory(new PropertyValueFactory<LevelTime, String>("Username"));
 
 		TableColumn<LevelTime, String> time = new TableColumn<LevelTime, String>("Time");
-		time.setCellValueFactory(new PropertyValueFactory<LevelTime, String>("Time"));
+		time.setCellValueFactory(new PropertyValueFactory<LevelTime, String>("StringTime"));
+		
 
 		//let's not use the rank. the list is sorted by insertion sort. so there is no reason to show an extra"rank" column...
 		

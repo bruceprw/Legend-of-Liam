@@ -40,6 +40,17 @@ public class LevelTime
 
 	public String getStringTime()
 	{
-		return time;
+		Date d =
+		null;
+		try
+		{
+			d = sdf.parse(time);
+		} catch (ParseException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String a = sdf.format(d);
+		return a;
 	}
 }
