@@ -12,7 +12,7 @@ import javafx.scene.media.MediaPlayer;
 public class Lava extends Cell {
 
 	private String path = "Images\\fire.jpg";
-	private String soundPath = "Sound\\Water Splash-SoundBible.com-800223477.mp3";
+	private String soundPath = "Sound\\catch_fire.wav";
 	private Image image;
 	
     public Lava() throws FileNotFoundException {

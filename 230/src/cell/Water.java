@@ -12,7 +12,7 @@ import javafx.scene.media.MediaPlayer;
 public class Water extends Cell {
 	
 	private String path = "Images\\water.jpg";
-	private String soundPath = "Sound\\Water Splash-SoundBible.com-800223477.mp3";
+	private String soundPath = "Sound\\water_splash.mp3";
 	private Image image;
 	
     public Water() throws FileNotFoundException {

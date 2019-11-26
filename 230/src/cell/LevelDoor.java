@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
 public class LevelDoor extends Cell {
 
 	private String path = "Images\\blue_door.jpg";
-	private String soundPath = "Sound\\Water Splash-SoundBible.com-800223477.mp3";
+	private String soundPath = "Sound\\creaking_door.mp3";
 	private Image image;
 	private int levelNo;
 	
