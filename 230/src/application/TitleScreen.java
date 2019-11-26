@@ -153,10 +153,10 @@ public class TitleScreen extends Screen
 
 		welcome = new Text("Welcome!");
 
-		editProfile = new Button("Edit Profile");
+		editProfile = new Button("Load Game");
 		editProfile.setOnAction(event ->
 		{
-
+			switchScreen(new GameScreen(currentUser.getName(), currentUser));
 		});
 
 		selectLevel = new Button("Select Level");
@@ -182,6 +182,12 @@ public class TitleScreen extends Screen
 		leaderboards.setId("titleButton");
 
 		menuPane.getChildren().addAll(welcome, editProfile, selectLevel, leaderboards, logout);
+	}
+	
+	public void switchToMenu(UserProfile currentUser) {
+		this.currentUser = currentUser;
+		root.setCenter(menuPane);
+		welcome.setText("Welcome " + currentUser.getName() + "!");
 	}
 
 }

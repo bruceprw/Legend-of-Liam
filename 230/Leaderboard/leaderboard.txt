@@ -1,7 +1,3 @@
-andyshuo,01:00:04
-andyshuo,01:00:04
-andyshuo,01:00:04
-andyshuo,01:00:04
-test,01:00:19
-test,01:00:26
-test,01:00:18
+andyshuo,4308
+andyshuo,4682
+andyshuo,23807

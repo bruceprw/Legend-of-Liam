@@ -18,12 +18,20 @@ public class SmartTargettingEnemy extends Enemy
 	private String path = "Images\\smart.jpg";
 	private Image image;
 	
+	public SmartTargettingEnemy(int currentX,int currentY,String movDirection) throws FileNotFoundException
+    {
+        this.currentPositionX = currentX;
+        this.currentPositionY = currentY;
+        this.movDirection = UP;
+        
+        setImage();
+    }
+	
     public SmartTargettingEnemy(int currentX,int currentY) throws FileNotFoundException
     {
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
-
-        //this.direction = HV;
+        
         setImage();
     }
     

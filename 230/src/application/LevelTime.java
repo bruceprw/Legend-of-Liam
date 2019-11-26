@@ -8,12 +8,13 @@ public class LevelTime
 {
 
 	private String username;
-	private String time;
-	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	private long time;
+	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 
-	public LevelTime(String u, String t)
+	public LevelTime(String u, long t)
 	{
 		username = u;
+		System.out.println(t);
 		time = t;
 	}
 
@@ -24,22 +25,15 @@ public class LevelTime
 
 	public long getTime()
 	{
-		Date a = null;
-		try
-		{
-			a = sdf.parse(time);
-		}
-		catch (ParseException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		Date a = new Date(time);
+		//System.out.println(a);
 		return a.getTime();
 	}
 
 	public String getStringTime()
 	{
-		return time;
+		Date d =new Date(time);
+		String a = sdf.format(d);
+		return a;
 	}
 }
