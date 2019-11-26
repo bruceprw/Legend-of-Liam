@@ -35,7 +35,7 @@ public class GameScreen extends Screen
 
 	private HBox buttonsPane;
 	private Button save;
-	private int levelNo;
+	private String levelNo;
 	private Button levelSelect;
 	private long time;
 	private GameBoard level;
@@ -50,7 +50,7 @@ public class GameScreen extends Screen
 	 * @throws InterruptedException
 	 */
 	
-	public GameScreen(int levelNo, UserProfile user)
+	public GameScreen(String levelNo, UserProfile user)
 	{
 		this.levelNo = levelNo;
 		this.user=user;

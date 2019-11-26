@@ -153,10 +153,10 @@ public class TitleScreen extends Screen
 
 		welcome = new Text("Welcome!");
 
-		editProfile = new Button("Edit Profile");
+		editProfile = new Button("Load Game");
 		editProfile.setOnAction(event ->
 		{
-
+			switchScreen(new GameScreen(currentUser.getName(), currentUser));
 		});
 
 		selectLevel = new Button("Select Level");

@@ -36,11 +36,11 @@ public class LevelScreen extends Screen {
 		back = new Button("Back");
 
 		for (int i = 0; i < 20; i++) {
-			int levelNo = i + 1;
+			Integer levelNo = i + 1;
 			
 			Button b = new Button("" + (levelNo));
 			b.setOnAction(event -> {
-				switchScreen(new GameScreen(levelNo,user));
+				switchScreen(new GameScreen(levelNo.toString(),user));
 			});
 			
 			b.setMinSize(LEVEL_BUTTON_SIZE, LEVEL_BUTTON_SIZE);
