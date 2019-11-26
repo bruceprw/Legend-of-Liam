@@ -119,7 +119,10 @@ public class GameScreen extends Screen
 		switchScreen(new GameScreen(levelNo,user));
 	}
 	public void NextLevel(){
-		switchScreen(new GameScreen(levelNo,user));
+		switchScreen(new LevelScreen(user));
+		Leaderboard ld = new Leaderboard();
+		
+		ld.addLevelTime(user.getName(),time);
 	}
 	
 
@@ -136,6 +139,7 @@ public class GameScreen extends Screen
 				RestartLevel();
 			}
 			if (a==1){
+				
 				 NextLevel();
 			}
 			break;
@@ -210,7 +214,7 @@ public class GameScreen extends Screen
 		{
 			// TODO: Create Save and add to User.
 			//System.out.println(Long.toString(time));
-			FileOutputer f = new FileOutputer(level,new LevelTime(user.getName(),Long.toString(time)));
+			FileOutputer f = new FileOutputer(level,new LevelTime(user.getName(),time));
 			// Switch to Title Screen
 			Scene s = new TitleScreen().getScene();
 			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());

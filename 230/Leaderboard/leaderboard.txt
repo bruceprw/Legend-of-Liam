@@ -1,9 +1,2 @@
-andyshuo,01:00
-andyshuo,01:00
-andyshuo,01:00
-andyshuo,01:00
-andyshuo,01:00
-test,01:00
-test,01:00
-test,01:00
-test,01:00
+andyshuo,4682
+andyshuo,4308
