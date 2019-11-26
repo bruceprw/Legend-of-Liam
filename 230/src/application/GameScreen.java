@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -47,6 +48,7 @@ public class GameScreen extends Screen
 	 * @param levelNo Number of the level to be loaded.
 	 * @throws InterruptedException
 	 */
+	
 	public GameScreen(int levelNo, UserProfile user)
 	{
 		this.user=user;
@@ -102,7 +104,20 @@ public class GameScreen extends Screen
 		});
 	}
 
+	//when its a game over it fades back to the title screen
+	public void GameOver(){
+		FadeTransition ft = new FadeTransition(Duration.millis(3000), root);
+		ft.setFromValue(1);
+		ft.setToValue(0);
+		ft.play();
+		Scene s = new TitleScreen().getScene();
+		scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
+		primaryStage.setScene(s);
+	}
+	
+
 	private void keyPressed(KeyEvent event) throws IOException
+
 	{
 		boolean end;
 		switch (event.getCode())
@@ -210,5 +225,6 @@ public class GameScreen extends Screen
 			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
 			primaryStage.setScene(s);
 		});
+	
 	}
 }

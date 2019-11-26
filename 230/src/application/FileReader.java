@@ -169,7 +169,7 @@ public class FileReader
 			}
 			else if(type.equals("DUMB"))
 			{
-				board[y][x] = new DumbTargettingEnemy(x,y,true);
+				board[y][x] = new DumbTargettingEnemy(x,y);
 				enemyX.add(x);
 				enemyY.add(y);
 			}
