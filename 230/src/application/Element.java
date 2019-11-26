@@ -1,14 +1,11 @@
 package application;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import javax.swing.JOptionPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.canvas.GraphicsContext;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
 
 public class Element
 {
@@ -24,9 +21,9 @@ public class Element
 
     public void playSound(String filepath) throws FileNotFoundException, IOException
     {
-    	InputStream music = new FileInputStream(new File(filepath));
-    		AudioStream audio = new AudioStream(music);
-    		AudioPlayer.player.start(audio);
+    	Media music = new Media(new File(filepath).toURI().toString());
+    	MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	mediaPlayer.play();
     
     }
 }

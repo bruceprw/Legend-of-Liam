@@ -142,25 +142,25 @@ public class GameBoard
 		switch(board[y][x].getString())
 		{
 		case "F": //flipper
-			board[y][x].playSound("");
+			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "O": //fireboot
-			board[y][x].playSound("");
+			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "RKEY":
-			board[y][x].playSound("");
+			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "BKEY":
-			board[y][x].playSound("");
+			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "YKEY":
-			board[y][x].playSound("");
+			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "GKEY":
-			board[y][x].playSound("");
+			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "T": //Token
-			board[y][x].playSound("");
+			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		}
 	}
@@ -170,42 +170,42 @@ public class GameBoard
 		switch(background[y][x].getString())
 		{
 		case "#": //wall
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "W": //water
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "L": //lava
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "D": //token door
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "@": //teleporter
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case " ": //ground
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "G": //goal
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "REDDOOR":
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "BLUEDOOR":
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "YELLOWDOOR":
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "GREENDOOR":
-			background[y][x].playSound("");
+			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		}
 	}
 	
-	public boolean move(String way)
+	public boolean move(String way) throws IOException
 	{
 		switch (way)
 		{
@@ -228,8 +228,8 @@ public class GameBoard
 						acquire((Collectible) board[playerY][playerX + 1]);
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
-					//playBoardSound(playerY,playerX+1);
-					//playBackSound(playerY,playerX+1);
+					playBoardSound(playerY,playerX+1);
+					playBackSound(playerY,playerX+1);
 					playerX = playerX + 1;
 				}
 
@@ -256,8 +256,8 @@ public class GameBoard
 
 					board[playerY][playerX - 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
-					//playBoardSound(playerY,playerX+1);
-					//playBackSound(playerY,playerX+1);
+					playBoardSound(playerY,playerX+1);
+					playBackSound(playerY,playerX+1);
 					playerX = playerX - 1;
 				}
 			}
@@ -283,8 +283,8 @@ public class GameBoard
 
 					board[playerY - 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
-					//playBoardSound(playerY,playerX+1);
-					//playBackSound(playerY,playerX+1);
+					playBoardSound(playerY,playerX+1);
+					playBackSound(playerY,playerX+1);
 					playerY = playerY - 1;
 				}
 			}
@@ -309,8 +309,8 @@ public class GameBoard
 
 					board[playerY + 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
-					//playBoardSound(playerY,playerX+1);
-					//playBackSound(playerY,playerX+1);
+					playBoardSound(playerY,playerX+1);
+					playBackSound(playerY,playerX+1);
 					playerY = playerY + 1;
 				}
 			}
