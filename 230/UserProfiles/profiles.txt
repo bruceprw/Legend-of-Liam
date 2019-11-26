@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 andyshuo,02040922,0
 gids,gids,0
 miles,password,0
+=======
+andyshuo,02040922,0
+gids,gids,0
+test,test,0
+jeff,jeff,0
+>>>>>>> 314a605ee7bd6b1b2aab80c849744ca0536b1d6a
