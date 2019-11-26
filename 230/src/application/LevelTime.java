@@ -9,11 +9,12 @@ public class LevelTime
 
 	private String username;
 	private String time;
-	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 
 	public LevelTime(String u, String t)
 	{
 		username = u;
+		System.out.println(t);
 		time = t;
 	}
 
@@ -25,7 +26,7 @@ public class LevelTime
 	public long getTime()
 	{
 		Date a = new Date(Long.parseLong(time));
-
+		System.out.println(a);
 		return a.getTime();
 	}
 

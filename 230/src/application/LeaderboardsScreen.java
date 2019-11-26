@@ -42,7 +42,7 @@ public class LeaderboardsScreen extends Screen {
 	private ArrayList<Button> levelButtons;
 	private Button back;
 	private Leaderboard ld;
-	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 
 	public LeaderboardsScreen(){
 		ld=new Leaderboard();

@@ -86,9 +86,9 @@ public class GameBoard {
 		setFog();
 
 		int[] temp = ((Player) board[playerY][playerX]).getInventory();
-		for (int i = 0; i < 7; i++) {
+		/*for (int i = 0; i < 7; i++) {
 			System.out.print(temp[i]);
-		}
+		}*/
 		System.out.println();
 		drawItem(gc);
 		// drawFog(gc);
@@ -104,6 +104,7 @@ public class GameBoard {
 
 	public boolean end() {
 		return playerY == goalY && playerX == goalX;
+		
 	}
 
 	public void drawItem(GraphicsContext gc) throws FileNotFoundException {
@@ -191,7 +192,7 @@ public class GameBoard {
 		background[y][x].playSound();
 	}
 
-	public boolean move(String way) {
+	public int move(String way) {
 		//moveEnemy();
 		switch (way) {
 		case "right":
@@ -210,7 +211,7 @@ public class GameBoard {
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX += 1;
-					System.out.println(playerX);
+					//System.out.println(playerX);
 				}
 
 			}
@@ -231,7 +232,7 @@ public class GameBoard {
 					board[playerY][playerX -1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX = playerX - 1;
-					System.out.println(playerX);
+					//System.out.println(playerX);
 				}
 
 			}
@@ -254,7 +255,7 @@ public class GameBoard {
 					board[playerY  - 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY - 1;
-					System.out.println(playerY);
+					//System.out.println(playerY);
 				}
 				}
 			break;
@@ -276,15 +277,17 @@ public class GameBoard {
 					board[playerY  + 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY + 1;
-					System.out.println(playerY);
+					//System.out.println(playerY);
 				}
 			}
 			break;
 		
 		}
 		if (playerDead())
-			return true;
-		return end();
+			return 2;
+		if(end())
+			return 1;
+		return 0;
 		}
 		
 			

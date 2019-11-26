@@ -111,9 +111,7 @@ public class GameScreen extends Screen
 
 	//when its a game over it fades back to the title screen
 	public void RestartLevel(){
-		leaderboard=new Leaderboard();
-		Date temp = new Date(time);
-		leaderboard.addLevelTime(user.getName(), sdf.format(temp));
+		
 		FadeTransition ft = new FadeTransition(Duration.millis(3000), root);
 		ft.setFromValue(1);
 		ft.setToValue(0);
@@ -121,56 +119,56 @@ public class GameScreen extends Screen
 		switchScreen(new GameScreen(levelNo,user));
 	}
 	public void NextLevel(){
-		switchScreen(new GameScreen(levelNo + 1,user));
+		switchScreen(new GameScreen(levelNo,user));
 	}
 	
 
 	private void keyPressed(KeyEvent event) throws IOException
 
 	{
-		boolean end;
+		int a;
 		switch (event.getCode())
 		{
 		case RIGHT:
-			end = level.move("right");
-			if(level.playerDead())
+			a = level.move("right");
+			if(a==2)
 			{
 				RestartLevel();
 			}
-			if (end){
+			if (a==1){
 				 NextLevel();
 			}
 			break;
 
 		case LEFT:
-			end = level.move("left");
-			if(level.playerDead())
+			a = level.move("left");
+			if(a==2)
 			{
 				RestartLevel();
 			}
-			if (end){
+			if (a==1){
 				 NextLevel();
 			}
 			break;
 
 		case UP:
-			end = level.move("up");
-			if(level.playerDead())
+			a = level.move("up");
+			if(a==2)
 			{
 				RestartLevel();
 			}
-			if (end){
+			if (a==1){
 				 NextLevel();
 			}
 			break;
 
 		case DOWN:
-			end = level.move("down");
-			if(level.playerDead())
+			a = level.move("down");
+			if(a==2)
 			{
 				RestartLevel();
 			}
-			if (end){
+			if (a==1){
 				 NextLevel();
 			}
 			break;
