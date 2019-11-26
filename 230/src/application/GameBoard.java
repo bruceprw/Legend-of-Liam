@@ -153,8 +153,8 @@ public class GameBoard {
 						acquire((Collectible) board[playerY][playerX + 1]);
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
-					playBoardSound(playerY,playerX+1);
-					playBackSound(playerY,playerX+1);
+					playBoardSound(playerX+1,playerY);
+					playBackSound(playerX+1,playerY);
 					playerX = playerX + 1;
 				}
 
@@ -177,8 +177,8 @@ public class GameBoard {
 
 					board[playerY][playerX - 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
-					playBoardSound(playerY,playerX+1);
-					playBackSound(playerY,playerX+1);
+					playBoardSound(playerX-1,playerY);
+					playBackSound(playerX-1,playerY);
 					playerX = playerX - 1;
 				}
 			}
@@ -200,8 +200,8 @@ public class GameBoard {
 
 					board[playerY - 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
-					playBoardSound(playerY,playerX+1);
-					playBackSound(playerY,playerX+1);
+					playBoardSound(playerX,playerY-1);
+					playBackSound(playerX,playerY-1);
 					playerY = playerY - 1;
 				}
 			}
@@ -222,8 +222,8 @@ public class GameBoard {
 
 					board[playerY + 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
-					playBoardSound(playerY,playerX+1);
-					playBackSound(playerY,playerX+1);
+					playBoardSound(playerX,playerY+1);
+					playBackSound(playerX,playerY+1);
 					playerY = playerY + 1;
 				}
 			}
