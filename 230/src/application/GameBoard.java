@@ -192,15 +192,24 @@ public class GameBoard {
 		case "down":
 			moveVertical(-1);
 		}
+		
+		if (playerDead())
+			return true;
 		return end();
-			/*
-		if (playerX == goalX && playerY == goalY)
-				//Win Condition
-				//next level load
-				break;
 		
-		return end();*/
 		
+	}
+	
+	public boolean playerDead()
+	{
+		for(int i=0;i<enemyX.size();i++)
+		{
+			if (playerX==enemyX.get(i)&&playerY==enemyY.get(i))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 
