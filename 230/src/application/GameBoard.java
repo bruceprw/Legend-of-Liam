@@ -15,6 +15,7 @@ import Collectibles.YellowKey;
 import cell.Cell;
 import cell.Teleporter;
 import cell.Wall;
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
 
@@ -124,6 +125,49 @@ public class GameBoard {
 		gc.strokeText(": " + temp[5], 75, 660);
 		gc.strokeText(": " + temp[6], 225, 660);
 	}
+	//Moves player Side to side
+	public void moveHorizontal(int x){
+		if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + x])) {
+			if (((Cell) background[playerY][playerX + x]) instanceof Teleporter) {
+				Teleporter temp = ((Teleporter) background[playerY][playerX + x]);
+				int tempX = temp.getPairX();
+				int tempY = temp.getPairY();
+				board[tempY][tempX] = board[playerY][playerX];
+				board[playerY][playerX] = new Empty();
+				playerY = tempY;
+				playerX = tempX;
+			} else {
+				if (board[playerY][playerX + x] instanceof Collectible)
+					acquire((Collectible) board[playerY][playerX + x]);
+				board[playerY][playerX + x] = board[playerY][playerX];
+				board[playerY][playerX] = new Empty();
+				playerX = playerX + x;
+			}
+
+		}
+	}
+	//Moves player up and down
+	public void moveVertical(int y){
+		if (((Player) board[playerY][playerX]).movable((Cell) background[playerY - y][playerX])) {
+			if (((Cell) background[playerY - y][playerX]) instanceof Teleporter) {
+				Teleporter temp = ((Teleporter) background[playerY - y][playerX]);
+				int tempX = temp.getPairX();
+				int tempY = temp.getPairY();
+				board[tempY][tempX] = board[playerY][playerX];
+				board[playerY][playerX] = new Empty();
+				playerY = tempY;
+				playerX = tempX;
+			} else {
+
+				if (board[playerY - y][playerX] instanceof Collectible)
+					acquire((Collectible) board[playerY - y][playerX]);
+
+				board[playerY - y][playerX] = board[playerY][playerX];
+				board[playerY][playerX] = new Empty();
+				playerY = playerY - y;
+			}
+		}
+	}
 
 	public void playBoardSound(int x, int y) {
 		board[y][x].playSound();
@@ -230,8 +274,28 @@ public class GameBoard {
 
 				break;
 		}
+		
+		if (playerDead())
+			return true;
 		return end();
+		
+		
 	}
+	
+	public boolean playerDead()
+	{
+		for(int i=0;i<enemyX.size();i++)
+		{
+			if (playerX==enemyX.get(i)&&playerY==enemyY.get(i))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	
 
 	// TODO ERROR OCCURS WHEN ENEMY IS TO MOVE ONTO PLAYER DOESNT KNOW WHAT TO DO
 	/**
