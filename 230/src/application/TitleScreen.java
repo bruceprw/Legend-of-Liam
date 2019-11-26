@@ -183,5 +183,11 @@ public class TitleScreen extends Screen
 
 		menuPane.getChildren().addAll(welcome, editProfile, selectLevel, leaderboards, logout);
 	}
+	
+	public void switchToMenu(UserProfile currentUser) {
+		this.currentUser = currentUser;
+		root.setCenter(menuPane);
+		welcome.setText("Welcome " + currentUser.getName() + "!");
+	}
 
 }
