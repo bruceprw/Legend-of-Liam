@@ -165,7 +165,7 @@ public class GameBoard {
 				playerX = tempX;
 			} else {
 
-				if (board[playerY - 1][playerX] instanceof Collectible)
+				if (board[playerY - y][playerX] instanceof Collectible)
 					acquire((Collectible) board[playerY - y][playerX]);
 
 				board[playerY - y][playerX] = board[playerY][playerX];
@@ -175,28 +175,110 @@ public class GameBoard {
 		}
 	}
 
-
-	public void playBoardSound(int x, int y)
-	{
+	public void playBoardSound(int x, int y) {
 		board[y][x].playSound();
 	}
-	
-	public void playBackSound(int x, int y)
-	{
+
+	public void playBackSound(int x, int y) {
 		background[y][x].playSound();
 	}
-	
+
 	public boolean move(String way) {
 		moveEnemy();
 		switch (way) {
+
 		case "right":
-			moveHorizontal(1);
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1])) {
+				if (((Cell) background[playerY][playerX + 1]) instanceof Teleporter) {
+					Teleporter temp = ((Teleporter) background[playerY][playerX + 1]);
+					int tempX = temp.getPairX();
+					int tempY = temp.getPairY();
+					board[tempY][tempX] = board[playerY][playerX];
+					board[playerY][playerX] = new Empty();
+					playerY = tempY;
+					playerX = tempX;
+				} else {
+					if (board[playerY][playerX + 1] instanceof Collectible)
+						acquire((Collectible) board[playerY][playerX + 1]);
+					board[playerY][playerX + 1] = board[playerY][playerX];
+					board[playerY][playerX] = new Empty();
+					playBoardSound(playerY, playerX + 1);
+					playBackSound(playerY, playerX + 1);
+					playerX = playerX + 1;
+				}
+
+			}
+			break;
 		case "left":
-			moveHorizontal(-1);
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1])) {
+				if (((Cell) background[playerY][playerX - 1]) instanceof Teleporter) {
+					Teleporter temp = ((Teleporter) background[playerY][playerX - 1]);
+					int tempX = temp.getPairX();
+					int tempY = temp.getPairY();
+					board[tempY][tempX] = board[playerY][playerX];
+					board[playerY][playerX] = new Empty();
+					playerY = tempY;
+					playerX = tempX;
+				} else {
+
+					if (board[playerY][playerX - 1] instanceof Collectible)
+						acquire((Collectible) board[playerY][playerX - 1]);
+
+					board[playerY][playerX - 1] = board[playerY][playerX];
+					board[playerY][playerX] = new Empty();
+					playBoardSound(playerY, playerX + 1);
+					playBackSound(playerY, playerX + 1);
+					playerX = playerX - 1;
+				}
+			}
+			break;
 		case "up":
-			moveVertical(1);
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX])) {
+				if (((Cell) background[playerY - 1][playerX]) instanceof Teleporter) {
+					Teleporter temp = ((Teleporter) background[playerY - 1][playerX]);
+					int tempX = temp.getPairX();
+					int tempY = temp.getPairY();
+					board[tempY][tempX] = board[playerY][playerX];
+					board[playerY][playerX] = new Empty();
+					playerY = tempY;
+					playerX = tempX;
+				} else {
+
+					if (board[playerY - 1][playerX] instanceof Collectible)
+						acquire((Collectible) board[playerY - 1][playerX]);
+
+					board[playerY - 1][playerX] = board[playerY][playerX];
+					board[playerY][playerX] = new Empty();
+					playBoardSound(playerY, playerX + 1);
+					playBackSound(playerY, playerX + 1);
+					playerY = playerY - 1;
+				}
+			}
+			break;
 		case "down":
-			moveVertical(-1);
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX])) {
+				if (((Cell) background[playerY + 1][playerX]) instanceof Teleporter) {
+					Teleporter temp = ((Teleporter) background[playerY + 1][playerX]);
+					int tempX = temp.getPairX();
+					int tempY = temp.getPairY();
+					board[tempY][tempX] = board[playerY][playerX];
+					board[playerY][playerX] = new Empty();
+					playerY = tempY;
+					playerX = tempX;
+				} else {
+					if (board[playerY + 1][playerX] instanceof Collectible)
+						acquire((Collectible) board[playerY + 1][playerX]);
+
+					board[playerY + 1][playerX] = board[playerY][playerX];
+					board[playerY][playerX] = new Empty();
+					playBoardSound(playerY, playerX + 1);
+					playBackSound(playerY, playerX + 1);
+					playerY = playerY + 1;
+				}
+			}
+			if (playerX == goalX && playerY == goalY)
+
+				break;
 		}
 		
 		if (playerDead())
@@ -221,6 +303,7 @@ public class GameBoard {
 
 	
 
+	// TODO ERROR OCCURS WHEN ENEMY IS TO MOVE ONTO PLAYER DOESNT KNOW WHAT TO DO
 	/**
 	 * method for moving enemy
 	 * 
@@ -232,68 +315,85 @@ public class GameBoard {
 		for (int i = 0; i < enemyX.size(); i++) {
 			// store enemy
 			try {
-				int currentX = enemyX.get(i);
-				int currentY = enemyY.get(i);
-				Enemy enemyHold = (Enemy) this.board[currentY][currentX];
+				int currentEnemyX = enemyX.get(i);
+				int currentEnemyY = enemyY.get(i);
+				Enemy enemyHold = (Enemy) this.board[currentEnemyY][currentEnemyX];
 
 				// find sub class of enemy
 				switch (enemyHold.getString()) {
 				case "DUMB":
-					return;
+					DumbTargettingEnemy dumbEnemy = (DumbTargettingEnemy) enemyHold;
+					int newEnemyX = dumbEnemy.moveTowardsPlayerOnX(currentEnemyX, playerX);
+					int newEnemyY = dumbEnemy.moveTowardsPlayerOnY(currentEnemyY, playerY);
+
+					if (!dumbEnemy.isMovable(this.getCell(newEnemyX, newEnemyY))) {
+						if (!dumbEnemy.isMovable(this.getCell(newEnemyX, currentEnemyY))) {
+							newEnemyX = currentEnemyX;
+						}
+						if (!dumbEnemy.isMovable(this.getCell(currentEnemyX, newEnemyY))) {
+							newEnemyY = currentEnemyY;
+						}
+					}
+					
+					board[newEnemyY][newEnemyX] = board[currentEnemyY][currentEnemyX];
+
+					enemyX.set(i,newEnemyX);
+					enemyY.set(i,newEnemyY);
+					
+
 				case "SMART":
 					// TODO fill this in
-					// check next move is next to wal
 
 					return;
 				case "STRAIGHT":
 					try {
-						int[] XY = enemyHold.moveTo(currentX, currentY,
-								this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
-						board[XY[1]][XY[0]] = board[currentY][currentX] ;
-						
-						enemyX.set(i,XY[0]);
-						enemyY.set(i,XY[1]);
+						int[] XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
+								this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
+						board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
+
+						enemyX.set(i, XY[0]);
+						enemyY.set(i, XY[1]);
 					} catch (IndexOutOfBoundsException e) {
-						int[] XY = enemyHold.moveTo(currentX, currentY,
-								this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
-						board[XY[1]][XY[0]] = board[currentY][currentX] ;
-						
-						enemyX.set(i,XY[0]);
-						enemyY.set(i,XY[1]);
+						int[] XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
+								this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
+						board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
+
+						enemyX.set(i, XY[0]);
+						enemyY.set(i, XY[1]);
 					}
 
 					break;
 				case "WALLHUG":
-					if (enemyHold.isMovable(getNextCell(currentX, currentY, enemyHold.getMovDirection()))) {
+					if (enemyHold.isMovable(getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()))) {
 						// check there is a wall
-						if (checkWall(currentX, currentY, enemyHold.getMovDirection())) {
+						if (checkWall(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())) {
 							// move to space if wall okay
 							try {
-								int[] XY = enemyHold.moveTo(currentX, currentY,
-										this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
-								board[XY[1]][XY[0]] = board[currentY][currentX] ;
-								
-								enemyX.set(i,XY[0]);
-								enemyY.set(i,XY[1]);
-								
+								int[] XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
+										this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
+								board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
+
+								enemyX.set(i, XY[0]);
+								enemyY.set(i, XY[1]);
+
 								// if that didn't work reverse
 							} catch (IndexOutOfBoundsException e) {
-								int[] XY = enemyHold.moveTo(currentX, currentY,
-										this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
-								board[XY[1]][XY[0]] = board[currentY][currentX] ;
-								
-								enemyX.set(i,XY[0]);
-								enemyY.set(i,XY[1]);
+								int[] XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
+										this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
+								board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
+
+								enemyX.set(i, XY[0]);
+								enemyY.set(i, XY[1]);
 							}
 						}
 						// check corner if no wall
-						if (this.checkCorner(currentX, currentY, enemyHold.getMovDirection())) {
-							int[] XY = ((WallFollowingEnemy) enemyHold).moveToCorner(currentX, currentY,
-									this.getNewWallDirection(currentX, currentY));
-							board[XY[1]][XY[0]] = board[currentY][currentX] ;
-							
-							enemyX.set(i,XY[0]);
-							enemyY.set(i,XY[1]);
+						if (this.checkCorner(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())) {
+							int[] XY = ((WallFollowingEnemy) enemyHold).moveToCorner(currentEnemyX, currentEnemyY,
+									this.getNewWallDirection(currentEnemyX, currentEnemyY));
+							board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
+
+							enemyX.set(i, XY[0]);
+							enemyY.set(i, XY[1]);
 						}
 
 					}
@@ -412,10 +512,13 @@ public class GameBoard {
 
 		}
 	}
-	
-	private Element getElement(int X,int Y)
-	{
+
+	private Element getBoardElement(int X, int Y) {
 		return board[Y][X];
+	}
+
+	private Cell getCell(int X, int Y) {
+		return (Cell) background[Y][X];
 	}
 
 	public void acquire(Collectible co) {
