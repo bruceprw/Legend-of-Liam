@@ -137,7 +137,6 @@ public class GameBoard {
 	}
 	
 	public boolean move(String way) {
-<<<<<<< HEAD
 		moveEnemy();
 		switch (way) {
 
