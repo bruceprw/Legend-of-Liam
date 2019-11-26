@@ -160,7 +160,7 @@ public class GameBoard
 			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
 			break;
 		case "T": //Token
-			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
+			board[y][x].playSound("Sound\\341695__projectsu012__coins-1( coin).wav");
 			break;
 		}
 	}
