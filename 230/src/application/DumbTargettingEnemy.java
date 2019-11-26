@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 public class DumbTargettingEnemy extends Enemy
 {
 	
+	
 	private String path = "Images\\idiot.png";
 	private Image image;
 	
@@ -52,6 +53,38 @@ public class DumbTargettingEnemy extends Enemy
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    public int moveTowardsPlayerOnX(int enemyX, int playerX)
+    {
+    	if (playerX > enemyX)
+    	{
+    		return enemyX+ONE;
+    	}
+    	else if(playerX < enemyX)
+    	{
+    		return enemyX-ONE;
+    	}
+    	else
+    	{
+    		return enemyX;
+    	}
+    }
+    
+    public int moveTowardsPlayerOnY(int enemyY, int playerY)
+    {
+    	if (playerY > enemyY)
+    	{
+    		return enemyY+ONE;
+    	}
+    	else if(playerY < enemyY)
+    	{
+    		return enemyY-ONE;
+    	}
+    	else
+    	{
+    		return enemyY;
+    	}
     }
 
     public String getString()

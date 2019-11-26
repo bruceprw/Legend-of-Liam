@@ -5,14 +5,6 @@ import cell.ColouredDoor;
 
 abstract class Enemy extends Element {
 
-	/// the current X and Y position
-	protected int currentPositionX;
-	protected int currentPositionY;
-
-	/// the next position for the enemy
-	protected int nextPositionX;
-	protected int nextPositionY;
-
 	protected String movDirection = "UP";
 
 	// Constants
@@ -24,6 +16,9 @@ abstract class Enemy extends Element {
 
 	protected final int ONE = 1;
 	protected final int TWO = 2;
+	
+	protected int currentPositionX;
+	protected int currentPositionY;
 
 	/**
 	 * @return the movDirection
