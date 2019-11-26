@@ -19,7 +19,8 @@ public class FileOutputer
 		background = lvl.getBackground();
 		board = lvl.getBoard();
 		output += "" + background[0].length + "," + background.length + "\r\n";
-		
+		long a = lt.getTime();
+		output+= ""+ a+"\r\n";
 		
 		setOutput(board,background);
 		//setTemp(board,background);

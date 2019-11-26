@@ -34,7 +34,8 @@ public class FileReader
 		mapSizeX = sizeScan.nextInt();
 		mapSizeY = sizeScan.nextInt();
 		Scanner longScan = new Scanner(in.nextLine());
-		time=longScan.nextLong();
+		time=longScan .nextLong();
+		longScan.close();
 		board = new Element[mapSizeY][mapSizeX];
 		background = new Element[mapSizeY][mapSizeX];
 		map = new String[mapSizeY];
