@@ -26,6 +26,14 @@ public class StraightLineEnemy extends Enemy {
         setImage();
     }
     
+    public StraightLineEnemy(int currentX, int currentY) throws FileNotFoundException {
+        this.currentPositionX = currentX;
+        this.currentPositionY = currentY;
+
+        this.movDirection = UP;
+        setImage();
+    }
+    
     String getDirection()
     {
     	return movDirection;

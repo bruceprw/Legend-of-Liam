@@ -24,6 +24,15 @@ public class WallFollowingEnemy extends Enemy {
 		this.movDirection = movDirection;
 		setImage();
 	}
+	
+	public WallFollowingEnemy(int currentX, int currentY) throws FileNotFoundException {
+		this.currentPositionX = currentX;
+		this.currentPositionY = currentY;
+		this.movDirection = UP;
+		setImage();
+	}
+	
+	
 
 	public int[] moveToCorner(int currentX, int currentY, String wallDirection) {
 		int[] a = { 1, 2 };
