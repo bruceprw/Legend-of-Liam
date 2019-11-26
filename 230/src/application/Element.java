@@ -18,4 +18,8 @@ public class Element
 	{
 		
 	}
+
+	public void playSound() {
+		
+	}
 }

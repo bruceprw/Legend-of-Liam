@@ -126,72 +126,14 @@ public class GameBoard {
 	}
 
 
-	public void playBoardSound(int x, int y) throws IOException
+	public void playBoardSound(int x, int y)
 	{
-		switch(board[y][x].getString())
-		{
-		case "F": //flipper
-			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "O": //fireboot
-			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "RKEY":
-			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "BKEY":
-			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "YKEY":
-			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "GKEY":
-			board[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "T": //Token
-			board[y][x].playSound("Sound\\341695__projectsu012__coins-1( coin).wav");
-			break;
-		}
+		board[y][x].playSound();
 	}
 	
-	public void playBackSound(int x, int y) throws IOException
+	public void playBackSound(int x, int y)
 	{
-		switch(background[y][x].getString())
-		{
-		case "#": //wall
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "W": //water
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "L": //lava
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "D": //token door
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "@": //teleporter
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case " ": //ground
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "G": //goal
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "REDDOOR":
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "BLUEDOOR":
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "YELLOWDOOR":
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		case "GREENDOOR":
-			background[y][x].playSound("Sound\\Water Splash-SoundBible.com-800223477.mp3");
-			break;
-		}
+		background[y][x].playSound();
 	}
 	
 	public boolean move(String way) {
