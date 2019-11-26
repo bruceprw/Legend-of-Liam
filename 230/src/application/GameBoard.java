@@ -14,6 +14,7 @@ import Collectibles.YellowKey;
 import cell.Cell;
 import cell.Teleporter;
 import cell.Wall;
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
 
@@ -123,96 +124,74 @@ public class GameBoard {
 		gc.strokeText(": " + temp[5], 75, 660);
 		gc.strokeText(": " + temp[6], 225, 660);
 	}
+	//Moves player Side to side
+	public void moveHorizontal(int x){
+		if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + x])) {
+			if (((Cell) background[playerY][playerX + x]) instanceof Teleporter) {
+				Teleporter temp = ((Teleporter) background[playerY][playerX + x]);
+				int tempX = temp.getPairX();
+				int tempY = temp.getPairY();
+				board[tempY][tempX] = board[playerY][playerX];
+				board[playerY][playerX] = new Empty();
+				playerY = tempY;
+				playerX = tempX;
+			} else {
+				if (board[playerY][playerX + x] instanceof Collectible)
+					acquire((Collectible) board[playerY][playerX + x]);
+				board[playerY][playerX + x] = board[playerY][playerX];
+				board[playerY][playerX] = new Empty();
+				playerX = playerX + x;
+			}
+
+		}
+	}
+	//Moves player up and down
+	public void moveVertical(int y){
+		if (((Player) board[playerY][playerX]).movable((Cell) background[playerY - y][playerX])) {
+			if (((Cell) background[playerY - y][playerX]) instanceof Teleporter) {
+				Teleporter temp = ((Teleporter) background[playerY - y][playerX]);
+				int tempX = temp.getPairX();
+				int tempY = temp.getPairY();
+				board[tempY][tempX] = board[playerY][playerX];
+				board[playerY][playerX] = new Empty();
+				playerY = tempY;
+				playerX = tempX;
+			} else {
+
+				if (board[playerY - 1][playerX] instanceof Collectible)
+					acquire((Collectible) board[playerY - y][playerX]);
+
+				board[playerY - y][playerX] = board[playerY][playerX];
+				board[playerY][playerX] = new Empty();
+				playerY = playerY - y;
+			}
+		}
+	}
 
 	public boolean move(String way) {
 		switch (way) {
 		case "right":
-			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1])) {
-				if (((Cell) background[playerY][playerX + 1]) instanceof Teleporter) {
-					Teleporter temp = ((Teleporter) background[playerY][playerX + 1]);
-					int tempX = temp.getPairX();
-					int tempY = temp.getPairY();
-					board[tempY][tempX] = board[playerY][playerX];
-					board[playerY][playerX] = new Empty();
-					playerY = tempY;
-					playerX = tempX;
-				} else {
-					if (board[playerY][playerX + 1] instanceof Collectible)
-						acquire((Collectible) board[playerY][playerX + 1]);
-					board[playerY][playerX + 1] = board[playerY][playerX];
-					board[playerY][playerX] = new Empty();
-					playerX = playerX + 1;
-				}
-
-			}
+			moveHorizontal(1);
 			break;
 		case "left":
-			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1])) {
-				if (((Cell) background[playerY][playerX - 1]) instanceof Teleporter) {
-					Teleporter temp = ((Teleporter) background[playerY][playerX - 1]);
-					int tempX = temp.getPairX();
-					int tempY = temp.getPairY();
-					board[tempY][tempX] = board[playerY][playerX];
-					board[playerY][playerX] = new Empty();
-					playerY = tempY;
-					playerX = tempX;
-				} else {
-
-					if (board[playerY][playerX - 1] instanceof Collectible)
-						acquire((Collectible) board[playerY][playerX - 1]);
-
-					board[playerY][playerX - 1] = board[playerY][playerX];
-					board[playerY][playerX] = new Empty();
-					playerX = playerX - 1;
-				}
-			}
+			moveHorizontal(-1);
 			break;
 		case "up":
-			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX])) {
-				if (((Cell) background[playerY - 1][playerX]) instanceof Teleporter) {
-					Teleporter temp = ((Teleporter) background[playerY - 1][playerX]);
-					int tempX = temp.getPairX();
-					int tempY = temp.getPairY();
-					board[tempY][tempX] = board[playerY][playerX];
-					board[playerY][playerX] = new Empty();
-					playerY = tempY;
-					playerX = tempX;
-				} else {
-
-					if (board[playerY - 1][playerX] instanceof Collectible)
-						acquire((Collectible) board[playerY - 1][playerX]);
-
-					board[playerY - 1][playerX] = board[playerY][playerX];
-					board[playerY][playerX] = new Empty();
-					playerY = playerY - 1;
-				}
-			}
+			moveVertical(1);
 			break;
 		case "down":
-			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX])) {
-				if (((Cell) background[playerY + 1][playerX]) instanceof Teleporter) {
-					Teleporter temp = ((Teleporter) background[playerY + 1][playerX]);
-					int tempX = temp.getPairX();
-					int tempY = temp.getPairY();
-					board[tempY][tempX] = board[playerY][playerX];
-					board[playerY][playerX] = new Empty();
-					playerY = tempY;
-					playerX = tempX;
-				} else {
-					if (board[playerY + 1][playerX] instanceof Collectible)
-						acquire((Collectible) board[playerY + 1][playerX]);
-
-					board[playerY + 1][playerX] = board[playerY][playerX];
-					board[playerY][playerX] = new Empty();
-					playerY = playerY + 1;
-				}
-			}
+			moveVertical(-1);
+			
 			if (playerX == goalX && playerY == goalY)
-
+				//Win Condition
+				//next level load
 				break;
+	
+		
 		}
 		return end();
 	}
+	
 
 	/**
 	 * method for moving enemy
