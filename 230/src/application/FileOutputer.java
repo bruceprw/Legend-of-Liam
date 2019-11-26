@@ -12,13 +12,14 @@ public class FileOutputer
 	private Element[][] background;
 	private Element[][] board;
 
-	public FileOutputer(GameBoard lvl)
+	public FileOutputer(GameBoard lvl, LevelTime lt)
 	{
 		this.lvl = lvl;
 
 		background = lvl.getBackground();
 		board = lvl.getBoard();
 		output += "" + background[0].length + "," + background.length + "\r\n";
+		
 		
 		setOutput(board,background);
 		//setTemp(board,background);

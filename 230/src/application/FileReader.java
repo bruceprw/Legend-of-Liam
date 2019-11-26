@@ -22,6 +22,7 @@ public class FileReader
 	private ArrayList<Integer> enemyY=new ArrayList<Integer>();
 	private int goalX;
 	private int goalY;
+	private long time;
 
 	public FileReader(String filePath) throws FileNotFoundException
 	{
@@ -32,6 +33,8 @@ public class FileReader
 		sizeScan.useDelimiter(",");
 		mapSizeX = sizeScan.nextInt();
 		mapSizeY = sizeScan.nextInt();
+		Scanner longScan = new Scanner(in.nextLine());
+		time=longScan.nextLong();
 		board = new Element[mapSizeY][mapSizeX];
 		background = new Element[mapSizeY][mapSizeX];
 		map = new String[mapSizeY];
@@ -89,6 +92,11 @@ public class FileReader
 		in.close();
 	}
 
+	public long getTime()
+	{
+		return time;
+	}
+	
 	public ArrayList<Integer> getEnemyX()
 	{
 		return enemyX;

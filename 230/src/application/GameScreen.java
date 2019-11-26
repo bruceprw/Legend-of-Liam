@@ -54,8 +54,18 @@ public class GameScreen extends Screen
 	{
 		this.levelNo = levelNo;
 		this.user=user;
+		
+		try
+		{
+			level = new GameBoard("LevelFiles\\" + levelNo + ".txt");
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
 		Label timeLabel = new Label();
-		long startTime = System.currentTimeMillis();
+		long startTime = level.getTime();
 		
 		new AnimationTimer()
 		{
@@ -69,14 +79,6 @@ public class GameScreen extends Screen
 			}
 		}.start();
 
-		try
-		{
-			level = new GameBoard("LevelFiles\\" + levelNo + ".txt");
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
 
 		root = new BorderPane();
 		game = new Canvas(GAME_WIDTH, GAME_HEIGHT);
@@ -213,7 +215,7 @@ public class GameScreen extends Screen
 		save.setOnAction(event ->
 		{
 			// TODO: Create Save and add to User.
-			// FileOutputer f = new FileOutputer(level);
+			FileOutputer f = new FileOutputer(level,new LevelTime(user.getName(),Long.toString(time)));
 			// Switch to Title Screen
 			Scene s = new TitleScreen().getScene();
 			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
