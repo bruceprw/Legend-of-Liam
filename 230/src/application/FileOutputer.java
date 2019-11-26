@@ -12,13 +12,15 @@ public class FileOutputer
 	private Element[][] background;
 	private Element[][] board;
 
-	public FileOutputer(GameBoard lvl)
+	public FileOutputer(GameBoard lvl, LevelTime lt)
 	{
 		this.lvl = lvl;
 
 		background = lvl.getBackground();
 		board = lvl.getBoard();
 		output += "" + background[0].length + "," + background.length + "\r\n";
+		long a = lt.getTime();
+		output+= ""+ a+"\r\n";
 		
 		setOutput(board,background);
 		//setTemp(board,background);
@@ -27,7 +29,7 @@ public class FileOutputer
 		
 		try
 		{
-			File outputFile = new File("LevelFiles\\AndyLvl1.txt");
+			File outputFile = new File("LevelFiles\\"+lt.getUsername()+".txt");
 			PrintWriter out = new PrintWriter(outputFile);
 			out.print(output+temp);
 			out.close();

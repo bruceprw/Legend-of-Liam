@@ -35,12 +35,13 @@ public class GameBoard {
 	final private String LEFT = "LEFT";
 	final private String DOWN = "DOWN";
 	final private String RIGHT = "RIGHT";
-
+	private long time;
 	final private int ONE = 1;
 	final private int TWO = 2;
 
 	public GameBoard(String filePath) throws FileNotFoundException {
 		FileReader lvl = new FileReader(filePath);
+		time = lvl.getTime();
 		this.board = lvl.getBoard();
 		this.background = lvl.getBackground();
 		playerX = lvl.getPlayerX();
@@ -60,6 +61,11 @@ public class GameBoard {
 		}
 	}
 
+	public long getTime()
+	{
+		return time;
+	}
+	
 	public void setFog() {
 		for (int y = playerY - 2; y < playerY + 3; y++) {
 			for (int x = playerX - 2; x < playerX + 3; x++) {

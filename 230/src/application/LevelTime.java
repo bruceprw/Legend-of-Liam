@@ -24,16 +24,7 @@ public class LevelTime
 
 	public long getTime()
 	{
-		Date a = null;
-		try
-		{
-			a = sdf.parse(time);
-		}
-		catch (ParseException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Date a = new Date(Long.parseLong(time));
 
 		return a.getTime();
 	}
