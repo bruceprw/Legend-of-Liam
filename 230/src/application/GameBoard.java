@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Collectibles.BlueKey;
@@ -136,7 +137,7 @@ public class GameBoard
 		gc.strokeText(": " + temp[6], 225, 660);
 	}
 
-	public void playBoardSound(int x, int y)
+	public void playBoardSound(int x, int y) throws IOException
 	{
 		switch(board[y][x].getString())
 		{
@@ -164,7 +165,7 @@ public class GameBoard
 		}
 	}
 	
-	public void playBackSound(int x, int y)
+	public void playBackSound(int x, int y) throws IOException
 	{
 		switch(background[y][x].getString())
 		{
