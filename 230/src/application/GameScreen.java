@@ -41,7 +41,7 @@ public class GameScreen extends Screen
 	private GameBoard level;
 	private UserProfile user;
 	private Leaderboard leaderboard;
-	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 	//int time = 0;
 
 	/**
@@ -65,7 +65,7 @@ public class GameScreen extends Screen
 		}
 		
 		Label timeLabel = new Label();
-		long startTime = System.currentTimeMillis()+ level.getTime()+1000*3600;
+		long startTime = System.currentTimeMillis()-level.getTime();
 		 
 		new AnimationTimer()
 		{
@@ -73,6 +73,7 @@ public class GameScreen extends Screen
 			{
 				long elapsedMillis = System.currentTimeMillis() - startTime;
 				time = elapsedMillis;
+				//System.out.println(time);
 				// System.out.println(elapsedMillis);
 				Date d = new Date(elapsedMillis);
 				timeLabel.setText(sdf.format(d));
@@ -210,6 +211,7 @@ public class GameScreen extends Screen
 		save.setOnAction(event ->
 		{
 			// TODO: Create Save and add to User.
+			//System.out.println(Long.toString(time));
 			FileOutputer f = new FileOutputer(level,new LevelTime(user.getName(),Long.toString(time)));
 			// Switch to Title Screen
 			Scene s = new TitleScreen().getScene();

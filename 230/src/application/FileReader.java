@@ -35,7 +35,7 @@ public class FileReader
 		mapSizeY = sizeScan.nextInt();
 		Scanner longScan = new Scanner(in.nextLine());
 		time=longScan .nextLong();
-		System.out.println(time);
+		//System.out.println(time);
 		longScan.close();
 		board = new Element[mapSizeY][mapSizeX];
 		background = new Element[mapSizeY][mapSizeX];
@@ -149,7 +149,9 @@ public class FileReader
 	{
 		line.useDelimiter(",");
 		int x = line.nextInt();
+		System.out.println(x+" ");
 		int y = line.nextInt();
+		
 		String feature = line.next();
 		//System.out.println(feature);
 		switch (feature)
