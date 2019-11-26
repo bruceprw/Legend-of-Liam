@@ -15,14 +15,15 @@ abstract class Enemy extends Element {
 
 	protected String movDirection;
 
-	//Constants
-	///Directions
-	final private String UP = "North";
-	final private String LEFT = "East";
-	final private String DOWN = "South";
-	final private String RIGHT = "West";
-	
-	final private int ONE = 1;
+	// Constants
+	/// Directions
+	final protected String UP = "North";
+	final protected String LEFT = "East";
+	final protected String DOWN = "South";
+	final protected String RIGHT = "West";
+
+	protected final int ONE = 1;
+	protected final int TWO = 2;
 
 	/**
 	 * @return the movDirection
@@ -38,46 +39,54 @@ abstract class Enemy extends Element {
 		this.movDirection = movDirection;
 	}
 
-	
-
-	public int[] moveTo(int currentX, int currentY, Cell cell) {
+	/**
+	 * Method for working out where to move
+	 * 
+	 * @param currentX
+	 * @param currentY
+	 * @param nextCell
+	 * @return
+	 */
+	public int[] moveTo(int currentX, int currentY, Cell nextCell) {
 		switch (this.getMovDirection()) {
 		case (UP):
 			// TODO break this into a method
-			if (this.isMovable(cell)) {
-				int[] a = { currentX + ONE, currentY };
+			if (this.isMovable(nextCell)) {
+				//TODO remove variable and just return the int array
+				int[] a = { currentX, currentY + ONE};
 				return a;
 			} else {
+				//not movable so return a empty array which should throw an error when used
 				this.reverseDirection();
 				int[] a = {};
 				return a;
 			}
 		case (LEFT):
-			if (this.isMovable(cell)) {
+			if (this.isMovable(nextCell)) {
+				int[] a = { currentX - ONE , currentY};
+				return a;
+			} else {
+				this.reverseDirection();
+				// TODO get opposite cell
+				this.moveTo(currentX, currentY, nextCell);
+			}
+		case (DOWN):
+			if (this.isMovable(nextCell)) {
+				int[] a = { currentX + ONE, currentY };
+				return a;
+			} else {
+				this.reverseDirection();
+				// TODO get opposite cell
+				this.moveTo(currentX, currentY, nextCell);
+			}
+		case (RIGHT):
+			if (this.isMovable(nextCell)) {
 				int[] a = { currentX, currentY + ONE };
 				return a;
 			} else {
 				this.reverseDirection();
 				// TODO get opposite cell
-				this.moveTo(currentX, currentY, cell);
-			}
-		case (DOWN):
-			if (this.isMovable(cell)) {
-				int[] a = { currentX - ONE, currentY };
-				return a;
-			} else {
-				this.reverseDirection();
-				// TODO get opposite cell
-				this.moveTo(currentX, currentY, cell);
-			}
-		case (RIGHT):
-			if (this.isMovable(cell)) {
-				int[] a = { currentX, currentY - ONE };
-				return a;
-			} else {
-				this.reverseDirection();
-				// TODO get opposite cell
-				this.moveTo(currentX, currentY, cell);
+				this.moveTo(currentX, currentY, nextCell);
 			}
 		default:
 			throw new IllegalStateException("Undifened direction");
@@ -85,6 +94,9 @@ abstract class Enemy extends Element {
 		}
 	}
 
+	/**
+	 * Method for revesering the direction of Enemy
+	 */
 	public void reverseDirection() {
 		switch (this.getMovDirection()) {
 		case (UP):
@@ -104,6 +116,12 @@ abstract class Enemy extends Element {
 		}
 	}
 
+	/**
+	 * Checks if given cell is movable
+	 * 
+	 * @param cell The cell the enemy wants to move to
+	 * @return True for yes it is movable else false
+	 */
 	public boolean isMovable(Cell cell) {
 		switch (cell.getString()) {
 		case "GREENDOOR":
