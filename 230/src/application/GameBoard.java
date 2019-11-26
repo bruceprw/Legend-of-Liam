@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Collectibles.BlueKey;
@@ -124,6 +125,17 @@ public class GameBoard {
 		gc.strokeText(": " + temp[6], 225, 660);
 	}
 
+
+	public void playBoardSound(int x, int y)
+	{
+		board[y][x].playSound();
+	}
+	
+	public void playBackSound(int x, int y)
+	{
+		background[y][x].playSound();
+	}
+	
 	public boolean move(String way) {
 		switch (way) {
 		case "right":
@@ -141,6 +153,8 @@ public class GameBoard {
 						acquire((Collectible) board[playerY][playerX + 1]);
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
+					playBoardSound(playerY,playerX+1);
+					playBackSound(playerY,playerX+1);
 					playerX = playerX + 1;
 				}
 
@@ -163,6 +177,8 @@ public class GameBoard {
 
 					board[playerY][playerX - 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
+					playBoardSound(playerY,playerX+1);
+					playBackSound(playerY,playerX+1);
 					playerX = playerX - 1;
 				}
 			}
@@ -184,6 +200,8 @@ public class GameBoard {
 
 					board[playerY - 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
+					playBoardSound(playerY,playerX+1);
+					playBackSound(playerY,playerX+1);
 					playerY = playerY - 1;
 				}
 			}
@@ -204,6 +222,8 @@ public class GameBoard {
 
 					board[playerY + 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
+					playBoardSound(playerY,playerX+1);
+					playBackSound(playerY,playerX+1);
 					playerY = playerY + 1;
 				}
 			}

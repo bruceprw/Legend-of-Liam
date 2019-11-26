@@ -1,14 +1,18 @@
 package cell;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class TokenDoor extends Cell {
     private int tokenNumToUnlockDoor;
     private String path = "Images\\token_door.jpg";
+	private String soundPath = "Sound\\341695__projectsu012__coins-1( coin).wav";
     private Image image;
     private boolean opened;
 
@@ -43,6 +47,13 @@ public class TokenDoor extends Cell {
 	{
 		image = new Image (new FileInputStream(path));
 	}
+	
+    public void playSound()
+    {
+    	Media music = new Media(new File(soundPath).toURI().toString());
+    	MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	mediaPlayer.play();
+    }
 	
     public void draw(GraphicsContext gc,int x,int y)
     {
