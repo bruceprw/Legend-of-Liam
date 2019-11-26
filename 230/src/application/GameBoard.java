@@ -191,14 +191,15 @@ public class GameBoard {
 			moveVertical(1);
 		case "down":
 			moveVertical(-1);
-			
+		}
+		return end();
+			/*
 		if (playerX == goalX && playerY == goalY)
 				//Win Condition
 				//next level load
-				GameScreen
 				break;
-		}
-		return end();
+		
+		return end();*/
 		
 	}
 
