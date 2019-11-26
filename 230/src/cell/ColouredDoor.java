@@ -1,11 +1,14 @@
 package cell;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class ColouredDoor extends Cell {
 
@@ -14,6 +17,7 @@ public class ColouredDoor extends Cell {
 	private String redPath = "Images\\red_door.jpg";
 	private String yellowPath = "Images\\yellow_door.jpg";
 	private String bluePath = "Images\\blue_door.jpg";
+	private String soundPath = "Sound\\Water Splash-SoundBible.com-800223477.mp3";
 	private Image image;
 	private boolean opened;
 	
@@ -57,6 +61,13 @@ public class ColouredDoor extends Cell {
     		gc.drawImage(image,x,y,100,100);
     		break;
     	}
+    }
+    
+    public void playSound()
+    {
+    	Media music = new Media(new File(soundPath).toURI().toString());
+    	MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	mediaPlayer.play();
     }
     
     public String getString()

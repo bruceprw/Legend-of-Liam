@@ -21,12 +21,28 @@ public class DumbTargettingEnemy extends Enemy
 	private String path = "Images\\idiot.png";
 	private Image image;
 	
-    public DumbTargettingEnemy(int currentX,int currentY, boolean HV)
+	  public DumbTargettingEnemy(int currentX,int currentY,String movDirection)
+	    {
+	        this.currentPositionX = currentX;
+	        this.currentPositionY = currentY;
+	        this.movDirection = UP;
+	        
+	        try
+			{
+				setImage();
+			}
+			catch (FileNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	
+    public DumbTargettingEnemy(int currentX,int currentY)
     {
         this.currentPositionX = currentX;
         this.currentPositionY = currentY;
 
-       // this.direction = HV;
         try
 		{
 			setImage();
@@ -38,16 +54,6 @@ public class DumbTargettingEnemy extends Enemy
 		}
     }
 
-    @Override
-    protected void findNewPosition() {
-        //find player location
-        //move in said direction 
-            //if wall stationary
-        
-        //if gone
-
-        //random direction
-    }
     public String getString()
     {
     	return"DUMB";

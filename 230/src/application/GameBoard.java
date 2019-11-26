@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Collectibles.BlueKey;
@@ -30,10 +31,10 @@ public class GameBoard {
 	private ArrayList<Integer> enemyX;
 	private ArrayList<Integer> enemyY;
 
-	final private String UP = "North";
-	final private String LEFT = "East";
-	final private String DOWN = "South";
-	final private String RIGHT = "West";
+	final private String UP = "UP";
+	final private String LEFT = "LEFT";
+	final private String DOWN = "DOWN";
+	final private String RIGHT = "RIGHT";
 
 	final private int ONE = 1;
 	final private int TWO = 2;
@@ -168,29 +169,39 @@ public class GameBoard {
 		}
 	}
 
+
+	public void playBoardSound(int x, int y)
+	{
+		board[y][x].playSound();
+	}
+	
+	public void playBackSound(int x, int y)
+	{
+		background[y][x].playSound();
+	}
+	
 	public boolean move(String way) {
+		moveEnemy();
 		switch (way) {
 		case "right":
 			moveHorizontal(1);
-			break;
 		case "left":
 			moveHorizontal(-1);
-			break;
 		case "up":
 			moveVertical(1);
-			break;
 		case "down":
 			moveVertical(-1);
 			
-			if (playerX == goalX && playerY == goalY)
+		if (playerX == goalX && playerY == goalY)
 				//Win Condition
 				//next level load
 				break;
-	
-		
 		}
 		return end();
+		
 	}
+
+
 	
 
 	/**
@@ -206,16 +217,36 @@ public class GameBoard {
 			try {
 				int currentX = enemyX.get(i);
 				int currentY = enemyY.get(i);
-				Enemy enemyHold = (Enemy) this.board[currentX][currentY];
+				Enemy enemyHold = (Enemy) this.board[currentY][currentX];
 
 				// find sub class of enemy
 				switch (enemyHold.getString()) {
 				case "DUMB":
-					// TODO fill this in
-					break;
+					return;
 				case "SMART":
 					// TODO fill this in
-					// check next move is next to wall
+					// check next move is next to wal
+
+					return;
+				case "STRAIGHT":
+					try {
+						int[] XY = enemyHold.moveTo(currentX, currentY,
+								this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
+						board[XY[1]][XY[0]] = board[currentY][currentX] ;
+						
+						enemyX.set(i,XY[0]);
+						enemyY.set(i,XY[1]);
+					} catch (IndexOutOfBoundsException e) {
+						int[] XY = enemyHold.moveTo(currentX, currentY,
+								this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
+						board[XY[1]][XY[0]] = board[currentY][currentX] ;
+						
+						enemyX.set(i,XY[0]);
+						enemyY.set(i,XY[1]);
+					}
+
+					break;
+				case "WALLHUG":
 					if (enemyHold.isMovable(getNextCell(currentX, currentY, enemyHold.getMovDirection()))) {
 						// check there is a wall
 						if (checkWall(currentX, currentY, enemyHold.getMovDirection())) {
@@ -223,42 +254,35 @@ public class GameBoard {
 							try {
 								int[] XY = enemyHold.moveTo(currentX, currentY,
 										this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
-								board[currentY][currentX] = board[XY[1]][XY[0]];
+								board[XY[1]][XY[0]] = board[currentY][currentX] ;
+								
+								enemyX.set(i,XY[0]);
+								enemyY.set(i,XY[1]);
+								
 								// if that didn't work reverse
 							} catch (IndexOutOfBoundsException e) {
 								int[] XY = enemyHold.moveTo(currentX, currentY,
 										this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
-								board[currentY][currentX] = board[XY[1]][XY[0]];
+								board[XY[1]][XY[0]] = board[currentY][currentX] ;
+								
+								enemyX.set(i,XY[0]);
+								enemyY.set(i,XY[1]);
 							}
 						}
 						// check corner if no wall
 						if (this.checkCorner(currentX, currentY, enemyHold.getMovDirection())) {
 							int[] XY = ((WallFollowingEnemy) enemyHold).moveToCorner(currentX, currentY,
 									this.getNewWallDirection(currentX, currentY));
-							board[currentY][currentX] = board[XY[1]][XY[0]];
+							board[XY[1]][XY[0]] = board[currentY][currentX] ;
+							
+							enemyX.set(i,XY[0]);
+							enemyY.set(i,XY[1]);
 						}
 
 					}
-
-					break;
-				case "STRAIGHT":
-					try {
-						int[] XY = enemyHold.moveTo(currentX, currentY,
-								this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
-						board[currentY][currentX] = board[XY[1]][XY[0]];
-					} catch (IndexOutOfBoundsException e) {
-						int[] XY = enemyHold.moveTo(currentX, currentY,
-								this.getNextCell(currentX, currentY, enemyHold.getMovDirection()));
-						board[currentY][currentX] = board[XY[1]][XY[0]];
-					}
-
-					break;
-				case "WALLHUG":
-					// TODO fill this in
 					break;
 				}
 			} catch (ClassCastException exc) {
-				// not a enemy class
 				exc.printStackTrace();
 			}
 
@@ -370,6 +394,11 @@ public class GameBoard {
 			throw new IllegalStateException("Undifened direction");
 
 		}
+	}
+	
+	private Element getElement(int X,int Y)
+	{
+		return board[Y][X];
 	}
 
 	public void acquire(Collectible co) {

@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -93,8 +94,16 @@ public class GameScreen extends Screen
 		root.setBottom(buttonsPane);
 
 		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-		scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> keyPressed(event));
+		scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+			try {
+				keyPressed(event);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	}
+
 	//when its a game over it fades back to the title screen
 	public void GameOver(){
 		FadeTransition ft = new FadeTransition(Duration.millis(3000), root);
@@ -106,7 +115,9 @@ public class GameScreen extends Screen
 		primaryStage.setScene(s);
 	}
 	
-	private void keyPressed(KeyEvent event)
+
+	private void keyPressed(KeyEvent event) throws IOException
+
 	{
 		boolean end;
 		switch (event.getCode())

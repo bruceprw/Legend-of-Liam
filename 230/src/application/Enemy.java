@@ -13,14 +13,14 @@ abstract class Enemy extends Element {
 	protected int nextPositionX;
 	protected int nextPositionY;
 
-	protected String movDirection;
+	protected String movDirection = "UP";
 
 	// Constants
 	/// Directions
-	final protected String UP = "North";
-	final protected String LEFT = "East";
-	final protected String DOWN = "South";
-	final protected String RIGHT = "West";
+	final protected String UP = "UP";
+	final protected String LEFT = "LEFT";
+	final protected String DOWN = "DOWN";
+	final protected String RIGHT = "RIGHT";
 
 	protected final int ONE = 1;
 	protected final int TWO = 2;
