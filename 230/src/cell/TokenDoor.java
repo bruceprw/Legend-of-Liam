@@ -12,7 +12,7 @@ import javafx.scene.media.MediaPlayer;
 public class TokenDoor extends Cell {
     private int tokenNumToUnlockDoor;
     private String path = "Images\\token_door.jpg";
-	private String soundPath = "Sound\\341695__projectsu012__coins-1( coin).wav";
+	private String soundPath = "Sound\\creaking_door.mp3";
     private Image image;
     private boolean opened;
 

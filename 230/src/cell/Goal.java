@@ -11,7 +11,7 @@ import javafx.scene.media.MediaPlayer;
 public class Goal extends Cell {
 
 	private String path = "Images\\goal.png";
-	private String soundPath = "Sound\\Water Splash-SoundBible.com-800223477.mp3";
+	private String soundPath = "Sound\\goal_applause.wav";
 	private Image image;
 	
     public Goal() throws FileNotFoundException {

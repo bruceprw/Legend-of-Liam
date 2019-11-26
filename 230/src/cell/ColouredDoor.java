@@ -17,7 +17,7 @@ public class ColouredDoor extends Cell {
 	private String redPath = "Images\\red_door.jpg";
 	private String yellowPath = "Images\\yellow_door.jpg";
 	private String bluePath = "Images\\blue_door.jpg";
-	private String soundPath = "Sound\\Water Splash-SoundBible.com-800223477.mp3";
+	private String soundPath = "Sound\\creaking_door.mp3";
 	private Image image;
 	private boolean opened;
 	
