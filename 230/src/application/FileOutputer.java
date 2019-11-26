@@ -29,7 +29,7 @@ public class FileOutputer
 		
 		try
 		{
-			File outputFile = new File("LevelFiles\\AndyLvl1.txt");
+			File outputFile = new File("LevelFiles\\"+lt.getUsername()+".txt");
 			PrintWriter out = new PrintWriter(outputFile);
 			out.print(output+temp);
 			out.close();
