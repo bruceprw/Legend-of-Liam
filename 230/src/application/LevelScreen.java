@@ -1,66 +1,132 @@
 package application;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import cell.LevelDoor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 public class LevelScreen extends Screen {
-	private static final double LEVEL_BUTTON_SIZE = 100;
-	private static final int BTNS_PER_ROW = 4;
-	private static final double GRID_H_GAP = 30;
-	private static final double GRID_V_GAP = 20;
-	private static final double GRID_PADDING_X = (WINDOW_WIDTH
-			- ((BTNS_PER_ROW * LEVEL_BUTTON_SIZE) + (BTNS_PER_ROW - 1) * (GRID_H_GAP))) / 2;
-	private static final double GRID_PADDING_TOP = 100;
-	
-	private BorderPane root;
-	private ScrollPane levels;
-	private GridPane grid;
+	private static final int GAME_WIDTH = 700;
+	private static final int GAME_HEIGHT = 700;
 
-	private ArrayList<Button> levelButtons;
-	private Button back;
+	private BorderPane root;
+
+	private Canvas game;
+
+	private GameBoard level;
 	private UserProfile user;
 
-	public LevelScreen(UserProfile user) {
+	/**
+	 * 
+	 * @param levelNo Number of the level to be loaded.
+	 * @throws InterruptedException
+	 */
+	
+	public LevelScreen(UserProfile user)
+	{
 		this.user=user;
-		root = new BorderPane();
-		levels = new ScrollPane();
-		grid = new GridPane();
-		levelButtons = new ArrayList<Button>();
-		back = new Button("Back");
 
-		for (int i = 0; i < 20; i++) {
-			Integer levelNo = i + 1;
-			
-			Button b = new Button("" + (levelNo));
-			b.setOnAction(event -> {
-				switchScreen(new GameScreen(levelNo.toString(),user));
-			});
-			
-			b.setMinSize(LEVEL_BUTTON_SIZE, LEVEL_BUTTON_SIZE);
-			levelButtons.add(b);
-			grid.add(b, i % BTNS_PER_ROW, i / BTNS_PER_ROW);
+		try
+		{
+			level = new GameBoard("LevelFiles\\levelSelect.txt");
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
 		}
 
-		grid.setPadding(new Insets(GRID_PADDING_TOP, 0, GRID_PADDING_X, GRID_PADDING_X));
-		grid.setHgap(GRID_H_GAP);
-		grid.setVgap(GRID_V_GAP);
-		// grid.setGridLinesVisible(true);
+		root = new BorderPane();
+		game = new Canvas(GAME_WIDTH, GAME_HEIGHT);
 
-		levels.setContent(grid);
+		// Initial Call of drawGame() (can delete if you want)
+		drawGame();
 
-		root.setCenter(levels);
-		root.setBottom(back);
-
-		back.setAlignment(Pos.BASELINE_LEFT);
-		grid.setAlignment(Pos.BASELINE_CENTER);
-
+		root.setCenter(game);
+		
 		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+		scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+			try {
+				keyPressed(event);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	}
+
+	private void keyPressed(KeyEvent event) throws IOException
+
+	{
+		switch (event.getCode())
+		{
+		case RIGHT:
+			level.move("right");
+			break;
+
+		case LEFT:
+			level.move("left");
+			break;
+			
+		case UP:
+			level.move("up");
+			break;
+			
+		case DOWN:
+			level.move("down");
+			break;
+			
+		case SPACE:
+			Element space = level.getBackground()[level.getPlayerY()][level.getPlayerX()];
+			if (space.getClass() == LevelDoor.class) {
+				LevelDoor door = (LevelDoor) space;
+				int levelNo = door.getLevelNo();
+				
+				if (levelNo == 0) {
+					TitleScreen t = new TitleScreen();
+					switchScreen(t);
+					t.switchToMenu(user);
+				} else {
+					switchScreen(new GameScreen(levelNo + "", user));
+				}
+			}
+			break;
+			
+		default:
+			break;
+		}
+
+		drawGame();
+
+		// Consume key press event so that arrow keys don't interact with Buttons.
+		event.consume();
+	}
+
+	private void drawGame()
+	{
+		GraphicsContext gc = game.getGraphicsContext2D();
+		gc.clearRect(0, 0, game.getWidth(), game.getHeight());
+
+		try
+		{
+			level.drawGame(gc);
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// TEST - get rid of this
+		gc.setFill(Color.BLACK);
+		gc.strokeRect(0, 0, game.getWidth(), game.getHeight());
+	}
+	
+	
 }

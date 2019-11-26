@@ -220,6 +220,10 @@ public class FileReader
 			int a = line.nextInt();
 			background[y][x] = new TokenDoor(a);
 			break;
+		case "LEVELDOOR":
+			int levelNo = line.nextInt();
+			background[y][x] = new LevelDoor(levelNo);
+			break;
 		case "TELEPORTER":
 			int tempX = line.nextInt();
 			int tempY = line.nextInt();
