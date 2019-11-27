@@ -12,7 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 /**
- * Player class -
+ * Player class.
  * 
  * @author Bruce Williams (972648)
  * @version 1.2
@@ -28,7 +28,7 @@ public class Player extends Element {
 	private String path = "Images\\player.jpg";
 	/**
 	 * @param name name of player.
-	 * @throws FileNotFoundException.
+	 * @throws FileNotFoundException if file not found.
 	 */
 	public Player(String name) throws FileNotFoundException {
 		setName(name);
@@ -57,9 +57,10 @@ public class Player extends Element {
 	}
 	/**
 	 * Adds 1 of item to inventory, position corresponds to itemID:
-	 * 0=Token, 1=RedKey, 2=GreenKey, 3=BlueKey, 4=YellowKey, 5=Fireboot, 6=Flipper.
+	 * 0=Token, 1=RedKey, 2=GreenKey, 3=BlueKey,
+	 *  4=YellowKey, 5=Fireboot, 6=Flipper.
 	 *	
-	 * @param position.
+	 * @param position position of player.
 	 */
 	public void acquireInventory(int position) {
 		inventory[position]++;
@@ -88,7 +89,7 @@ public class Player extends Element {
 	}
 	/**
 	 * Updates avatar.
-	 * @param avatar
+	 * @param avatar visual represntation of player.
 	 */
 	public void setAvatar(Image avatar) {
 		this.avatar = avatar;
@@ -102,7 +103,7 @@ public class Player extends Element {
 	}
 	
 	/**
-	 * updates position of player
+	 * updates position of player.
 	 * @param pos position of player
 	 */
 	public void setPos(int[][] pos) {
@@ -144,10 +145,11 @@ public class Player extends Element {
 		inventory[i]--;
 	}
 	/**
-	 * checks if player can move onto specified cell
-	 * @param cell 
+	 * checks if player can move onto specified cell.
+	 * @param cell  cell on board.
 	 * @return
 	 */
+	//TODO: make method less than 75 lines.
 	public boolean movable(Cell cell) {
 		switch (cell.getString()) {
 		case "GREENDOOR":
