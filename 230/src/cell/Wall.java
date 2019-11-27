@@ -12,7 +12,7 @@ import javafx.scene.media.MediaPlayer;
 public class Wall extends Cell {
 	
 	private String path = "Images\\wall.jpg";
-	private String soundPath = "Sound\\hit_bricks_wall.wav";
+	private String soundPath = "Sound\\wall_hit.mp3";
 	private Image image;
 	
     public Wall() throws FileNotFoundException {

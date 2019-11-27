@@ -8,7 +8,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		Screen.setPrimaryStage(primaryStage);
-		
+		Screen.primaryStage.setTitle("Legend of Liam");
 		try {
 			// Replace TitleScreen() to change the starting screen.
 			Scene scene = new TitleScreen().getScene();

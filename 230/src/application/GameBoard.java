@@ -292,8 +292,8 @@ public class GameBoard {
 			break;
 
 		}
-		if (moveEnemy())
-			return 2;
+		//if (moveEnemy())
+			//return 2;
 		if (playerDead())
 			return 2;
 		if (end())

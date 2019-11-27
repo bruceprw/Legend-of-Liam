@@ -176,6 +176,9 @@ public class GameScreen extends Screen
 				 NextLevel();
 			}
 			break;
+		case ESCAPE:
+			NextLevel();
+			break;
 
 		default:
 			break;
