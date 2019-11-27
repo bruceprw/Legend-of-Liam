@@ -85,7 +85,7 @@ public class WallFollowingEnemy extends Enemy {
 		}
 	}
 
-	String getDirection() {
+	public String getDirection() {
 		return movDirection;
 	}
 

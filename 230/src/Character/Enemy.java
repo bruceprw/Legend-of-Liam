@@ -3,8 +3,11 @@ package Character;
 import java.io.File;
 
 import application.Element;
+import application.Empty;
+import application.GameBoard;
 import cell.Cell;
 import cell.ColouredDoor;
+import cell.Ground;
 import cell.TokenDoor;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -184,5 +187,17 @@ public abstract class Enemy extends Element {
 		default:
 			return false;
 		}
+	}
+	
+	protected boolean checkMove(GameBoard gb, int x,int y)
+	{
+		Element[][] board = gb.getBoard();
+		Element[][] background = gb.getBackground();
+		
+		if ((background[y][x] instanceof Ground)&&(board[y][x] instanceof Empty))
+			return true;
+		else 
+			return false;
+		
 	}
 }
