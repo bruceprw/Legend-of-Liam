@@ -1,7 +1,8 @@
-package application;
+package Character;
 
 import java.io.File;
 
+import application.Element;
 import cell.Cell;
 import cell.ColouredDoor;
 import cell.TokenDoor;

@@ -1,7 +1,7 @@
 package Collectibles;
 
+import Character.Player;
 import application.Element;
-import application.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

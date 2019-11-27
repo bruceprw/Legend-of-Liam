@@ -2,6 +2,10 @@ package application;
 
 import java.io.File;
 import java.io.PrintWriter;
+
+import Character.Player;
+import Character.StraightLineEnemy;
+import Character.WallFollowingEnemy;
 import cell.*;
 
 public class FileOutputer

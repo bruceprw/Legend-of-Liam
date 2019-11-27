@@ -1,4 +1,4 @@
-package application;
+package Character;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.zip.DataFormatException;
 
+import application.Element;
 import cell.Cell;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

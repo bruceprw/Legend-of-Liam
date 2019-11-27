@@ -4,6 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Character.DumbTargettingEnemy;
+import Character.Player;
+import Character.SmartTargettingEnemy;
+import Character.StraightLineEnemy;
+import Character.WallFollowingEnemy;
 import Collectibles.*;
 import cell.*;
 
@@ -149,7 +155,7 @@ public class FileReader
 	{
 		line.useDelimiter(",");
 		int x = line.nextInt();
-		System.out.println(x+" ");
+		//System.out.println(x+" ");
 		int y = line.nextInt();
 		
 		String feature = line.next();

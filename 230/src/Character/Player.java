@@ -1,9 +1,10 @@
-package application;
+package Character;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import Collectibles.Collectible;
+import application.Element;
 import cell.Cell;
 import cell.ColouredDoor;
 import cell.TokenDoor;
