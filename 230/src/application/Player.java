@@ -157,6 +157,7 @@ public class Player extends Element {
 		switch (cell.getString()) {
 		case "GREENDOOR":
 			if (((ColouredDoor) cell).getOpened()) {
+				((ColouredDoor)cell).playSound();
 				return true;
 			} else {
 				if (checkInventory(2)) {
@@ -169,6 +170,7 @@ public class Player extends Element {
 
 		case "REDDOOR":
 			if (((ColouredDoor) cell).getOpened()) {
+				((ColouredDoor)cell).playSound();
 				return true;
 			} else {
 				if (checkInventory(1)) {
@@ -181,6 +183,7 @@ public class Player extends Element {
 
 		case "YELLOWDOOR":
 			if (((ColouredDoor) cell).getOpened()) {
+				((ColouredDoor)cell).playSound();
 				return true;
 			} else {
 				if (checkInventory(4)) {
@@ -193,6 +196,7 @@ public class Player extends Element {
 
 		case "BLUEDOOR":
 			if (((ColouredDoor) cell).getOpened()) {
+				((ColouredDoor)cell).playSound();
 				return true;
 			} else {
 				if (checkInventory(3)) {
@@ -205,13 +209,16 @@ public class Player extends Element {
 
 		case "W":
 			if (checkInventory(6)) {
+				cell.playSound();
 				return true;
 			} else
 				return false;
 		case "#":
+			cell.playSound();
 			return false;
 		case "D":
 			if (((TokenDoor) cell).getOpened()) {
+				cell.playSound();
 				return true;
 			} else {
 				if (getTokenNum() == (((TokenDoor) cell).getTokenNum())) {
@@ -225,15 +232,19 @@ public class Player extends Element {
 			}
 
 		case "@":
+			cell.playSound();
 			return true;
 		case "L":
 			if (checkInventory(5)) {
+				cell.playSound();
 				return true;
 			} else
 				return false;
 		case " ":
+			cell.playSound();
 			return true;
 		case "G":
+			cell.playSound();
 			return true;
 		default:
 			return false;
