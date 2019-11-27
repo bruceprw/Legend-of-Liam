@@ -13,7 +13,7 @@ import javafx.scene.media.MediaPlayer;
 public class YellowKey extends Collectible
 {
 	private String path = "Images\\YK.png";
-    private String soundPath = "Sound\\pickup_keys.ogg";
+    private String soundPath = "Sound\\pickup_keys.mp3";
 	
 	public YellowKey() throws FileNotFoundException
 	{
