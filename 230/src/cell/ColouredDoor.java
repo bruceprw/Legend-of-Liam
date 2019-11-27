@@ -17,7 +17,8 @@ public class ColouredDoor extends Cell {
 	private String redPath = "Images\\red_door.jpg";
 	private String yellowPath = "Images\\yellow_door.jpg";
 	private String bluePath = "Images\\blue_door.jpg";
-	private String soundPath = "Sound\\creaking_door.mp3";
+	private String knockSoundPath = "Sound\\door_knock.mp3";
+	private String openSoundPath = "Sound\\creaking_door.mp3";
 	private Image image;
 	private boolean opened;
 	
@@ -62,9 +63,17 @@ public class ColouredDoor extends Cell {
     		break;
     	}
     }
-    public void playSound()
+    
+    public void playKnockSound()
     {
-    	Media music = new Media(new File(soundPath).toURI().toString());
+    	Media music = new Media(new File(knockSoundPath).toURI().toString());
+    	MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	mediaPlayer.play();
+    }
+    
+    public void playOpenSound()
+    {
+    	Media music = new Media(new File(openSoundPath).toURI().toString());
     	MediaPlayer mediaPlayer = new MediaPlayer(music);
     	mediaPlayer.play();
     }
