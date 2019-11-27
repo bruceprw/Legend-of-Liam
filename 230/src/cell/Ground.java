@@ -12,7 +12,7 @@ import javafx.scene.media.MediaPlayer;
 public class Ground extends Cell {
 
 	private String path = "Images\\ground.jpg";
-	private String soundPath = "Sound\\foot_steps.wav";
+	private String soundPath = "Sound\\foot_step.mp3";
 	private Image image;
 	
     public Ground() throws FileNotFoundException{

@@ -13,7 +13,7 @@ import javafx.scene.media.MediaPlayer;
 public class Token extends Collectible
 {
 	private String path = "Images\\token.png";
-    private String soundPath = "Sound\\creaking_door.mp3";
+    private String soundPath = "Sound\\coin_sound.mp3";
 	
 	public Token() throws FileNotFoundException
 	{

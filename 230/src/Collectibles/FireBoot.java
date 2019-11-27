@@ -13,7 +13,7 @@ import javafx.scene.media.MediaPlayer;
 public class FireBoot extends Collectible
 {
 	private String path = "Images\\Fireboot.jpg";
-    private String soundPath = "Sound\\creaking_door.mp3";
+    private String soundPath = "Sound\\putting_on_shoes.mp3";
 	
 	public FireBoot() throws FileNotFoundException
 	{

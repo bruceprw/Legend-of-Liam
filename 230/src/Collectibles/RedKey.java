@@ -13,7 +13,7 @@ import javafx.scene.media.MediaPlayer;
 public class RedKey extends Collectible
 {
 	private String path = "Images\\RK.png";
-    private String soundPath = "Sound\\creaking_door.mp3";
+    private String soundPath = "Sound\\pickup_keys.ogg";
 	
 	public RedKey() throws FileNotFoundException
 	{

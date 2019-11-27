@@ -13,7 +13,7 @@ import javafx.scene.media.MediaPlayer;
 public class BlueKey extends Collectible
 {
 	private String path = "Images\\BK.png";
-    private String soundPath = "Sound\\creaking_door.mp3";
+    private String soundPath = "Sound\\pickup_keys.ogg";
 	
 	public BlueKey() throws FileNotFoundException
 	{
