@@ -68,7 +68,7 @@ public class DumbTargettingEnemy extends Enemy
     		a[0] = enemyX-ONE;
     		return a;
     	}
-    	if (playerY > enemyY)
+    	else if (playerY > enemyY)
     	{
     		a[1] = enemyY+ONE;
     		return a;

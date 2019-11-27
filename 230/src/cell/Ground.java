@@ -37,9 +37,9 @@ public class Ground extends Cell {
     
     public void playSound()
     {
-    	Media music = new Media(new File(soundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
-    	mediaPlayer.play();
+    	//Media music = new Media(new File(soundPath).toURI().toString());
+    	//MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	//mediaPlayer.play();
     }
     
     public String getString()
