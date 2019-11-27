@@ -2,6 +2,7 @@ package application;
 
 import cell.Cell;
 import cell.ColouredDoor;
+import cell.TokenDoor;
 
 abstract class Enemy extends Element {
 
@@ -152,7 +153,7 @@ abstract class Enemy extends Element {
 		case "#":
 			return false;
 		case "D":
-			if (((ColouredDoor) cell).getOpened()) {
+			if (((TokenDoor) cell).getOpened()) {
 				return true;
 			} else {
 				return false;
