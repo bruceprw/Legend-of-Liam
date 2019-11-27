@@ -9,7 +9,7 @@ import cell.TokenDoor;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-abstract class Enemy extends Element {
+public abstract class Enemy extends Element {
 	
     private String soundPath = "Sound\\creaking_door.mp3";
 

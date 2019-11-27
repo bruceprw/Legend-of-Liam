@@ -343,7 +343,7 @@ public class GameBoard
 			break;
 
 		}
-		moveEnemy();
+		//moveEnemy();
 		if (playerDead())
 			return 2;
 		if (end())
@@ -388,8 +388,11 @@ public class GameBoard
 	 * 
 	 */
 	// TODO break this up into smaller methods, its disgusting
-	private void moveEnemy()
-	{
+
+	
+	/*
+	private void moveEnemy() {
+
 		// go through each element in the array list and move the enemy
 		for (int i = 0; i < enemyX.size(); i++)
 		{
@@ -425,12 +428,13 @@ public class GameBoard
 				newEnemyX = XY[0];
 				newEnemyY = XY[1];
 
+
 				// check if new position touches player if so return true
 				/*
 				if (this.touchEnemy(newEnemyY, newEnemyX))
 				{
 					return true;
-				}*/
+				}
 
 				// check new enemy position is actually movable, if so return false as we don't
 				// need to update position
@@ -439,7 +443,15 @@ public class GameBoard
 					this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, newEnemyY, newEnemyX, i);
 				}
 
+				//check if new position touches player if so return true
+
 				// move the enemy on board
+
+				//check new enemy position is actually movable, if so return false as we don't need to update position
+				if (!dumbEnemy.isMovable(this.getCell(newEnemyX, newEnemyY))) {
+					return;
+				}
+
 
 
 				break;
@@ -454,12 +466,17 @@ public class GameBoard
 				newEnemyX = node.getX();
 				newEnemyY = node.getY();
 
+
 				// check new position doesn't touch player
 				/*
 				if (this.touchEnemy(newEnemyY, newEnemyX))
 				{
 					return true;
-				}*/
+				}
+
+				//check new position doesn't touch player
+			
+
 
 				// move enemy
 				this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, newEnemyY, newEnemyX, i);
@@ -471,7 +488,7 @@ public class GameBoard
 				// if it does we return true however it can throw a index out of bounds
 				XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
 						this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
-				/*try
+			/*try
 				{
 					if (this.touchEnemy(XY[1], XY[0]))
 					{
@@ -480,29 +497,47 @@ public class GameBoard
 				} catch (ArrayIndexOutOfBoundsException e)
 				{
 
-				}*/
+				}
 
 				// actually move player
+
+				
+				//actually move player
+
 				this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, XY[1], XY[0], i);
 				break;
 
 			case "WALLHUG":
+
 				if (enemyHold.isMovable(getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())))
 				{
 					// check there is a wall
 					if (checkWall(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()))
 					{
+
+				WallFollowingEnemy wallEnemy = (WallFollowingEnemy) enemyHold;
+				if (enemyHold.isMovable(getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()))) {
+					// check next position is movable 
+					if (checkWall(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())) {
+
 						// move to space if wall okay
 						try
 						{
 							XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
 									this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
+
 							/*if (this.touchPlayer(XY[1], XY[0]))
 							{
 								return true;
-							}*/
+							}
+
+							
+
 
 							this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, XY[1], XY[0], i);
+
+							return;
+
 
 							// if that didn't work reverse
 							// dont think i need this
@@ -510,11 +545,18 @@ public class GameBoard
 						{
 							XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
 									this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
+
+		
+
 							this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, XY[1], XY[0], i);
+
 						}
 					}
 
-					// check corner if no wall
+							return;
+						}
+					}
+
 					else if (this.checkCorner(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()))
 					{
 						XY = ((WallFollowingEnemy) enemyHold).moveToCorner(currentEnemyX, currentEnemyY,
@@ -524,12 +566,17 @@ public class GameBoard
 
 					}
 
+
 				}
-				else
-					break;
+
+
+				} else 
+					wallEnemy.unMovableNextCell(this.getBackground(),currentEnemyX,currentEnemyY);
+				break;
+
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * Returns the next cell based off movDirection of element

@@ -153,7 +153,7 @@ public class SmartTargettingEnemy extends Enemy {
 	}
 }
 
-class Node {
+public class Node {
 	// (x, y) represents coordinates of a cell in matrix
 	int x, y;
 
