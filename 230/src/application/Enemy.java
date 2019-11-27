@@ -67,7 +67,7 @@ abstract class Enemy extends Element {
 			} else {
 				//not movable so return a empty array which should throw an error when used
 				this.reverseDirection();
-				int[] a = {};
+				int[] a = { currentX + ONE, currentY };
 				return a;
 			}
 		case (LEFT):
@@ -76,8 +76,8 @@ abstract class Enemy extends Element {
 				return a;
 			} else {
 				this.reverseDirection();
-				// TODO get opposite cell
-				this.moveTo(currentX, currentY, nextCell);
+				int[] a = { currentX, currentY + ONE };
+				return a;
 			}
 		case (DOWN):
 			if (this.isMovable(nextCell)) {
@@ -85,8 +85,8 @@ abstract class Enemy extends Element {
 				return a;
 			} else {
 				this.reverseDirection();
-				// TODO get opposite cell
-				this.moveTo(currentX, currentY, nextCell);
+				int[] a = { currentX, currentY + ONE};
+				return a;
 			}
 		case (RIGHT):
 			if (this.isMovable(nextCell)) {
@@ -94,8 +94,8 @@ abstract class Enemy extends Element {
 				return a;
 			} else {
 				this.reverseDirection();
-				// TODO get opposite cell
-				this.moveTo(currentX, currentY, nextCell);
+				int[] a = { currentX - ONE , currentY};
+				return a;
 			}
 		default:
 			throw new IllegalStateException("Undifened direction");
