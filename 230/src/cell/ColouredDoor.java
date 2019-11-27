@@ -62,7 +62,6 @@ public class ColouredDoor extends Cell {
     		break;
     	}
     }
-    
     public void playSound()
     {
     	Media music = new Media(new File(soundPath).toURI().toString());

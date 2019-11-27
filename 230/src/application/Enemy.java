@@ -1,10 +1,16 @@
 package application;
 
+import java.io.File;
+
 import cell.Cell;
 import cell.ColouredDoor;
 import cell.TokenDoor;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 abstract class Enemy extends Element {
+	
+    private String soundPath = "Sound\\creaking_door.mp3";
 
 	protected String movDirection = "UP";
 
@@ -21,6 +27,13 @@ abstract class Enemy extends Element {
 	protected int currentPositionX;
 	protected int currentPositionY;
 
+    public void playSound()
+    {
+    	Media music = new Media(new File(soundPath).toURI().toString());
+    	MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	mediaPlayer.play();
+    }
+	
 	/**
 	 * @return the movDirection
 	 */
