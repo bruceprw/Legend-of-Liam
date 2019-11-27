@@ -19,7 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
 
-public class GameBoard {
+public class GameBoard
+{
 	private Element[][] board;
 	private Element[][] background;
 	private Element[][] fog;
@@ -39,7 +40,8 @@ public class GameBoard {
 	final private int ONE = 1;
 	final private int TWO = 2;
 
-	public GameBoard(String filePath) throws FileNotFoundException {
+	public GameBoard(String filePath) throws FileNotFoundException
+	{
 		FileReader lvl = new FileReader(filePath);
 		time = lvl.getTime();
 		this.board = lvl.getBoard();
@@ -53,30 +55,40 @@ public class GameBoard {
 		goalY = lvl.getGoalY();
 	}
 
-	public void drawFog(GraphicsContext gc) {
-		for (int y = playerY - 3, j = 0; y < playerY + 4; y++, j += 100) {
-			for (int x = playerX - 3, i = 0; x < playerX + 4; x++, i += 100) {
+	public void drawFog(GraphicsContext gc)
+	{
+		for (int y = playerY - 3, j = 0; y < playerY + 4; y++, j += 100)
+		{
+			for (int x = playerX - 3, i = 0; x < playerX + 4; x++, i += 100)
+			{
 				fog[y][x].draw(gc, i, j);
 			}
 		}
 	}
 
-	public long getTime() {
+	public long getTime()
+	{
 		return time;
 	}
 
-	public void setFog() {
-		for (int y = playerY - 2; y < playerY + 3; y++) {
-			for (int x = playerX - 2; x < playerX + 3; x++) {
+	public void setFog()
+	{
+		for (int y = playerY - 2; y < playerY + 3; y++)
+		{
+			for (int x = playerX - 2; x < playerX + 3; x++)
+			{
 				fog[y][x] = new Empty();
 			}
 		}
 	}
 
-	public void drawGame(GraphicsContext gc) throws FileNotFoundException {
+	public void drawGame(GraphicsContext gc) throws FileNotFoundException
+	{
 
-		for (int y = playerY - 2, j = 0; y < playerY + 3; y++, j += 100) {
-			for (int x = playerX - 3, i = 0; x < playerX + 4; x++, i += 100) {
+		for (int y = playerY - 2, j = 0; y < playerY + 3; y++, j += 100)
+		{
+			for (int x = playerX - 3, i = 0; x < playerX + 4; x++, i += 100)
+			{
 				background[y][x].draw(gc, i, j);
 				board[y][x].draw(gc, i, j);
 			}
@@ -93,20 +105,24 @@ public class GameBoard {
 		// drawFog(gc);
 	}
 
-	public int getPlayerX() {
+	public int getPlayerX()
+	{
 		return playerX;
 	}
 
-	public int getPlayerY() {
+	public int getPlayerY()
+	{
 		return playerY;
 	}
 
-	public boolean end() {
+	public boolean end()
+	{
 		return playerY == goalY && playerX == goalX;
 
 	}
 
-	public void drawItem(GraphicsContext gc) throws FileNotFoundException {
+	public void drawItem(GraphicsContext gc) throws FileNotFoundException
+	{
 		int[] temp = ((Player) board[playerY][playerX]).getInventory();
 		Token token = new Token();
 		RedKey r = new RedKey();
@@ -166,28 +182,36 @@ public class GameBoard {
 	 * = temp; } } }
 	 */
 
-	public void playBoardSound(int x, int y) {
+	public void playBoardSound(int x, int y)
+	{
 		board[y][x].playSound();
 	}
 
-	public void playBackSound(int x, int y) {
+	public void playBackSound(int x, int y)
+	{
 		background[y][x].playSound();
 	}
 
-	public boolean touchEnemy(int x, int y) {
+	public boolean touchEnemy(int x, int y)
+	{
 		return board[y][x] instanceof Enemy;
 	}
 
-	public int move(String way) {
+	public int move(String way)
+	{
 		// moveEnemy();
-		switch (way) {
+		switch (way)
+		{
 		case "right":
-			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1])) {
-				if (touchEnemy(playerX + 1, playerY)) {
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1]))
+			{
+				if (touchEnemy(playerX + 1, playerY))
+				{
 					return 2;
 				}
 
-				if (((Cell) background[playerY][playerX + 1]) instanceof Teleporter) {
+				if (((Cell) background[playerY][playerX + 1]) instanceof Teleporter)
+				{
 					Teleporter temp = ((Teleporter) background[playerY][playerX + 1]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -195,9 +219,14 @@ public class GameBoard {
 					board[playerY][playerX] = new Empty();
 					playerY = tempY;
 					playerX = tempX;
-				} else {
+				}
+				else
+				{
 					if (board[playerY][playerX + 1] instanceof Collectible)
+					{
+						board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY][playerX + 1]);
+					}
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX += 1;
@@ -207,12 +236,15 @@ public class GameBoard {
 			}
 			break;
 		case "left":
-			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1])) {
-				if (touchEnemy(playerX - 1, playerY)) {
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1]))
+			{
+				if (touchEnemy(playerX - 1, playerY))
+				{
 					return 2;
 				}
 
-				if (((Cell) background[playerY][playerX - 1]) instanceof Teleporter) {
+				if (((Cell) background[playerY][playerX - 1]) instanceof Teleporter)
+				{
 					Teleporter temp = ((Teleporter) background[playerY][playerX - 1]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -220,9 +252,15 @@ public class GameBoard {
 					board[playerY][playerX] = new Empty();
 					playerY = tempY;
 					playerX = tempX;
-				} else {
+				}
+				else
+				{
 					if (board[playerY][playerX - 1] instanceof Collectible)
+					{
 						acquire((Collectible) board[playerY][playerX - 1]);
+						board[playerY][playerX -1].playSound();
+					}
+
 					board[playerY][playerX - 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX = playerX - 1;
@@ -232,12 +270,15 @@ public class GameBoard {
 			}
 			break;
 		case "up":
-			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX])) {
-				if (touchEnemy(playerX, playerY - 1)) {
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX]))
+			{
+				if (touchEnemy(playerX, playerY - 1))
+				{
 					return 2;
 				}
 
-				if (((Cell) background[playerY - 1][playerX]) instanceof Teleporter) {
+				if (((Cell) background[playerY - 1][playerX]) instanceof Teleporter)
+				{
 					Teleporter temp = ((Teleporter) background[playerY - 1][playerX]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -245,11 +286,15 @@ public class GameBoard {
 					board[playerY][playerX] = new Empty();
 					playerY = tempY;
 					playerX = tempX;
-				} else {
+				}
+				else
+				{
 
 					if (board[playerY - 1][playerX] instanceof Collectible)
+					{
+						board[playerY][playerX+1].playSound();
 						acquire((Collectible) board[playerY - 1][playerX]);
-
+					}
 					board[playerY - 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY - 1;
@@ -258,12 +303,15 @@ public class GameBoard {
 			}
 			break;
 		case "down":
-			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX])) {
-				if (touchEnemy(playerX, playerY + 1)) {
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX]))
+			{
+				if (touchEnemy(playerX, playerY + 1))
+				{
 					return 2;
 				}
 
-				if (((Cell) background[playerY + 1][playerX]) instanceof Teleporter) {
+				if (((Cell) background[playerY + 1][playerX]) instanceof Teleporter)
+				{
 					Teleporter temp = ((Teleporter) background[playerY + 1][playerX]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -271,11 +319,15 @@ public class GameBoard {
 					board[playerY][playerX] = new Empty();
 					playerY = tempY;
 					playerX = tempX;
-				} else {
+				}
+				else
+				{
 
 					if (board[playerY + 1][playerX] instanceof Collectible)
+					{
+						board[playerY][playerX+1].playSound();
 						acquire((Collectible) board[playerY + 1][playerX]);
-
+					}
 					board[playerY + 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY + 1;
@@ -294,16 +346,20 @@ public class GameBoard {
 		return 0;
 	}
 
-	public boolean playerDead() {
-		for (int i = 0; i < enemyX.size(); i++) {
-			if (playerX == enemyX.get(i) && playerY == enemyY.get(i)) {
+	public boolean playerDead()
+	{
+		for (int i = 0; i < enemyX.size(); i++)
+		{
+			if (playerX == enemyX.get(i) && playerY == enemyY.get(i))
+			{
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean touchPlayer(int x, int y) {
+	public boolean touchPlayer(int x, int y)
+	{
 		return board[y][x] instanceof Player;
 	}
 
@@ -316,9 +372,11 @@ public class GameBoard {
 	private boolean moveEnemy() {
 		// get each enemy
 
-		for (int i = 0; i < enemyX.size(); i++) {
+		for (int i = 0; i < enemyX.size(); i++)
+		{
 			// store enemy
-			try {
+			try
+			{
 				int currentEnemyX = enemyX.get(i);
 				int currentEnemyY = enemyY.get(i);
 				
@@ -330,15 +388,19 @@ public class GameBoard {
 				Enemy enemyHold = (Enemy) this.board[currentEnemyY][currentEnemyX];
 
 				// find sub class of enemy
-				switch (enemyHold.getString()) {
+				switch (enemyHold.getString())
+				{
 				case "DUMB":
 					DumbTargettingEnemy dumbEnemy = (DumbTargettingEnemy) enemyHold;
 
-					if (!dumbEnemy.isMovable(this.getCell(newEnemyX, newEnemyY))) {
-						if (!dumbEnemy.isMovable(this.getCell(newEnemyX, currentEnemyY))) {
+					if (!dumbEnemy.isMovable(this.getCell(newEnemyX, newEnemyY)))
+					{
+						if (!dumbEnemy.isMovable(this.getCell(newEnemyX, currentEnemyY)))
+						{
 							newEnemyX = currentEnemyX;
 						}
-						if (!dumbEnemy.isMovable(this.getCell(currentEnemyX, newEnemyY))) {
+						if (!dumbEnemy.isMovable(this.getCell(currentEnemyX, newEnemyY)))
+						{
 							newEnemyY = currentEnemyY;
 						}
 					}
@@ -400,9 +462,11 @@ public class GameBoard {
 					break;
 
 				case "WALLHUG":
-					if (enemyHold.isMovable(getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()))) {
+					if (enemyHold.isMovable(getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())))
+					{
 						// check there is a wall
-						if (checkWall(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())) {
+						if (checkWall(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()))
+						{
 							// move to space if wall okay
 							try {
 								XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
@@ -444,7 +508,8 @@ public class GameBoard {
 					}
 					break;
 				}
-			} catch (ClassCastException exc) {
+			} catch (ClassCastException exc)
+			{
 				exc.printStackTrace();
 			}
 
@@ -460,8 +525,10 @@ public class GameBoard {
 	 * @param movDirection the move direction of the element
 	 * @return the Cell next to given X Y
 	 */
-	private Cell getNextCell(int X, int Y, String movDirection) {
-		switch (movDirection) {
+	private Cell getNextCell(int X, int Y, String movDirection)
+	{
+		switch (movDirection)
+		{
 		case (UP):
 			// TODO make method to get element from board & background
 			return (Cell) background[Y + ONE][X];
@@ -487,34 +554,48 @@ public class GameBoard {
 	 * @param movDirection the mov direction
 	 * @return True if there is a wall at the next space else return false
 	 */
-	private boolean checkWall(int X, int Y, String movDirection) {
-		switch (movDirection) {
+	private boolean checkWall(int X, int Y, String movDirection)
+	{
+		switch (movDirection)
+		{
 		case (UP):
 			if ((Cell) background[Y + ONE][X + ONE] instanceof Wall
-					|| (Cell) background[Y + ONE][X - ONE] instanceof Wall) {
+					|| (Cell) background[Y + ONE][X - ONE] instanceof Wall)
+			{
 				return true;
-			} else {
+			}
+			else
+			{
 				return false;
 			}
 		case (DOWN):
 			if ((Cell) background[Y - ONE][X + ONE] instanceof Wall
-					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall) {
+					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall)
+			{
 				return true;
-			} else {
+			}
+			else
+			{
 				return false;
 			}
 		case (LEFT):
 			if ((Cell) background[Y + ONE][X - ONE] instanceof Wall
-					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall) {
+					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall)
+			{
 				return true;
-			} else {
+			}
+			else
+			{
 				return false;
 			}
 		case (RIGHT):
 			if ((Cell) background[Y + ONE][X - ONE] instanceof Wall
-					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall) {
+					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall)
+			{
 				return true;
-			} else {
+			}
+			else
+			{
 				return false;
 			}
 		default:
@@ -523,34 +604,50 @@ public class GameBoard {
 		}
 	}
 
-	private String getNewWallDirection(int X, int Y) {
-		if ((Cell) background[Y][X + TWO] instanceof Wall) {
+	private String getNewWallDirection(int X, int Y)
+	{
+		if ((Cell) background[Y][X + TWO] instanceof Wall)
+		{
 			return RIGHT;
-		} else if ((Cell) background[Y][X - TWO] instanceof Wall) {
+		}
+		else if ((Cell) background[Y][X - TWO] instanceof Wall)
+		{
 			return LEFT;
-		} else if ((Cell) background[Y + TWO][X] instanceof Wall) {
+		}
+		else if ((Cell) background[Y + TWO][X] instanceof Wall)
+		{
 			return UP;
-		} else if ((Cell) background[Y - TWO][X] instanceof Wall) {
+		}
+		else if ((Cell) background[Y - TWO][X] instanceof Wall)
+		{
 			return DOWN;
 		}
 		return "REVERSE";
 
 	}
 
-	private boolean checkCorner(int X, int Y, String movDirection) {
-		switch (movDirection) {
+	private boolean checkCorner(int X, int Y, String movDirection)
+	{
+		switch (movDirection)
+		{
 		case (UP):
 		case (DOWN):
-			if ((Cell) background[Y][X + TWO] instanceof Wall || (Cell) background[Y][X - TWO] instanceof Wall) {
+			if ((Cell) background[Y][X + TWO] instanceof Wall || (Cell) background[Y][X - TWO] instanceof Wall)
+			{
 				return true;
-			} else {
+			}
+			else
+			{
 				return false;
 			}
 		case (LEFT):
 		case (RIGHT):
-			if ((Cell) background[Y + TWO][X] instanceof Wall || (Cell) background[Y - TWO][X] instanceof Wall) {
+			if ((Cell) background[Y + TWO][X] instanceof Wall || (Cell) background[Y - TWO][X] instanceof Wall)
+			{
 				return true;
-			} else {
+			}
+			else
+			{
 				return false;
 			}
 		default:
@@ -559,23 +656,28 @@ public class GameBoard {
 		}
 	}
 
-	private Element getBoardElement(int X, int Y) {
+	private Element getBoardElement(int X, int Y)
+	{
 		return board[Y][X];
 	}
 
-	public Cell getCell(int X, int Y) {
+	public Cell getCell(int X, int Y)
+	{
 		return (Cell) background[Y][X];
 	}
 
-	public void acquire(Collectible co) {
+	public void acquire(Collectible co)
+	{
 		((Player) board[playerY][playerX]).acquireInventory(co.getIndex());
 	}
 
-	public Element[][] getBoard() {
+	public Element[][] getBoard()
+	{
 		return this.board;
 	}
 
-	public Element[][] getBackground() {
+	public Element[][] getBackground()
+	{
 		return this.background;
 	}
 }
