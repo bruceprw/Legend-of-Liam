@@ -192,6 +192,11 @@ public class GameBoard
 		background[y][x].playSound();
 	}
 
+	public boolean touchEnemy(int x ,int y)
+	{
+		return board[y][x] instanceof Enemy;
+	}
+	
 	public int move(String way)
 	{
 		// moveEnemy();
@@ -200,6 +205,11 @@ public class GameBoard
 		case "right":
 			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1]))
 			{
+				if (touchEnemy(playerX+1,playerY))
+				{
+					return 2;
+				}
+				
 				if(((Cell) background[playerY][playerX + 1]) instanceof Teleporter)
 				{
 					Teleporter temp = ((Teleporter) background[playerY][playerX + 1]);
@@ -225,6 +235,11 @@ public class GameBoard
 		case "left":
 			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1]))
 			{
+				if (touchEnemy(playerX-1,playerY))
+				{
+					return 2;
+				}
+				
 				if(((Cell) background[playerY][playerX - 1]) instanceof Teleporter)
 				{
 					Teleporter temp = ((Teleporter) background[playerY][playerX - 1]);
@@ -250,6 +265,11 @@ public class GameBoard
 		case "up":
 			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX]))
 			{
+				if (touchEnemy(playerX,playerY-1))
+				{
+					return 2;
+				}
+				
 				if(((Cell) background[playerY - 1][playerX]) instanceof Teleporter)
 				{
 					Teleporter temp = ((Teleporter) background[playerY - 1][playerX]);
@@ -276,6 +296,11 @@ public class GameBoard
 		case "down":
 			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX]))
 			{
+				if (touchEnemy(playerX,playerY+1))
+				{
+					return 2;
+				}
+				
 				if(((Cell) background[playerY + 1][playerX]) instanceof Teleporter)
 				{
 					Teleporter temp = ((Teleporter) background[playerY + 1][playerX]);
@@ -301,7 +326,8 @@ public class GameBoard
 			break;
 
 		}
-		//moveEnemy();
+		if(moveEnemy())
+			return 2;
 		if(playerDead())
 			return 2;
 		if(end())
@@ -320,6 +346,11 @@ public class GameBoard
 		}
 		return false;
 	}
+	
+	public boolean touchPlayer(int x, int y)
+	{
+		return board[y][x] instanceof Player;
+	}
 
 	// TODO ERROR OCCURS WHEN ENEMY IS TO MOVE ONTO PLAYER DOESNT KNOW WHAT TO DO
 	/**
@@ -327,7 +358,7 @@ public class GameBoard
 	 * 
 	 */
 	// TODO break this up into smaller methods, its disgusting
-	private void moveEnemy()
+	private boolean moveEnemy()
 	{
 		// get each enemy
 
@@ -360,6 +391,8 @@ public class GameBoard
 						}
 					}
 
+					
+					
 					board[newEnemyY][newEnemyX] = board[currentEnemyY][currentEnemyX];
 
 					enemyX.set(i, newEnemyX);
@@ -374,6 +407,7 @@ public class GameBoard
 					{
 						int[] XY = enemyHold.moveTo(currentEnemyX, currentEnemyY, this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
 						board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
+						
 
 						enemyX.set(i, XY[0]);
 						enemyY.set(i, XY[1]);
