@@ -32,7 +32,6 @@ public class Player extends Element {
 	 */
 	public Player(String name) throws FileNotFoundException {
 		setName(name);
-		setAvatar(avatar);
 		setImage();
 	}
 	/**
@@ -86,20 +85,6 @@ public class Player extends Element {
 	 */
 	public int[] getInventory() {
 		return inventory;
-	}
-	/**
-	 * Updates avatar.
-	 * @param avatar visual represntation of player.
-	 */
-	public void setAvatar(Image avatar) {
-		this.avatar = avatar;
-	}
-	/**
-	 * 
-	 * @return avatar the visual representation of the player.
-	 */
-	public Image getAvatar() {
-		return avatar;
 	}
 	
 	/**
