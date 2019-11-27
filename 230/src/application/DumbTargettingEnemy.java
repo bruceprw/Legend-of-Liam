@@ -55,37 +55,36 @@ public class DumbTargettingEnemy extends Enemy
 		}
     }
     
-    public int moveTowardsPlayerOnX(int enemyX, int playerX)
+    public int[] moveTowardsPlayer(int enemyX, int enemyY ,int playerX, int playerY)
     {
+    	int[] a = {enemyX,enemyY};
     	if (playerX > enemyX)
     	{
-    		return enemyX+ONE;
+    		a[0] = enemyX+ONE;
+    		return a;
     	}
     	else if(playerX < enemyX)
     	{
-    		return enemyX-ONE;
+    		a[0] = enemyX-ONE;
+    		return a;
     	}
-    	else
-    	{
-    		return enemyX;
-    	}
-    }
-    
-    public int moveTowardsPlayerOnY(int enemyY, int playerY)
-    {
     	if (playerY > enemyY)
     	{
-    		return enemyY+ONE;
+    		a[1] = enemyY+ONE;
+    		return a;
     	}
     	else if(playerY < enemyY)
     	{
-    		return enemyY-ONE;
+
+    		a[1] = enemyY-ONE;
+    		return a;
     	}
     	else
     	{
-    		return enemyY;
+    		return a;
     	}
     }
+ 
 
     public String getString()
     {

@@ -174,25 +174,20 @@ public class GameBoard {
 		background[y][x].playSound();
 	}
 
-	public boolean touchEnemy(int x ,int y)
-	{
+	public boolean touchEnemy(int x, int y) {
 		return board[y][x] instanceof Enemy;
 	}
-	
-	public int move(String way)
-	{
+
+	public int move(String way) {
 		// moveEnemy();
 		switch (way) {
 		case "right":
-			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1]))
-			{
-				if (touchEnemy(playerX+1,playerY))
-				{
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1])) {
+				if (touchEnemy(playerX + 1, playerY)) {
 					return 2;
 				}
-				
-				if(((Cell) background[playerY][playerX + 1]) instanceof Teleporter)
-				{
+
+				if (((Cell) background[playerY][playerX + 1]) instanceof Teleporter) {
 					Teleporter temp = ((Teleporter) background[playerY][playerX + 1]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -212,15 +207,12 @@ public class GameBoard {
 			}
 			break;
 		case "left":
-			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1]))
-			{
-				if (touchEnemy(playerX-1,playerY))
-				{
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1])) {
+				if (touchEnemy(playerX - 1, playerY)) {
 					return 2;
 				}
-				
-				if(((Cell) background[playerY][playerX - 1]) instanceof Teleporter)
-				{
+
+				if (((Cell) background[playerY][playerX - 1]) instanceof Teleporter) {
 					Teleporter temp = ((Teleporter) background[playerY][playerX - 1]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -240,15 +232,12 @@ public class GameBoard {
 			}
 			break;
 		case "up":
-			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX]))
-			{
-				if (touchEnemy(playerX,playerY-1))
-				{
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX])) {
+				if (touchEnemy(playerX, playerY - 1)) {
 					return 2;
 				}
-				
-				if(((Cell) background[playerY - 1][playerX]) instanceof Teleporter)
-				{
+
+				if (((Cell) background[playerY - 1][playerX]) instanceof Teleporter) {
 					Teleporter temp = ((Teleporter) background[playerY - 1][playerX]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -269,15 +258,12 @@ public class GameBoard {
 			}
 			break;
 		case "down":
-			if(((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX]))
-			{
-				if (touchEnemy(playerX,playerY+1))
-				{
+			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX])) {
+				if (touchEnemy(playerX, playerY + 1)) {
 					return 2;
 				}
-				
-				if(((Cell) background[playerY + 1][playerX]) instanceof Teleporter)
-				{
+
+				if (((Cell) background[playerY + 1][playerX]) instanceof Teleporter) {
 					Teleporter temp = ((Teleporter) background[playerY + 1][playerX]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -299,9 +285,9 @@ public class GameBoard {
 			break;
 
 		}
-		if(moveEnemy())
+		if (moveEnemy())
 			return 2;
-		if(playerDead())
+		if (playerDead())
 			return 2;
 		if (end())
 			return 1;
@@ -316,9 +302,8 @@ public class GameBoard {
 		}
 		return false;
 	}
-	
-	public boolean touchPlayer(int x, int y)
-	{
+
+	public boolean touchPlayer(int x, int y) {
 		return board[y][x] instanceof Player;
 	}
 
@@ -328,8 +313,7 @@ public class GameBoard {
 	 * 
 	 */
 	// TODO break this up into smaller methods, its disgusting
-	private boolean moveEnemy()
-	{
+	private boolean moveEnemy() {
 		// get each enemy
 
 		for (int i = 0; i < enemyX.size(); i++) {
@@ -338,17 +322,17 @@ public class GameBoard {
 				int currentEnemyX = enemyX.get(i);
 				int currentEnemyY = enemyY.get(i);
 				
-				int newEnemyX;
-				int newEnemyY;
-				
+				int[] XY;
+
+				int newEnemyX = currentEnemyX;
+				int newEnemyY = currentEnemyY;
+
 				Enemy enemyHold = (Enemy) this.board[currentEnemyY][currentEnemyX];
 
 				// find sub class of enemy
 				switch (enemyHold.getString()) {
 				case "DUMB":
 					DumbTargettingEnemy dumbEnemy = (DumbTargettingEnemy) enemyHold;
-					newEnemyX = dumbEnemy.moveTowardsPlayerOnX(currentEnemyX, playerX);
-					newEnemyY = dumbEnemy.moveTowardsPlayerOnY(currentEnemyY, playerY);
 
 					if (!dumbEnemy.isMovable(this.getCell(newEnemyX, newEnemyY))) {
 						if (!dumbEnemy.isMovable(this.getCell(newEnemyX, currentEnemyY))) {
@@ -358,62 +342,74 @@ public class GameBoard {
 							newEnemyY = currentEnemyY;
 						}
 					}
+					
+					XY = dumbEnemy.moveTowardsPlayer(currentEnemyX, currentEnemyY, playerX, playerY);
+					newEnemyX = XY[0];
+					newEnemyY = XY[1];
+					
+					if (this.touchEnemy(newEnemyY, newEnemyX)) {
+						return true;
+					}
 
-					//this needs to be a method
+					// this needs to be a method
 					board[newEnemyY][newEnemyX] = board[currentEnemyY][currentEnemyX];
 
 					enemyX.set(i, newEnemyX);
 					enemyY.set(i, newEnemyY);
-					
+
 					break;
 
 				case "SMART":
-					
-					SmartTargettingEnemy smartEnemy = (SmartTargettingEnemy)enemyHold;
-					Node node = smartEnemy.findPath(this.getBackground(),currentEnemyX,currentEnemyY,playerX,playerY);
-					if(node!=null)
+
+					SmartTargettingEnemy smartEnemy = (SmartTargettingEnemy) enemyHold;
+					Node node = smartEnemy.findPath(this.getBackground(), currentEnemyX, currentEnemyY, playerX,
+							playerY);
+					if (node != null)
 						System.out.println("next Node X & Y: " + node.toString());
-					else System.out.println("Node is null fix me");
+					else
+						System.out.println("Node is null fix me");
 					newEnemyX = node.getX();
 					newEnemyY = node.getY();
-					
+
+					if (this.touchEnemy(newEnemyY, newEnemyX)) {
+						return true;
+					}
+
 					board[newEnemyY][newEnemyX] = board[currentEnemyY][currentEnemyX];
 
 					enemyX.set(i, newEnemyX);
 					enemyY.set(i, newEnemyY);
-					
-					System.out.println("New smart position: " +newEnemyX+" "+newEnemyY);
-					
-					
+
+					System.out.println("New smart position: " + newEnemyX + " " + newEnemyY);
+
 					break;
 				case "STRAIGHT":
-					try {
-						int[] XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
+						XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
 								this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
+						try {
+						if (this.touchEnemy(XY[1], XY[0])) {
+							return true;
+						}
+						}catch(ArrayIndexOutOfBoundsException e)
+						{
+							
+						}
 						board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
-						
-
 						enemyX.set(i, XY[0]);
 						enemyY.set(i, XY[1]);
-					} catch (IndexOutOfBoundsException e) {
-						int[] XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
-								this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
-						board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
-
-						enemyX.set(i, XY[0]);
-						enemyY.set(i, XY[1]);
-					}
 					break;
 
-					
 				case "WALLHUG":
 					if (enemyHold.isMovable(getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()))) {
 						// check there is a wall
 						if (checkWall(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())) {
 							// move to space if wall okay
 							try {
-								int[] XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
+								XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
 										this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
+								if (this.getBoardElement(XY[1], XY[0]) instanceof Player) {
+									return true;
+								}
 								board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
 
 								enemyX.set(i, XY[0]);
@@ -421,8 +417,11 @@ public class GameBoard {
 
 								// if that didn't work reverse
 							} catch (IndexOutOfBoundsException e) {
-								int[] XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
+								XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
 										this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
+								if (this.touchEnemy(XY[1], XY[0])) {
+									return true;
+								}
 								board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
 
 								enemyX.set(i, XY[0]);
@@ -431,8 +430,11 @@ public class GameBoard {
 						}
 						// check corner if no wall
 						if (this.checkCorner(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())) {
-							int[] XY = ((WallFollowingEnemy) enemyHold).moveToCorner(currentEnemyX, currentEnemyY,
+							XY = ((WallFollowingEnemy) enemyHold).moveToCorner(currentEnemyX, currentEnemyY,
 									this.getNewWallDirection(currentEnemyX, currentEnemyY));
+							if (this.touchEnemy(XY[1], XY[0])) {
+								return true;
+							}
 							board[XY[1]][XY[0]] = board[currentEnemyY][currentEnemyX];
 
 							enemyX.set(i, XY[0]);
@@ -447,6 +449,7 @@ public class GameBoard {
 			}
 
 		}
+		return false;
 	}
 
 	/**
