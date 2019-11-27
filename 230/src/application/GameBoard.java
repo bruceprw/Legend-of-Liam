@@ -416,13 +416,38 @@ public class GameBoard
 				enemyY.set(i, newY);
 				enemyX.set(i, newX);
 				//System.out.println(Enemy.checkMove(this,22,21));
-				System.out.print(enemyX.get(i));
+				
+				
+				break;
+			case "DUMB":
+				DumbTargettingEnemy c = (DumbTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
+				int newXa= c.getX(this,playerX,playerY,enemyX.get(i),enemyY.get(i));
+				System.out.print(newXa+",");
+				int newYa = c.getY(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
+				System.out.println(newYa);
+				if(newXa==enemyX.get(i)&&newYa==enemyY.get(i))
+				{
+					
+				}
+				else
+				{
+					board[newYa][newXa] = board[enemyY.get(i)][enemyX.get(i)];
+					board[enemyY.get(i)][enemyX.get(i)] = new Empty();
+					enemyY.set(i, newYa);
+					enemyX.set(i, newXa);
+				}
+				
+				
+				
+				break;
+				/*System.out.print(enemyX.get(i));
 				System.out.print(",");
 				System.out.print(enemyY.get(i));
 				System.out.print(",");
 				System.out.println(board[enemyY.get(i)][enemyX.get(i)].getString());
-				
-				break;
+				System.out.print(playerX);
+				System.out.print(","+playerY);
+				System.out.println("Player");*/
 			}
 		}
 	}

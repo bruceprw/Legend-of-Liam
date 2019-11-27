@@ -193,8 +193,9 @@ public abstract class Enemy extends Element {
 	{
 		Element[][] board = gb.getBoard();
 		Element[][] background = gb.getBackground();
+		boolean a = (board[y][x]instanceof Player || board[y][x] instanceof Empty);
 		
-		if ((background[y][x] instanceof Ground)&&(board[y][x] instanceof Empty))
+		if ((background[y][x] instanceof Ground)&&(a))
 			return true;
 		else 
 			return false;
