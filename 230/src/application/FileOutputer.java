@@ -108,7 +108,7 @@ public class FileOutputer
 					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + ((StraightLineEnemy) board[y][x]).getDirection() + "\r\n";
 					break;
 				case "WALLHUG":
-					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + ((WallFollowingEnemy) board[y][x]).getDirection() + "\r\n";
+					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + ((WallFollowingEnemy) board[y][x]).getDirection()+","+((WallFollowingEnemy)board[y][x]).getHand() + "\r\n";
 					break;
 				case "DUMB":
 					temp += "" + x + "," + y + ",ENEMY,DUMB" + "\r\n";

@@ -405,12 +405,24 @@ public class GameBoard
 					enemyY.set(i, newY);
 					enemyX.set(i, newX);
 				}
-
+				break;
+			case "WALLHUG":
+				WallFollowingEnemy b= (WallFollowingEnemy) board[enemyY.get(i)][enemyX.get(i)];
+				int newX=b.getX(this,enemyX.get(i),enemyY.get(i));
+				int newY=b.getY(this, enemyX.get(i), enemyY.get(i));
+				//System.out.println(newY);
+				board[newY][newX]=board[enemyY.get(i)][enemyX.get(i)];
+				board[enemyY.get(i)][enemyX.get(i)]=new Empty();
+				enemyY.set(i, newY);
+				enemyX.set(i, newX);
+				//System.out.println(Enemy.checkMove(this,22,21));
 				System.out.print(enemyX.get(i));
 				System.out.print(",");
 				System.out.print(enemyY.get(i));
 				System.out.print(",");
 				System.out.println(board[enemyY.get(i)][enemyX.get(i)].getString());
+				
+				break;
 			}
 		}
 	}

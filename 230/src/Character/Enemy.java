@@ -189,7 +189,7 @@ public abstract class Enemy extends Element {
 		}
 	}
 	
-	protected boolean checkMove(GameBoard gb, int x,int y)
+	public static boolean checkMove(GameBoard gb, int x,int y)
 	{
 		Element[][] board = gb.getBoard();
 		Element[][] background = gb.getBackground();

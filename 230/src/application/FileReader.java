@@ -181,7 +181,8 @@ public class FileReader
 			else if(type.equals("WALLHUG"))
 			{
 				String way = line.next();
-				board[y][x] = new WallFollowingEnemy(x,y,way);
+				String hand = line.next();
+				board[y][x] = new WallFollowingEnemy(x,y,way,hand);
 				enemyX.add(x);
 				enemyY.add(y);
 			}
