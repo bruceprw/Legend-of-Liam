@@ -117,7 +117,10 @@ public class Player extends Element {
 	public int[][] getPos() {
 		return pos;
 	}
-
+	/**
+	 * Create avatar image
+	 * @throws FileNotFoundException
+	 */
 	public void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));
 	}
