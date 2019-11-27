@@ -62,6 +62,36 @@ public class WallFollowingEnemy extends Enemy {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param matrix
+	 */
+	public void unMovableNextCell(Element[][] matrix,int enemyX, int enemyY)
+	{
+		switch(movDirection)
+		{
+		case(UP):
+		case(DOWN):
+			if((this.isMovable((Cell)matrix[enemyX-1][enemyY]))){
+				this.setMovDirection(LEFT);
+			} else if(this.isMovable((Cell)matrix[enemyX+1][enemyY])) {
+				this.setMovDirection(RIGHT);
+			}
+			break;
+		case(RIGHT):
+		case(LEFT):
+			if(this.isMovable((Cell)matrix[enemyX][enemyY+ONE])){
+				this.setMovDirection(UP);
+			} else if(this.isMovable((Cell)matrix[enemyX][enemyY-1])) {
+				this.setMovDirection(DOWN);
+			}
+			break;
+		default:
+			throw new IllegalStateException("WALLHUG in bad position cant move");
+		}
+		
+	}
 
 	private int getNewWallXPosition(int currentX, String wallDirection) {
 		switch (wallDirection) {
