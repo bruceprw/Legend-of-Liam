@@ -172,45 +172,10 @@ public class SmartTargettingEnemy extends Enemy
 		gc.drawImage(image, x, y, 100, 100);
 	}
 
-	//private ArrayList<Path> temp = new ArrayList<Path>();
+	private ArrayList<Path> temp = new ArrayList<Path>();
 
 	public void getPath(GameBoard gb, int x, int y, int playerX, int playerY)
 	{
-		ArrayList<Path> temp = new ArrayList<Path>();
-		setPaths(gb, x, y, playerX, playerY, 0, temp);
-		
-		//System.out.println(temp.get(1));
-		int counter = 0;
-		ArrayList<Path> fl = new ArrayList<Path>();
-		
-		
-		for(int i=0;i<temp.size();i++)
-		{
-			if(temp.get(i).getX()==x&&temp.get(i).getY()==y)
-			{
-				counter=temp.get(i).getCount();
-				fl.add(temp.get(i));
-			}
-		}
-		for(int i=0;i<temp.size();i++)
-		{
-			if(temp.get(i).getCount()<counter)
-				fl.add(temp.get(i));
-		}
-		
-		for(int i=0;i<fl.size();i++)
-		{
-			ArrayList<Path> a = new ArrayList<Path>();
-			for(int j=0;j<fl.size();j++)
-			{
-				
-			}
-		}
-		
-		for(int i=0;i<fl.size();i++)
-		{
-			System.out.println(fl.get(i).getX()+","+fl.get(i).getY()+","+fl.get(i).getCount());
-		}
 		
 		
 		/*
@@ -254,57 +219,8 @@ public class SmartTargettingEnemy extends Enemy
 
 	public void setPaths(GameBoard gb, int x, int y, int playerX, int playerY, int counter, ArrayList<Path> temp)
 	{
-		temp.add(new Path(gb, playerX, playerY, counter));
-		if(x == playerX && y == playerY)
-		{
-			//System.out.println(x+","+y);
-			//System.out.println(playerX+","+playerY);
-			return;
-		}
-		// System.out.println(x+","+y);
-		if(Enemy.checkMove(gb, playerX + 1, playerY)||(playerX+1==x&&playerY==y))
-		{
-			if(checkVisited(temp, playerX + 1, playerY, counter + 1))
-			{
-
-			}
-			else
-			{
-				setPaths(gb, x, y, playerX+1, playerY, counter + 1, temp);
-			}
-
-		}
-
-		if(Enemy.checkMove(gb, playerX-1, playerY)||(playerX-1==x&&playerY==y))
-		{
-			if(checkVisited(temp, playerX - 1, playerY, counter + 1))
-			{
-
-			}
-			else
-			{
-				setPaths(gb, x, y, playerX-1, playerY, counter + 1, temp);
-			}
-		}
-
-		if(Enemy.checkMove(gb, playerX, playerY + 1)||(playerX==x&&playerY+1==y))
-		{
-			if(checkVisited(temp, playerX, playerY + 1, counter + 1))
-			{
-
-			}
-			else
-				setPaths(gb, x, y , playerX, playerY+1, counter + 1, temp);
-		}
-
-		if(Enemy.checkMove(gb, playerX, playerY - 1)||(playerX==x&&playerY-1==y))
-		{
-			if(checkVisited(temp, playerX, playerY - 1, counter + 1))
-				;
-			else
-				setPaths(gb, x, y , playerX, playerY-1, counter + 1, temp);
-		}
-
+		//Path a = new Path(gb,x,y,0,playerX,playerY,temp);
+		
 	}
 
 	public boolean checkVisited(ArrayList<Path> p, int x, int y, int counter)
