@@ -28,7 +28,7 @@ public class Player extends Element
 	private int[][] pos;
 	private Image image;
 
-	private String path = "Images\\player.jpg";
+	private String path = "Images\\Player.png";
 
 	/**
 	 * @param name name of player.
@@ -78,7 +78,7 @@ public class Player extends Element
 	}
 
 	/**
-	 * updates number of specifed item to given num.
+	 * updates number of specified item to given num.
 	 * 
 	 * @param position itemID.
 	 * @param num      number of items.
