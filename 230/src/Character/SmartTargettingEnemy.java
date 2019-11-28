@@ -172,35 +172,54 @@ public class SmartTargettingEnemy extends Enemy
 		gc.drawImage(image, x, y, 100, 100);
 	}
 
-	private ArrayList<Path> temp = new ArrayList<Path>();
+	//private ArrayList<Path> temp = new ArrayList<Path>();
 
 	public void getPath(GameBoard gb, int x, int y, int playerX, int playerY)
 	{
-		setPaths(gb, x, y, playerX, playerY, 0);
-		ArrayList<Path> finalList = new ArrayList<Path>();
-		finalList.add(temp.get(temp.size() - 1));
-		for (int i = 0; i < temp.size(); i++)
-		{//not done
-			if(temp.get(i).getCount() == (finalList.get(j).getCount() - 1))
+		ArrayList<Path> temp = new ArrayList<Path>();
+		setPaths(gb, x, y, playerX, playerY, 0, temp);
+		
+		//System.out.println(temp.get(1));
+		int counter = 0;
+		ArrayList<Path> fl = new ArrayList<Path>();
+		
+		
+		for(int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getX()==x&&temp.get(i).getY()==y)
 			{
-				if(isAdjacent(temp.get(i), finalList.get(j)))
-				{
-					finalList.add(temp.get(i));
-				}
+				counter=temp.get(i).getCount();
+				fl.add(temp.get(i));
 			}
 		}
+		for(int i=0;i<temp.size();i++)
+		{
+			if(temp.get(i).getCount()<counter)
+				fl.add(temp.get(i));
+		}
+		
+		for(int i=0;i<fl.size();i++)
+		{
+			ArrayList<Path> a = new ArrayList<Path>();
+			for(int j=0;j<fl.size();j++)
+			{
+				
+			}
+		}
+		
+		for(int i=0;i<fl.size();i++)
+		{
+			System.out.println(fl.get(i).getX()+","+fl.get(i).getY()+","+fl.get(i).getCount());
+		}
+		
+		
 		/*
 		 * for(int i=0;i<temp.size();i++) { if(temp.get(i).getCount()>counter)
 		 * temp.remove(i); }
 		 */
-		ArrayList<Path> finalPath = new ArrayList<Path>();
-		System.out.println(playerX + "," + playerY);
 		// System.out.println(temp.size());
 
-		for (int i = 0; i < finalList.size(); i++)
-		{
-			System.out.println(finalList.get(i).toString());
-		}
+
 
 		/*
 		 * for (int i = 0; i < temp.size(); i++) {
@@ -208,7 +227,7 @@ public class SmartTargettingEnemy extends Enemy
 		 */
 	}
 
-	public void removeDuplicate()
+	/*public void removeDuplicate()
 	{
 		for (int i = 0; i < temp.size(); i++)
 		{
@@ -218,7 +237,7 @@ public class SmartTargettingEnemy extends Enemy
 					temp.remove(j);
 			}
 		}
-	}
+	}*/
 
 	public boolean isAdjacent(Path a, Path b)
 	{
@@ -233,55 +252,57 @@ public class SmartTargettingEnemy extends Enemy
 		return g || j;
 	}
 
-	public void setPaths(GameBoard gb, int x, int y, int playerX, int playerY, int counter)
+	public void setPaths(GameBoard gb, int x, int y, int playerX, int playerY, int counter, ArrayList<Path> temp)
 	{
-		temp.add(new Path(gb, x, y, counter));
+		temp.add(new Path(gb, playerX, playerY, counter));
 		if(x == playerX && y == playerY)
 		{
+			//System.out.println(x+","+y);
+			//System.out.println(playerX+","+playerY);
 			return;
 		}
 		// System.out.println(x+","+y);
-		if(Enemy.checkMove(gb, x + 1, y))
+		if(Enemy.checkMove(gb, playerX + 1, playerY)||(playerX+1==x&&playerY==y))
 		{
-			if(checkVisited(temp, x + 1, y, counter + 1))
+			if(checkVisited(temp, playerX + 1, playerY, counter + 1))
 			{
 
 			}
 			else
 			{
-				setPaths(gb, x + 1, y, playerX, playerY, counter + 1);
+				setPaths(gb, x, y, playerX+1, playerY, counter + 1, temp);
 			}
 
 		}
 
-		if(Enemy.checkMove(gb, x - 1, y))
+		if(Enemy.checkMove(gb, playerX-1, playerY)||(playerX-1==x&&playerY==y))
 		{
-			if(checkVisited(temp, x - 1, y, counter + 1))
+			if(checkVisited(temp, playerX - 1, playerY, counter + 1))
 			{
 
 			}
 			else
 			{
-				setPaths(gb, x - 1, y, playerX, playerY, counter + 1);
+				setPaths(gb, x, y, playerX-1, playerY, counter + 1, temp);
 			}
 		}
 
-		if(Enemy.checkMove(gb, x, y + 1))
+		if(Enemy.checkMove(gb, playerX, playerY + 1)||(playerX==x&&playerY+1==y))
 		{
-			if(checkVisited(temp, x, y + 1, counter + 1))
+			if(checkVisited(temp, playerX, playerY + 1, counter + 1))
 			{
 
 			}
 			else
-				setPaths(gb, x, y + 1, playerX, playerY, counter + 1);
+				setPaths(gb, x, y , playerX, playerY+1, counter + 1, temp);
 		}
 
-		if(Enemy.checkMove(gb, x, y - 1))
+		if(Enemy.checkMove(gb, playerX, playerY - 1)||(playerX==x&&playerY-1==y))
 		{
-			if(checkVisited(temp, x, y - 1, counter + 1))
+			if(checkVisited(temp, playerX, playerY - 1, counter + 1))
 				;
 			else
-				setPaths(gb, x, y - 1, playerX, playerY, counter + 1);
+				setPaths(gb, x, y , playerX, playerY-1, counter + 1, temp);
 		}
 
 	}
@@ -293,7 +314,7 @@ public class SmartTargettingEnemy extends Enemy
 			boolean xB = p.get(i).getX() == x;
 			boolean yB = p.get(i).getY() == y;
 			boolean cB = p.get(i).getCount() < counter;
-			if(xB && yB && cB)
+			if(xB && yB )
 				return true;
 		}
 		return false;
