@@ -197,18 +197,26 @@ public class SmartTargettingEnemy extends Enemy
 			if(temp.get(i).getCount()<counter)
 				fl.add(temp.get(i));
 		}
-		Path f = fl.get(0);
-		//System.out.println(fl.get(0));
-		ArrayList<Path> ad = new ArrayList<Path>();
-		
-		for(int i=0;i<fl.size();i++)
+		if(fl.size()==0)
 		{
-			if(isAdjacent(fl.get(i),f))
-				ad.add(fl.get(i));
+			return new Path(gb, x,y,0);
 		}
-		
-		//System.out.println(ad.get(0));
-		return ad.get(0);
+		else
+		{
+			Path f = fl.get(0);
+			// System.out.println(fl.get(0));
+			ArrayList<Path> ad = new ArrayList<Path>();
+
+			for (int i = 0; i < fl.size(); i++)
+			{
+				if (isAdjacent(fl.get(i), f))
+					ad.add(fl.get(i));
+			}
+
+			// System.out.println(ad.get(0));
+			return ad.get(0);
+
+		}
 		
 		/*
 		 * for(int i=0;i<temp.size();i++) { if(temp.get(i).getCount()>counter)
