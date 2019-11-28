@@ -14,21 +14,24 @@ import javafx.scene.image.Image;
  * Straight line enemy moves in a straight line
  * 
  * @author Miles Singleton
- * @version 0.0
  */
-public class StraightLineEnemy extends Enemy
-{
+public class StraightLineEnemy extends Enemy {
 
 	private String path = "Images\\straightE.jpg";
 	private Image image;
-	private final String UP = "UP";
-	private final String DOWN = "DOWN";
-	private final String LEFT = "LEFT";
-	private final String RIGHT = "RIGHT";
 	private String movDirection;
 
-	public StraightLineEnemy(int currentX, int currentY, String movDirection) throws FileNotFoundException
-	{
+	private final String TYPE = "STRAIGHT";
+
+	/**
+	 * Constructor for straight line enemy
+	 * 
+	 * @param currentX     The X position of enemy on game board
+	 * @param currentY     The Y position of enemy on game board
+	 * @param movDirection the move direction of the enemy
+	 * @throws FileNotFoundException Only thrown if image can't be loaded
+	 */
+	public StraightLineEnemy(int currentX, int currentY, String movDirection) throws FileNotFoundException {
 		this.currentPositionX = currentX;
 		this.currentPositionY = currentY;
 
@@ -36,8 +39,15 @@ public class StraightLineEnemy extends Enemy
 		setImage();
 	}
 
-	public StraightLineEnemy(int currentX, int currentY) throws FileNotFoundException
-	{
+	/**
+	 * Constructor for straight line enemy, used if move direction has not be
+	 * defined
+	 * 
+	 * @param currentX The X position of enemy on game board
+	 * @param currentY The Y position of enemy on game board
+	 * @throws FileNotFoundException Only thrown if image can't be loaded
+	 */
+	public StraightLineEnemy(int currentX, int currentY) throws FileNotFoundException {
 		this.currentPositionX = currentX;
 		this.currentPositionY = currentY;
 
@@ -45,67 +55,125 @@ public class StraightLineEnemy extends Enemy
 		setImage();
 	}
 
-	public String getDirection()
-	{
+	/**
+	 * @return the move direction
+	 */
+	public String getDirection() {
 		return movDirection;
 	}
 
-	public String getString()
-	{
-		return "STRAIGHT";
+	/**
+	 * @return the subclass of enemy
+	 */
+	public String getString() {
+		return TYPE;
 	}
 
-	public void setImage() throws FileNotFoundException
-	{
+	/**
+	 * sets the image for enemy
+	 * 
+	 * @throws FileNotFoundException Thrown if file not found
+	 */
+	public void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));
 	}
 
-	public void draw(GraphicsContext gc, int x, int y)
-	{
-		gc.drawImage(image, x, y, 100, 100);
+	/**
+	 * Draws the enemy sprite on screen
+	 * 
+	 * @param gc
+	 * @param x  X coordinate on screen to draw at
+	 * @param y  Y coordinate on screen to draw at
+	 */
+	public void draw(GraphicsContext gc, int x, int y) {
+		gc.drawImage(image, x, y, HUNDRED, HUNDRED);
 	}
 
-	public int getX(GameBoard gb, int x, int y)
-	{
+	/**
+	 * Works out the new X coordinate
+	 * 
+	 * @param gb the game board currently in play
+	 * @param x  the X position of the enemy
+	 * @param y  the Y position of the enemy
+	 * @return the new X position
+	 */
+	public int getX(GameBoard gb, int x, int y) {
 
-		switch (movDirection)
-		{
+		switch (movDirection) {
 		case UP:
-			if(checkMove(gb, x, y - 1))
-			{
+			if (checkMove(gb, x, y - ONE)) {
 				return x;
-			}
-			else
-			{
+			} else {
 				return x;
 			}
 
 		case DOWN:
-			if(checkMove(gb, x, y + 1))
+			if (checkMove(gb, x, y + ONE))
 				return x;
-			else
-			{
+			else {
 				return x;
 			}
 
 		case LEFT:
-			if(checkMove(gb, x - 1, y))
-			{
-				return x-1;
-			}
-			else
-			{
-				return x+1;
+			if (checkMove(gb, x - ONE, y)) {
+				return x - ONE;
+			} else {
+				return x + ONE;
 			}
 
 		case RIGHT:
-			if(checkMove(gb, x + 1, y))
-			{
-				return x+1;
+			if (checkMove(gb, x + ONE, y)) {
+				return x + ONE;
+			} else {
+				return x - ONE;
 			}
-			else
-			{
-				return x-1;
+		default:
+			return ZERO;
+		}
+
+	}
+
+	/**
+	 * Works out the new Y coordinate
+	 * 
+	 * @param gb the game board currently in play
+	 * @param x  the X position of the enemy
+	 * @param y  the Y position of the enemy
+	 * @return the new Y position
+	 */
+	public int getY(GameBoard gb, int x, int y) {
+
+		switch (movDirection) {
+		case UP:
+			if (checkMove(gb, x, y - ONE)) {
+				return y - ONE;
+			} else {
+				reverseDirection();
+				return y + ONE;
+			}
+
+		case DOWN:
+			if (checkMove(gb, x, y + ONE)) {
+				return y + ONE;
+			} else {
+				reverseDirection();
+				return y - ONE;
+			}
+
+		case LEFT:
+			if (checkMove(gb, x - ONE, y))
+				return y;
+			else {
+				reverseDirection();
+				return y;
+			}
+
+		case RIGHT:
+			if (checkMove(gb, x + ONE, y))
+				return y;
+			else {
+				reverseDirection();
+				return y;
 			}
 		default:
 			return 0;
@@ -113,95 +181,36 @@ public class StraightLineEnemy extends Enemy
 
 	}
 
-	public int getY(GameBoard gb, int x, int y)
-	{
-
-		switch (movDirection)
-		{
-		case UP:
-			if(checkMove(gb, x, y - 1))
-			{
-				return y-1;
-			}
-			else
-			{
-				revDirection();
-				return y+1;
-			}
-
-		case DOWN:
-			if(checkMove(gb, x, y + 1))
-			{
-				return y+1;
-			}
-			else
-			{
-				revDirection();
-				return y-1;
-			}
-
-		case LEFT:
-			if(checkMove(gb, x - 1, y))
-				return y;
-			else
-			{
-				revDirection();
-				return y;
-			}
-
-		case RIGHT:
-			if(checkMove(gb, x + 1, y))
-				return y;
-			else
-			{
-				revDirection();
-				return y;
-			}
-		default:
-			return 0;
-		}
-
-	}
-
-	public void revDirection()
-	{
-		switch (movDirection)
-		{
-		case UP:
-			movDirection = DOWN;
-			break;
-		case DOWN:
-			movDirection = UP;
-			break;
-		case LEFT:
-			movDirection = RIGHT;
-			break;
-		case RIGHT:
-			movDirection = LEFT;
-			break;
-		}
-
-	}
-
-	public boolean horizontalNoMove(GameBoard gb, int playerX, int playerY)
-	{
+	/**
+	 * Checks if the next horizontal move is possible
+	 * 
+	 * @param gb current game board in play
+	 * @return true if its valid else false
+	 */
+	//TODO variable not used, still needed?
+	public boolean horizontalNoMove(GameBoard gb,int x,int y) {
 		Element[][] board = gb.getBoard();
 		Element[][] bg = gb.getBackground();
-		boolean left = board[currentPositionY][currentPositionX - 1] instanceof Empty;
-		boolean right = board[currentPositionY][currentPositionX + 1] instanceof Empty;
-		boolean bgLeft = bg[currentPositionY][currentPositionX - 1] instanceof Ground;
-		boolean bgRight = bg[currentPositionY][currentPositionX + 1] instanceof Ground;
+		boolean left = board[currentPositionY][currentPositionX - ONE] instanceof Empty;
+		boolean right = board[currentPositionY][currentPositionX + ONE] instanceof Empty;
+		boolean bgLeft = bg[currentPositionY][currentPositionX - ONE] instanceof Ground;
+		boolean bgRight = bg[currentPositionY][currentPositionX + ONE] instanceof Ground;
 		return ((!left) && (!right)) || ((!bgLeft) && (!bgRight));
 	}
 
-	public boolean verticalNoMove(GameBoard gb, int playerX, int playerY)
-	{
+	/**
+	 * Checks if the next horizontal move is valid
+	 * 
+	 * @param gb current game board in play
+	 * @return true if its valid else false
+	 */
+	public boolean verticalNoMove(GameBoard gb,int x,int y) {
 		Element[][] board = gb.getBoard();
 		Element[][] bg = gb.getBackground();
-		boolean up = board[currentPositionY - 1][currentPositionX] instanceof Empty;
-		boolean down = board[currentPositionY + 1][currentPositionX] instanceof Empty;
-		boolean bgUp = bg[currentPositionY - 1][currentPositionX] instanceof Ground;
-		boolean bgDown = bg[currentPositionY + 1][currentPositionX] instanceof Ground;
+		boolean up = board[currentPositionY - ONE][currentPositionX] instanceof Empty;
+		boolean down = board[currentPositionY + ONE][currentPositionX] instanceof Empty;
+		boolean bgUp = bg[currentPositionY - ONE][currentPositionX] instanceof Ground;
+		boolean bgDown = bg[currentPositionY + ONE][currentPositionX] instanceof Ground;
 		return ((!up) && (!down)) || ((!bgUp) && (!bgDown));
 	}
 

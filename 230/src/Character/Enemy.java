@@ -13,8 +13,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public abstract class Enemy extends Element {
-	
-    private String soundPath = "Sound\\creaking_door.mp3";
+
+	private String soundPath = "Sound\\creaking_door.mp3";
 
 	protected String movDirection = "UP";
 
@@ -27,37 +27,41 @@ public abstract class Enemy extends Element {
 
 	protected final int ONE = 1;
 	protected final int TWO = 2;
-	
+	protected final int ZERO = 0;
+	protected final int HUNDRED = 100;
+
 	protected int currentPositionX;
 	protected int currentPositionY;
 
-    public void playSound()
-    {
-    	Media music = new Media(new File(soundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
-    	mediaPlayer.play();
-    }
-	
 	/**
-	 * @return the movDirection
+	 * plays sound effect
+	 */
+	public void playSound() {
+		Media music = new Media(new File(soundPath).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(music);
+		mediaPlayer.play();
+	}
+
+	/**
+	 * @return the move direction of the enemy
 	 */
 	public String getMovDirection() {
 		return movDirection;
 	}
 
 	/**
-	 * @param movDirection the movDirection to set
+	 * @param the new direction for the enemy
 	 */
 	public void setMovDirection(String movDirection) {
 		this.movDirection = movDirection;
 	}
 
 	/**
-	 * Method for working out where to move
+	 * Method for working out where to move next
 	 * 
-	 * @param currentX
-	 * @param currentY
-	 * @param nextCell
+	 * @param currentX The current X position
+	 * @param currentY The current Y position
+	 * @param nextCell The next Cell
 	 * @return
 	 */
 	public int[] moveTo(int currentX, int currentY, Cell nextCell) {
@@ -65,18 +69,18 @@ public abstract class Enemy extends Element {
 		case (UP):
 			// TODO break this into a method
 			if (this.isMovable(nextCell)) {
-				//TODO remove variable and just return the int array
-				int[] a = { currentX, currentY + ONE};
+				// TODO remove variable and just return the int array
+				int[] a = { currentX, currentY + ONE };
 				return a;
 			} else {
-				//not movable so return a empty array which should throw an error when used
+				// not movable so return a empty array which should throw an error when used
 				this.reverseDirection();
 				int[] a = { currentX + ONE, currentY };
 				return a;
 			}
 		case (LEFT):
 			if (this.isMovable(nextCell)) {
-				int[] a = { currentX - ONE , currentY};
+				int[] a = { currentX - ONE, currentY };
 				return a;
 			} else {
 				this.reverseDirection();
@@ -89,7 +93,7 @@ public abstract class Enemy extends Element {
 				return a;
 			} else {
 				this.reverseDirection();
-				int[] a = { currentX, currentY + ONE};
+				int[] a = { currentX, currentY + ONE };
 				return a;
 			}
 		case (RIGHT):
@@ -98,7 +102,7 @@ public abstract class Enemy extends Element {
 				return a;
 			} else {
 				this.reverseDirection();
-				int[] a = { currentX - ONE , currentY};
+				int[] a = { currentX - ONE, currentY };
 				return a;
 			}
 		default:
@@ -108,7 +112,7 @@ public abstract class Enemy extends Element {
 	}
 
 	/**
-	 * Method for revesering the direction of Enemy
+	 * Method for reversing the direction of Enemy
 	 */
 	public void reverseDirection() {
 		switch (this.getMovDirection()) {
@@ -188,17 +192,23 @@ public abstract class Enemy extends Element {
 			return false;
 		}
 	}
-	
-	public static boolean checkMove(GameBoard gb, int x,int y)
-	{
+
+	/**
+	 * Checks if new move is valid
+	 * @param gb the game board in play
+	 * @param x the X coordinate of new position
+	 * @param y the Y coordinate of new position
+	 * @return true if next move is valid else false
+	 */
+	public static boolean checkMove(GameBoard gb, int x, int y) {
 		Element[][] board = gb.getBoard();
 		Element[][] background = gb.getBackground();
-		boolean a = (board[y][x]instanceof Player || board[y][x] instanceof Empty);
-		
-		if ((background[y][x] instanceof Ground)&&(a))
+		boolean a = (board[y][x] instanceof Player || board[y][x] instanceof Empty);
+
+		if ((background[y][x] instanceof Ground) && (a))
 			return true;
-		else 
+		else
 			return false;
-		
+
 	}
 }
