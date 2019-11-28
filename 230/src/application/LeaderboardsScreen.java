@@ -53,7 +53,8 @@ public class LeaderboardsScreen extends Screen {
 		levels = new ScrollPane();
 		levelGrid = new GridPane();
 		levelButtons = new ArrayList<Button>();
-
+		
+		
 		back = new Button("Back");
 		back.setOnAction(event ->
 		{
@@ -67,7 +68,6 @@ public class LeaderboardsScreen extends Screen {
 			levelButtons.add(b);
 			levelGrid.add(b, i % BTNS_PER_ROW, i / BTNS_PER_ROW);
 			
-			// TODO
 		}
 
 		levelGrid.setHgap(GRID_H_GAP);
