@@ -1,4 +1,4 @@
-
+package Character;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -198,7 +198,7 @@ public class SmartTargettingEnemy extends Enemy
 				fl.add(temp.get(i));
 		}
 		Path f = fl.get(0);
-		System.out.println(fl.get(0));
+		//System.out.println(fl.get(0));
 		ArrayList<Path> ad = new ArrayList<Path>();
 		
 		for(int i=0;i<fl.size();i++)
@@ -207,7 +207,7 @@ public class SmartTargettingEnemy extends Enemy
 				ad.add(fl.get(i));
 		}
 		
-		System.out.println(ad.get(0));
+		//System.out.println(ad.get(0));
 		return ad.get(0);
 		
 		/*

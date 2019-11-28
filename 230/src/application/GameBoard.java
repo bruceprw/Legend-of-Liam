@@ -1,4 +1,4 @@
-
+package application;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -346,13 +346,19 @@ public class GameBoard
 
 		}
 		moveEnemy();
-		if(playerDead())
+		System.out.println(checkPlayerDead());
+		if(playerDead()||checkPlayerDead())
 			return 2;
 		if(end())
 			return 1;
 		return 0;
 	}
 
+	public boolean checkPlayerDead()
+	{
+		return !(board[playerY][playerX] instanceof Player);
+	}
+	
 	public boolean playerDead()
 	{
 		for (int i = 0; i < enemyX.size(); i++)
@@ -450,14 +456,13 @@ public class GameBoard
 				Path e = d.getPath(this,enemyX.get(i),enemyY.get(i),playerX,playerY);
 				
 				int newXe = e.getX();
-				
 				int newYe = e.getY();
-				System.out.println(newXe+","+newYe);
+				//System.out.println(newXe+","+newYe);
 				board[newYe][newXe] = board[enemyY.get(i)][enemyX.get(i)];
 				board[enemyY.get(i)][enemyX.get(i)] = new Empty();
 				enemyY.set(i,newYe);
 				enemyX.set(i,newXe);
-				System.out.print(enemyX.get(i));
+				/*System.out.print(enemyX.get(i));
 				System.out.print(",");
 				System.out.print(enemyY.get(i));
 				System.out.print(",");

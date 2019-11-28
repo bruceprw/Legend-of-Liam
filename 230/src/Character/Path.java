@@ -17,9 +17,9 @@ public class Path extends Element
 	private int playerX, playerY;
 	private boolean found = false;
 
-	Path(GameBoard gb, int x, int y, int counter
+	Path(GameBoard gb, int x, int y, int counter)
 	{
-		temp.add(this);
+		//temp.add(this);
 		this.playerX = playerX;
 		this.playerY = playerY;
 		this.x = x;
