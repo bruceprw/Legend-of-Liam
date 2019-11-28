@@ -59,6 +59,10 @@ public class LeaderboardsScreen extends Screen {
 		levelButtons = new ArrayList<Button>();
 
 		back = new Button("Back");
+		back.setOnAction(event ->
+		{
+			switchScreen(new TitleScreen());
+		});
 
 		for (int i = 0; i < 10; i++) {
 			Button b = new Button("" + (i + 1));
