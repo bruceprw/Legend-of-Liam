@@ -166,7 +166,7 @@ public class Player extends Element
 	}
 
 	/**
-	 * checks if player can move onto specified cell.
+	 * checks if player can move onto specified cell and responds appropriately.
 	 * 
 	 * @param cell cell on board.
 	 * @return
