@@ -53,16 +53,21 @@ public class LeaderboardsScreen extends Screen {
 		levels = new ScrollPane();
 		levelGrid = new GridPane();
 		levelButtons = new ArrayList<Button>();
-
+		
+		
 		back = new Button("Back");
-
+		back.setOnAction(event ->
+		{
+			switchScreen(new TitleScreen());
+		});
+		
+		
 		for (int i = 0; i < 20; i++) {
 			Button b = new Button("" + (i + 1));
 			b.setMinSize(LEVEL_BUTTON_SIZE, LEVEL_BUTTON_SIZE);
 			levelButtons.add(b);
 			levelGrid.add(b, i % BTNS_PER_ROW, i / BTNS_PER_ROW);
 			
-			// TODO
 		}
 
 		levelGrid.setHgap(GRID_H_GAP);
