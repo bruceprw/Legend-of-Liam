@@ -9,11 +9,16 @@ import java.util.Scanner;
 
 public class Leaderboard
 {
-	private String filePath = "Leaderboard\\leaderboard.txt";
+	private String filePath;
 	private ArrayList<LevelTime> list = new ArrayList<LevelTime>();
 
-	public Leaderboard()
+	public Leaderboard(String level)
 	{
+		initLeaderboard(level);
+	}
+	public void initLeaderboard(String level) {
+		this.filePath = "Leaderboard\\leaderboard" + level + ".txt";
+		System.out.println(list);
 		readLevelTime();
 		sortList();
 	}
@@ -31,6 +36,9 @@ public class Leaderboard
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(!in.hasNext()) {
+			System.out.println("aa");
+		}
 		while (in.hasNext())
 		{
 			String line = in.nextLine();
@@ -44,9 +52,9 @@ public class Leaderboard
 		
 	}
 
-	public void outputList()
-	{
+	public void outputList(){
 		File file = new File(filePath);
+		System.out.println(list);
 		PrintWriter out =
 		null;
 		try

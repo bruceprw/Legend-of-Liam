@@ -116,12 +116,11 @@ public class GameScreen extends Screen
 		ft.setFromValue(1);
 		ft.setToValue(0);
 		ft.play();
-		System.out.println("restart");
 		switchScreen(new GameScreen(levelNo,user));
 	}
 	public void NextLevel(){
 		switchScreen(new LevelScreen(user));
-		Leaderboard ld = new Leaderboard();
+		Leaderboard ld = new Leaderboard(levelNo);
 		
 		ld.addLevelTime(user.getName(),time);
 	}
@@ -130,8 +129,7 @@ public class GameScreen extends Screen
 	private void keyPressed(KeyEvent event) throws IOException
 
 	{
-		int a =
-		0;
+		int a;
 		switch (event.getCode())
 		{
 		case RIGHT:
@@ -170,9 +168,8 @@ public class GameScreen extends Screen
 
 		case DOWN:
 			a = level.move("down");
-			System.out.println(a);
 			if(a==2)
-			{  
+			{
 				RestartLevel();
 			}
 			if (a==1){
@@ -186,14 +183,9 @@ public class GameScreen extends Screen
 		default:
 			break;
 		}
-		if(a==2)
-		{
-			
-		}
-		else
-		{
+
 		drawGame();
-		}
+
 		// Consume key press event so that arrow keys don't interact with Buttons.
 		event.consume();
 	}
