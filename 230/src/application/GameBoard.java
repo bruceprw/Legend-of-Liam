@@ -392,18 +392,25 @@ public class GameBoard
 			{
 			case "STRAIGHT":
 				StraightLineEnemy a = (StraightLineEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				if(a.horizontalNoMove(this, playerX, playerX) || a.verticalNoMove(this, playerX, playerY))
+				boolean hori = a.horizontalNoMove(this, enemyX.get(i), enemyY.get(i));
+				boolean lOR = a.getMovDirection().equals("LEFT")||a.getMovDirection().equals("RIGHT");
+				boolean verti = a.verticalNoMove(this, enemyX.get(i), enemyY.get(i));
+				boolean UD = a.getMovDirection().equals("UP")||a.getMovDirection().equals("DOWN");
+				if((hori&&lOR)||(verti&&UD))
 				{
 
 				}
 				else
 				{
-					int newX = a.getX(this, playerX, playerY);
-					int newY = a.getY(this, playerX, playerY);
+					int newX = a.getX(this, enemyX.get(i), enemyY.get(i));
+					int newY = a.getY(this, enemyX.get(i), enemyY.get(i));
 					board[newY][newX] = board[enemyY.get(i)][enemyX.get(i)];
 					board[enemyY.get(i)][enemyX.get(i)] = new Empty();
 					enemyY.set(i, newY);
 					enemyX.set(i, newX);
+					//System.out.print(enemyX.get(i));
+					//System.out.print(","+enemyY.get(i));
+					//System.out.println(",straight");
 				}
 				break;
 			case "WALLHUG":
@@ -422,9 +429,9 @@ public class GameBoard
 			case "DUMB":
 				DumbTargettingEnemy c = (DumbTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
 				int newXa= c.getX(this,playerX,playerY,enemyX.get(i),enemyY.get(i));
-				System.out.print(newXa+",");
+				//System.out.print(newXa+",");
 				int newYa = c.getY(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
-				System.out.println(newYa);
+				//System.out.println(newYa);
 				if(newXa==enemyX.get(i)&&newYa==enemyY.get(i))
 				{
 					
@@ -436,9 +443,14 @@ public class GameBoard
 					enemyY.set(i, newYa);
 					enemyX.set(i, newXa);
 				}
-				
-				
-				
+				break;
+			case "SMART":
+				SmartTargettingEnemy d = (SmartTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
+				d.getPath(this,enemyX.get(i),enemyY.get(i),playerX,playerY);
+				System.out.print(enemyX.get(i));
+				System.out.print(","+enemyY.get(i));
+				System.out.println(",SMART");
+				System.out.println("bca");
 				break;
 				/*System.out.print(enemyX.get(i));
 				System.out.print(",");

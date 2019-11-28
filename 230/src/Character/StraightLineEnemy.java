@@ -65,54 +65,47 @@ public class StraightLineEnemy extends Enemy
 		gc.drawImage(image, x, y, 100, 100);
 	}
 
-	public int getX(GameBoard gb, int playerX, int playerY)
+	public int getX(GameBoard gb, int x, int y)
 	{
 
 		switch (movDirection)
 		{
 		case UP:
-			if(checkMove(gb, currentPositionX, currentPositionY - 1))
+			if(checkMove(gb, x, y - 1))
 			{
-
-				return currentPositionX;
+				return x;
 			}
 			else
 			{
-				revDirection();
-				return getX(gb, playerX, playerY);
+				return x;
 			}
 
 		case DOWN:
-			if(checkMove(gb, currentPositionX, currentPositionY + 1))
-				return currentPositionX;
+			if(checkMove(gb, x, y + 1))
+				return x;
 			else
 			{
-				revDirection();
-				return getX(gb, playerX, playerY);
+				return x;
 			}
 
 		case LEFT:
-			if(checkMove(gb, currentPositionX - 1, currentPositionY))
+			if(checkMove(gb, x - 1, y))
 			{
-				currentPositionX += 1;
-				return currentPositionX;
+				return x-1;
 			}
 			else
 			{
-				revDirection();
-				return getX(gb, playerX, playerY);
+				return x+1;
 			}
 
 		case RIGHT:
-			if(checkMove(gb, currentPositionX + 1, currentPositionY))
+			if(checkMove(gb, x + 1, y))
 			{
-				currentPositionX -= 1;
-				return currentPositionX;
+				return x+1;
 			}
 			else
 			{
-				revDirection();
-				return getX(gb, playerX, playerY);
+				return x-1;
 			}
 		default:
 			return 0;
@@ -120,51 +113,49 @@ public class StraightLineEnemy extends Enemy
 
 	}
 
-	public int getY(GameBoard gb, int playerX, int playerY)
+	public int getY(GameBoard gb, int x, int y)
 	{
 
 		switch (movDirection)
 		{
 		case UP:
-			if(checkMove(gb, currentPositionX, currentPositionY - 1))
+			if(checkMove(gb, x, y - 1))
 			{
-				currentPositionY -= 1;
-				return currentPositionY;
+				return y-1;
 			}
 			else
 			{
 				revDirection();
-				return getY(gb, playerX, playerY);
+				return y+1;
 			}
 
 		case DOWN:
-			if(checkMove(gb, currentPositionX, currentPositionY + 1))
+			if(checkMove(gb, x, y + 1))
 			{
-				currentPositionY += 1;
-				return currentPositionY;
+				return y+1;
 			}
 			else
 			{
 				revDirection();
-				return getY(gb, playerX, playerY);
+				return y-1;
 			}
 
 		case LEFT:
-			if(checkMove(gb, currentPositionX - 1, currentPositionY))
-				return currentPositionY;
+			if(checkMove(gb, x - 1, y))
+				return y;
 			else
 			{
 				revDirection();
-				return getY(gb, playerX, playerY);
+				return y;
 			}
 
 		case RIGHT:
-			if(checkMove(gb, currentPositionX + 1, currentPositionY))
-				return currentPositionY;
+			if(checkMove(gb, x + 1, y))
+				return y;
 			else
 			{
 				revDirection();
-				return getY(gb, playerX, playerY);
+				return y;
 			}
 		default:
 			return 0;
