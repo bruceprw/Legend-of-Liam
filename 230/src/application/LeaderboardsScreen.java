@@ -26,7 +26,7 @@ import javafx.util.Callback;
 
 public class LeaderboardsScreen extends Screen {
 	private static final double LEVEL_BUTTON_SIZE = 50;
-	private static final int BTNS_PER_ROW = 4;
+	private static final int BTNS_PER_ROW = 5;
 	private static final double GRID_H_GAP = 30;
 	private static final double GRID_V_GAP = 20;
 	private static final double GRID_PADDING_X = 50;
@@ -41,11 +41,15 @@ public class LeaderboardsScreen extends Screen {
 	private ArrayList<LevelTime> list;
 	private ArrayList<Button> levelButtons;
 	private Button back;
-	private Leaderboard ld;
+	private static Leaderboard ld;
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 
-	public LeaderboardsScreen(){
-		ld=new Leaderboard();
+	public LeaderboardsScreen(String level){
+		screenInit(level);
+	}
+	private void screenInit(String level) {
+		System.out.println(level);
+		ld=new Leaderboard(level);
 		list=ld.getList();
 		root = new BorderPane();
 		centerBox = new HBox();
@@ -53,23 +57,24 @@ public class LeaderboardsScreen extends Screen {
 		levels = new ScrollPane();
 		levelGrid = new GridPane();
 		levelButtons = new ArrayList<Button>();
-		
-		
+
 		back = new Button("Back");
-		back.setOnAction(event ->
-		{
-			switchScreen(new TitleScreen());
-		});
-		
-		
-		for (int i = 0; i < 20; i++) {
+
+		for (int i = 0; i < 10; i++) {
 			Button b = new Button("" + (i + 1));
 			b.setMinSize(LEVEL_BUTTON_SIZE, LEVEL_BUTTON_SIZE);
+			b.setOnAction(event ->
+			{
+				System.out.println(b.getText());
+				switchScreen(new LeaderboardsScreen(b.getText()));
+				System.out.println(ld.getList());
+			});			
 			levelButtons.add(b);
 			levelGrid.add(b, i % BTNS_PER_ROW, i / BTNS_PER_ROW);
 			
+			// TODO
 		}
-
+		
 		levelGrid.setHgap(GRID_H_GAP);
 		levelGrid.setVgap(GRID_V_GAP);
 		levelGrid.setGridLinesVisible(true);
@@ -77,8 +82,7 @@ public class LeaderboardsScreen extends Screen {
 		
 		centerBox.setStyle("-fx-box-border: transparent");
 
-		buildTable();
-		addItems();
+		buildAdd();
 
 		scrollBox.getChildren().add(levels);
 		levels.setContent(levelGrid);
@@ -94,7 +98,10 @@ public class LeaderboardsScreen extends Screen {
 	}
 
 
-
+	private void buildAdd() {
+		buildTable();
+		addItems();
+	}
 	private void buildTable() {
 		leaderboard = new TableView<LevelTime>();
 		leaderboard.setMinWidth(WINDOW_WIDTH/2);
@@ -117,7 +124,7 @@ public class LeaderboardsScreen extends Screen {
 		
 		leaderboard.getColumns().addAll(rank, username, time);
 	}
-
+	
 	private void addItems() {
 		// TODO: Load list of users function.
 
