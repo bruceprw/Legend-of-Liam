@@ -276,7 +276,7 @@ public class SmartTargettingEnemy extends Enemy
 		{
 			if(checkVisited(temp, playerX - 1, playerY, counter + 1))
 			{
-
+				;;
 			}
 			else
 			{
