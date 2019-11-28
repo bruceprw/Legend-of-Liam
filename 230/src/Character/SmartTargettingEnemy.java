@@ -174,7 +174,7 @@ public class SmartTargettingEnemy extends Enemy
 
 	//private ArrayList<Path> temp = new ArrayList<Path>();
 
-	public void getPath(GameBoard gb, int x, int y, int playerX, int playerY)
+	public Path getPath(GameBoard gb, int x, int y, int playerX, int playerY)
 	{
 		ArrayList<Path> temp = new ArrayList<Path>();
 		setPaths(gb, x, y, playerX, playerY, 0, temp);
@@ -197,21 +197,18 @@ public class SmartTargettingEnemy extends Enemy
 			if(temp.get(i).getCount()<counter)
 				fl.add(temp.get(i));
 		}
+		Path f = fl.get(0);
+		System.out.println(fl.get(0));
+		ArrayList<Path> ad = new ArrayList<Path>();
 		
 		for(int i=0;i<fl.size();i++)
 		{
-			ArrayList<Path> a = new ArrayList<Path>();
-			for(int j=0;j<fl.size();j++)
-			{
-				
-			}
+			if(isAdjacent(fl.get(i),f))
+				ad.add(fl.get(i));
 		}
 		
-		for(int i=0;i<fl.size();i++)
-		{
-			System.out.println(fl.get(i).getX()+","+fl.get(i).getY()+","+fl.get(i).getCount());
-		}
-		
+		System.out.println(ad.get(0));
+		return ad.get(0);
 		
 		/*
 		 * for(int i=0;i<temp.size();i++) { if(temp.get(i).getCount()>counter)
