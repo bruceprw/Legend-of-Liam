@@ -168,7 +168,7 @@ public class TitleScreen extends Screen
 		leaderboards = new Button("Leaderboards");
 		leaderboards.setOnAction(event ->
 		{
-			switchScreen(new LeaderboardsScreen());
+			switchScreen(new LeaderboardsScreen("1"));
 		});
 
 		logout = new Button("Log Out");
