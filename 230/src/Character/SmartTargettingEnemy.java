@@ -177,40 +177,62 @@ public class SmartTargettingEnemy extends Enemy
 	public void getPath(GameBoard gb, int x, int y, int playerX, int playerY)
 	{
 		setPaths(gb, x, y, playerX, playerY, 0);
-		ArrayList<Path> finalPath = new ArrayList<Path>();
-		System.out.println(temp.size());
-		finalPath.add(temp.get(temp.size()-1));
-		temp.remove(temp.size()-1);
-		
-		for(int j=0;j<finalPath.size();j++)
-		{
-			System.out.println(j);
-			for(int i=0;i<temp.size();i++)
+		ArrayList<Path> finalList = new ArrayList<Path>();
+		finalList.add(temp.get(temp.size() - 1));
+		for (int i = 0; i < temp.size(); i++)
+		{//not done
+			if(temp.get(i).getCount() == (finalList.get(j).getCount() - 1))
 			{
-				if(isAdjacent(finalPath.get(j),temp.get(i)))
+				if(isAdjacent(temp.get(i), finalList.get(j)))
 				{
-					System.out.println(temp.get(i));
-					finalPath.add(temp.get(i));
-					temp.remove(i);
+					finalList.add(temp.get(i));
 				}
 			}
 		}
-		
+		/*
+		 * for(int i=0;i<temp.size();i++) { if(temp.get(i).getCount()>counter)
+		 * temp.remove(i); }
+		 */
+		ArrayList<Path> finalPath = new ArrayList<Path>();
+		System.out.println(playerX + "," + playerY);
+		// System.out.println(temp.size());
+
+		for (int i = 0; i < finalList.size(); i++)
+		{
+			System.out.println(finalList.get(i).toString());
+		}
+
+		/*
+		 * for (int i = 0; i < temp.size(); i++) {
+		 * System.out.println(temp.get(i).toString()); }
+		 */
+	}
+
+	public void removeDuplicate()
+	{
 		for (int i = 0; i < temp.size(); i++)
 		{
-			System.out.println(finalPath.get(i).toString());
+			for (int j = 0; j < temp.size(); j++)
+			{
+				if(temp.get(i).equals(temp.get(j)))
+					temp.remove(j);
+			}
 		}
 	}
 
-	public boolean isAdjacent(Path a,Path b)
+	public boolean isAdjacent(Path a, Path b)
 	{
-		boolean f = (a.getX()==b.getX())^(a.getY()==b.getY());
-		boolean c = Math.abs(a.getX()-b.getX())<1;
-		boolean d = Math.abs(a.getY()-b.getY())<1;
-		boolean e = Math.abs(a.getCount()-b.getCount())==1;
-		return c&&d&&e&&f;
+		boolean c = a.getX() == b.getX();
+		boolean d = a.getY() == b.getY();
+		boolean e = (a.getX() - 1 == b.getX()) && d;
+		boolean f = (a.getX() + 1 == b.getX()) && d;
+		boolean g = e || f;
+		boolean h = (a.getY() - 1 == b.getY()) && c;
+		boolean i = (a.getY() + 1 == b.getY()) && c;
+		boolean j = h || i;
+		return g || j;
 	}
-	
+
 	public void setPaths(GameBoard gb, int x, int y, int playerX, int playerY, int counter)
 	{
 		temp.add(new Path(gb, x, y, counter));
@@ -218,20 +240,52 @@ public class SmartTargettingEnemy extends Enemy
 		{
 			return;
 		}
-		//System.out.println(x+","+y);
-		if(Enemy.checkMove(gb, x + 1, y)&&!checkVisited(temp,x+1,y,counter+1))
-			setPaths(gb, x + 1, y, playerX, playerY, counter + 1);
-		if(Enemy.checkMove(gb, x - 1, y)&&!checkVisited(temp,x-1,y,counter+1))
-			setPaths(gb, x - 1, y, playerX, playerY, counter + 1);
-		if(Enemy.checkMove(gb, x, y + 1)&&!checkVisited(temp,x,y+1,counter+1))
-			setPaths(gb, x, y + 1, playerX, playerY, counter + 1);
-		if(Enemy.checkMove(gb, x, y - 1)&&!checkVisited(temp,x,y-1,counter+1))
-			setPaths(gb, x, y - 1, playerX, playerY, counter + 1);
+		// System.out.println(x+","+y);
+		if(Enemy.checkMove(gb, x + 1, y))
+		{
+			if(checkVisited(temp, x + 1, y, counter + 1))
+			{
+
+			}
+			else
+			{
+				setPaths(gb, x + 1, y, playerX, playerY, counter + 1);
+			}
+
+		}
+
+		if(Enemy.checkMove(gb, x - 1, y))
+		{
+			if(checkVisited(temp, x - 1, y, counter + 1))
+			{
+
+			}
+			else
+			{
+				setPaths(gb, x - 1, y, playerX, playerY, counter + 1);
+			}
+		}
+
+		if(Enemy.checkMove(gb, x, y + 1))
+		{
+			if(checkVisited(temp, x, y + 1, counter + 1))
+			{
+
+			}
+			else
+				setPaths(gb, x, y + 1, playerX, playerY, counter + 1);
+		}
+
+		if(Enemy.checkMove(gb, x, y - 1))
+		{
+			if(checkVisited(temp, x, y - 1, counter + 1))
+				;
+			else
+				setPaths(gb, x, y - 1, playerX, playerY, counter + 1);
+		}
 
 	}
 
-	
-	
 	public boolean checkVisited(ArrayList<Path> p, int x, int y, int counter)
 	{
 		for (int i = 0; i < p.size(); i++)
@@ -239,10 +293,18 @@ public class SmartTargettingEnemy extends Enemy
 			boolean xB = p.get(i).getX() == x;
 			boolean yB = p.get(i).getY() == y;
 			boolean cB = p.get(i).getCount() < counter;
-			if(xB && yB)
+			if(xB && yB && cB)
 				return true;
 		}
 		return false;
+	}
+
+	public boolean checkCount(ArrayList<Path> p,int x,int y,int counter)
+	{
+		for(int i=0;i<p.size();i++)
+		{
+			if(((p.get(i).getX()==x)&&(p.get(i).getY()==y))&&p.get(i).getCount()<counter)
+		}
 	}
 
 }

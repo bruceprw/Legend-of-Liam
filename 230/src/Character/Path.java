@@ -26,6 +26,11 @@ public class Path extends Element
 		return a&&b&&c;
 	}
 	
+	public boolean equals(Path p)
+	{
+		return this.x==p.getX()&&this.y==p.getY()&&this.counter==p.getCount();
+	}
+	
 	public int getX()
 	{
 		return x;

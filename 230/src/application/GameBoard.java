@@ -447,10 +447,10 @@ public class GameBoard
 			case "SMART":
 				SmartTargettingEnemy d = (SmartTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
 				d.getPath(this,enemyX.get(i),enemyY.get(i),playerX,playerY);
-				System.out.print(enemyX.get(i));
+				/*System.out.print(enemyX.get(i));
 				System.out.print(","+enemyY.get(i));
 				System.out.println(",SMART");
-				System.out.println("bca");
+				System.out.println("bca");*/
 				break;
 				/*System.out.print(enemyX.get(i));
 				System.out.print(",");
