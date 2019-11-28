@@ -28,7 +28,7 @@ public class Player extends Element
 	private int[][] pos;
 	private Image image;
 
-	private String path = "Images\\player.jpg";
+	private String path = "Images\\Liam.png";
 
 	/**
 	 * @param name name of player.
