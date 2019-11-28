@@ -21,7 +21,6 @@ import javafx.util.Pair;
  * Smart targeting enemies uses BFS to find player and chase
  * 
  * @author Miles Singleton
- * @version 0.0
  */
 public class SmartTargettingEnemy extends Enemy
 {
@@ -172,10 +171,11 @@ public class SmartTargettingEnemy extends Enemy
 		gc.drawImage(image, x, y, 100, 100);
 	}
 
-	//private ArrayList<Path> temp = new ArrayList<Path>();
+	private ArrayList<Path> temp = new ArrayList<Path>();
 
 	public Path getPath(GameBoard gb, int x, int y, int playerX, int playerY)
 	{
+
 		ArrayList<Path> temp = new ArrayList<Path>();
 		setPaths(gb, x, y, playerX, playerY, 0, temp);
 		
@@ -209,6 +209,7 @@ public class SmartTargettingEnemy extends Enemy
 		{
 			System.out.println(fl.get(i).getX()+","+fl.get(i).getY()+","+fl.get(i).getCount());
 		}*/
+
 		
 		return ad.get(0);
 		/*
@@ -252,57 +253,8 @@ public class SmartTargettingEnemy extends Enemy
 
 	public void setPaths(GameBoard gb, int x, int y, int playerX, int playerY, int counter, ArrayList<Path> temp)
 	{
-		temp.add(new Path(gb, playerX, playerY, counter));
-		if(x == playerX && y == playerY)
-		{
-			//System.out.println(x+","+y);
-			//System.out.println(playerX+","+playerY);
-			return;
-		}
-		// System.out.println(x+","+y);
-		if(Enemy.checkMove(gb, playerX + 1, playerY)||(playerX+1==x&&playerY==y))
-		{
-			if(checkVisited(temp, playerX + 1, playerY, counter + 1))
-			{
-
-			}
-			else
-			{
-				setPaths(gb, x, y, playerX+1, playerY, counter + 1, temp);
-			}
-
-		}
-
-		if(Enemy.checkMove(gb, playerX-1, playerY)||(playerX-1==x&&playerY==y))
-		{
-			if(checkVisited(temp, playerX - 1, playerY, counter + 1))
-			{
-
-			}
-			else
-			{
-				setPaths(gb, x, y, playerX-1, playerY, counter + 1, temp);
-			}
-		}
-
-		if(Enemy.checkMove(gb, playerX, playerY + 1)||(playerX==x&&playerY+1==y))
-		{
-			if(checkVisited(temp, playerX, playerY + 1, counter + 1))
-			{
-
-			}
-			else
-				setPaths(gb, x, y , playerX, playerY+1, counter + 1, temp);
-		}
-
-		if(Enemy.checkMove(gb, playerX, playerY - 1)||(playerX==x&&playerY-1==y))
-		{
-			if(checkVisited(temp, playerX, playerY - 1, counter + 1))
-				;
-			else
-				setPaths(gb, x, y , playerX, playerY-1, counter + 1, temp);
-		}
-
+		//Path a = new Path(gb,x,y,0,playerX,playerY,temp);
+		
 	}
 
 	public boolean checkVisited(ArrayList<Path> p, int x, int y, int counter)
@@ -323,72 +275,13 @@ public class SmartTargettingEnemy extends Enemy
 		for(int i=0;i<p.size();i++)
 		{
 			if(((p.get(i).getX()==x)&&(p.get(i).getY()==y))&&p.get(i).getCount()<counter)
+			{
+				
+			}
 		}
+		//TODO replace this and finish method
+		return true;
 	}
 
 }
 
-public class Node
-{
-	// (x, y) represents coordinates of a cell in matrix
-	int x, y;
-
-	// maintain a parent node for printing final path
-	Node parent;
-
-	Node(int x, int y, Node parent)
-	{
-		this.x = x;
-		this.y = y;
-		this.parent = parent;
-	}
-
-	/**
-	 * @return the x
-	 */
-	public int getX()
-	{
-		return x;
-	}
-
-	/**
-	 * @return the y
-	 */
-	public int getY()
-	{
-		return y;
-	}
-
-	private Node getParent()
-	{
-		return this.parent;
-	}
-
-	private void setParent(Node node)
-	{
-		this.parent = node;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "(" + x + ", " + y + ')';
-	}
-
-	public Node getGoodNode(Node leafNode)
-	{
-		while (true)
-		{
-			if(leafNode.getParent().getParent() == null)
-			{
-				leafNode.setParent(null);
-				return leafNode;
-			}
-			else
-			{
-				leafNode = leafNode.getParent();
-			}
-		}
-	}
-
-}
