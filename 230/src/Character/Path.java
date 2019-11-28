@@ -25,31 +25,6 @@ public class Path extends Element
 		this.x = x;
 		this.y = y;
 		this.counter = counter;
-		if(x == playerX && y == playerY)
-			found = true;
-		if(found == false)
-		{
-			if(Enemy.checkMove(gb, x - 1, y))
-			{
-				left = new Path(gb, x - 1, y, counter + 1, playerX, playerY,temp);
-			}
-			if(Enemy.checkMove(gb, x + 1, y))
-			{
-				right = new Path(gb, x + 1, y, counter + 1, playerX, playerY,temp);
-			}
-			if(Enemy.checkMove(gb, x, y - 1))
-			{
-				up = new Path(gb, x, y - 1, counter + 1, playerX, playerY,temp);
-			}
-			if(Enemy.checkMove(gb, x, y + 1))
-			{
-				down = new Path(gb, x, y + 1, counter + 1, playerX, playerY,temp);
-			}
-		}
-		else 
-		{
-			
-		}
 
 	}
 
