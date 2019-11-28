@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import Character.DumbTargettingEnemy;
 import Character.Enemy;
 import Character.Node;
+import Character.Path;
 import Character.Player;
 import Character.SmartTargettingEnemy;
 import Character.StraightLineEnemy;
@@ -446,20 +447,32 @@ public class GameBoard
 				break;
 			case "SMART":
 				SmartTargettingEnemy d = (SmartTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				d.getPath(this,enemyX.get(i),enemyY.get(i),playerX,playerY);
+				Path e = d.getPath(this,enemyX.get(i),enemyY.get(i),playerX,playerY);
+				
+				int newXe = e.getX();
+				
+				int newYe = e.getY();
+				System.out.println(newXe+","+newYe);
+				board[newYe][newXe] = board[enemyY.get(i)][enemyX.get(i)];
+				board[enemyY.get(i)][enemyX.get(i)] = new Empty();
+				enemyY.set(i,newYe);
+				enemyX.set(i,newXe);
+				System.out.print(enemyX.get(i));
+				System.out.print(",");
+				System.out.print(enemyY.get(i));
+				System.out.print(",");
+				System.out.println(board[enemyY.get(i)][enemyX.get(i)].getString());
+				/*System.out.print(playerX);
+				System.out.print(","+playerY);
+				System.out.println("Player");*/
+				
+				
 				/*System.out.print(enemyX.get(i));
 				System.out.print(","+enemyY.get(i));
 				System.out.println(",SMART");
 				System.out.println("bca");*/
 				break;
-				/*System.out.print(enemyX.get(i));
-				System.out.print(",");
-				System.out.print(enemyY.get(i));
-				System.out.print(",");
-				System.out.println(board[enemyY.get(i)][enemyX.get(i)].getString());
-				System.out.print(playerX);
-				System.out.print(","+playerY);
-				System.out.println("Player");*/
+			
 			}
 		}
 	}
