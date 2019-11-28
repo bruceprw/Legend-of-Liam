@@ -21,7 +21,6 @@ import javafx.util.Pair;
  * Smart targeting enemies uses BFS to find player and chase
  * 
  * @author Miles Singleton
- * @version 0.0
  */
 public class SmartTargettingEnemy extends Enemy
 {
