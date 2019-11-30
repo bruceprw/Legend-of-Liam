@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import cell.Teleporter;
 import cell.Wall;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 
@@ -37,6 +39,8 @@ public class GameBoard
 	private int playerY;
 	private int goalX;
 	private int goalY;
+	
+	private Media playerDie = new Media(new File("Sound\\player_killed.wav").toURI().toString());
 	
 	private MediaPlayer mediaPlayer;
 	
@@ -364,9 +368,14 @@ public class GameBoard
 
 		}
 		moveEnemy();
-		System.out.println(checkPlayerDead());
+		//System.out.println(checkPlayerDead());
 		if (playerDead() || checkPlayerDead())
+		{
+			mediaPlayer = new MediaPlayer(playerDie);
+			mediaPlayer.play();
+			//mediaPlayer.stop();
 			return 2;
+		}
 		if (end())
 			return 1;
 		return 0;

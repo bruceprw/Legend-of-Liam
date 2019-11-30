@@ -18,6 +18,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -42,6 +44,10 @@ public class GameScreen extends Screen
 	private UserProfile user;
 	private Leaderboard leaderboard;
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+	private Image ggImage = new Image("Images\\game_over.png");
+	private Image ggBGImage = new Image("Images\\gameoverbg.png");
+	private ImageView ggImageView = new ImageView(ggImage);
+	private ImageView ggBGView = new ImageView(ggBGImage);
 	//int time = 0;
 
 	/**
@@ -52,6 +58,9 @@ public class GameScreen extends Screen
 	
 	public GameScreen(String levelNo, UserProfile user)
 	{
+		ggImageView.setOpacity(0);
+		ggBGView.setOpacity(0);
+		
 		this.levelNo = levelNo;
 		this.user=user;
 		
@@ -184,7 +193,17 @@ public class GameScreen extends Screen
 			break;
 		}
 		if(a==2)
-			RestartLevel();
+		{
+			FadeTransition fadeInBG = new FadeTransition(Duration.seconds(2),ggBGView);
+			FadeTransition fadeInGG = new FadeTransition(Duration.seconds(2),ggImageView);
+			fadeInBG.setFromValue(0);
+			fadeInGG.setFromValue(0);
+			fadeInBG.setToValue(0.5);
+			fadeInGG.setToValue(1);
+		
+			//RestartLevel();
+		}
+			
 		else
 		{
 			drawGame();

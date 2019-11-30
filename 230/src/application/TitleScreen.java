@@ -46,6 +46,7 @@ public class TitleScreen extends Screen
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	private UserProfile currentUser = null;
 
+
 	public TitleScreen()
 	{
 		root = new BorderPane();
@@ -55,10 +56,10 @@ public class TitleScreen extends Screen
 		buildLoginPane();
 
 		buildMenuPane();
-		/*mediaPlayer = new MediaPlayer(music);
+		mediaPlayer = new MediaPlayer(music);
 		mediaPlayer.setAutoPlay(true);
 		mediaPlayer.setVolume(0.5);
-		mediaPlayer.play();*/
+		mediaPlayer.play();
 		
 		
 		root.setTop(topPane);
@@ -171,6 +172,7 @@ public class TitleScreen extends Screen
 		selectLevel.setOnAction(event ->
 		{
 			switchScreen(new LevelScreen(currentUser));
+			mediaPlayer.stop();
 		});
 
 		leaderboards = new Button("Leaderboards");
