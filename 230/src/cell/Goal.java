@@ -11,12 +11,19 @@ import javafx.scene.media.MediaPlayer;
 public class Goal extends Cell {
 
 	private String path = "Images\\goal.png";
-	private String soundPath = "Sound\\BGM\\Mournful_DepartureGOAL.mp3";
+	private static String soundPath = "Sound\\BGM\\Mournful_DepartureGOAL.mp3";
 	private Image image;
+	private static Media music = new Media(new File(soundPath).toURI().toString());
+	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	
     public Goal() throws FileNotFoundException {
         super(false, true, false, "", Item.NONE);
         setImage();
+    }
+    
+    public MediaPlayer getSound()
+    {
+    	return mediaPlayer;
     }
 
     public void setImage() throws FileNotFoundException
@@ -36,8 +43,6 @@ public class Goal extends Cell {
     
     public void playSound()
     {
-    	Media music = new Media(new File(soundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
     	mediaPlayer.play();
     }
 }

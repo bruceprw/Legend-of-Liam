@@ -1,6 +1,7 @@
 package cell;
 
 import application.Element;
+import javafx.scene.media.MediaPlayer;
 
 public class Cell extends Element
 {
@@ -17,6 +18,8 @@ public class Cell extends Element
 	private boolean consumeableItem;
 	// item the cell contains, if no item then it item will equal Item.NONE
 	//private Item item;
+	
+	private MediaPlayer mediaPlayer;
 
 	public Cell(boolean harmable, boolean playerAllowed, boolean enemyAllowed, String texturePath, Item itemRequiredForCell)
 	{
@@ -86,6 +89,12 @@ public class Cell extends Element
 	{
 		enemyAllowed = enemyAllowed;
 	}
+	
+	public MediaPlayer getSound()
+	{
+		return mediaPlayer;
+	}
+	
 /*
 	public void setItem(Item item)
 	{

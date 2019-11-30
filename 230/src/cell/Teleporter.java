@@ -13,10 +13,12 @@ import javafx.scene.media.MediaPlayer;
 public class Teleporter extends Cell{
 	
 	private String path = "Images\\teleporter.jpg";
-	private String soundPath = "Sound\\teleport.wav";
+	private static String soundPath = "Sound\\teleport.wav";
 	private Image image;
 	private int pairX;
 	private int pairY;
+	private static Media music = new Media(new File(soundPath).toURI().toString());
+	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 
 	public Teleporter(int pairX,int pairY) throws FileNotFoundException
 	{
@@ -25,6 +27,11 @@ public class Teleporter extends Cell{
 		this.pairX=pairX;
 		this.pairY=pairY;
 	}
+	
+    public MediaPlayer getSound()
+    {
+    	return mediaPlayer;
+    }
 	
 	public int getPairX()
 	{
@@ -43,8 +50,6 @@ public class Teleporter extends Cell{
 
     public void playSound()
     {
-    	Media music = new Media(new File(soundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
     	mediaPlayer.play();
     }
 	

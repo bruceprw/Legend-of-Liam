@@ -12,8 +12,11 @@ import javafx.scene.media.MediaPlayer;
 public class TokenDoor extends Cell {
     private int tokenNumToUnlockDoor;
     private String path = "Images\\token_door.jpg";
-	private String knockSoundPath = "Sound\\door_knock.mp3";
-	private String openSoundPath = "Sound\\creaking_door.mp3";
+	private static String knockSoundPath = "Sound\\door_knock.mp3";
+	private static String openSoundPath = "Sound\\creaking_door.mp3";
+	private static Media knockMusic = new Media(new File(knockSoundPath).toURI().toString());
+	private static Media openMusic = new Media(new File(openSoundPath).toURI().toString());
+	private static MediaPlayer mediaPlayer;
     private Image image;
     private boolean opened;
 
@@ -28,6 +31,11 @@ public class TokenDoor extends Cell {
     public boolean isPlayerMoved() {
     }*/
 
+    public MediaPlayer getSound()
+    {
+    	return mediaPlayer;
+    }
+    
 	public int getTokenNum()
 	{
 		
@@ -51,15 +59,13 @@ public class TokenDoor extends Cell {
 	
     public void playKnockSound()
     {
-    	Media music = new Media(new File(knockSoundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	mediaPlayer = new MediaPlayer(knockMusic);
     	mediaPlayer.play();
     }
     
     public void playOpenSound()
     {
-    	Media music = new Media(new File(openSoundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	mediaPlayer=new MediaPlayer(openMusic);
     	mediaPlayer.play();
     }
 	

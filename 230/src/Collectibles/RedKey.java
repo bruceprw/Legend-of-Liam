@@ -13,7 +13,9 @@ import javafx.scene.media.MediaPlayer;
 public class RedKey extends Collectible
 {
 	private String path = "Images\\RK.png";
-    private String soundPath = "Sound\\pickup_keys.mp3";
+    private static String soundPath = "Sound\\pickup_keys.mp3";
+	private static Media music = new Media(new File(soundPath).toURI().toString());
+	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	
 	public RedKey() throws FileNotFoundException
 	{
@@ -23,8 +25,6 @@ public class RedKey extends Collectible
 	
     public void playSound()
     {
-    	Media music = new Media(new File(soundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
     	mediaPlayer.play();
     }
 	

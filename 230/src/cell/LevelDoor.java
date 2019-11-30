@@ -16,9 +16,11 @@ import javafx.scene.text.Font;
 public class LevelDoor extends Cell {
 
 	private String path = "Images\\blue_door.jpg";
-	private String soundPath = "Sound\\creaking_door.mp3";
+	private static String soundPath = "Sound\\creaking_door.mp3";
 	private Image image;
 	private int levelNo;
+	private static Media music = new Media(new File(soundPath).toURI().toString());
+	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	
     public LevelDoor(int levelNo) throws FileNotFoundException{
         super(false, true, false, "", Item.NONE);
@@ -33,6 +35,11 @@ public class LevelDoor extends Cell {
     
     public int getLevelNo() {
     	return levelNo;
+    }
+    
+    public MediaPlayer getSound()
+    {
+    	return mediaPlayer;
     }
     
 	public void setImage() throws FileNotFoundException
@@ -54,8 +61,6 @@ public class LevelDoor extends Cell {
     
     public void playSound()
     {
-    	Media music = new Media(new File(soundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
     	mediaPlayer.play();
     }
     

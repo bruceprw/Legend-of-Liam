@@ -25,6 +25,7 @@ import cell.Teleporter;
 import cell.Wall;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 
 public class GameBoard
@@ -36,7 +37,9 @@ public class GameBoard
 	private int playerY;
 	private int goalX;
 	private int goalY;
-
+	
+	private MediaPlayer mediaPlayer;
+	
 	private ArrayList<Integer> enemyX;
 	private ArrayList<Integer> enemyY;
 
@@ -211,13 +214,15 @@ public class GameBoard
 		switch (way)
 		{
 		case "right":
+			mediaPlayer = ((Cell)background[playerY][playerX+1]).getSound();
+			mediaPlayer.play();
+			mediaPlayer.stop();
 			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1]))
 			{
 				if (touchEnemy(playerX + 1, playerY))
 				{
 					return 2;
 				}
-
 				if (((Cell) background[playerY][playerX + 1]) instanceof Teleporter)
 				{
 					Teleporter temp = ((Teleporter) background[playerY][playerX + 1]);
@@ -232,7 +237,8 @@ public class GameBoard
 				{
 					if (board[playerY][playerX + 1] instanceof Collectible)
 					{
-						board[playerY][playerX + 1].playSound();
+						playBoardSound(playerX+1,playerY);
+						//board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY][playerX + 1]);
 					}
 					board[playerY][playerX + 1] = board[playerY][playerX];
@@ -244,6 +250,9 @@ public class GameBoard
 			}
 			break;
 		case "left":
+			mediaPlayer = ((Cell)background[playerY][playerX-1]).getSound();
+			mediaPlayer.play();
+			mediaPlayer.stop();
 			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1]))
 			{
 				if (touchEnemy(playerX - 1, playerY))
@@ -265,6 +274,7 @@ public class GameBoard
 				{
 					if (board[playerY][playerX - 1] instanceof Collectible)
 					{
+						playBoardSound(playerX-1,playerY);
 						acquire((Collectible) board[playerY][playerX - 1]);
 						board[playerY][playerX - 1].playSound();
 					}
@@ -278,6 +288,9 @@ public class GameBoard
 			}
 			break;
 		case "up":
+			mediaPlayer = ((Cell)background[playerY-1][playerX]).getSound();
+			mediaPlayer.play();
+			mediaPlayer.stop();
 			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX]))
 			{
 				if (touchEnemy(playerX, playerY - 1))
@@ -300,6 +313,7 @@ public class GameBoard
 
 					if (board[playerY - 1][playerX] instanceof Collectible)
 					{
+						playBoardSound(playerX,playerY-1);
 						board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY - 1][playerX]);
 					}
@@ -311,6 +325,9 @@ public class GameBoard
 			}
 			break;
 		case "down":
+			mediaPlayer = ((Cell)background[playerY+1][playerX]).getSound();
+			mediaPlayer.play();
+			mediaPlayer.stop();
 			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX]))
 			{
 				if (touchEnemy(playerX, playerY + 1))
@@ -333,6 +350,7 @@ public class GameBoard
 
 					if (board[playerY + 1][playerX] instanceof Collectible)
 					{
+						playBoardSound(playerX,playerY+1);
 						board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY + 1][playerX]);
 					}

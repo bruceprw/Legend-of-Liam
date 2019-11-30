@@ -129,7 +129,7 @@ public class GameScreen extends Screen
 	private void keyPressed(KeyEvent event) throws IOException
 
 	{
-		int a;
+		int a=0;
 		switch (event.getCode())
 		{
 		case RIGHT:
@@ -183,8 +183,13 @@ public class GameScreen extends Screen
 		default:
 			break;
 		}
-
-		drawGame();
+		if(a==2)
+			RestartLevel();
+		else
+		{
+			drawGame();
+		}
+		
 
 		// Consume key press event so that arrow keys don't interact with Buttons.
 		event.consume();

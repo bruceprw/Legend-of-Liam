@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -40,7 +42,8 @@ public class TitleScreen extends Screen
 	private PasswordField password;
 	private Button submit;
 	private Button newProfile;
-
+	private static Media music = new Media(new File("Sound\\BGM\\Aurora_CurrentsINTRO.mp3").toURI().toString());
+	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	private UserProfile currentUser = null;
 
 	public TitleScreen()
@@ -52,7 +55,12 @@ public class TitleScreen extends Screen
 		buildLoginPane();
 
 		buildMenuPane();
-
+		/*mediaPlayer = new MediaPlayer(music);
+		mediaPlayer.setAutoPlay(true);
+		mediaPlayer.setVolume(0.5);
+		mediaPlayer.play();*/
+		
+		
 		root.setTop(topPane);
 		root.setCenter(loginPane);
 

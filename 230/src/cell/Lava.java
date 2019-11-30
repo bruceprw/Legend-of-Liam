@@ -12,14 +12,21 @@ import javafx.scene.media.MediaPlayer;
 public class Lava extends Cell {
 
 	private String path = "Images\\fire.jpg";
-	private String soundPath = "Sound\\catch_fire.wav";
+	private static String soundPath = "Sound\\catch_fire.wav";
 	private Image image;
+	private static Media music = new Media(new File(soundPath).toURI().toString());
+	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	
     public Lava() throws FileNotFoundException {
         super(true, true, false, "", Item.FIRE_BOOTS);
         setImage();
     }
 
+    
+    public MediaPlayer getSound()
+    {
+    	return mediaPlayer;
+    }
     public String getString()
     {
     	return"L";
@@ -32,8 +39,6 @@ public class Lava extends Cell {
     
     public void playSound()
     {
-    	Media music = new Media(new File(soundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
     	mediaPlayer.play();
     }
 	

@@ -17,10 +17,14 @@ public class ColouredDoor extends Cell {
 	private String redPath = "Images\\red_door.jpg";
 	private String yellowPath = "Images\\yellow_door.jpg";
 	private String bluePath = "Images\\blue_door.jpg";
-	private String knockSoundPath = "Sound\\door_knock.mp3";
-	private String openSoundPath = "Sound\\creaking_door.mp3";
+	private static String knockSoundPath = "Sound\\door_knock.mp3";
+	private static String openSoundPath = "Sound\\creaking_door.mp3";
 	private Image image;
 	private boolean opened;
+	private static Media knockMusic = new Media(new File(knockSoundPath).toURI().toString());
+	private static Media openMusic = new Media(new File(openSoundPath).toURI().toString());
+	private static MediaPlayer mediaPlayer;
+	
 	
 	
     public ColouredDoor(String colour) throws FileNotFoundException {
@@ -28,6 +32,11 @@ public class ColouredDoor extends Cell {
         this.colour = colour;
         this.opened=false;
         setImage(colour);
+    }
+    
+    public MediaPlayer getSound()
+    {
+    	return mediaPlayer;
     }
     
     public String getColour()
@@ -66,15 +75,13 @@ public class ColouredDoor extends Cell {
     
     public void playKnockSound()
     {
-    	Media music = new Media(new File(knockSoundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	mediaPlayer = new MediaPlayer(knockMusic);
     	mediaPlayer.play();
     }
     
     public void playOpenSound()
     {
-    	Media music = new Media(new File(openSoundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
+    	mediaPlayer = new MediaPlayer(openMusic);
     	mediaPlayer.play();
     }
     

@@ -14,6 +14,8 @@ public class Water extends Cell {
 	private String path = "Images\\water.jpg";
 	private String soundPath = "Sound\\water_splash.mp3";
 	private Image image;
+	private Media music = new Media(new File(soundPath).toURI().toString());
+	private MediaPlayer mediaPlayer = new MediaPlayer(music);
 	
     public Water() throws FileNotFoundException {
         super(true, true, false, "", Item.FLIPPER);
@@ -33,13 +35,15 @@ public class Water extends Cell {
     
     public void playSound()
     {
-    	Media music = new Media(new File(soundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
     	mediaPlayer.play();
     }
     
     public String getString()
     {
     	return "W";
+    }
+    public MediaPlayer getSound()
+    {
+    	return mediaPlayer;
     }
 }
