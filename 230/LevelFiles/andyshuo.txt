@@ -1,5 +1,5 @@
 28,24
-3263
+7662
 ############################
 ############################
 ############################
@@ -24,14 +24,14 @@
 ############################
 ############################
 ############################
-22,3,ENEMY,WALLHUG,RIGHT,UP
 6,5,RKEY
 7,5,GKEY
 8,5,BKEY
 9,5,YKEY
-10,5,ENEMY,DUMB
-11,5,ENEMY,STRAIGHT,RIGHT
-15,16,START
+12,5,ENEMY,STRAIGHT,RIGHT
+12,14,ENEMY,DUMB
+16,14,ENEMY,WALLHUG,LEFT,DOWN
+15,19,START
 22,20,ENEMY,SMART
 5,3,DOOR,3
 14,5,REDDOOR

@@ -36,6 +36,15 @@ public class ColouredDoor extends Cell {
     
     public MediaPlayer getSound()
     {
+    	if(opened)
+    	{
+    		playOpenSound();
+    	}
+    	else
+    	{
+    		playKnockSound();
+    	}
+    	
     	return mediaPlayer;
     }
     

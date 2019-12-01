@@ -1,5 +1,6 @@
 package application;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -44,26 +45,33 @@ public class GameScreen extends Screen
 	private UserProfile user;
 	private Leaderboard leaderboard;
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-	private Image ggImage = new Image("Images\\game_over.png");
-	private Image ggBGImage = new Image("Images\\gameoverbg.png");
-	private ImageView ggImageView = new ImageView(ggImage);
-	private ImageView ggBGView = new ImageView(ggBGImage);
-	//int time = 0;
+	private Image ggImage;
+	private Image ggBGImage;
+	// int time = 0;
 
 	/**
 	 * 
 	 * @param levelNo Number of the level to be loaded.
 	 * @throws InterruptedException
 	 */
-	
+
 	public GameScreen(String levelNo, UserProfile user)
 	{
-		ggImageView.setOpacity(0);
-		ggBGView.setOpacity(0);
-		
+
+		try
+		{
+			ggImage = new Image(new FileInputStream("Images\\game_over.png"));
+			ggBGImage = new Image(new FileInputStream("Images\\gameoverbg.png"));
+		}
+		catch (FileNotFoundException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		this.levelNo = levelNo;
-		this.user=user;
-		
+		this.user = user;
+
 		try
 		{
 			level = new GameBoard("LevelFiles\\" + levelNo + ".txt");
@@ -72,23 +80,22 @@ public class GameScreen extends Screen
 		{
 			e.printStackTrace();
 		}
-		
+
 		Label timeLabel = new Label();
-		long startTime = System.currentTimeMillis()-level.getTime();
-		 
+		long startTime = System.currentTimeMillis() - level.getTime();
+
 		new AnimationTimer()
 		{
 			public void handle(long now)
 			{
 				long elapsedMillis = System.currentTimeMillis() - startTime;
 				time = elapsedMillis;
-				//System.out.println(time);
+				// System.out.println(time);
 				// System.out.println(elapsedMillis);
 				Date d = new Date(elapsedMillis);
 				timeLabel.setText(sdf.format(d));
 			}
 		}.start();
-
 
 		root = new BorderPane();
 		game = new Canvas(GAME_WIDTH, GAME_HEIGHT);
@@ -108,107 +115,112 @@ public class GameScreen extends Screen
 		root.setBottom(buttonsPane);
 
 		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-		scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-			try {
+		scene.addEventHandler(KeyEvent.KEY_PRESSED, event ->
+		{
+			try
+			{
 				keyPressed(event);
-			} catch (IOException e) {
+			}
+			catch (IOException e)
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
 	}
 
-	//when its a game over it fades back to the title screen
-	public void RestartLevel(){
-		
+	// when its a game over it fades back to the title screen
+	public void RestartLevel()
+	{
+
 		FadeTransition ft = new FadeTransition(Duration.millis(3000), root);
 		ft.setFromValue(1);
 		ft.setToValue(0);
 		ft.play();
-		switchScreen(new GameScreen(levelNo,user));
+		switchScreen(new GameScreen(levelNo, user));
 	}
-	public void NextLevel(){
+
+	public void NextLevel()
+	{
 		switchScreen(new LevelScreen(user));
 		Leaderboard ld = new Leaderboard(levelNo);
-		
-		ld.addLevelTime(user.getName(),time);
+
+		ld.addLevelTime(user.getName(), time);
 	}
-	
 
 	private void keyPressed(KeyEvent event) throws IOException
 
 	{
-		int a=0;
+		int a = 0;
 		switch (event.getCode())
 		{
 		case RIGHT:
 			a = level.move("right");
-			if(a==2)
+			if(a == 2)
 			{
-				RestartLevel();
+				// RestartLevel();
 			}
-			if (a==1){
-				
-				 NextLevel();
+			if(a == 1)
+			{
+
+				NextLevel();
 			}
 			break;
 
 		case LEFT:
 			a = level.move("left");
-			if(a==2)
+			if(a == 2)
 			{
-				RestartLevel();
+				// RestartLevel();
 			}
-			if (a==1){
-				 NextLevel();
+			if(a == 1)
+			{
+				NextLevel();
 			}
 			break;
 
 		case UP:
 			a = level.move("up");
-			if(a==2)
+			if(a == 2)
 			{
-				RestartLevel();
+
+				// RestartLevel();
 			}
-			if (a==1){
-				 NextLevel();
+			if(a == 1)
+			{
+				NextLevel();
 			}
 			break;
 
 		case DOWN:
 			a = level.move("down");
-			if(a==2)
+			if(a == 2)
 			{
-				RestartLevel();
+
+				// RestartLevel();
 			}
-			if (a==1){
-				 NextLevel();
+			if(a == 1)
+			{
+				NextLevel();
 			}
 			break;
 		case ESCAPE:
-			NextLevel();
+			Scene s = new LevelScreen(user).getScene();
+			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
+			primaryStage.setScene(s);
 			break;
 
 		default:
 			break;
 		}
-		if(a==2)
+		if(a == 2)
 		{
-			FadeTransition fadeInBG = new FadeTransition(Duration.seconds(2),ggBGView);
-			FadeTransition fadeInGG = new FadeTransition(Duration.seconds(2),ggImageView);
-			fadeInBG.setFromValue(0);
-			fadeInGG.setFromValue(0);
-			fadeInBG.setToValue(0.5);
-			fadeInGG.setToValue(1);
-		
-			//RestartLevel();
+			RestartLevel();
 		}
-			
 		else
 		{
 			drawGame();
 		}
-		
 
 		// Consume key press event so that arrow keys don't interact with Buttons.
 		event.consume();
@@ -228,10 +240,6 @@ public class GameScreen extends Screen
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// TEST - get rid of this
-		gc.setFill(Color.BLACK);
-		gc.strokeRect(0, 0, game.getWidth(), game.getHeight());
 	}
 
 	private void buildButtons()
@@ -240,8 +248,8 @@ public class GameScreen extends Screen
 		save.setOnAction(event ->
 		{
 			// TODO: Create Save and add to User.
-			//System.out.println(Long.toString(time));
-			FileOutputer f = new FileOutputer(level,new LevelTime(user.getName(),time));
+			// System.out.println(Long.toString(time));
+			FileOutputer f = new FileOutputer(level, new LevelTime(user.getName(), time));
 			// Switch to Title Screen
 			Scene s = new TitleScreen().getScene();
 			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
@@ -256,6 +264,6 @@ public class GameScreen extends Screen
 			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
 			primaryStage.setScene(s);
 		});
-	
+
 	}
 }

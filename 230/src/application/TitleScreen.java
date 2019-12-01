@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -10,6 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -26,14 +31,14 @@ public class TitleScreen extends Screen
 	private VBox topPane;
 	private Text title;
 	private Text dailyMessage;
-
+	private Image titleImage;
 	private VBox menuPane;
 	private Text welcome;
 	private Button editProfile;
 	private Button selectLevel;
 	private Button leaderboards;
 	private Button logout;
-
+	private ImageView a ;
 	private GridPane loginPane;
 	private Text loginPrompt;
 	private Text usernameLabel;
@@ -47,10 +52,14 @@ public class TitleScreen extends Screen
 	private UserProfile currentUser = null;
 
 
-	public TitleScreen()
+	public TitleScreen() throws FileNotFoundException
 	{
 		root = new BorderPane();
-
+		titleImage = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
+		
+		a = new ImageView(titleImage);
+		a.setFitHeight(730);
+		a.setFitWidth(900);
 		buildTopPane();
 
 		buildLoginPane();
@@ -82,16 +91,19 @@ public class TitleScreen extends Screen
 		dailyMessage = new Text(DailyMessage.getMessage());
 		dailyMessage.setWrappingWidth(WINDOW_WIDTH);
 		dailyMessage.setTextAlignment(TextAlignment.CENTER);
-
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
+		topPane.setBackground(new Background(b));
 		topPane.getChildren().addAll(title, dailyMessage);
 	}
 
 	private void buildLoginPane()
 	{
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
 		loginPane = new GridPane();
 		loginPane.setHgap(10);
 		loginPane.setVgap(5);
 		loginPane.setAlignment(Pos.CENTER);
+		loginPane.setBackground(new Background(b));
 		loginPrompt = new Text("Please enter your login details, or");
 		usernameLabel = new Text("Username:");
 		passwordLabel = new Text("Password:");
@@ -158,8 +170,9 @@ public class TitleScreen extends Screen
 
 	private void buildMenuPane()
 	{
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
 		menuPane = new VBox();
-
+		menuPane.setBackground(new Background(b));
 		welcome = new Text("Welcome!");
 
 		editProfile = new Button("Load Game");
