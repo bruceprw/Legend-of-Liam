@@ -45,6 +45,7 @@ public class SmartTargettingEnemy extends Enemy
 		setImage();
 	}
 
+	//Is this still needed?
 	public Node findPath(Element[][] matrix, int x, int y, int playerX, int playerY)
 	{
 		// make queue
@@ -134,29 +135,6 @@ public class SmartTargettingEnemy extends Enemy
 		System.out.print(node + " ");
 		return len + 1;
 	}
-
-	private void RandomDirection() throws DataFormatException
-	{
-		int rand = (int) Math.random();
-		switch (rand)
-		{
-		case (0):
-			this.setMovDirection(UP);
-			break;
-		case (1):
-			this.setMovDirection(DOWN);
-			break;
-		case (2):
-			this.setMovDirection(LEFT);
-			break;
-		case (3):
-			this.setMovDirection(RIGHT);
-			break;
-		default:
-			throw new DataFormatException("Method is broken, find a beter exception subclass as this ones shit");
-		}
-	}
-
 	public String getString()
 	{
 		return "SMART";
@@ -324,7 +302,7 @@ public class SmartTargettingEnemy extends Enemy
 		}
 		return false;
 	}
-
+/*	delete or implement this
 	public boolean checkCount(ArrayList<Path> p,int x,int y,int counter)
 	{
 		for(int i=0;i<p.size();i++)
@@ -332,70 +310,5 @@ public class SmartTargettingEnemy extends Enemy
 			if(((p.get(i).getX()==x)&&(p.get(i).getY()==y))&&p.get(i).getCount()<counter)
 		}
 	}
-
-}
-
-public class Node
-{
-	// (x, y) represents coordinates of a cell in matrix
-	int x, y;
-
-	// maintain a parent node for printing final path
-	Node parent;
-
-	Node(int x, int y, Node parent)
-	{
-		this.x = x;
-		this.y = y;
-		this.parent = parent;
-	}
-
-	/**
-	 * @return the x
-	 */
-	public int getX()
-	{
-		return x;
-	}
-
-	/**
-	 * @return the y
-	 */
-	public int getY()
-	{
-		return y;
-	}
-
-	private Node getParent()
-	{
-		return this.parent;
-	}
-
-	private void setParent(Node node)
-	{
-		this.parent = node;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "(" + x + ", " + y + ')';
-	}
-
-	public Node getGoodNode(Node leafNode)
-	{
-		while (true)
-		{
-			if(leafNode.getParent().getParent() == null)
-			{
-				leafNode.setParent(null);
-				return leafNode;
-			}
-			else
-			{
-				leafNode = leafNode.getParent();
-			}
-		}
-	}
-
+( */
 }
