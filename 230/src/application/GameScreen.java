@@ -251,9 +251,16 @@ public class GameScreen extends Screen
 			// System.out.println(Long.toString(time));
 			FileOutputer f = new FileOutputer(level, new LevelTime(user.getName(), time));
 			// Switch to Title Screen
-			Scene s = new TitleScreen().getScene();
-			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-			primaryStage.setScene(s);
+			
+			TitleScreen s = null;
+			try {
+				// TODO Not sure if exception should be caught here or in TitleScreen constructor.
+				s = new TitleScreen();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			switchScreen(s);
+			s.switchToMenu(user);
 		});
 
 		levelSelect = new Button("Back to Level Select");
