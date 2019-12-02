@@ -106,6 +106,9 @@ public class UserProfile
 		if (exists(name))
 		{
 			//System.out.println(exists(name));
+			
+			// Clears list to avoid future duplicates being saved.
+			list.clear();
 			return true;
 		}
 		else
