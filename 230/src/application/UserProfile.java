@@ -91,6 +91,10 @@ public class UserProfile
 			out.print(""+list.get(i).getName()+","+list.get(i).getPassword()+","+list.get(i).getLevelProg()+"\r\n");
 		}
 		
+		/* Added this as repeated calls of readList() put duplicate profiles in 
+		 * list, which were then outputted to the file.
+		 */
+		list.clear();
 		
 		out.close();
 		
