@@ -38,9 +38,10 @@ public class TitleScreen extends Screen
 	private Image titleImage;
 	private VBox menuPane;
 	private Text welcome;
-	private Button editProfile;
+	private Button loadGame;
 	private Button selectLevel;
 	private Button leaderboards;
+	private Button options;
 	private Button logout;
 	private ImageView a ;
 	private GridPane loginPane;
@@ -163,6 +164,7 @@ public class TitleScreen extends Screen
 
 					welcome.setText("Welcome " + currentUser.getName() + "!");
 				}
+				line.close();
 			}
 
 			if(!found)
@@ -193,8 +195,8 @@ public class TitleScreen extends Screen
 		welcome = new Text("Welcome!");
 		welcome.setFill(Color.CHARTREUSE);
 
-		editProfile = new Button("Load Game");
-		editProfile.setOnAction(event ->
+		loadGame = new Button("Load Game");
+		loadGame.setOnAction(event ->
 		{
 			switchScreen(new GameScreen(currentUser.getName(), currentUser));
 		});
@@ -211,6 +213,12 @@ public class TitleScreen extends Screen
 		{
 			switchScreen(new LeaderboardsScreen("1"));
 		});
+		
+		options = new Button("Options");
+		options.setOnAction(event -> 
+		{
+			createPopup(new OptionsScreen(currentUser));
+		});
 
 		logout = new Button("Log Out");
 		logout.setOnAction(event ->
@@ -218,11 +226,7 @@ public class TitleScreen extends Screen
 			root.setCenter(loginPane);
 		});
 
-		editProfile.setId("titleButton");
-		selectLevel.setId("titleButton");
-		leaderboards.setId("titleButton");
-
-		menuPane.getChildren().addAll(welcome, editProfile, selectLevel, leaderboards, logout);
+		menuPane.getChildren().addAll(welcome, loadGame, selectLevel, leaderboards, options, logout);
 	}
 	
 	public void switchToMenu(UserProfile currentUser) {

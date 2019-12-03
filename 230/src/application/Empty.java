@@ -1,6 +1,5 @@
 package application;
 
-import java.io.FileNotFoundException;
 
 import cell.Cell;
 import cell.Item;

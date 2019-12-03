@@ -4,30 +4,24 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+
 import javafx.util.Duration;
 
 public class GameScreen extends Screen
@@ -46,13 +40,14 @@ public class GameScreen extends Screen
 	private long time;
 	private GameBoard level;
 	private UserProfile user;
-	private Leaderboard leaderboard;
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+
 	private Image ggImage;
 	private Image ggBGImage;
 	private Media music = new Media(new File("Sound\\BGM\\bg.mp3").toURI().toString());
 	private MediaPlayer bg = new MediaPlayer(music);
 	// int time = 0;
+
 
 	/**
 	 * 
@@ -66,8 +61,8 @@ public class GameScreen extends Screen
 		
 		try
 		{
-			ggImage = new Image(new FileInputStream("Images\\game_over.png"));
-			ggBGImage = new Image(new FileInputStream("Images\\gameoverbg.png"));
+			Image ggImage = new Image(new FileInputStream("Images\\game_over.png"));
+			Image ggBGImage = new Image(new FileInputStream("Images\\gameoverbg.png"));
 		}
 		catch (FileNotFoundException e1)
 		{
@@ -255,9 +250,12 @@ public class GameScreen extends Screen
 			// System.out.println(Long.toString(time));
 			FileOutputer f = new FileOutputer(level, new LevelTime(user.getName(), time));
 			// Switch to Title Screen
-			Scene s = new TitleScreen().getScene();
-			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-			primaryStage.setScene(s);
+			
+			TitleScreen s = null;
+			// TODO Not sure if exception should be caught here or in TitleScreen constructor.
+			s = new TitleScreen();
+			switchScreen(s);
+			s.switchToMenu(user);
 		});
 
 		levelSelect = new Button("Back to Level Select");

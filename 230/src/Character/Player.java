@@ -3,12 +3,10 @@ package Character;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import Collectibles.Collectible;
 import application.Element;
 import cell.Cell;
 import cell.ColouredDoor;
 import cell.TokenDoor;
-import javafx.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -21,8 +19,6 @@ import javafx.scene.image.Image;
 public class Player extends Element
 {
 	private String name;
-	private Image avatar;
-	private int score;
 	private int[] inventory =
 	{ 0, 0, 0, 0, 0, 0, 0 };
 	private int[][] pos;
@@ -171,7 +167,6 @@ public class Player extends Element
 	 * @param cell cell on board.
 	 * @return
 	 */
-	// TODO: make method less than 75 lines.
 	public boolean movable(Cell cell)
 	{
 		switch (cell.getString())

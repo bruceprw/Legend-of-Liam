@@ -2,12 +2,9 @@ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-
 import Character.DumbTargettingEnemy;
 import Character.Enemy;
-import Character.Node;
 import Character.Path;
 import Character.Player;
 import Character.SmartTargettingEnemy;
@@ -48,13 +45,7 @@ public class GameBoard
 	private ArrayList<Integer> enemyX;
 	private ArrayList<Integer> enemyY;
 
-	final private String UP = "UP";
-	final private String LEFT = "LEFT";
-	final private String DOWN = "DOWN";
-	final private String RIGHT = "RIGHT";
 	private long time;
-	final private int ONE = 1;
-	final private int TWO = 2;
 
 	public GameBoard(String filePath) throws FileNotFoundException
 	{
@@ -183,6 +174,8 @@ public class GameBoard
 		return board[y][x] instanceof Enemy;
 	}
 
+	//TODO this needs to be broken into several methods it far too big,
+	//TODO also comment this what does this even do?
 	public int move(String way)
 	{
 		// moveEnemy();
@@ -374,21 +367,6 @@ public class GameBoard
 		return board[y][x] instanceof Player;
 	}
 
-	private void moveEnemyOnBoard(int currentEnemyY, int currentEnemyX, int newEnemyY, int newEnemyX, int i)
-	{
-		if (newEnemyX == currentEnemyX && newEnemyY == currentEnemyY)
-		{
-		}
-		else
-		{
-			board[newEnemyY][newEnemyX] = board[currentEnemyY][currentEnemyX];
-			board[currentEnemyY][currentEnemyX] = new Empty();
-
-			enemyX.set(i, newEnemyX);
-			enemyY.set(i, newEnemyY);
-		}
-	}
-
 	public void moveEnemy()
 	{
 		for (int i = 0; i < enemyX.size(); i++)
@@ -485,150 +463,6 @@ public class GameBoard
 
 			}
 		}
-	}
-
-	/**
-	 * Returns the next cell based off movDirection of element
-	 * 
-	 * @param X            the X coordinates
-	 * @param Y            the Y coordinates
-	 * @param movDirection the move direction of the element
-	 * @return the Cell next to given X Y
-	 */
-	private Cell getNextCell(int X, int Y, String movDirection)
-	{
-		switch (movDirection)
-		{
-		case (UP):
-			// TODO make method to get element from board & background
-			return (Cell) background[Y + ONE][X];
-		case (DOWN):
-			return (Cell) background[Y - ONE][X];
-		case (LEFT):
-			return (Cell) background[Y][X - ONE];
-		case (RIGHT):
-			return (Cell) background[Y][X + ONE];
-		default:
-			throw new IllegalStateException("Undifened direction");
-
-		}
-
-	}
-
-	/**
-	 * Checks that there is a wall next to the enemy TODO refactor this into wall
-	 * following enemy doesn't need to be here
-	 * 
-	 * @param X            coordinate
-	 * @param Y            coordinate
-	 * @param movDirection the mov direction
-	 * @return True if there is a wall at the next space else return false
-	 */
-	private boolean checkWall(int X, int Y, String movDirection)
-	{
-		switch (movDirection)
-		{
-		case (UP):
-			if ((Cell) background[Y + ONE][X + ONE] instanceof Wall
-					|| (Cell) background[Y + ONE][X - ONE] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		case (DOWN):
-			if ((Cell) background[Y - ONE][X + ONE] instanceof Wall
-					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		case (LEFT):
-			if ((Cell) background[Y + ONE][X - ONE] instanceof Wall
-					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		case (RIGHT):
-			if ((Cell) background[Y + ONE][X - ONE] instanceof Wall
-					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		default:
-			throw new IllegalStateException("Undifened direction");
-
-		}
-	}
-
-	private String getNewWallDirection(int X, int Y)
-	{
-		if ((Cell) background[Y][X + TWO] instanceof Wall)
-		{
-			return RIGHT;
-		}
-		else if ((Cell) background[Y][X - TWO] instanceof Wall)
-		{
-			return LEFT;
-		}
-		else if ((Cell) background[Y + TWO][X] instanceof Wall)
-		{
-			return UP;
-		}
-		else if ((Cell) background[Y - TWO][X] instanceof Wall)
-		{
-			return DOWN;
-		}
-		return "REVERSE";
-
-	}
-
-	private boolean checkCorner(int X, int Y, String movDirection)
-	{
-		switch (movDirection)
-		{
-		case (UP):
-		case (DOWN):
-			if ((Cell) background[Y][X + TWO] instanceof Wall || (Cell) background[Y][X - TWO] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		case (LEFT):
-		case (RIGHT):
-			if ((Cell) background[Y + TWO][X] instanceof Wall || (Cell) background[Y - TWO][X] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		default:
-			throw new IllegalStateException("Undifened direction");
-
-		}
-	}
-
-	private Element getBoardElement(int X, int Y)
-	{
-		return board[Y][X];
 	}
 
 	public Cell getCell(int X, int Y)
