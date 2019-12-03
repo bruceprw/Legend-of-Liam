@@ -37,5 +37,19 @@ requires a certin amount of tokens to be able to pass through
 If you lucky enough to find one walking on the tile will teleporter you to some
 where else on the map, who knows where
 
+--Collectable item
+-Tokens
+collecting a certin amount of these tokens allow you to pass through a token
+door
+
+-Fipper
+These allow you to swim acrross water cells 
+
+-Fire boots
+These firey boots allow you to cooly traverse across fire tiles 
+
+-Key 
+A key allows you to open the door of the coresponding colour 
+
 
 
