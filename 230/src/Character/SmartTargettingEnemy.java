@@ -22,7 +22,7 @@ import javafx.scene.image.Image;
  */
 public class SmartTargettingEnemy extends Enemy
 {
-	private String path = "Images\\smart.jpg";
+	private String path = "Images\\smart.png";
 	private Image image;
 
 	public SmartTargettingEnemy(int currentX, int currentY, String movDirection) throws FileNotFoundException

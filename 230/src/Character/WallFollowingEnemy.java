@@ -19,7 +19,7 @@ import javafx.scene.image.Image;
 public class WallFollowingEnemy extends Enemy
 {
 
-	private String path = "Images\\wallHugE.jpg";
+	private String path = "Images\\wallHugE.png";
 	private Image image;
 	private String movDirection;
 	private String hand;

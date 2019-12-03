@@ -16,7 +16,7 @@ import javafx.scene.media.MediaPlayer;
  */
 public class Lava extends Cell {
 
-	private String path = "Images\\fire.jpg";
+	private String path = "Images\\updateimage\\lava.png";
 	private static String soundPath = "Sound\\catch_fire.wav";
 	private Image image;
 	private static Media music = new Media(new File(soundPath).toURI().toString());

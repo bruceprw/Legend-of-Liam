@@ -16,7 +16,7 @@ import javafx.scene.media.MediaPlayer;
  */
 public class FireBoot extends Collectible
 {
-	private String path = "Images\\Fireboot.jpg";
+	private String path = "Images\\fireboots.png";
     private static String soundPath = "Sound\\putting_on_shoes.mp3";
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
