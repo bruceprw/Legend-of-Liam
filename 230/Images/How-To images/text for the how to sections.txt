@@ -51,5 +51,24 @@ These firey boots allow you to cooly traverse across fire tiles
 -Key 
 A key allows you to open the door of the coresponding colour 
 
+--enemies
+-Straight enimies 
+Moves in a straight line will only change direction when meet with a tile he
+can't walk on
+
+--wall following enimies 
+These enimies will only walk next to a wall 
+
+- dumb enimies
+TThey will follow your everymove to persue you, you move up, he
+moves down, you move left he moves left, even if he can't get you he still
+follow you even if he ends up walking into a wall
+
+-Smart enimies
+These cruel fiends will find the fastest path to you and follow you till the
+ends of the earth. Or it can't reach you then there poor brain goes hay wire and
+he just stumbles in random direction
+
+
 
 

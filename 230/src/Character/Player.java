@@ -167,7 +167,6 @@ public class Player extends Element
 	 * @param cell cell on board.
 	 * @return
 	 */
-	// TODO: make method less than 75 lines.
 	public boolean movable(Cell cell)
 	{
 		switch (cell.getString())
