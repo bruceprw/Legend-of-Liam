@@ -9,6 +9,8 @@ public abstract class Screen {
 	protected final static int WINDOW_HEIGHT = 730;
 	protected final static int POPUP_WIDTH = 400;
 	protected final static int POPUP_HEIGHT = 300;
+	protected final static int HOW_TO_PLAY_WIDTH = 700;
+	protected final static int HOW_TO_PLAY_HEIGHT = 700;
 	protected final static String STYLESHEET = "application.css";
 
 	protected static Stage primaryStage;

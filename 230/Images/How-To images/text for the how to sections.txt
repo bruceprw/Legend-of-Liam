@@ -1,37 +1,38 @@
---The point of the game
--General description 
-You are stuck in Liam's maze you can't leave till you till you reach the goal.
-Sadly for you his poor students have been forced to create cruel and determine
-enemies to chase you down. If they catch you, they cruelest of punishements of
-all, the levels restarts and you have to start that level from the begining. 
-Can you escape Liam's curel maze and escape his
-deadly enimies. 
+Only text between hash-tags are read. Use // to mark newLines you don't want to be read.
+
+--General description 
+#You are stuck in Liam's maze you can't leave till you till you reach the goal. //
+Sadly for you his poor students have been forced to create cruel and determine //
+enemies to chase you down. If they catch you, they cruelest of punishments of //
+all, the levels restarts and you have to start that level from the beginning. 
+
+Can you escape Liam's cruel maze and escape his deadly enemies?# 
 
 --Leader board
-The three quickest players will be displayed on the leader board, can you get
-the quickest time 
+#The three quickest players will be displayed on the leader board, can you get //
+the quickest time# 
 
 --User Profile
-Each user has a profile to store there times, used for the leaderboard, and to
-save and load the game.
+#Each user has a profile to store there times, used for the leaderboard, and to //
+save and load the game.#
 
 --save & load
-You can save and load the game, This will save the current state of the game,
-including your positon, enimies positons, all the items you have and havent
-collected and all locked and unlocked doors.
+#You can save and load the game, This will save the current state of the game, //
+including your positon, enimies positons, all the items you have and havent //
+collected and all locked and unlocked doors.#
 
 --Movement  
-The arrows keys move the player in their coresponding direction
+#The arrows keys move the player in their coresponding direction:
 The up key moves the player up
 The down key moves the player down
 The left key moves the player left
 The right key moves the player right
 
-The space is used to confirm which door to go into on the level select.
-As well as to quit the level when in the game.
+The space is used to confirm which door to go into on the level select. //
+As well as to quit the level when in the game.#
 
 --Cell types
--Wall
+#-Wall
 Player and Enemy cannot stand or pass through a wall
 
 -ground
@@ -42,9 +43,9 @@ This is the space you need to get to, to win the level
 
 -water
 You need to get your hands on some flippers to be able to traverse this tile
-Enimies cannot swim
+Enimies cannot swim#
 
--fire
+#-fire
 You need a pair of fire boots to walk on these tiles, the enimies cannot stand
 on fire
 
@@ -57,10 +58,10 @@ requires a certin amount of tokens to be able to pass through
 
 --teleporter 
 If you lucky enough to find one walking on the tile will teleporter you to some
-where else on the map, who knows where
+where else on the map, who knows where#
 
 --Collectable item
--Tokens
+#-Tokens
 collecting a certin amount of these tokens allow you to pass through a token
 door
 
@@ -71,10 +72,10 @@ These allow you to swim acrross water cells
 These firey boots allow you to cooly traverse across fire tiles 
 
 -Key 
-A key allows you to open the door of the coresponding colour 
+A key allows you to open the door of the coresponding colour# 
 
 --enemies
--Straight enimies 
+#-Straight enimies 
 Moves in a straight line will only change direction when meet with a tile he
 can't walk on
 
