@@ -7,3 +7,35 @@ The right key moves the player right
 
 The space is used to confirm which door to go into on the level select.
 As well as to quit the level when in the game.
+
+--Cell types
+-Wall
+Player and Enemy cannot stand or pass through a wall
+
+-ground
+These are spaces the player and enemies can stand
+
+-goal
+This is the space you need to get to, to win the level
+
+-water
+You need to get your hands on some flippers to be able to traverse this tile
+Enimies cannot swim
+
+-fire
+You need a pair of fire boots to walk on these tiles, the enimies cannot stand
+on fire
+
+--Doors
+there are diffrent coloured door which require a key of the same colour to get
+through. 
+
+-token doors
+requires a certin amount of tokens to be able to pass through 
+
+--teleporter 
+If you lucky enough to find one walking on the tile will teleporter you to some
+where else on the map, who knows where
+
+
+
