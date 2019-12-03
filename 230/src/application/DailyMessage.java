@@ -1,97 +1,157 @@
 package application;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
 /**
+ * This class retrieve the Message of the Day for the program, using a process
+ * outlined at cswebcat.swan.ac.uk.
  * 
  * @author Gideon Davies
  * @version 1.0
  */
 public class DailyMessage {
+	/**
+	 * The URL where the puzzle is found.
+	 */
 	private static final String PUZZLE_URL = "http://cswebcat.swan.ac.uk/puzzle";
+
+	/**
+	 * The (partial) URL where the solution is inputed.
+	 */
 	private static final String SOLUTION_URL = "http://cswebcat.swan.ac.uk/message?solution=";
+
+	/**
+	 * The default daily message should any connection fail.
+	 */
+	private static final String DEFAULT_MESSAGE = "Welcome to Legend of Liam!";
+
+	/**
+	 * The daily message to be displayed.
+	 */
 	private static String dailyMessage = retrieveMessage();
-	
+
+	/**
+	 * Get the daily message.
+	 * 
+	 * @return The daily message
+	 */
 	public static String getMessage() {
 		return dailyMessage;
 	}
-	
-	private static String getPuzzle() throws IOException {
-		URL url = null;
-		HttpURLConnection connect = null; 
-		
-		url = new URL(PUZZLE_URL);
-		connect = (HttpURLConnection) url.openConnection();
 
+	/**
+	 * Connects to {@link #PUZZLE_URL} and retrieves a puzzle.
+	 * 
+	 * @return A puzzle as a String of capital letters.
+	 * @throws IOException
+	 *             if the connection fails.
+	 */
+	private static String getPuzzle() throws IOException {
+		// Establish a connection to PUZZLE_URL
+		URL url = new URL(PUZZLE_URL);
+		HttpURLConnection connect = (HttpURLConnection) url.openConnection();
 		connect.setRequestMethod("GET");
+
+		// Read the puzzle.
 		Scanner scan = new Scanner(connect.getInputStream());
 		String puzzle = scan.nextLine();
 		scan.close();
-		
+
 		return puzzle;
 	}
-	
+
+	/**
+	 * Solves the input puzzle using the method described at
+	 * cswebcat.swan.ac.uk.
+	 * 
+	 * @param puzzle
+	 *            The string of capital letters to be solved.
+	 * @return The puzzle solution.
+	 */
 	private static String solvePuzzle(String puzzle) {
-		char[] alphabet = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-				'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-		
+		char[] puzzleChars = puzzle.toCharArray();
+
 		String solution = "";
-		
-		for (int i = 0; i < puzzle.length(); i++) {
-			char puzzleChar = puzzle.charAt(i);
-			
-			int index = -1;
-			
-			for (int j = 0; j < alphabet.length; j++) {
-				if (puzzleChar == alphabet[j]) {
-					index = j;
-				}
-			}
-			
+
+		// Changes each letter.
+		for (int i = 0; i < puzzleChars.length; i++) {
+
+			// Every second letter changes to the previous letter.
+			// The 1st, 3rd etc. letters change to the next letter.
 			if (i % 2 == 0) {
-				index = (index + 1) % alphabet.length;
-			} else {
-				index -= 1;
-				if (index == -1) {
-					index = 25;
+
+				if (puzzleChars[i] != 'Z') {
+					puzzleChars[i]++;
+				} else {
+					// Z cycles back to A
+					puzzleChars[i] = 'A';
 				}
+
+			} else {
+
+				if (puzzleChars[i] != 'A') {
+					puzzleChars[i]--;
+				} else {
+					// A cycles to Z
+					puzzleChars[i] = 'Z';
+				}
+
 			}
 			
-			solution += alphabet[index];
+			// Add the changed letter to the solution string.
+			solution += puzzleChars[i];
 		}
-		
+
 		return solution;
 	}
-	
-	private static String inputSolution(String solution) throws IOException {
-		URL url = null;
-		HttpURLConnection connect = null; 
-		
-		url = new URL(SOLUTION_URL + solution);
-		connect = (HttpURLConnection) url.openConnection();
 
+	/**
+	 * Inputs a puzzle solution to the url and retrieves the daily message from
+	 * the page.
+	 * 
+	 * @param solution
+	 *            The solution to the puzzle.
+	 * @return The daily message.
+	 * @throws IOException
+	 *             if the connection fails.
+	 */
+	private static String inputSolution(String solution) throws IOException {
+		// Establish a connection. Solution added to URL.
+		URL url = new URL(SOLUTION_URL + solution);
+		HttpURLConnection connect = (HttpURLConnection) url.openConnection();
 		connect.setRequestMethod("GET");
-		Scanner scan = new Scanner(connect.getInputStream());
-		String puzzle = "";
 		
+		// Read the message from the page.
+		Scanner scan = new Scanner(connect.getInputStream());
+		String message = "";
+
 		while (scan.hasNextLine()) {
-			puzzle += scan.nextLine();
+			message += scan.nextLine();
 		}
 		scan.close();
-		return puzzle;
+		
+		return message;
 	}
-	
+
+	/**
+	 * This method retrieves the daily message from the website.
+	 * 
+	 * @return The daily message.
+	 */
 	private static String retrieveMessage() {
 		String message = null;
-		
+
 		try {
+			// Combines the three other private methods in order.
 			message = inputSolution(solvePuzzle(getPuzzle()));
 		} catch (IOException e) {
-			message = "Welcome to Legend of Liam!";
+			// Uses default message if any errors occur.
+			message = DEFAULT_MESSAGE;
 		}
-		
+
 		return message;
 	}
 }
