@@ -2,7 +2,6 @@ package application;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 import cell.LevelDoor;
 import javafx.scene.Scene;

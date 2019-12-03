@@ -6,16 +6,13 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Queue;
-import java.util.Random;
 import java.util.Set;
-import java.util.zip.DataFormatException;
 
 import application.Element;
 import application.GameBoard;
 import cell.Cell;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.util.Pair;
 
 /**
  * Smart targeting enemies uses BFS to find player and chase
@@ -296,7 +293,7 @@ public class SmartTargettingEnemy extends Enemy
 		{
 			boolean xB = p.get(i).getX() == x;
 			boolean yB = p.get(i).getY() == y;
-			boolean cB = p.get(i).getCount() < counter;
+			p.get(i).getCount();
 			if(xB && yB )
 				return true;
 		}

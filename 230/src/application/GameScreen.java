@@ -3,28 +3,19 @@ package application;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class GameScreen extends Screen
@@ -43,11 +34,7 @@ public class GameScreen extends Screen
 	private long time;
 	private GameBoard level;
 	private UserProfile user;
-	private Leaderboard leaderboard;
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-	private Image ggImage;
-	private Image ggBGImage;
-	// int time = 0;
 
 	/**
 	 * 
@@ -60,8 +47,8 @@ public class GameScreen extends Screen
 
 		try
 		{
-			ggImage = new Image(new FileInputStream("Images\\game_over.png"));
-			ggBGImage = new Image(new FileInputStream("Images\\gameoverbg.png"));
+			Image ggImage = new Image(new FileInputStream("Images\\game_over.png"));
+			Image ggBGImage = new Image(new FileInputStream("Images\\gameoverbg.png"));
 		}
 		catch (FileNotFoundException e1)
 		{

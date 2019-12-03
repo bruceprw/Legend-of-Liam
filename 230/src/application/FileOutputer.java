@@ -10,7 +10,6 @@ import cell.*;
 
 public class FileOutputer
 {
-	private GameBoard lvl;
 	private String output = "";
 	private String temp = "";
 	private Element[][] background;
@@ -18,8 +17,6 @@ public class FileOutputer
 
 	public FileOutputer(GameBoard lvl, LevelTime lt)
 	{
-		this.lvl = lvl;
-
 		background = lvl.getBackground();
 		board = lvl.getBoard();
 		output += "" + background[0].length + "," + background.length + "\r\n";

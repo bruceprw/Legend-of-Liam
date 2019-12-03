@@ -147,6 +147,7 @@ public class TitleScreen extends Screen
 
 					welcome.setText("Welcome " + currentUser.getName() + "!");
 				}
+				line.close();
 			}
 
 			if(!found)

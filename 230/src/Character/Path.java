@@ -1,7 +1,5 @@
 package Character;
 
-import java.util.ArrayList;
-
 import application.Element;
 import application.GameBoard;
 
@@ -14,14 +12,10 @@ public class Path extends Element
 	Path down;
 	Path left;
 	Path right;
-	private int playerX, playerY;
-	private boolean found = false;
-
+	
 	Path(GameBoard gb, int x, int y, int counter)
 	{
 		//temp.add(this);
-		this.playerX = playerX;
-		this.playerY = playerY;
 		this.x = x;
 		this.y = y;
 		this.counter = counter;

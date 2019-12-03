@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import application.Element;
 import application.Empty;
 import application.GameBoard;
-import cell.Cell;
 import cell.Ground;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -25,8 +24,6 @@ public class WallFollowingEnemy extends Enemy
 	private String movDirection;
 	private String hand;
 
-	private int wallX = 0;
-	private int wallY = 0;
 
 	public WallFollowingEnemy(int currentX, int currentY, String movDirection, String hand) throws FileNotFoundException
 	{
@@ -129,6 +126,7 @@ public class WallFollowingEnemy extends Enemy
 
 	}
 
+	//TODO THIS NEEDS TO BE REFACTORED 
 	public int getX(GameBoard gb, int x, int y)
 	{
 		switch (movDirection)

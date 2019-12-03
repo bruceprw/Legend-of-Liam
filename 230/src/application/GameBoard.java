@@ -2,12 +2,9 @@ package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-
 import Character.DumbTargettingEnemy;
 import Character.Enemy;
-import Character.Node;
 import Character.Path;
 import Character.Player;
 import Character.SmartTargettingEnemy;
