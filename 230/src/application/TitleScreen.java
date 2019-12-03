@@ -40,6 +40,7 @@ public class TitleScreen extends Screen
 	private Text welcome;
 	private Button loadGame;
 	private Button selectLevel;
+	private Button howToPlay;
 	private Button leaderboards;
 	private Button options;
 	private Button logout;
@@ -207,6 +208,16 @@ public class TitleScreen extends Screen
 			switchScreen(new LevelScreen(currentUser));
 			mediaPlayer.stop();
 		});
+		
+		howToPlay = new Button("How To Play");
+		howToPlay.setOnAction(event ->
+		{
+			try {
+				createPopup(new HowToPlayScreen());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		});
 
 		leaderboards = new Button("Leaderboards");
 		leaderboards.setOnAction(event ->
@@ -226,7 +237,7 @@ public class TitleScreen extends Screen
 			root.setCenter(loginPane);
 		});
 
-		menuPane.getChildren().addAll(welcome, loadGame, selectLevel, leaderboards, options, logout);
+		menuPane.getChildren().addAll(welcome, loadGame, selectLevel, howToPlay, leaderboards, options, logout);
 	}
 	
 	public void switchToMenu(UserProfile currentUser) {
