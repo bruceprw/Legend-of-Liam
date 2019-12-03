@@ -20,6 +20,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class HowToPlayScreen extends Screen {
+	/**
+	 * Width of the HowToPlayScreen.
+	 */
+	protected final static int HOW_TO_PLAY_WIDTH = 700;
+	/**
+	 * Height of the HowToPlayScreen.
+	 */
+	protected final static int HOW_TO_PLAY_HEIGHT = 700;
+	
 	ArrayList<String> texts = new ArrayList<String>();
 	private int textIndex = 0;
 	
