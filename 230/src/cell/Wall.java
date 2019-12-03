@@ -9,6 +9,11 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+/**
+ * The player and enemy cannot pass through the wall.
+ * @author user
+ *
+ */
 public class Wall extends Cell {
 	
 	private String path = "Images\\wall.jpg";
@@ -17,32 +22,52 @@ public class Wall extends Cell {
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	
+	/**
+	 * Sets the instance of the wall.
+	 * @throws FileNotFoundException
+	 */
     public Wall() throws FileNotFoundException {
         super(false, false, false, "", Item.NONE);
         setImage();
     } 
     
+    /**
+     * Get the image from the path.
+     * @throws FileNotFoundException
+     */
 	public void setImage() throws FileNotFoundException
 	{
 		image = new Image (new FileInputStream(path));
 	}
     
+	/**
+	 * Plays the sound when the player intended to go to the door.
+	 */
     public void playSound()
     {
     	mediaPlayer.setAutoPlay(true);
     	mediaPlayer.play();
     }
 	
+    /**
+     * @return the media player of the sound stored.
+     */
     public MediaPlayer getSound()
     {
     	return mediaPlayer;
     }
     
+    /**
+     * draw the door image.
+     */
     public void draw(GraphicsContext gc,int x,int y)
     {
 		gc.drawImage(image,x,y,100,100);
     }
     
+    /**
+     * Get the string for file outputer.
+     */
     public String getString()
     {
     	return "#";

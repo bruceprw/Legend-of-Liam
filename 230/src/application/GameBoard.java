@@ -28,6 +28,12 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * Stores the gameboard instance
+ * Deal with movement of the player and enemy. 
+ * @author user
+ *
+ */
 public class GameBoard
 {
 	private Element[][] board;
@@ -47,6 +53,11 @@ public class GameBoard
 
 	private long time;
 
+	/**
+	 * Reads in info from level file and set the important information.
+	 * @param filePath the name of the level file you wanted to retrieve.
+	 * @throws FileNotFoundException
+	 */
 	public GameBoard(String filePath) throws FileNotFoundException
 	{
 		FileReader lvl = new FileReader(filePath);
@@ -55,40 +66,27 @@ public class GameBoard
 		this.background = lvl.getBackground();
 		playerX = lvl.getPlayerX();
 		playerY = lvl.getPlayerY();
-		fog = lvl.getFog();
 		enemyX = lvl.getEnemyX();
 		enemyY = lvl.getEnemyY();
 		goalX = lvl.getGoalX();
 		goalY = lvl.getGoalY();
 	}
 
-	public void drawFog(GraphicsContext gc)
-	{
-		for (int y = playerY - 3, j = 0; y < playerY + 4; y++, j += 100)
-		{
-			for (int x = playerX - 3, i = 0; x < playerX + 4; x++, i += 100)
-			{
-				fog[y][x].draw(gc, i, j);
-			}
-		}
-	}
-
+	/**
+	 * Get the time passed.
+	 * @return the time passed
+	 */
 	public long getTime()
 	{
 		return time;
 	}
 
-	public void setFog()
-	{
-		for (int y = playerY - 2; y < playerY + 3; y++)
-		{
-			for (int x = playerX - 2; x < playerX + 3; x++)
-			{
-				fog[y][x] = new Empty();
-			}
-		}
-	}
-
+	/**
+	 * Draws the maps and the board elements in 7x5
+	 * and also the items hold by player.
+	 * @param gc the canvas graphics context
+	 * @throws FileNotFoundException
+	 */
 	public void drawGame(GraphicsContext gc) throws FileNotFoundException
 	{
 
@@ -100,34 +98,41 @@ public class GameBoard
 				board[y][x].draw(gc, i, j);
 			}
 		}
-		// TimeUnit.SECONDS.sleep(2);
-		setFog();
-
-		// int[] temp = ((Player) board[playerY][playerX]).getInventory();
-		/*
-		 * for (int i = 0; i < 7; i++) { System.out.print(temp[i]); }
-		 */
-		// System.out.println();
 		drawItem(gc);
-		// drawFog(gc);
 	}
 
+	/**
+	 * Get the player's x-coordinate.
+	 * @return player's x-coordinate
+	 */
 	public int getPlayerX()
 	{
 		return playerX;
 	}
 
+	/**
+	 * Get player's y-coordinate.
+	 * @return player's y-coordinate
+	 */
 	public int getPlayerY()
 	{
 		return playerY;
 	}
 
+	/**
+	 * Checks whether the player got to the goal
+	 * @return true if player got to the goal.
+	 */
 	public boolean end()
 	{
 		return playerY == goalY && playerX == goalX;
-
 	}
 
+	/**
+	 * Draws the items in order.
+	 * @param gc canvas's graphics context.
+	 * @throws FileNotFoundException
+	 */
 	public void drawItem(GraphicsContext gc) throws FileNotFoundException
 	{
 		int[] temp = ((Player) board[playerY][playerX]).getInventory();
@@ -159,16 +164,32 @@ public class GameBoard
 		
 	}
 
+	/**
+	 * Plays the sound of board element that player steps on.
+	 * @param x the next step that player steps on 
+	 * @param y the next step that player steps on
+	 */
 	public void playBoardSound(int x, int y)
 	{
 		board[y][x].playSound();
 	}
 
+	/**
+	 * Plays the sound of background element that player steps on.
+	 * @param x the next step that player steps on 
+	 * @param y the next step that player steps on
+	 */
 	public void playBackSound(int x, int y)
 	{
 		background[y][x].playSound();
 	}
 
+	/**
+	 * Checks whether the player touches the enemy.
+	 * @param x the x-coordinate that player about to step on.
+	 * @param y the y-coordinate that player about to step on.
+	 * @return true if the position is an instance of an enemy.
+	 */
 	public boolean touchEnemy(int x, int y)
 	{
 		return board[y][x] instanceof Enemy;
@@ -176,6 +197,16 @@ public class GameBoard
 
 	//TODO this needs to be broken into several methods it far too big,
 	//TODO also comment this what does this even do?
+	/**
+	 * Deals with the movement of the enemy, and also deals with the interaction after the player movement.
+	 * Moves the enemy and plays the sound that should be played when player steps on it.
+	 * Checks whether the player is dead or not.
+	 * 
+	 * @param way the way that player goes.
+	 * @return 0 if nothing happens
+	 * @return 1 if player got to the goal.
+	 * @return 2 if the player is dead.
+	 */
 	public int move(String way)
 	{
 		// moveEnemy();
@@ -250,7 +281,6 @@ public class GameBoard
 					board[playerY][playerX - 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX = playerX - 1;
-					// System.out.println(playerX);
 				}
 
 			}
@@ -288,7 +318,6 @@ public class GameBoard
 					board[playerY - 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY - 1;
-					// System.out.println(playerY);
 				}
 			}
 			break;
@@ -325,14 +354,11 @@ public class GameBoard
 					board[playerY + 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY + 1;
-					// System.out.println(playerY);
 				}
 			}
 			break;
-
 		}
 		moveEnemy();
-		//System.out.println(checkPlayerDead());
 		if (playerDead() || checkPlayerDead())
 		{
 			mediaPlayer = new MediaPlayer(playerDie);
@@ -345,11 +371,19 @@ public class GameBoard
 		return 0;
 	}
 
+	/**
+	 * Checks the next step of enemy is player or not
+	 * @return true if the next step is player and therefore the player is dead.
+	 */
 	public boolean checkPlayerDead()
 	{
 		return !(board[playerY][playerX] instanceof Player);
 	}
 
+	/**
+	 * Checks whether player walks towards the enemy.
+	 * @return true if player walks towards enemy.
+	 */
 	public boolean playerDead()
 	{
 		for (int i = 0; i < enemyX.size(); i++)
@@ -362,11 +396,9 @@ public class GameBoard
 		return false;
 	}
 
-	public boolean touchPlayer(int x, int y)
-	{
-		return board[y][x] instanceof Player;
-	}
-
+	/**
+	 * Moves every enemy after the player moves.
+	 */
 	public void moveEnemy()
 	{
 		for (int i = 0; i < enemyX.size(); i++)
@@ -432,8 +464,9 @@ public class GameBoard
 
 				int newXe = e.getX();
 				int newYe = e.getY();
-
-				if (newXe == e.getX() && newYe == e.getY())
+				
+				//Checks whether there are path that goes to player as if there are no path the enemy won't move.
+				if (newXe == enemyX.get(i) && newYe == enemyY.get(i))
 				{
 
 				}
@@ -444,42 +477,44 @@ public class GameBoard
 					enemyY.set(i, newYe);
 					enemyX.set(i, newXe);
 				}
-
-				// System.out.println(newXe+","+newYe);
-
-				
-				/* System.out.print(enemyX.get(i)); System.out.print(",");
-				 System.out.print(enemyY.get(i)); System.out.print(",");
-				 System.out.println(board[enemyY.get(i)][enemyX.get(i)].getString());
-				 System.out.print(playerX); System.out.print(","+playerY);
-				 System.out.println("Player");*.
-				 
-
-				/*
-				 * System.out.print(enemyX.get(i)); System.out.print(","+enemyY.get(i));
-				 * System.out.println(",SMART"); System.out.println("bca");
-				 */
 				break;
-
 			}
 		}
 	}
 
+	/**
+	 * Get the cell at x,y coordinate to retrieve other info.
+	 * @param X x-coordinate
+	 * @param Y y-coordinate
+	 * @return the cell from the background 
+	 */
 	public Cell getCell(int X, int Y)
 	{
 		return (Cell) background[Y][X];
 	}
 
+	/**
+	 * Allow the player to get collectible.
+	 * @param co the collectible
+	 */
 	public void acquire(Collectible co)
 	{
 		((Player) board[playerY][playerX]).acquireInventory(co.getIndex());
 	}
 
+	/**
+	 * Get the board
+	 * @return the board
+	 */
 	public Element[][] getBoard()
 	{
 		return this.board;
 	}
 
+	/**
+	 * Get the background
+	 * @return the background
+	 */
 	public Element[][] getBackground()
 	{
 		return this.background;

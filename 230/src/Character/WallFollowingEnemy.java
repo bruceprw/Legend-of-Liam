@@ -24,7 +24,14 @@ public class WallFollowingEnemy extends Enemy
 	private String movDirection;
 	private String hand;
 
-
+	/**
+	 * Stores the enemy information from the level file.
+	 * @param currentX current x position
+	 * @param currentY current y position
+	 * @param movDirection the direction that this enemy is moving
+	 * @param hand the hand that's touching the wall for direction determining.
+	 * @throws FileNotFoundException
+	 */
 	public WallFollowingEnemy(int currentX, int currentY, String movDirection, String hand) throws FileNotFoundException
 	{
 		this.currentPositionX = currentX;
@@ -105,19 +112,29 @@ public class WallFollowingEnemy extends Enemy
 		return movDirection;
 	}
 
+	/**
+	 * String for output file.
+	 */
 	public String getString()
 	{
 		return "WALLHUG";
 	}
 
+	/**
+	 * Sets the image of the enemy.
+	 * 
+	 * @throws FileNotFoundException
+	 */
 	public void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
 	}
 
+	/**
+	 * draw the image.
+	 */
 	public void draw(GraphicsContext gc, int x, int y)
 	{
-
 		gc.drawImage(image, x, y, 100, 100);
 	}
 

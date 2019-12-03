@@ -9,7 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class ColouredDoor extends Cell {
+public class ColouredDoor extends Cell
+{
 
 	private String colour;
 	private String greenPath = "Images\\green_door.jpg";
@@ -23,97 +24,133 @@ public class ColouredDoor extends Cell {
 	private static Media knockMusic = new Media(new File(knockSoundPath).toURI().toString());
 	private static Media openMusic = new Media(new File(openSoundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer;
-	
-	
-	
-    public ColouredDoor(String colour) throws FileNotFoundException {
-        super(false, true, false, "", Item.GREEN_KEY);
-        this.colour = colour;
-        this.opened=false;
-        setImage(colour);
-    }
-    
-    public MediaPlayer getSound()
-    {
-    	if(opened)
-    	{
-    		playOpenSound();
-    	}
-    	else
-    	{
-    		playKnockSound();
-    	}
-    	
-    	return mediaPlayer;
-    }
-    
-    public String getColour()
-    {
-    	return colour;
-    }
-    
-    public void openDoor()
-    {
-    	opened=true;
-    }
-    
+
+	/**
+	 * Sets the information of the door.
+	 * @param colour the colour of the door.
+	 * @throws FileNotFoundException
+	 */
+	public ColouredDoor(String colour) throws FileNotFoundException
+	{
+		super(false, true, false, "", Item.GREEN_KEY);
+		this.colour = colour;
+		this.opened = false;
+		setImage(colour);
+	}
+
+	/**
+	 * Plays the sound 
+	 */
+	public MediaPlayer getSound()
+	{
+		//Change the sound track as there are different "door" condition.
+		if(opened)
+		{
+			playOpenSound();
+		}
+		else
+		{
+			playKnockSound();
+		}
+
+		return mediaPlayer;
+	}
+
+	/**
+	 * Get the colour.
+	 * @return the colour
+	 */
+	public String getColour()
+	{
+		return colour;
+	}
+
+	/**
+	 * Open the door.
+	 */
+	public void openDoor()
+	{
+		opened = true;
+	}
+
+	/**
+	 * Checks whether the door is opened or not.
+	 * @return true if the door is opened.
+	 */
 	public boolean getOpened()
 	{
 		return opened;
 	}
-    
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-    	switch(colour)
-    	{
-    	case "GREENDOOR":
-    		gc.drawImage(image,x,y,100,100);
-    		break;
-    	case "REDDOOR":
-    		gc.drawImage(image,x,y,100,100);
-    		break;
-    	case "YELLOWDOOR":
-    		gc.drawImage(image,x,y,100,100);
-    		break;
-    	case "BLUEDOOR":
-    		gc.drawImage(image,x,y,100,100);
-    		break;
-    	}
-    }
-    
-    public void playKnockSound()
-    {
-    	mediaPlayer = new MediaPlayer(knockMusic);
-    	mediaPlayer.play();
-    }
-    
-    public void playOpenSound()
-    {
-    	mediaPlayer = new MediaPlayer(openMusic);
-    	mediaPlayer.play();
-    }
-    
-    public String getString()
-    {
-    	return colour;
-    }
-    
-    public void setImage (String colour) throws FileNotFoundException
-    {
-    	switch(colour)
-    	{
-    	case "GREENDOOR":
-    		image = new Image(new FileInputStream(greenPath));
-    		break;
-    	case "REDDOOR":
-    		image = new Image(new FileInputStream(redPath));
-    		break;
-    	case "YELLOWDOOR":
-    		image = new Image(new FileInputStream(yellowPath));
-    		break;
-    	case "BLUEDOOR":
-    		image = new Image(new FileInputStream(bluePath));
-    		break;
-    	}
-    }
+
+	/**
+	 * Draw the door according to different colour instance.
+	 */
+	public void draw(GraphicsContext gc, int x, int y)
+	{
+		switch (colour)
+		{
+		case "GREENDOOR":
+			gc.drawImage(image, x, y, 100, 100);
+			break;
+		case "REDDOOR":
+			gc.drawImage(image, x, y, 100, 100);
+			break;
+		case "YELLOWDOOR":
+			gc.drawImage(image, x, y, 100, 100);
+			break;
+		case "BLUEDOOR":
+			gc.drawImage(image, x, y, 100, 100);
+			break;
+		}
+	}
+
+	/**
+	 * Plays the sound that the door is closed.
+	 */
+	public void playKnockSound()
+	{
+		mediaPlayer = new MediaPlayer(knockMusic);
+		mediaPlayer.play();
+	}
+
+	/**
+	 * Plays the sound that the door is opened.
+	 */
+	public void playOpenSound()
+	{
+		mediaPlayer = new MediaPlayer(openMusic);
+		mediaPlayer.play();
+	}
+
+	/**
+	 * Get the string of the door.
+	 */
+	public String getString()
+	{
+		return colour;
+	}
+
+	/**
+	 * Set the image to different colour according to the colour of the instance.
+	 * @param colour
+	 * @throws FileNotFoundException
+	 */
+	public void setImage(String colour) throws FileNotFoundException
+	{
+		switch (colour)
+		{
+		case "GREENDOOR":
+			image = new Image(new FileInputStream(greenPath));
+			break;
+		case "REDDOOR":
+			image = new Image(new FileInputStream(redPath));
+			break;
+		case "YELLOWDOOR":
+			image = new Image(new FileInputStream(yellowPath));
+			break;
+		case "BLUEDOOR":
+			image = new Image(new FileInputStream(bluePath));
+			break;
+		}
+	}
 }

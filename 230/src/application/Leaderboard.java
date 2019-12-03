@@ -6,15 +6,29 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Reads the leader board file and output the leader board to leaderboard page.
+ * @author user
+ *
+ */
 public class Leaderboard
 {
 	private String filePath;
 	private ArrayList<LevelTime> list = new ArrayList<LevelTime>();
 
+	/**
+	 * Creates instance of leaderboard
+	 * @param level the level and file title of each leaderboard.
+	 */
 	public Leaderboard(String level)
 	{
 		initLeaderboard(level);
 	}
+	
+	/**
+	 * Initiate the file reading.
+	 * @param level
+	 */
 	public void initLeaderboard(String level) {
 		this.filePath = "Leaderboard\\leaderboard" + level + ".txt";
 		System.out.println(list);
@@ -22,6 +36,9 @@ public class Leaderboard
 		sortList();
 	}
 
+	/**
+	 * Read the level info.
+	 */
 	public void readLevelTime()
 	{
 		File file = new File(filePath);
@@ -51,6 +68,9 @@ public class Leaderboard
 		
 	}
 
+	/**
+	 * Output the information after the information has been changed.
+	 */
 	public void outputList(){
 		File file = new File(filePath);
 		System.out.println(list);
@@ -73,6 +93,11 @@ public class Leaderboard
 		out.close();
 	}
 
+	/**
+	 * Update the list by adding new value.
+	 * @param name the name of player
+	 * @param time the time taken to finish the game.
+	 */
 	public void addLevelTime(String name, long time)
 	{
 		LevelTime lt = new LevelTime(name, time);
@@ -80,11 +105,18 @@ public class Leaderboard
 		outputList();
 	}
 
+	/**
+	 * 
+	 * @return the list that stores names and time taken.
+	 */
 	public ArrayList<LevelTime> getList()
 	{
 		return list;
 	}
 
+	/**
+	 * Sort the list according to time difference.
+	 */
 	public void sortList()
 	{
 		for (int i = 0; i < list.size(); i++)

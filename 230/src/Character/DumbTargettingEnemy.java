@@ -20,6 +20,12 @@ public class DumbTargettingEnemy extends Enemy
 	private String path = "Images\\idiot.png";
 	private Image image;
 
+	/**
+	 * Create an instance of dumb enemy.
+	 * @param currentX current x-position
+	 * @param currentY current y-position
+	 * @param movDirection the direction the enemy is moving.
+	 */
 	public DumbTargettingEnemy(int currentX, int currentY, String movDirection)
 	{
 		this.currentPositionX = currentX;
@@ -84,21 +90,40 @@ public class DumbTargettingEnemy extends Enemy
 		}
 	}
 
+	/**
+	 * String for output purpose.
+	 */
 	public String getString()
 	{
 		return "DUMB";
 	}
 
+	/**
+	 * Set image.
+	 * @throws FileNotFoundException
+	 */
 	public void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
 	}
 
+	/**
+	 * Draw the image.
+	 */
 	public void draw(GraphicsContext gc, int x, int y)
 	{
 		gc.drawImage(image, x, y, 100, 100);
 	}
 
+	/**
+	 * Get the next x-coordinate.
+	 * @param gb the gameboard for checking elements.
+	 * @param playerX the player's x-coordinate.
+	 * @param playerY the player's y-coordinate.
+	 * @param x the enemy's x-coordinate.
+	 * @param y the enemy's y-coordinate.
+	 * @return the position of the next move.
+	 */
 	public int getX(GameBoard gb, int playerX, int playerY, int x, int y)
 	{
 		int xD = playerX - x;
@@ -128,6 +153,15 @@ public class DumbTargettingEnemy extends Enemy
 			return x;
 	}
 
+	/**
+	 * Get the next y-coordinate.
+	 * @param gb the gameboard for checking elements.
+	 * @param playerX the player's x-coordinate.
+	 * @param playerY the player's y-coordinate.
+	 * @param x the enemy's x-coordinate.
+	 * @param y the enemy's y-coordinate.
+	 * @return the position of the next move.
+	 */
 	public int getY(GameBoard gb, int playerX, int playerY, int x, int y)
 	{
 		int xD = playerX - x;

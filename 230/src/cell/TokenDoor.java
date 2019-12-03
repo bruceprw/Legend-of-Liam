@@ -9,7 +9,13 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+/**
+ * Stores information of tokendoor.
+ * @author user
+ *
+ */
 public class TokenDoor extends Cell {
+	/*The token number needed to unlock the door.*/
     private int tokenNumToUnlockDoor;
     private String path = "Images\\token_door.jpg";
 	private static String knockSoundPath = "Sound\\door_knock.mp3";
@@ -20,6 +26,11 @@ public class TokenDoor extends Cell {
     private Image image;
     private boolean opened;
 
+    /**
+     * Create instance of the door.
+     * @param tokenNumToUnlockDoor number of tokens need to open the door.
+     * @throws FileNotFoundException
+     */
     public TokenDoor(int tokenNumToUnlockDoor) throws FileNotFoundException {
         super(false, true, false, "", Item.NONE);
         this.tokenNumToUnlockDoor = tokenNumToUnlockDoor;
@@ -31,49 +42,80 @@ public class TokenDoor extends Cell {
     public boolean isPlayerMoved() {
     }*/
 
+    /**
+     * Gets the media player of the door.
+     * @return media player that stores the sound.
+     * 
+     */
     public MediaPlayer getSound()
     {
     	return mediaPlayer;
     }
     
+    /**
+     * Get the token number needed to open door.
+     * @return the number
+     */
 	public int getTokenNum()
 	{
-		
 		return tokenNumToUnlockDoor;
 	}
 	
+	/**
+	 * Open the door.
+	 */
 	public void openDoor()
 	{
 		this.opened=true;
 	}
 	
+	/** 
+	 * return the state of the door.
+	 * @return true if the door is opened.
+	 */
 	public boolean getOpened()
 	{
 		return opened;
 	}
 	
+	/**
+	 * Set the image.
+	 * @throws FileNotFoundException
+	 */
 	public void setImage() throws FileNotFoundException
 	{
 		image = new Image (new FileInputStream(path));
 	}
 	
+	/**
+	 * Plays the sound that the door isn't opened.
+	 */
     public void playKnockSound()
     {
     	mediaPlayer = new MediaPlayer(knockMusic);
     	mediaPlayer.play();
     }
     
+    /**
+     * Plays the sound that the door is opening.
+     */
     public void playOpenSound()
     {
     	mediaPlayer=new MediaPlayer(openMusic);
     	mediaPlayer.play();
     }
 	
+    /**
+     * Draw the door.
+     */
     public void draw(GraphicsContext gc,int x,int y)
     {
 		gc.drawImage(image,x,y,100,100);
     }
     
+    /**
+     * Get the String for output purpose.
+     */
     public String getString()
     {
     	return "D";

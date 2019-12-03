@@ -13,6 +13,12 @@ import Character.WallFollowingEnemy;
 import Collectibles.*;
 import cell.*;
 
+/**
+ * Reads the level information from the level files.
+ * And it allows the other class to retrieve information such as player's coordinate,and the board and background instance.
+ * @author user
+ *
+ */
 
 public class FileReader
 {
@@ -30,6 +36,12 @@ public class FileReader
 	private int goalY;
 	private long time;
 
+	/**
+	 * Reads in the level info. from the level files.
+	 * Converts the information to different Class instance that works to each other. 
+	 * @param filePath
+	 * @throws FileNotFoundException
+	 */
 	public FileReader(String filePath) throws FileNotFoundException
 	{
 		File file = new File(filePath);
@@ -51,7 +63,7 @@ public class FileReader
 			map[i] = in.nextLine();
 		}
 
-		subMap(map);
+		substituteBackground(map);
 
 		while (in.hasNext())
 		{
@@ -59,7 +71,7 @@ public class FileReader
 			if(temp.equals("////"))
 				break;
 			Scanner addLine = new Scanner(temp);
-			subAdd(addLine);
+			substituteBoard(addLine);
 		}
 		for (int y = 0; y < board.length; y++)
 		{
@@ -77,94 +89,89 @@ public class FileReader
 					background[y][x] = new Empty();
 			}
 		}
-		fog = new Element[mapSizeY][mapSizeX];
-		setFog();
-		/*
-		for (int y = 0; y < board.length; y++)
-		{
-			for (int x = 0; x < board[y].length; x++)
-			{
-				System.out.print(board[y][x].getString());
-			}
-			System.out.println();
-		}
-		for (int y = 0; y < background.length; y++)
-		{
-			for (int x = 0; x < background[y].length; x++)
-			{
-				System.out.print(background[y][x].getString());
-			}
-			System.out.println();
-		}*/
 		sizeScan.close();
 		in.close();
 	}
+	
+	/**
+	 * Get the time 
+	 * @return the time that was saved in the file.
+	 */
 
 	public long getTime()
 	{
 		return time;
 	}
 	
+	/**
+	 * Gets the coordinates of every enemas.
+	 * @return arrayList of x-coordinate.
+	 */
 	public ArrayList<Integer> getEnemyX()
 	{
 		return enemyX;
 	}
 	
+	/**
+	 * Gets the coordinates of every enemas.
+	 * @return arrayList of y-coordinate.
+	 */
 	public ArrayList<Integer> getEnemyY()
 	{
 		return enemyY;
 	}
 	
-	public Element[][] getFog()
-	{
-		return fog;
-	}
-	
-	public void setFog() throws FileNotFoundException
-	{
-		for(int y=0;y<background.length;y++)
-		{
-			for(int x=0;x<background[y].length;x++)
-			{
-				fog[y][x]=new Fog();
-			}
-		}
-	}
-	
+	/**
+	 * Gets the player's x-coordinates.
+	 * @return player's x-coordinates
+	 */
 	public int getPlayerX()
 	{
 		return playerX;
 	}
 
+	/**
+	 * Gets the player's y-coordinates.
+	 * @return player's y-coordinates
+	 */
 	public int getPlayerY()
 	{
 		return playerY;
 	}
 
+	/**
+	 * Get the background element instance
+	 * @return the background element instance
+	 */
 	public Element[][] getBackground()
 	{
 		return this.background;
 	}
 
+	/**
+	 * Gets the board elements instance
+	 * @return the board elements instance
+	 */
 	public Element[][] getBoard()
 	{
 		return this.board;
 	}
 
-	public void subAdd(Scanner line) throws FileNotFoundException
+	/**
+	 * Substitute the level file's ACSII information to classes.
+	 * @param line the current line that's scanning
+	 * @throws FileNotFoundException
+	 */
+	public void substituteBoard(Scanner line) throws FileNotFoundException
 	{
 		line.useDelimiter(",");
 		int x = line.nextInt();
-		//System.out.println(x+" ");
 		int y = line.nextInt();
 		
 		String feature = line.next();
-		//System.out.println(feature);
 		switch (feature)
 		{
 		case "START":
-			//System.out.println(playerY);
-			//System.out.println(playerX);
 			playerX = x;
 			playerY = y;
 			board[y][x] = new Player("Name");
@@ -272,16 +279,30 @@ public class FileReader
 		}
 	}
 
+	/**
+	 * Get the goal x-coordinate.
+	 * @return the goal x-coordinate
+	 */
 	public int getGoalX()
 	{
 		return goalX;
 	}
+	
+	/**
+	 * Get the goal y-coordinate
+	 * @return the goal's y-coordinate
+	 */
 	public int getGoalY()
 	{
 		return goalY;
 	}
 	
-	public void subMap(String[] temp) throws FileNotFoundException
+	/**
+	 * Substitutes the background ASCII information to classes
+	 * @param temp the information of the map in String array
+	 * @throws FileNotFoundException 
+	 */
+	public void substituteBackground(String[] temp) throws FileNotFoundException
 	{
 
 		for (int j = 0; j < temp.length; j++)

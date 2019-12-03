@@ -13,6 +13,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 
+/**
+ * The door that the player pass to get to different level.
+ * @author user
+ *
+ */
 public class LevelDoor extends Cell {
 
 	private String path = "Images\\blue_door.jpg";
@@ -22,6 +27,11 @@ public class LevelDoor extends Cell {
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	
+	/**
+	 * Create the instance of the level door.
+	 * @param levelNo
+	 * @throws FileNotFoundException
+	 */
     public LevelDoor(int levelNo) throws FileNotFoundException{
         super(false, true, false, "", Item.NONE);
         this.levelNo = levelNo;
