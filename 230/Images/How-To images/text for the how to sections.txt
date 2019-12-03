@@ -1,32 +1,34 @@
+Only text between hash-tags are read. Use // to mark newLines you don't want to be read.
+
 --General description 
-#You are stuck in Liam's maze you can't leave till you till you reach the goal.
-Sadly for you his poor students have been forced to create cruel and determine
-enemies to chase you down. If they catch you, they cruelest of punishments of
+#You are stuck in Liam's maze you can't leave till you till you reach the goal. //
+Sadly for you his poor students have been forced to create cruel and determine //
+enemies to chase you down. If they catch you, they cruelest of punishments of //
 all, the levels restarts and you have to start that level from the beginning. 
-Can you escape Liam's cruel maze and escape his
-deadly enemies.# 
+
+Can you escape Liam's cruel maze and escape his deadly enemies?# 
 
 --Leader board
-#The three quickest players will be displayed on the leader board, can you get
+#The three quickest players will be displayed on the leader board, can you get //
 the quickest time# 
 
 --User Profile
-#Each user has a profile to store there times, used for the leaderboard, and to
+#Each user has a profile to store there times, used for the leaderboard, and to //
 save and load the game.#
 
 --save & load
-#You can save and load the game, This will save the current state of the game,
-including your positon, enimies positons, all the items you have and havent
+#You can save and load the game, This will save the current state of the game, //
+including your positon, enimies positons, all the items you have and havent //
 collected and all locked and unlocked doors.#
 
 --Movement  
-#The arrows keys move the player in their coresponding direction
+#The arrows keys move the player in their coresponding direction:
 The up key moves the player up
 The down key moves the player down
 The left key moves the player left
 The right key moves the player right
 
-The space is used to confirm which door to go into on the level select.
+The space is used to confirm which door to go into on the level select. //
 As well as to quit the level when in the game.#
 
 --Cell types

@@ -97,13 +97,31 @@ public class HowToPlayScreen extends Screen {
 		
 		while (in.hasNext()) {
 			in.next();
-			
+		
 			if (in.hasNext()) {
-				texts.add(in.next());
+				//texts.add(in.next());
+				texts.add(readPage(new Scanner(in.next())));
 			}
 			
 		}
 		
 		in.close();
+	}
+	
+	private String readPage(Scanner page) {
+		page.useDelimiter("//");
+		
+		String s = "";
+		
+		while (page.hasNext()) {
+			s += page.next();
+			
+			if (page.hasNextLine()) {
+				page.nextLine();
+				
+			}
+		}
+		
+		return s;
 	}
 }
