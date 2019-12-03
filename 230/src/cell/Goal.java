@@ -8,41 +8,43 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class Goal extends Cell {
+public class Goal extends Cell
+{
 
 	private String path = "Images\\goal.png";
 	private static String soundPath = "Sound\\BGM\\Mournful_DepartureGOAL.mp3";
 	private Image image;
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
-	
-    public Goal() throws FileNotFoundException {
-        super(false, true, false, "", Item.NONE);
-        setImage();
-    }
-    
-    public MediaPlayer getSound()
-    {
-    	return mediaPlayer;
-    }
 
-    public void setImage() throws FileNotFoundException
-    {
-    	Image image = new Image(new FileInputStream(path));
-    }
-    
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
-    
-    public String getString()
-    {
-    	return "G";
-    }
-    
-    public void playSound()
-    {
-    	mediaPlayer.play();
-    }
+	public Goal() throws FileNotFoundException
+	{
+		super(false, true, false, "", Item.NONE);
+		setImage();
+	}
+
+	public MediaPlayer getSound()
+	{
+		return mediaPlayer;
+	}
+
+	public void setImage() throws FileNotFoundException
+	{
+		Image image = new Image(new FileInputStream(path));
+	}
+
+	public void draw(GraphicsContext gc, int x, int y)
+	{
+		gc.drawImage(image, x, y, 100, 100);
+	}
+
+	public String getString()
+	{
+		return "G";
+	}
+
+	public void playSound()
+	{
+		mediaPlayer.play();
+	}
 }

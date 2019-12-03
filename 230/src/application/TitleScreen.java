@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import application.DailyMessage;
@@ -13,6 +14,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
@@ -20,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -52,10 +56,18 @@ public class TitleScreen extends Screen
 	private UserProfile currentUser = null;
 
 
-	public TitleScreen() throws FileNotFoundException
+	public TitleScreen()
 	{
 		root = new BorderPane();
-		titleImage = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
+		try
+		{
+			titleImage = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		a = new ImageView(titleImage);
 		a.setFitHeight(730);
@@ -67,7 +79,7 @@ public class TitleScreen extends Screen
 		buildMenuPane();
 		mediaPlayer = new MediaPlayer(music);
 		mediaPlayer.setAutoPlay(true);
-		mediaPlayer.setVolume(0.5);
+		mediaPlayer.setVolume(0.2);
 		mediaPlayer.play();
 		
 		
@@ -87,8 +99,10 @@ public class TitleScreen extends Screen
 
 		title = new Text("Legend of Liam");
 		title.setFont(Font.font(100));
+		title.setFill(Color.CHARTREUSE);
 
 		dailyMessage = new Text(DailyMessage.getMessage());
+		dailyMessage.setFill(Color.CHARTREUSE);
 		dailyMessage.setWrappingWidth(WINDOW_WIDTH);
 		dailyMessage.setTextAlignment(TextAlignment.CENTER);
 		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
@@ -105,8 +119,11 @@ public class TitleScreen extends Screen
 		loginPane.setAlignment(Pos.CENTER);
 		loginPane.setBackground(new Background(b));
 		loginPrompt = new Text("Please enter your login details, or");
+		loginPrompt.setFill(Color.CHARTREUSE);
 		usernameLabel = new Text("Username:");
+		usernameLabel.setFill(Color.CHARTREUSE);
 		passwordLabel = new Text("Password:");
+		passwordLabel.setFill(Color.CHARTREUSE);
 		username = new TextField();
 		password = new PasswordField();
 		submit = new Button("Submit");
@@ -174,6 +191,7 @@ public class TitleScreen extends Screen
 		menuPane = new VBox();
 		menuPane.setBackground(new Background(b));
 		welcome = new Text("Welcome!");
+		welcome.setFill(Color.CHARTREUSE);
 
 		editProfile = new Button("Load Game");
 		editProfile.setOnAction(event ->

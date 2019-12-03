@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,6 +25,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -47,6 +50,8 @@ public class GameScreen extends Screen
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 	private Image ggImage;
 	private Image ggBGImage;
+	private Media music = new Media(new File("Sound\\BGM\\bg.mp3").toURI().toString());
+	private MediaPlayer bg = new MediaPlayer(music);
 	// int time = 0;
 
 	/**
@@ -57,7 +62,8 @@ public class GameScreen extends Screen
 
 	public GameScreen(String levelNo, UserProfile user)
 	{
-
+		bg.play();
+		
 		try
 		{
 			ggImage = new Image(new FileInputStream("Images\\game_over.png"));
@@ -132,16 +138,13 @@ public class GameScreen extends Screen
 	// when its a game over it fades back to the title screen
 	public void RestartLevel()
 	{
-
-		FadeTransition ft = new FadeTransition(Duration.millis(3000), root);
-		ft.setFromValue(1);
-		ft.setToValue(0);
-		ft.play();
+		bg.stop();
 		switchScreen(new GameScreen(levelNo, user));
 	}
 
 	public void NextLevel()
 	{
+		bg.stop();
 		switchScreen(new LevelScreen(user));
 		Leaderboard ld = new Leaderboard(levelNo);
 
@@ -205,6 +208,7 @@ public class GameScreen extends Screen
 			}
 			break;
 		case ESCAPE:
+			bg.stop();
 			Scene s = new LevelScreen(user).getScene();
 			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
 			primaryStage.setScene(s);
