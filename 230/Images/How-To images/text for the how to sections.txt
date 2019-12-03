@@ -1,0 +1,9 @@
+--Movement  
+The arrows keys move the player in their coresponding direction
+The up key moves the player up
+The down key moves the player down
+The left key moves the player left
+The right key moves the player right
+
+The space is used to confirm which door to go into on the level select.
+As well as to quit the level when in the game.
