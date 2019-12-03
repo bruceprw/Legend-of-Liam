@@ -146,11 +146,39 @@ public class DumbTargettingEnemy extends Enemy
 				return x;
 		}
 		else if((xDifference==yDifference)&&(xD<0))
-			return x-1;
+		{
+			if(checkMove(gb,x-1,y))
+				return x-1;
+			else
+				return x;
+		}
 		else if((xDifference==yDifference)&&(xD>0))
-			return x+1;
+		{
+			if(checkMove(gb,x+1,y))
+				return x+1;
+			else
+				return x;
+		}
 		else
+		{
+			if(yD>0&&!checkMove(gb,x,y+1))
+			{
+				if(xD>0&&checkMove(gb,x+1,y))
+					return x+1;
+				else if(xD<0&&checkMove(gb,x-1,y))
+					return x-1;
+			}
+			else if(yD<0&&!checkMove(gb,x,y-1))
+			{
+				if(xD>0&&checkMove(gb,x+1,y))
+					return x+1;
+				else if(xD<0&&checkMove(gb,x-1,y))
+					return x-1;
+			}
+			
 			return x;
+		}
+			
 	}
 
 	/**
@@ -179,6 +207,28 @@ public class DumbTargettingEnemy extends Enemy
 		{
 			if(checkMove(gb,x,y-1))
 				return y-1;
+			else
+				return y;
+		}
+		else if((xDifference==yDifference)&&(yD<0))
+		{
+			if(checkMove(gb,x+1,y)&&xD>0)
+				return y;
+			else if(checkMove(gb,x-1,y)&&xD<0)
+				return y;
+			else if(checkMove(gb,x,y-1))
+				return y-1;
+			else
+				return y;
+		}
+		else if((xDifference==yDifference)&&(yD>0))
+		{
+			if(checkMove(gb,x+1,y)&&xD>0)
+				return y;
+			else if(checkMove(gb,x-1,y)&&xD<0)
+				return y;
+			else if(checkMove(gb,x,y+1))
+				return y+1;
 			else
 				return y;
 		}

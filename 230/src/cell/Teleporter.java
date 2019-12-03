@@ -16,7 +16,7 @@ import javafx.scene.media.MediaPlayer;
  */
 public class Teleporter extends Cell{
 	
-	private String path = "Images\\teleporter.jpg";
+	private String path = "Images\\teleporter.png";
 	private static String soundPath = "Sound\\teleport.wav";
 	private Image image;
 	private int pairX;

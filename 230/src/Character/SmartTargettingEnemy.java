@@ -192,7 +192,7 @@ public class SmartTargettingEnemy extends Enemy
 				if (isAdjacent(fl.get(i), f))
 					ad.add(fl.get(i));
 			}
-			System.out.println(ad.get(0));
+			//System.out.println(ad.get(0));
 			return ad.get(0);
 		}
 	}
