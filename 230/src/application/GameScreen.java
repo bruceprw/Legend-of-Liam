@@ -204,9 +204,7 @@ public class GameScreen extends Screen
 			break;
 		case ESCAPE:
 			bg.stop();
-			Scene s = new LevelScreen(user).getScene();
-			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-			primaryStage.setScene(s);
+			switchScreen(new LevelScreen(user));
 			break;
 
 		default:
@@ -262,9 +260,7 @@ public class GameScreen extends Screen
 		levelSelect.setOnAction(event ->
 		{
 			// Switch to Level Select Screen
-			Scene s = new LevelScreen(user).getScene();
-			scene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
-			primaryStage.setScene(s);
+			switchScreen(new LevelScreen(user));
 		});
 
 	}
