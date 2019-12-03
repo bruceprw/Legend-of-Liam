@@ -2,8 +2,10 @@
 -General description 
 You are stuck in Liam's maze you can't leave till you till you reach the goal.
 Sadly for you his poor students have been forced to create cruel and determine
-enemies to chase you down, can you escape Liam's curel maze and escape his
-deadly enimies.
+enemies to chase you down. If they catch you, they cruelest of punishements of
+all, the levels restarts and you have to start that level from the begining. 
+Can you escape Liam's curel maze and escape his
+deadly enimies. 
 
 --Leader board
 The three quickest players will be displayed on the leader board, can you get
