@@ -371,6 +371,31 @@ public class GameBoard
 		return 0;
 	}
 
+	
+	/**
+	 * 
+	 */
+	public void moveUP()
+	{
+		
+	}
+	
+	public void moveDown()
+	{
+		
+	}
+	
+	public void moveLeft()
+	{
+		
+	}
+	
+	public void moveRight()
+	{
+		
+	}
+	
+	
 	/**
 	 * Checks the next step of enemy is player or not
 	 * @return true if the next step is player and therefore the player is dead.
