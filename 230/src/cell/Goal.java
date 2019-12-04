@@ -8,36 +8,68 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class Goal extends Cell {
+/**
+ * Stores the image and sound of goal.
+ * @author user
+ *
+ */
+public class Goal extends Cell
+{
 
 	private String path = "Images\\goal.png";
-	private String soundPath = "Sound\\BGM\\Mournful_DepartureGOAL.mp3";
+	private static String soundPath = "Sound\\BGM\\Mournful_DepartureGOAL.mp3";
 	private Image image;
-	
-    public Goal() throws FileNotFoundException {
-        super(false, true, false, "", Item.NONE);
-        setImage();
-    }
+	private static Media music = new Media(new File(soundPath).toURI().toString());
+	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 
-    public void setImage() throws FileNotFoundException
-    {
-    	Image image = new Image(new FileInputStream(path));
-    }
-    
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
-    
-    public String getString()
-    {
-    	return "G";
-    }
-    
-    public void playSound()
-    {
-    	Media music = new Media(new File(soundPath).toURI().toString());
-    	MediaPlayer mediaPlayer = new MediaPlayer(music);
-    	mediaPlayer.play();
-    }
+	/**
+	 * Creates instance of goal.
+	 * @throws FileNotFoundException
+	 */
+	public Goal() throws FileNotFoundException
+	{
+		super(false, true, false, "", Item.NONE);
+		setImage();
+	}
+
+	/**
+	 * @return the media player of goal.
+	 */
+	public MediaPlayer getSound()
+	{
+		return mediaPlayer;
+	}
+
+	/**
+	 * Sets image.
+	 * @throws FileNotFoundException
+	 */
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image(new FileInputStream(path));
+	}
+
+	/**
+	 * Draw image.
+	 */
+	public void draw(GraphicsContext gc, int x, int y)
+	{
+		gc.drawImage(image, x, y, 100, 100);
+	}
+
+	/**
+	 * @return string for output purpose.
+	 */
+	public String getString()
+	{
+		return "G";
+	}
+
+	/**
+	 * Plays sound.
+	 */
+	public void playSound()
+	{
+		mediaPlayer.play();
+	}
 }

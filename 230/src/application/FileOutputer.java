@@ -8,18 +8,30 @@ import Character.StraightLineEnemy;
 import Character.WallFollowingEnemy;
 import cell.*;
 
+/**
+ * This class is to output saves files.
+ * 
+ * @author Andy Kuo
+ *
+ */
+
 public class FileOutputer
 {
-	private GameBoard lvl;
 	private String output = "";
 	private String temp = "";
 	private Element[][] background;
 	private Element[][] board;
 
+	
+	/**
+	 * Outputs the file with the game board 
+	 * 
+	 * @param lvl the game board
+	 * @param lt the current level time
+	 */
+	
 	public FileOutputer(GameBoard lvl, LevelTime lt)
 	{
-		this.lvl = lvl;
-
 		background = lvl.getBackground();
 		board = lvl.getBoard();
 		output += "" + background[0].length + "," + background.length + "\r\n";
@@ -27,7 +39,6 @@ public class FileOutputer
 		output+= ""+ a+"\r\n";
 		
 		setOutput(board,background);
-		//setTemp(board,background);
 
 		setRemain(lvl,board);
 		
@@ -42,12 +53,16 @@ public class FileOutputer
 			System.out.println("Failed!");
 		}
 		
-		
 		String finalOutput = output + temp;
 		System.out.println(finalOutput);
-		//System.out.println(temp);
 	}
 	
+	/**
+	 * this methods saves the inventory information of the game.
+	 * 
+	 * @param lvl the GameBoard instance
+	 * @param board the board instance
+	 */
 	public void setRemain(GameBoard lvl, Element[][] board)
 	{
 		int[] inventory = ((Player) board[lvl.getPlayerY()][lvl.getPlayerX()]).getInventory();
@@ -62,15 +77,34 @@ public class FileOutputer
 		temp+="////";
 	}
 	
+	/**
+	 * this method sets part of the output
+	 * 
+	 * @param board the current board instance
+	 * @param background the current background
+	 */
 	public void setOutput(Element[][] board, Element[][] background)
 	{
 		getSwitch(board,background);
 	}
 	
+	/**
+	 * this method sets part of the output
+	 * 
+	 * @param board the current board instance
+	 * @param background the current background
+	 */
 	public void setTemp(Element[][] board, Element[][] background)
 	{
 		getSwitch(board,background);
 	}
+	
+	/**
+	 * Switchs lots of board and background information to a String value.
+	 * 
+	 * @param board board instance
+	 * @param background background instance
+	 */
 	
 	public void getSwitch(Element[][] board,Element[][] background)
 	{

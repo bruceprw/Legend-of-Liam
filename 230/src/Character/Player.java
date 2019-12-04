@@ -1,16 +1,21 @@
 package Character;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import Collectibles.Collectible;
+import javax.swing.ImageIcon;
+
 import application.Element;
 import cell.Cell;
 import cell.ColouredDoor;
 import cell.TokenDoor;
-import javafx.*;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Player class.
@@ -18,24 +23,20 @@ import javafx.scene.image.Image;
  * @author Bruce Williams (972648)
  * @version 1.2
  */
-public class Player extends Element
-{
+public class Player extends Element {
 	private String name;
-	private Image avatar;
-	private int score;
-	private int[] inventory =
-	{ 0, 0, 0, 0, 0, 0, 0 };
+	private int[] inventory = { 0, 0, 0, 0, 0, 0, 0 };
 	private int[][] pos;
 	private Image image;
 
 	private String path = "Images\\Player.png";
+	//private java.awt.Image img;
 
 	/**
 	 * @param name name of player.
 	 * @throws FileNotFoundException if file not found.
 	 */
-	public Player(String name) throws FileNotFoundException
-	{
+	public Player(String name) throws FileNotFoundException {
 		setName(name);
 		setImage();
 	}
@@ -44,8 +45,7 @@ public class Player extends Element
 	 * 
 	 * @param name name of player.
 	 */
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -53,16 +53,14 @@ public class Player extends Element
 	 * 
 	 * @return name name of player.
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
 	/**
 	 * @return "START".
 	 */
-	public String getString()
-	{
+	public String getString() {
 		return "START";
 	}
 
@@ -72,8 +70,7 @@ public class Player extends Element
 	 * 
 	 * @param position position of player.
 	 */
-	public void acquireInventory(int position)
-	{
+	public void acquireInventory(int position) {
 		inventory[position]++;
 	}
 
@@ -83,8 +80,7 @@ public class Player extends Element
 	 * @param position itemID.
 	 * @param num      number of items.
 	 */
-	public void setInventory(int position, int num)
-	{
+	public void setInventory(int position, int num) {
 		inventory[position] += num;
 	}
 
@@ -92,8 +88,7 @@ public class Player extends Element
 	 * 
 	 * @return number of tokens.
 	 */
-	public int getTokenNum()
-	{
+	public int getTokenNum() {
 		return inventory[0];
 	}
 
@@ -101,8 +96,7 @@ public class Player extends Element
 	 * 
 	 * @return inventory
 	 */
-	public int[] getInventory()
-	{
+	public int[] getInventory() {
 		return inventory;
 	}
 
@@ -111,8 +105,7 @@ public class Player extends Element
 	 * 
 	 * @param pos position of player
 	 */
-	public void setPos(int[][] pos)
-	{
+	public void setPos(int[][] pos) {
 		this.pos = pos;
 
 	}
@@ -121,8 +114,7 @@ public class Player extends Element
 	 * 
 	 * @return pos position of player on board
 	 */
-	public int[][] getPos()
-	{
+	public int[][] getPos() {
 		return pos;
 	}
 
@@ -131,18 +123,22 @@ public class Player extends Element
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	public void setImage() throws FileNotFoundException
-	{
+	public void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));
 	}
 
 	/**
 	 * @param x width of image
-	 * @param y height of imagge
+	 * @param y height of image
 	 */
-	public void draw(GraphicsContext gc, int x, int y)
-	{
-		gc.drawImage(image, x, y);
+	public void drawPlayer(GraphicsContext gc, int x, int y, int r) {
+		gc.save();
+		gc.translate(x, y);
+		gc.rotate(r);
+		//gc.translate(-x, -y);
+		//gc.drawImage(image, -(1), -(1));
+		gc.drawImage(image, -(100/2), -(100/2));
+		gc.restore();
 	}
 
 	/**
@@ -150,8 +146,7 @@ public class Player extends Element
 	 * @param i itemID
 	 * @return TRUE if inventory contains that specified item, else FALSE.
 	 */
-	public boolean checkInventory(int i)
-	{
+	public boolean checkInventory(int i) {
 		return inventory[i] > 0;
 	}
 
@@ -160,8 +155,7 @@ public class Player extends Element
 	 * 
 	 * @param i itemID
 	 */
-	public void dropCol(int i)
-	{
+	public void dropCol(int i) {
 		inventory[i]--;
 	}
 
@@ -171,126 +165,90 @@ public class Player extends Element
 	 * @param cell cell on board.
 	 * @return
 	 */
-	// TODO: make method less than 75 lines.
-	public boolean movable(Cell cell)
-	{
-		switch (cell.getString())
-		{
+	public boolean movable(Cell cell) {
+		switch (cell.getString()) {
 		case "GREENDOOR":
-			if (((ColouredDoor) cell).getOpened())
-			{
+			if (((ColouredDoor) cell).getOpened()) {
 				return true;
-			}
-			else
-			{
-				if (checkInventory(2))
-				{
+			} else {
+				if (checkInventory(2)) {
 					dropCol(2);
 					((ColouredDoor) cell).playOpenSound();
 					((ColouredDoor) cell).openDoor();
 					return true;
-				}
-				else
-				{
+				} else {
 					((ColouredDoor) cell).playKnockSound();
 					return false;
 				}
 			}
 
 		case "REDDOOR":
-			if (((ColouredDoor) cell).getOpened())
-			{
+			if (((ColouredDoor) cell).getOpened()) {
 				return true;
-			}
-			else
-			{
-				if (checkInventory(1))
-				{
+			} else {
+				if (checkInventory(1)) {
 					dropCol(1);
 					((ColouredDoor) cell).playOpenSound();
 					((ColouredDoor) cell).openDoor();
 					return true;
-				}
-				else
-				{
+				} else {
 					((ColouredDoor) cell).playKnockSound();
 					return false;
 				}
 			}
 
 		case "YELLOWDOOR":
-			if (((ColouredDoor) cell).getOpened())
-			{
+			if (((ColouredDoor) cell).getOpened()) {
 				return true;
-			}
-			else
-			{
-				if (checkInventory(4))
-				{
+			} else {
+				if (checkInventory(4)) {
 					dropCol(4);
 					((ColouredDoor) cell).playOpenSound();
 					((ColouredDoor) cell).openDoor();
 					return true;
-				}
-				else
-				{
-					((ColouredDoor)cell).playKnockSound();
+				} else {
+					((ColouredDoor) cell).playKnockSound();
 					return false;
 				}
 			}
 
 		case "BLUEDOOR":
-			if (((ColouredDoor) cell).getOpened())
-			{
+			if (((ColouredDoor) cell).getOpened()) {
 				return true;
-			}
-			else
-			{
-				if (checkInventory(3))
-				{
+			} else {
+				if (checkInventory(3)) {
 					dropCol(3);
 					((ColouredDoor) cell).playOpenSound();
 					((ColouredDoor) cell).openDoor();
 					return true;
-				}
-				else
-				{
-					((ColouredDoor)cell).playKnockSound();
+				} else {
+					((ColouredDoor) cell).playKnockSound();
 					return false;
 				}
 			}
 
 		case "W":
-			if (checkInventory(6))
-			{
+			if (checkInventory(6)) {
 				cell.playSound();
 				return true;
-			}
-			else
+			} else
 				return false;
 		case "#":
 			cell.playSound();
 			return false;
 		case "D":
-			if (((TokenDoor) cell).getOpened())
-			{
+			if (((TokenDoor) cell).getOpened()) {
 				return true;
-			}
-			else
-			{
-				if (getTokenNum() == (((TokenDoor) cell).getTokenNum()))
-				{
-					for (int i = 0; i < (((TokenDoor) cell).getTokenNum()); i++)
-					{
+			} else {
+				if (getTokenNum() == (((TokenDoor) cell).getTokenNum())) {
+					for (int i = 0; i < (((TokenDoor) cell).getTokenNum()); i++) {
 						dropCol(0);
 					}
 					((TokenDoor) cell).playOpenSound();
 					((TokenDoor) cell).openDoor();
 					return true;
-				}
-				else
-				{
-					((TokenDoor) cell).playKnockSound(); 
+				} else {
+					((TokenDoor) cell).playKnockSound();
 					return false;
 				}
 			}
@@ -299,12 +257,10 @@ public class Player extends Element
 			cell.playSound();
 			return true;
 		case "L":
-			if (checkInventory(5))
-			{
+			if (checkInventory(5)) {
 				cell.playSound();
 				return true;
-			}
-			else
+			} else
 				return false;
 		case " ":
 			cell.playSound();

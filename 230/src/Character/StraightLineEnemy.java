@@ -17,7 +17,7 @@ import javafx.scene.image.Image;
  */
 public class StraightLineEnemy extends Enemy {
 
-	private String path = "Images\\straightE.jpg";
+	private String path = "Images\\straightE.png";
 	private Image image;
 	private String movDirection;
 

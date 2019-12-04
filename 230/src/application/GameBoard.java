@@ -1,12 +1,10 @@
 package application;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-
 import Character.DumbTargettingEnemy;
 import Character.Enemy;
-import Character.Node;
 import Character.Path;
 import Character.Player;
 import Character.SmartTargettingEnemy;
@@ -25,8 +23,17 @@ import cell.Teleporter;
 import cell.Wall;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * Stores the gameboard instance
+ * Deal with movement of the player and enemy. 
+ * @author user
+ *
+ */
 public class GameBoard
 {
 	private Element[][] board;
@@ -36,18 +43,22 @@ public class GameBoard
 	private int playerY;
 	private int goalX;
 	private int goalY;
-
+	private int rotation;
+	
+	private Media playerDie = new Media(new File("Sound\\player_killed.wav").toURI().toString());
+	
+	private MediaPlayer mediaPlayer;
+	
 	private ArrayList<Integer> enemyX;
 	private ArrayList<Integer> enemyY;
 
-	final private String UP = "UP";
-	final private String LEFT = "LEFT";
-	final private String DOWN = "DOWN";
-	final private String RIGHT = "RIGHT";
 	private long time;
-	final private int ONE = 1;
-	final private int TWO = 2;
 
+	/**
+	 * Reads in info from level file and set the important information.
+	 * @param filePath the name of the level file you wanted to retrieve.
+	 * @throws FileNotFoundException
+	 */
 	public GameBoard(String filePath) throws FileNotFoundException
 	{
 		FileReader lvl = new FileReader(filePath);
@@ -56,40 +67,27 @@ public class GameBoard
 		this.background = lvl.getBackground();
 		playerX = lvl.getPlayerX();
 		playerY = lvl.getPlayerY();
-		fog = lvl.getFog();
 		enemyX = lvl.getEnemyX();
 		enemyY = lvl.getEnemyY();
 		goalX = lvl.getGoalX();
 		goalY = lvl.getGoalY();
 	}
 
-	public void drawFog(GraphicsContext gc)
-	{
-		for (int y = playerY - 3, j = 0; y < playerY + 4; y++, j += 100)
-		{
-			for (int x = playerX - 3, i = 0; x < playerX + 4; x++, i += 100)
-			{
-				fog[y][x].draw(gc, i, j);
-			}
-		}
-	}
-
+	/**
+	 * Get the time passed.
+	 * @return the time passed
+	 */
 	public long getTime()
 	{
 		return time;
 	}
 
-	public void setFog()
-	{
-		for (int y = playerY - 2; y < playerY + 3; y++)
-		{
-			for (int x = playerX - 2; x < playerX + 3; x++)
-			{
-				fog[y][x] = new Empty();
-			}
-		}
-	}
-
+	/**
+	 * Draws the maps and the board elements in 7x5
+	 * and also the items hold by player.
+	 * @param gc the canvas graphics context
+	 * @throws FileNotFoundException
+	 */
 	public void drawGame(GraphicsContext gc) throws FileNotFoundException
 	{
 
@@ -99,36 +97,59 @@ public class GameBoard
 			{
 				background[y][x].draw(gc, i, j);
 				board[y][x].draw(gc, i, j);
+				background[y][x].drawPlayer(gc, x, y, rotation);
+				board[y][x].drawPlayer(gc, x, y, rotation);
 			}
 		}
-		// TimeUnit.SECONDS.sleep(2);
-		setFog();
-
-		// int[] temp = ((Player) board[playerY][playerX]).getInventory();
-		/*
-		 * for (int i = 0; i < 7; i++) { System.out.print(temp[i]); }
-		 */
-		// System.out.println();
 		drawItem(gc);
-		// drawFog(gc);
 	}
 
+	/*public void drawPlayerInGame(GraphicsContext gc) throws FileNotFoundException
+	{
+
+		for (int y = playerY - 2, j = 0; y < playerY + 3; y++, j += 100)
+		{
+			for (int x = playerX - 3, i = 0; x < playerX + 4; x++, i += 100)
+			{
+				background[y][x].draw(gc, i, j, r);
+				board[y][x].draw(gc, i, j, r);
+			}
+		}
+		drawItem(gc);
+	}*/
+	
+	/**
+	 * Get the player's x-coordinate.
+	 * @return player's x-coordinate
+	 */
 	public int getPlayerX()
 	{
 		return playerX;
 	}
 
+	/**
+	 * Get player's y-coordinate.
+	 * @return player's y-coordinate
+	 */
 	public int getPlayerY()
 	{
 		return playerY;
 	}
 
+	/**
+	 * Checks whether the player got to the goal
+	 * @return true if player got to the goal.
+	 */
 	public boolean end()
 	{
 		return playerY == goalY && playerX == goalX;
-
 	}
 
+	/**
+	 * Draws the items in order.
+	 * @param gc canvas's graphics context.
+	 * @throws FileNotFoundException
+	 */
 	public void drawItem(GraphicsContext gc) throws FileNotFoundException
 	{
 		int[] temp = ((Player) board[playerY][playerX]).getInventory();
@@ -139,87 +160,88 @@ public class GameBoard
 		YellowKey y = new YellowKey();
 		FireBoot f = new FireBoot();
 		Flipper fl = new Flipper();
-		gc.drawImage(token.getImage(), 0, 500, 75, 75);
-		gc.drawImage(r.getImage(), 150, 500, 75, 75);
-		gc.drawImage(g.getImage(), 275, 500, 75, 75);
-		gc.drawImage(b.getImage(), 400, 500, 75, 75);
-		gc.drawImage(y.getImage(), 525, 500, 75, 75);
-		gc.drawImage(f.getImage(), 0, 600, 75, 75);
-		gc.drawImage(fl.getImage(), 150, 600, 75, 75);
+		gc.setFill(Color.MEDIUMSEAGREEN);
+		gc.fillRect(0, 510, 700, 200);
+		gc.setFill(Color.GOLD);
+		gc.drawImage(token.getImage(), 0, 610, 75, 75);
+		gc.drawImage(r.getImage(), 0, 510, 75, 75);
+		gc.drawImage(g.getImage(), 150, 510, 75, 75);
+		gc.drawImage(b.getImage(), 300, 510, 75, 75);
+		gc.drawImage(y.getImage(), 450, 510, 75, 75);
+		gc.drawImage(f.getImage(), 150, 610, 75, 75);
+		gc.drawImage(fl.getImage(), 300, 610, 75, 75);
 		gc.setFont(new Font("Arial", 50));
-		gc.strokeText(": " + temp[0], 75, 560);
-		gc.strokeText(": " + temp[1], 225, 560);
-		gc.strokeText(": " + temp[2], 350, 560);
-		gc.strokeText(": " + temp[3], 475, 560);
-		gc.strokeText(": " + temp[4], 600, 560);
-		gc.strokeText(": " + temp[5], 75, 660);
-		gc.strokeText(": " + temp[6], 225, 660);
+		gc.fillText(": " + temp[0], 75, 670);
+		gc.fillText(": " + temp[1], 75, 570);
+		gc.fillText(": " + temp[2], 225, 570);
+		gc.fillText(": " + temp[3], 375, 570);
+		gc.fillText(": " + temp[4], 525, 570);
+		gc.fillText(": " + temp[5], 225, 670);
+		gc.fillText(": " + temp[6], 375, 670);
+		
 	}
-	// Moves player Side to side
-	/*
-	 * public void moveHorizontal(int x){
-	 * 
-	 * if (((Player) board[playerY][playerX]).movable((Cell)
-	 * background[playerY][playerX +x])) { if (((Cell) background[playerY][playerX
-	 * +x]) instanceof Teleporter) { Teleporter temp = ((Teleporter)
-	 * background[playerY][playerX +x]); int tempX = temp.getPairX(); int tempY =
-	 * temp.getPairY(); board[tempY][tempX] = board[playerY][playerX];
-	 * board[playerY][playerX] = new Empty(); playerY = tempY; playerX = tempX; }
-	 * else { if (board[playerY][playerX +x] instanceof Collectible)
-	 * acquire((Collectible) board[playerY][playerX +x]); board[playerY][playerX +x]
-	 * = board[playerY][playerX]; board[playerY][playerX] = new Empty(); playerX +=
-	 * x; System.out.println(playerX+x); }
-	 * 
-	 * } }
+	
+	/**
+	 * Plays the sound of board element that player steps on.
+	 * @param x the next step that player steps on 
+	 * @param y the next step that player steps on
 	 */
-	// Moves player up and down
-	/*
-	 * public void moveVertical(int y){ if (((Player)
-	 * board[playerY][playerX]).movable((Cell) background[playerY + y][playerX])) {
-	 * if (((Cell) background[playerY + y][playerX]) instanceof Teleporter) {
-	 * Teleporter temp = ((Teleporter) background[playerY + y][playerX]); int tempX
-	 * = temp.getPairX(); int tempY = temp.getPairY(); board[tempY][tempX] =
-	 * board[playerY][playerX]; board[playerY][playerX] = new Empty(); playerY =
-	 * tempY; playerX = tempX; } else {
-	 * 
-	 * if (board[playerY + y][playerX] instanceof Collectible) acquire((Collectible)
-	 * board[playerY + y][playerX]);
-	 * 
-	 * board[playerY + y][playerX] = board[playerY][playerX];
-	 * board[playerY][playerX] = new Empty(); int temp = playerY; temp += y; playerY
-	 * = temp; } } }
-	 */
-
 	public void playBoardSound(int x, int y)
 	{
 		board[y][x].playSound();
 	}
 
+	/**
+	 * Plays the sound of background element that player steps on.
+	 * @param x the next step that player steps on 
+	 * @param y the next step that player steps on
+	 */
 	public void playBackSound(int x, int y)
 	{
 		background[y][x].playSound();
 	}
 
+	/**
+	 * Checks whether the player touches the enemy.
+	 * @param x the x-coordinate that player about to step on.
+	 * @param y the y-coordinate that player about to step on.
+	 * @return true if the position is an instance of an enemy.
+	 */
 	public boolean touchEnemy(int x, int y)
 	{
 		return board[y][x] instanceof Enemy;
 	}
 
+	//TODO this needs to be broken into several methods it far too big,
+	//TODO also comment this what does this even do?
+	/**
+	 * Deals with the movement of the enemy, and also deals with the interaction after the player movement.
+	 * Moves the enemy and plays the sound that should be played when player steps on it.
+	 * Checks whether the player is dead or not.
+	 * 
+	 * @param way the way that player goes.
+	 * @return 0 if nothing happens
+	 * @return 1 if player got to the goal.
+	 * @return 2 if the player is dead.
+	 */
 	public int move(String way)
 	{
 		// moveEnemy();
 		switch (way)
 		{
 		case "right":
+			mediaPlayer = ((Cell)background[playerY][playerX+1]).getSound();
+			mediaPlayer.play();
+			mediaPlayer.stop();
 			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX + 1]))
 			{
 				if (touchEnemy(playerX + 1, playerY))
 				{
 					return 2;
 				}
-
 				if (((Cell) background[playerY][playerX + 1]) instanceof Teleporter)
 				{
+					rotation = 90;
 					Teleporter temp = ((Teleporter) background[playerY][playerX + 1]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -232,18 +254,25 @@ public class GameBoard
 				{
 					if (board[playerY][playerX + 1] instanceof Collectible)
 					{
-						board[playerY][playerX + 1].playSound();
+						playBoardSound(playerX+1,playerY);
+						//board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY][playerX + 1]);
 					}
+					rotation = 90;
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX += 1;
+					
+					
 					// System.out.println(playerX);
 				}
 
 			}
 			break;
 		case "left":
+			mediaPlayer = ((Cell)background[playerY][playerX-1]).getSound();
+			mediaPlayer.play();
+			mediaPlayer.stop();
 			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY][playerX - 1]))
 			{
 				if (touchEnemy(playerX - 1, playerY))
@@ -253,6 +282,7 @@ public class GameBoard
 
 				if (((Cell) background[playerY][playerX - 1]) instanceof Teleporter)
 				{
+					rotation = 270;
 					Teleporter temp = ((Teleporter) background[playerY][playerX - 1]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -265,19 +295,22 @@ public class GameBoard
 				{
 					if (board[playerY][playerX - 1] instanceof Collectible)
 					{
+						playBoardSound(playerX-1,playerY);
 						acquire((Collectible) board[playerY][playerX - 1]);
 						board[playerY][playerX - 1].playSound();
 					}
-
+					rotation = 270;
 					board[playerY][playerX - 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX = playerX - 1;
-					// System.out.println(playerX);
 				}
 
 			}
 			break;
 		case "up":
+			mediaPlayer = ((Cell)background[playerY-1][playerX]).getSound();
+			mediaPlayer.play();
+			mediaPlayer.stop();
 			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY - 1][playerX]))
 			{
 				if (touchEnemy(playerX, playerY - 1))
@@ -287,6 +320,7 @@ public class GameBoard
 
 				if (((Cell) background[playerY - 1][playerX]) instanceof Teleporter)
 				{
+					rotation = 0;
 					Teleporter temp = ((Teleporter) background[playerY - 1][playerX]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -300,17 +334,21 @@ public class GameBoard
 
 					if (board[playerY - 1][playerX] instanceof Collectible)
 					{
+						playBoardSound(playerX,playerY-1);
 						board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY - 1][playerX]);
 					}
+					rotation = 0;
 					board[playerY - 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY - 1;
-					// System.out.println(playerY);
 				}
 			}
 			break;
 		case "down":
+			mediaPlayer = ((Cell)background[playerY+1][playerX]).getSound();
+			mediaPlayer.play();
+			mediaPlayer.stop();
 			if (((Player) board[playerY][playerX]).movable((Cell) background[playerY + 1][playerX]))
 			{
 				if (touchEnemy(playerX, playerY + 1))
@@ -320,6 +358,7 @@ public class GameBoard
 
 				if (((Cell) background[playerY + 1][playerX]) instanceof Teleporter)
 				{
+					rotation = 180;
 					Teleporter temp = ((Teleporter) background[playerY + 1][playerX]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -333,32 +372,44 @@ public class GameBoard
 
 					if (board[playerY + 1][playerX] instanceof Collectible)
 					{
+						playBoardSound(playerX,playerY+1);
 						board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY + 1][playerX]);
 					}
+					rotation = 180;
 					board[playerY + 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY + 1;
-					// System.out.println(playerY);
 				}
 			}
 			break;
-
 		}
 		moveEnemy();
-		System.out.println(checkPlayerDead());
 		if (playerDead() || checkPlayerDead())
+		{
+			mediaPlayer = new MediaPlayer(playerDie);
+			mediaPlayer.play();
+			//mediaPlayer.stop();
 			return 2;
+		}
 		if (end())
 			return 1;
 		return 0;
 	}
 
+	/**
+	 * Checks the next step of enemy is player or not
+	 * @return true if the next step is player and therefore the player is dead.
+	 */
 	public boolean checkPlayerDead()
 	{
 		return !(board[playerY][playerX] instanceof Player);
 	}
 
+	/**
+	 * Checks whether player walks towards the enemy.
+	 * @return true if player walks towards enemy.
+	 */
 	public boolean playerDead()
 	{
 		for (int i = 0; i < enemyX.size(); i++)
@@ -371,26 +422,9 @@ public class GameBoard
 		return false;
 	}
 
-	public boolean touchPlayer(int x, int y)
-	{
-		return board[y][x] instanceof Player;
-	}
-
-	private void moveEnemyOnBoard(int currentEnemyY, int currentEnemyX, int newEnemyY, int newEnemyX, int i)
-	{
-		if (newEnemyX == currentEnemyX && newEnemyY == currentEnemyY)
-		{
-		}
-		else
-		{
-			board[newEnemyY][newEnemyX] = board[currentEnemyY][currentEnemyX];
-			board[currentEnemyY][currentEnemyX] = new Empty();
-
-			enemyX.set(i, newEnemyX);
-			enemyY.set(i, newEnemyY);
-		}
-	}
-
+	/**
+	 * Moves every enemy after the player moves.
+	 */
 	public void moveEnemy()
 	{
 		for (int i = 0; i < enemyX.size(); i++)
@@ -456,8 +490,9 @@ public class GameBoard
 
 				int newXe = e.getX();
 				int newYe = e.getY();
-
-				if (newXe == e.getX() && newYe == e.getY())
+				
+				//Checks whether there are path that goes to player as if there are no path the enemy won't move.
+				if (newXe == enemyX.get(i) && newYe == enemyY.get(i))
 				{
 
 				}
@@ -468,337 +503,44 @@ public class GameBoard
 					enemyY.set(i, newYe);
 					enemyX.set(i, newXe);
 				}
-
-				// System.out.println(newXe+","+newYe);
-
-				
-				/* System.out.print(enemyX.get(i)); System.out.print(",");
-				 System.out.print(enemyY.get(i)); System.out.print(",");
-				 System.out.println(board[enemyY.get(i)][enemyX.get(i)].getString());
-				 System.out.print(playerX); System.out.print(","+playerY);
-				 System.out.println("Player");*.
-				 
-
-				/*
-				 * System.out.print(enemyX.get(i)); System.out.print(","+enemyY.get(i));
-				 * System.out.println(",SMART"); System.out.println("bca");
-				 */
 				break;
-
 			}
 		}
 	}
 
 	/**
-	 * method for moving enemy
-	 * 
+	 * Get the cell at x,y coordinate to retrieve other info.
+	 * @param X x-coordinate
+	 * @param Y y-coordinate
+	 * @return the cell from the background 
 	 */
-	// TODO break this up into smaller methods, its disgusting
-
-	/*
-	 * private void moveEnemy() {
-	 * 
-	 * // go through each element in the array list and move the enemy for (int i =
-	 * 0; i < enemyX.size(); i++) { // stores data on each enemy that is called int
-	 * currentEnemyX = enemyX.get(i); int currentEnemyY = enemyY.get(i);
-	 * 
-	 * 
-	 * // used to store new moves before put into variables int[] XY;
-	 * 
-	 * int newEnemyX = currentEnemyX; int newEnemyY = currentEnemyY;
-	 * 
-	 * // get the enemy at i on array list Enemy enemyHold = (Enemy)
-	 * this.board[currentEnemyY][currentEnemyX];
-	 * 
-	 * System.out.println(enemyHold.getString());
-	 * System.out.print(currentEnemyX+","); System.out.println(currentEnemyY);
-	 * 
-	 * 
-	 * // find sub class of enemy to do specific move functions // TODO break into
-	 * own functions, prefalibly in own function switch (enemyHold.getString()) {
-	 * case "DUMB": // store enemy hold in specific dumb class DumbTargettingEnemy
-	 * dumbEnemy = (DumbTargettingEnemy) enemyHold;
-	 * 
-	 * // get new positions for dumb enemy and put them in new enemy X & Y XY =
-	 * dumbEnemy.moveTowardsPlayer(currentEnemyX, currentEnemyY, playerX, playerY);
-	 * newEnemyX = XY[0]; newEnemyY = XY[1];
-	 * 
-	 * 
-	 * // check if new position touches player if so return true /* if
-	 * (this.touchEnemy(newEnemyY, newEnemyX)) { return true; }
-	 * 
-	 * // check new enemy position is actually movable, if so return false as we
-	 * don't // need to update position if
-	 * (!dumbEnemy.isMovable(this.getCell(newEnemyX, newEnemyY))) {
-	 * this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, newEnemyY, newEnemyX, i);
-	 * }
-	 * 
-	 * //check if new position touches player if so return true
-	 * 
-	 * // move the enemy on board
-	 * 
-	 * //check new enemy position is actually movable, if so return false as we
-	 * don't need to update position if
-	 * (!dumbEnemy.isMovable(this.getCell(newEnemyX, newEnemyY))) { return; }
-	 * 
-	 * 
-	 * 
-	 * break;
-	 * 
-	 * case "SMART": // hold smart enemy in smart class and create node class which
-	 * will hold the new // X & Y SmartTargettingEnemy smartEnemy =
-	 * (SmartTargettingEnemy) enemyHold; Node node =
-	 * smartEnemy.findPath(this.getBackground(), currentEnemyX, currentEnemyY,
-	 * playerX, playerY);
-	 * 
-	 * // set next position newEnemyX = node.getX(); newEnemyY = node.getY();
-	 * 
-	 * 
-	 * // check new position doesn't touch player /* if (this.touchEnemy(newEnemyY,
-	 * newEnemyX)) { return true; }
-	 * 
-	 * //check new position doesn't touch player
-	 * 
-	 * 
-	 * 
-	 * // move enemy this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, newEnemyY,
-	 * newEnemyX, i);
-	 * 
-	 * break;
-	 * 
-	 * case "STRAIGHT": // we call the move to method on enemy and try and see if it
-	 * touches player // if it does we return true however it can throw a index out
-	 * of bounds XY = enemyHold.moveTo(currentEnemyX, currentEnemyY,
-	 * this.getNextCell(currentEnemyX, currentEnemyY, enemyHold.getMovDirection()));
-	 * /*try { if (this.touchEnemy(XY[1], XY[0])) { return true; } } catch
-	 * (ArrayIndexOutOfBoundsException e) {
-	 * 
-	 * }
-	 * 
-	 * // actually move player
-	 * 
-	 * 
-	 * //actually move player
-	 * 
-	 * this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, XY[1], XY[0], i); break;
-	 * 
-	 * case "WALLHUG":
-	 * 
-	 * if (enemyHold.isMovable(getNextCell(currentEnemyX, currentEnemyY,
-	 * enemyHold.getMovDirection()))) { // check there is a wall if
-	 * (checkWall(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())) {
-	 * 
-	 * WallFollowingEnemy wallEnemy = (WallFollowingEnemy) enemyHold; if
-	 * (enemyHold.isMovable(getNextCell(currentEnemyX, currentEnemyY,
-	 * enemyHold.getMovDirection()))) { // check next position is movable if
-	 * (checkWall(currentEnemyX, currentEnemyY, enemyHold.getMovDirection())) {
-	 * 
-	 * // move to space if wall okay try { XY = enemyHold.moveTo(currentEnemyX,
-	 * currentEnemyY, this.getNextCell(currentEnemyX, currentEnemyY,
-	 * enemyHold.getMovDirection()));
-	 * 
-	 * /*if (this.touchPlayer(XY[1], XY[0])) { return true; }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, XY[1], XY[0], i);
-	 * 
-	 * return;
-	 * 
-	 * 
-	 * // if that didn't work reverse // dont think i need this } catch
-	 * (IndexOutOfBoundsException e) { XY = enemyHold.moveTo(currentEnemyX,
-	 * currentEnemyY, this.getNextCell(currentEnemyX, currentEnemyY,
-	 * enemyHold.getMovDirection()));
-	 * 
-	 * 
-	 * 
-	 * this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, XY[1], XY[0], i);
-	 * 
-	 * } }
-	 * 
-	 * return; } }
-	 * 
-	 * else if (this.checkCorner(currentEnemyX, currentEnemyY,
-	 * enemyHold.getMovDirection())) { XY = ((WallFollowingEnemy)
-	 * enemyHold).moveToCorner(currentEnemyX, currentEnemyY,
-	 * this.getNewWallDirection(currentEnemyX, currentEnemyY));
-	 * 
-	 * this.moveEnemyOnBoard(currentEnemyY, currentEnemyX, XY[1], XY[0], i);
-	 * 
-	 * }
-	 * 
-	 * 
-	 * }
-	 * 
-	 * 
-	 * } else
-	 * wallEnemy.unMovableNextCell(this.getBackground(),currentEnemyX,currentEnemyY)
-	 * ; break;
-	 * 
-	 * } } }
-	 */
-
-	/**
-	 * Returns the next cell based off movDirection of element
-	 * 
-	 * @param X            the X coordinates
-	 * @param Y            the Y coordinates
-	 * @param movDirection the move direction of the element
-	 * @return the Cell next to given X Y
-	 */
-	private Cell getNextCell(int X, int Y, String movDirection)
-	{
-		switch (movDirection)
-		{
-		case (UP):
-			// TODO make method to get element from board & background
-			return (Cell) background[Y + ONE][X];
-		case (DOWN):
-			return (Cell) background[Y - ONE][X];
-		case (LEFT):
-			return (Cell) background[Y][X - ONE];
-		case (RIGHT):
-			return (Cell) background[Y][X + ONE];
-		default:
-			throw new IllegalStateException("Undifened direction");
-
-		}
-
-	}
-
-	/**
-	 * Checks that there is a wall next to the enemy TODO refactor this into wall
-	 * following enemy doesn't need to be here
-	 * 
-	 * @param X            coordinate
-	 * @param Y            coordinate
-	 * @param movDirection the mov direction
-	 * @return True if there is a wall at the next space else return false
-	 */
-	private boolean checkWall(int X, int Y, String movDirection)
-	{
-		switch (movDirection)
-		{
-		case (UP):
-			if ((Cell) background[Y + ONE][X + ONE] instanceof Wall
-					|| (Cell) background[Y + ONE][X - ONE] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		case (DOWN):
-			if ((Cell) background[Y - ONE][X + ONE] instanceof Wall
-					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		case (LEFT):
-			if ((Cell) background[Y + ONE][X - ONE] instanceof Wall
-					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		case (RIGHT):
-			if ((Cell) background[Y + ONE][X - ONE] instanceof Wall
-					|| (Cell) background[Y - ONE][X - ONE] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		default:
-			throw new IllegalStateException("Undifened direction");
-
-		}
-	}
-
-	private String getNewWallDirection(int X, int Y)
-	{
-		if ((Cell) background[Y][X + TWO] instanceof Wall)
-		{
-			return RIGHT;
-		}
-		else if ((Cell) background[Y][X - TWO] instanceof Wall)
-		{
-			return LEFT;
-		}
-		else if ((Cell) background[Y + TWO][X] instanceof Wall)
-		{
-			return UP;
-		}
-		else if ((Cell) background[Y - TWO][X] instanceof Wall)
-		{
-			return DOWN;
-		}
-		return "REVERSE";
-
-	}
-
-	private boolean checkCorner(int X, int Y, String movDirection)
-	{
-		switch (movDirection)
-		{
-		case (UP):
-		case (DOWN):
-			if ((Cell) background[Y][X + TWO] instanceof Wall || (Cell) background[Y][X - TWO] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		case (LEFT):
-		case (RIGHT):
-			if ((Cell) background[Y + TWO][X] instanceof Wall || (Cell) background[Y - TWO][X] instanceof Wall)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		default:
-			throw new IllegalStateException("Undifened direction");
-
-		}
-	}
-
-	private Element getBoardElement(int X, int Y)
-	{
-		return board[Y][X];
-	}
-
 	public Cell getCell(int X, int Y)
 	{
 		return (Cell) background[Y][X];
 	}
 
+	/**
+	 * Allow the player to get collectible.
+	 * @param co the collectible
+	 */
 	public void acquire(Collectible co)
 	{
 		((Player) board[playerY][playerX]).acquireInventory(co.getIndex());
 	}
 
+	/**
+	 * Get the board
+	 * @return the board
+	 */
 	public Element[][] getBoard()
 	{
 		return this.board;
 	}
 
+	/**
+	 * Get the background
+	 * @return the background
+	 */
 	public Element[][] getBackground()
 	{
 		return this.background;

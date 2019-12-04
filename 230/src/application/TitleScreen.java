@@ -1,7 +1,9 @@
 package application;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import application.DailyMessage;
@@ -10,9 +12,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -24,14 +35,16 @@ public class TitleScreen extends Screen
 	private VBox topPane;
 	private Text title;
 	private Text dailyMessage;
-
+	private Image titleImage;
 	private VBox menuPane;
 	private Text welcome;
-	private Button editProfile;
+	private Button loadGame;
 	private Button selectLevel;
+	private Button howToPlay;
 	private Button leaderboards;
+	private Button options;
 	private Button logout;
-
+	private ImageView a ;
 	private GridPane loginPane;
 	private Text loginPrompt;
 	private Text usernameLabel;
@@ -40,19 +53,38 @@ public class TitleScreen extends Screen
 	private PasswordField password;
 	private Button submit;
 	private Button newProfile;
-
+	private static Media music = new Media(new File("Sound\\BGM\\Aurora_CurrentsINTRO.mp3").toURI().toString());
+	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	private UserProfile currentUser = null;
+
 
 	public TitleScreen()
 	{
 		root = new BorderPane();
-
+		try
+		{
+			titleImage = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		a = new ImageView(titleImage);
+		a.setFitHeight(730);
+		a.setFitWidth(900);
 		buildTopPane();
 
 		buildLoginPane();
 
 		buildMenuPane();
-
+		mediaPlayer = new MediaPlayer(music);
+		mediaPlayer.setAutoPlay(true);
+		mediaPlayer.setVolume(0.2);
+		mediaPlayer.play();
+		
+		
 		root.setTop(topPane);
 		root.setCenter(loginPane);
 
@@ -69,23 +101,31 @@ public class TitleScreen extends Screen
 
 		title = new Text("Legend of Liam");
 		title.setFont(Font.font(100));
+		title.setFill(Color.CHARTREUSE);
 
 		dailyMessage = new Text(DailyMessage.getMessage());
+		dailyMessage.setFill(Color.CHARTREUSE);
 		dailyMessage.setWrappingWidth(WINDOW_WIDTH);
 		dailyMessage.setTextAlignment(TextAlignment.CENTER);
-
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
+		topPane.setBackground(new Background(b));
 		topPane.getChildren().addAll(title, dailyMessage);
 	}
 
 	private void buildLoginPane()
 	{
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
 		loginPane = new GridPane();
 		loginPane.setHgap(10);
 		loginPane.setVgap(5);
 		loginPane.setAlignment(Pos.CENTER);
+		loginPane.setBackground(new Background(b));
 		loginPrompt = new Text("Please enter your login details, or");
+		loginPrompt.setFill(Color.CHARTREUSE);
 		usernameLabel = new Text("Username:");
+		usernameLabel.setFill(Color.CHARTREUSE);
 		passwordLabel = new Text("Password:");
+		passwordLabel.setFill(Color.CHARTREUSE);
 		username = new TextField();
 		password = new PasswordField();
 		submit = new Button("Submit");
@@ -125,6 +165,7 @@ public class TitleScreen extends Screen
 
 					welcome.setText("Welcome " + currentUser.getName() + "!");
 				}
+				line.close();
 			}
 
 			if(!found)
@@ -149,12 +190,14 @@ public class TitleScreen extends Screen
 
 	private void buildMenuPane()
 	{
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
 		menuPane = new VBox();
-
+		menuPane.setBackground(new Background(b));
 		welcome = new Text("Welcome!");
+		welcome.setFill(Color.CHARTREUSE);
 
-		editProfile = new Button("Load Game");
-		editProfile.setOnAction(event ->
+		loadGame = new Button("Load Game");
+		loadGame.setOnAction(event ->
 		{
 			switchScreen(new GameScreen(currentUser.getName(), currentUser));
 		});
@@ -163,12 +206,29 @@ public class TitleScreen extends Screen
 		selectLevel.setOnAction(event ->
 		{
 			switchScreen(new LevelScreen(currentUser));
+			mediaPlayer.stop();
+		});
+		
+		howToPlay = new Button("How To Play");
+		howToPlay.setOnAction(event ->
+		{
+			try {
+				createPopup(new HowToPlayScreen());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		});
 
 		leaderboards = new Button("Leaderboards");
 		leaderboards.setOnAction(event ->
 		{
 			switchScreen(new LeaderboardsScreen("1"));
+		});
+		
+		options = new Button("Options");
+		options.setOnAction(event -> 
+		{
+			createPopup(new OptionsScreen(currentUser));
 		});
 
 		logout = new Button("Log Out");
@@ -177,11 +237,7 @@ public class TitleScreen extends Screen
 			root.setCenter(loginPane);
 		});
 
-		editProfile.setId("titleButton");
-		selectLevel.setId("titleButton");
-		leaderboards.setId("titleButton");
-
-		menuPane.getChildren().addAll(welcome, editProfile, selectLevel, leaderboards, logout);
+		menuPane.getChildren().addAll(welcome, loadGame, selectLevel, howToPlay, leaderboards, options, logout);
 	}
 	
 	public void switchToMenu(UserProfile currentUser) {

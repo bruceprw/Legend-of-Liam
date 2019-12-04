@@ -1,74 +1,86 @@
 package Character;
 
-import java.util.ArrayList;
-
 import application.Element;
 import application.GameBoard;
 
+/**
+ * Stores the path information for the smart enemy.
+ * @author user
+ *
+ */
 public class Path extends Element
 {
 	private int x;
 	private int y;
+	/**
+	 * The number of steps taken from the start of the enemy.
+	 */
 	private int counter;
 	Path up;
 	Path down;
 	Path left;
 	Path right;
-	private int playerX, playerY;
-	private boolean found = false;
-
+	
+	/**
+	 * Stores the information of the path.
+	 * @param gb the gameboard
+	 * @param x the x-coordinate
+	 * @param y the y-coordinate
+	 * @param counter counter of the current path from the start of the enemy.
+	 */
 	Path(GameBoard gb, int x, int y, int counter)
 	{
 		//temp.add(this);
-		this.playerX = playerX;
-		this.playerY = playerY;
 		this.x = x;
 		this.y = y;
 		this.counter = counter;
 
 	}
 
-	public boolean faster(Path p)
-	{
-
-		boolean a = this.x == p.getX();
-		boolean b = this.y == p.getY();
-		boolean c = this.counter < p.getCount();
-		return a && b && c;
-	}
-
+	/**
+	 * Checks whether two paths has the same distance from the start of the enemy.
+	 * @param p the other path
+	 * @return true if they are the same.
+	 */
 	public boolean equals(Path p)
 	{
 		return this.x == p.getX() && this.y == p.getY() && this.counter == p.getCount();
 	}
 
+	/**
+	 * Get the x-coordinate.
+	 * @return x-coordinate.
+	 */
 	public int getX()
 	{
 		return x;
 	}
 
+	/**
+	 * Get the y-coordinate 
+	 * @return y-coordinate
+	 */
 	public int getY()
 	{
 		return y;
 
 	}
 
+	/**
+	 * Get the counter
+	 * @return the counter
+	 */
 	public int getCount()
 	{
 		return counter;
 	}
 
+	/**
+	 * Switch the information to string.
+	 */
 	public String toString()
 	{
 		return "" + x + "," + y + "," + counter;
 	}
 
-	/*
-	 * public void setNext() { if(Enemy.checkMove(gb, x, y - 1)) this.up = new
-	 * Path(gb, x, y - 1, counter + 1,playerX,playerY); if(Enemy.checkMove(gb, x, y
-	 * + 1)) this.down = new Path(gb, x, y + 1, counter + 1,playerX,playerY);
-	 * if(Enemy.checkMove(gb, x - 1, y)) this.right = new Path(gb, x - 1, y, counter
-	 * + 1,playerX,playerY); if(Enemy.checkMove(gb, x + 1, y)) this.left = new
-	 * Path(gb, x + 1, y, counter + 1,playerX,playerY); }
-	 */
 }

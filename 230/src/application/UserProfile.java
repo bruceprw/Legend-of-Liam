@@ -91,6 +91,10 @@ public class UserProfile
 			out.print(""+list.get(i).getName()+","+list.get(i).getPassword()+","+list.get(i).getLevelProg()+"\r\n");
 		}
 		
+		/* Added this as repeated calls of readList() put duplicate profiles in 
+		 * list, which were then outputted to the file.
+		 */
+		list.clear();
 		
 		out.close();
 		
@@ -102,6 +106,9 @@ public class UserProfile
 		if (exists(name))
 		{
 			//System.out.println(exists(name));
+			
+			// Clears list to avoid future duplicates being saved.
+			list.clear();
 			return true;
 		}
 		else

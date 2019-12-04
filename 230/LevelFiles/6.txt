@@ -21,6 +21,11 @@
 ##########################################
 ##########################################
 5,3,START
+7,3,ENEMY,STRAIGHT,DOWN
+5,7,ENEMY,STRAIGHT,RIGHT
+36,11,ENEMY,STRAIGHT,LEFT
 29,4,REDDOOR
+29,16,ENEMY,STRAIGHT,UP
 21,16,RKEY
+22,16,ENEMY,WALLHUG,LEFT,UP
 ////

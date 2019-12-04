@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import application.Element;
 import application.Empty;
 import application.GameBoard;
-import cell.Cell;
 import cell.Ground;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -20,14 +19,19 @@ import javafx.scene.image.Image;
 public class WallFollowingEnemy extends Enemy
 {
 
-	private String path = "Images\\wallHugE.jpg";
+	private String path = "Images\\wallHugE.png";
 	private Image image;
 	private String movDirection;
 	private String hand;
 
-	private int wallX = 0;
-	private int wallY = 0;
-
+	/**
+	 * Stores the enemy information from the level file.
+	 * @param currentX current x position
+	 * @param currentY current y position
+	 * @param movDirection the direction that this enemy is moving
+	 * @param hand the hand that's touching the wall for direction determining.
+	 * @throws FileNotFoundException
+	 */
 	public WallFollowingEnemy(int currentX, int currentY, String movDirection, String hand) throws FileNotFoundException
 	{
 		this.currentPositionX = currentX;
@@ -108,19 +112,29 @@ public class WallFollowingEnemy extends Enemy
 		return movDirection;
 	}
 
+	/**
+	 * String for output file.
+	 */
 	public String getString()
 	{
 		return "WALLHUG";
 	}
 
+	/**
+	 * Sets the image of the enemy.
+	 * 
+	 * @throws FileNotFoundException
+	 */
 	public void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
 	}
 
+	/**
+	 * draw the image.
+	 */
 	public void draw(GraphicsContext gc, int x, int y)
 	{
-
 		gc.drawImage(image, x, y, 100, 100);
 	}
 
@@ -129,6 +143,7 @@ public class WallFollowingEnemy extends Enemy
 
 	}
 
+	//TODO THIS NEEDS TO BE REFACTORED 
 	public int getX(GameBoard gb, int x, int y)
 	{
 		switch (movDirection)

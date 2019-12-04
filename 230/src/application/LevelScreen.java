@@ -1,23 +1,30 @@
 package application;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 import cell.LevelDoor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 public class LevelScreen extends Screen {
 	private static final int GAME_WIDTH = 700;
 	private static final int GAME_HEIGHT = 700;
-
+	private Image bg;
 	private BorderPane root;
-
+	private Media music ;
+	private MediaPlayer mediaPlayer ;
 	private Canvas game;
 
 	private GameBoard level;
@@ -33,6 +40,21 @@ public class LevelScreen extends Screen {
 	{
 		this.user=user;
 
+		music= new Media(new File("Sound\\BGM\\bg.mp3").toURI().toString());
+		
+		mediaPlayer = new MediaPlayer(music);
+		mediaPlayer.setAutoPlay(true);
+		mediaPlayer.play();
+		try
+		{
+			bg = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
+		}catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		
 		try
 		{
 			level = new GameBoard("LevelFiles\\levelSelect.txt");
@@ -43,6 +65,7 @@ public class LevelScreen extends Screen {
 		}
 
 		root = new BorderPane();
+		root.setBackground(new Background(new BackgroundImage(bg,null,null,null,null)));
 		game = new Canvas(GAME_WIDTH, GAME_HEIGHT);
 
 		// Initial Call of drawGame() (can delete if you want)
@@ -96,6 +119,7 @@ public class LevelScreen extends Screen {
 					switchScreen(new GameScreen(levelNo + "", user));
 				}
 			}
+			mediaPlayer.stop();
 			break;
 			
 		default:

@@ -1,6 +1,7 @@
 package cell;
 
 import application.Element;
+import javafx.scene.media.MediaPlayer;
 
 public class Cell extends Element
 {
@@ -14,9 +15,7 @@ public class Cell extends Element
 	private String texturePath;
 	// will contain the item required to access this cell
 	private Item itemRequiredForCell;
-	private boolean consumeableItem;
-	// item the cell contains, if no item then it item will equal Item.NONE
-	//private Item item;
+	private MediaPlayer mediaPlayer;
 
 	public Cell(boolean harmable, boolean playerAllowed, boolean enemyAllowed, String texturePath, Item itemRequiredForCell)
 	{
@@ -74,18 +73,23 @@ public class Cell extends Element
 
 	public void setConsumesItem(boolean consumeableItem)
 	{
-		this.consumeableItem = consumeableItem;
 	}
 
 	public void setPlayerAllowed(boolean playerAllowed)
 	{
-		playerAllowed = playerAllowed;
+		this.playerAllowed = playerAllowed;
 	}
 
 	public void setEnemyAllowed(boolean enemyAllowed)
 	{
-		enemyAllowed = enemyAllowed;
+		this.enemyAllowed = enemyAllowed;
 	}
+	
+	public MediaPlayer getSound()
+	{
+		return mediaPlayer;
+	}
+	
 /*
 	public void setItem(Item item)
 	{
