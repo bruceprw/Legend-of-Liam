@@ -1,30 +1,29 @@
 package Character;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import application.Element;
 import application.Empty;
 import application.GameBoard;
-import cell.Cell;
-import cell.ColouredDoor;
 import cell.Ground;
-import cell.TokenDoor;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
  * The super class of all enemy.
- * @author user
+ * 
+ * @author Miles Singleton
  *
  */
 public abstract class Enemy extends Element {
 
-	private String soundPath = "Sound\\creaking_door.mp3";
-
+	private final String soundPath = "Sound\\creaking_door.mp3";
 	protected String movDirection = "UP";
 
-	// Constants
-	/// Directions
 	final protected String UP = "UP";
 	final protected String LEFT = "LEFT";
 	final protected String DOWN = "DOWN";
@@ -34,91 +33,64 @@ public abstract class Enemy extends Element {
 	protected final int TWO = 2;
 	protected final int ZERO = 0;
 	protected final int HUNDRED = 100;
+	
+	protected String name = "Enemy";
 
 	protected int currentPositionX;
 	protected int currentPositionY;
 
+	protected Image image;
+
 	/**
-	 * plays sound effect
+	 * plays sound effect for enemy.
 	 */
 	public void playSound() {
 		Media music = new Media(new File(soundPath).toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(music);
 		mediaPlayer.play();
 	}
-
-	/**
-	 * @return the move direction of the enemy
-	 */
-	public String getMovDirection() {
-		return movDirection;
+	
+	public String getString() {
+		return name;
 	}
 
 	/**
-	 * @param the new direction for the enemy
+	 * Draws the enemy's sprite.
+	 * 
+	 * @param gc The graphics context's canvas buffer, used to draw to
+	 * @param X  The X coordinate of where it needs to be drawn to
+	 * @param Y  The Y coordinate of where it needs to be drawn to
+	 */
+	public void draw(GraphicsContext gc, int X, int Y) {
+		gc.drawImage(image, X, Y, HUNDRED, HUNDRED);
+	}
+
+	/**
+	 * Sets the image for the enemy's sprite.
+	 * 
+	 * @param path The path to the image file, stored in sub class
+	 * @throws FileNotFoundException
+	 */
+	protected void setImage(String path) throws FileNotFoundException {
+		image = new Image(new FileInputStream(path));
+	}
+	
+	/**
+	 * Set the move direction of the enemy.
+	 * @param movDirection New move direction.
 	 */
 	public void setMovDirection(String movDirection) {
 		this.movDirection = movDirection;
 	}
-
+	
 	/**
-	 * Method for working out where to move next
-	 * 
-	 * @param currentX The current X position
-	 * @param currentY The current Y position
-	 * @param nextCell The next Cell
-	 * @return
+	 * gets the current move direction.
+	 * @return current move direction.
 	 */
-	public int[] moveTo(int currentX, int currentY, Cell nextCell) {
-		switch (this.getMovDirection()) {
-		case (UP):
-			// TODO break this into a method
-			if (this.isMovable(nextCell)) {
-				// TODO remove variable and just return the int array
-				int[] a = { currentX, currentY + ONE };
-				return a;
-			} else {
-				// not movable so return a empty array which should throw an error when used
-				this.reverseDirection();
-				int[] a = { currentX + ONE, currentY };
-				return a;
-			}
-		case (LEFT):
-			if (this.isMovable(nextCell)) {
-				int[] a = { currentX - ONE, currentY };
-				return a;
-			} else {
-				this.reverseDirection();
-				int[] a = { currentX, currentY + ONE };
-				return a;
-			}
-		case (DOWN):
-			if (this.isMovable(nextCell)) {
-				int[] a = { currentX + ONE, currentY };
-				return a;
-			} else {
-				this.reverseDirection();
-				int[] a = { currentX, currentY + ONE };
-				return a;
-			}
-		case (RIGHT):
-			if (this.isMovable(nextCell)) {
-				int[] a = { currentX, currentY + ONE };
-				return a;
-			} else {
-				this.reverseDirection();
-				int[] a = { currentX - ONE, currentY };
-				return a;
-			}
-		default:
-			throw new IllegalStateException("Undifened direction");
-
-		}
+	public String getMovDirection() {
+		return this.movDirection;
 	}
-
-	/**
-	 * Method for reversing the direction of Enemy
-	 */
+	
 	public void reverseDirection() {
 		switch (this.getMovDirection()) {
 		case (UP):
@@ -138,71 +110,13 @@ public abstract class Enemy extends Element {
 		}
 	}
 
+
 	/**
-	 * Checks if given cell is movable
+	 * Checks if next move is possible.
 	 * 
-	 * @param cell The cell the enemy wants to move to
-	 * @return True for yes it is movable else false
-	 */
-	public boolean isMovable(Cell cell) {
-		switch (cell.getString()) {
-		case "GREENDOOR":
-			if (((ColouredDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
-
-		case "REDDOOR":
-			if (((ColouredDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
-
-		case "YELLOWDOOR":
-			if (((ColouredDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
-
-		case "BLUEDOOR":
-			if (((ColouredDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
-
-		case "W":
-			return false;
-		case "#":
-			return false;
-		case "D":
-			if (((TokenDoor) cell).getOpened()) {
-				return true;
-			} else {
-				return false;
-			}
-
-		case "@":
-			return true;
-		case "L":
-			return false;
-		case " ":
-			return true;
-		case "G":
-			return true;
-		default:
-			return false;
-		}
-	}
-
-	/**
-	 * Checks if new move is valid
 	 * @param gb the game board in play
-	 * @param x the X coordinate of new position
-	 * @param y the Y coordinate of new position
+	 * @param x  the X coordinate of new position
+	 * @param y  the Y coordinate of new position
 	 * @return true if next move is valid else false
 	 */
 	public static boolean checkMove(GameBoard gb, int x, int y) {

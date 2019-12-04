@@ -398,8 +398,8 @@ public class GameBoard {
 				break;
 			case "WALLHUG":
 				WallFollowingEnemy b = (WallFollowingEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				int newX = b.getX(this, enemyX.get(i), enemyY.get(i));
-				int newY = b.getY(this, enemyX.get(i), enemyY.get(i));
+				int newX = b.getsNewX(this, enemyX.get(i), enemyY.get(i));
+				int newY = b.getNewY(this, enemyX.get(i), enemyY.get(i));
 				// System.out.println(newY);
 				board[newY][newX] = board[enemyY.get(i)][enemyX.get(i)];
 				board[enemyY.get(i)][enemyX.get(i)] = new Empty();
@@ -410,9 +410,9 @@ public class GameBoard {
 				break;
 			case "DUMB":
 				DumbTargettingEnemy c = (DumbTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				int newXa = c.getX(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
+				int newXa = c.getNewX(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
 				// System.out.print(newXa+",");
-				int newYa = c.getY(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
+				int newYa = c.getNewY(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
 				// System.out.println(newYa);
 				if (newXa == enemyX.get(i) && newYa == enemyY.get(i)) {
 

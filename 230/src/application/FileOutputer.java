@@ -133,11 +133,11 @@ public class FileOutputer {
 					temp += "" + x + "," + y + ",START" + "\r\n";
 					break;
 				case "STRAIGHT":
-					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + ((StraightLineEnemy) board[y][x]).getDirection()
+					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + ((StraightLineEnemy) board[y][x]).getMovDirection()
 							+ "\r\n";
 					break;
 				case "WALLHUG":
-					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + ((WallFollowingEnemy) board[y][x]).getDirection()
+					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + ((WallFollowingEnemy) board[y][x]).getMovDirection()
 							+ "," + ((WallFollowingEnemy) board[y][x]).getHand() + "\r\n";
 					break;
 				case "DUMB":
