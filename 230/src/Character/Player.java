@@ -1,24 +1,16 @@
 package Character;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import javax.swing.ImageIcon;
-
 import application.Element;
 import cell.Cell;
 import cell.ColouredDoor;
 import cell.TokenDoor;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
- * Player class.
+ * Class is used to create a player on the screen 
  * 
  * @author Bruce Williams (972648)
  * @version 1.2
@@ -29,8 +21,10 @@ public class Player extends Element {
 	private int[][] pos;
 	private Image image;
 
+	private final String START = "START";
+
 	private String path = "Images\\Player.png";
-	//private java.awt.Image img;
+	// private java.awt.Image img;
 
 	/**
 	 * @param name name of player.
@@ -42,6 +36,7 @@ public class Player extends Element {
 	}
 
 	/**
+	 * Sets the players name
 	 * 
 	 * @param name name of player.
 	 */
@@ -50,6 +45,7 @@ public class Player extends Element {
 	}
 
 	/**
+	 * Gets the players name
 	 * 
 	 * @return name name of player.
 	 */
@@ -58,15 +54,21 @@ public class Player extends Element {
 	}
 
 	/**
-	 * @return "START".
+	 * Returns player string 
+	 * 
+	 * @return START
 	 */
 	public String getString() {
-		return "START";
+		return START;
 	}
 
+	/*
+	 * Guide to the items code 0=Token, 1=RedKey, 2=GreenKey, 3=BlueKey,
+	 * 4=YellowKey, 5=Fireboot, 6=Flipper.
+	 */
+
 	/**
-	 * Adds 1 of item to inventory, position corresponds to itemID: 0=Token,
-	 * 1=RedKey, 2=GreenKey, 3=BlueKey, 4=YellowKey, 5=Fireboot, 6=Flipper.
+	 * Adds a item to inventory, position corresponds to itemID:
 	 * 
 	 * @param position position of player.
 	 */
@@ -75,16 +77,17 @@ public class Player extends Element {
 	}
 
 	/**
-	 * updates number of specified item to given num.
+	 * updates number of specified item to given number of items.
 	 * 
 	 * @param position itemID.
-	 * @param num      number of items.
+	 * @param number   number of items.
 	 */
-	public void setInventory(int position, int num) {
-		inventory[position] += num;
+	public void setInventory(int position, int number) {
+		inventory[position] += number;
 	}
 
 	/**
+	 * Gets the number of tokens the player has
 	 * 
 	 * @return number of tokens.
 	 */
@@ -93,8 +96,10 @@ public class Player extends Element {
 	}
 
 	/**
+	 * Returns the inventory array, containing all items currently collected by the
+	 * player
 	 * 
-	 * @return inventory
+	 * @return inventory int array, each item is represented by its item code
 	 */
 	public int[] getInventory() {
 		return inventory;
@@ -111,6 +116,7 @@ public class Player extends Element {
 	}
 
 	/**
+	 * Gets the position of the player.
 	 * 
 	 * @return pos position of player on board
 	 */
@@ -119,7 +125,7 @@ public class Player extends Element {
 	}
 
 	/**
-	 * Create avatar image
+	 * Sets the player's sprite
 	 * 
 	 * @throws FileNotFoundException
 	 */
@@ -128,19 +134,25 @@ public class Player extends Element {
 	}
 
 	/**
-	 * @param x width of image
-	 * @param y height of image
+	 * Draws the player sprite to screen
+	 * 
+	 * @param gc the graphics buffer of the canvas to be drawn to
+	 * @param x  width of image
+	 * @param y  height of image
+	 * @param r  the rotation of the image
 	 */
 	public void drawPlayer(GraphicsContext gc, int x, int y, int r) {
 		gc.save();
 		gc.translate(x, y);
 		gc.rotate(r);
-		//gc.drawImage(image, -(1), -(1));
-		gc.drawImage(image, -(100/2), -(100/2));
+		// gc.drawImage(image, -(1), -(1));
+		gc.drawImage(image, -(100 / 2), -(100 / 2));
 		gc.restore();
-	} 
+	}
 
 	/**
+	 * checks if a specific item is in the inventory of the player. Item is
+	 * specified by an int
 	 * 
 	 * @param i itemID
 	 * @return TRUE if inventory contains that specified item, else FALSE.
@@ -150,7 +162,7 @@ public class Player extends Element {
 	}
 
 	/**
-	 * Removes 1 of specified item
+	 * Removes a specified item from inventory
 	 * 
 	 * @param i itemID
 	 */
@@ -162,7 +174,7 @@ public class Player extends Element {
 	 * checks if player can move onto specified cell and responds appropriately.
 	 * 
 	 * @param cell cell on board.
-	 * @return
+	 * @return True if given tile is movable, else false
 	 */
 	public boolean movable(Cell cell) {
 		switch (cell.getString()) {

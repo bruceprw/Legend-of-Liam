@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 import Character.Player;
@@ -9,111 +10,104 @@ import Character.WallFollowingEnemy;
 import cell.*;
 
 /**
- * This class is to output saves files.
+ * This class is used to output the save files for the game.
  * 
  * @author Andy Kuo
- *
+ * @version 1.0
  */
-
-public class FileOutputer
-{
+public class FileOutputer {
 	private String output = "";
 	private String temp = "";
 	private Element[][] background;
 	private Element[][] board;
 
-	
 	/**
-	 * Outputs the file with the game board 
+	 * Outputs the file with the game board
 	 * 
 	 * @param lvl the game board
-	 * @param lt the current level time
+	 * @param lt  the current level time
 	 */
-	
-	public FileOutputer(GameBoard lvl, LevelTime lt)
-	{
+	public FileOutputer(GameBoard lvl, LevelTime lt) {
 		background = lvl.getBackground();
 		board = lvl.getBoard();
 		output += "" + background[0].length + "," + background.length + "\r\n";
 		long a = lt.getTime();
-		output+= ""+ a+"\r\n";
-		
-		setOutput(board,background);
+		output += "" + a + "\r\n";
 
-		setRemain(lvl,board);
-		
-		try
-		{
-			File outputFile = new File("LevelFiles\\"+lt.getUsername()+".txt");
+		setOutput(board, background);
+
+		setRemain(lvl, board);
+
+		// attempts to read in the file
+
+		try {
+			File outputFile = new File("LevelFiles\\" + lt.getUsername() + ".txt");
 			PrintWriter out = new PrintWriter(outputFile);
-			out.print(output+temp);
+			out.print(output + temp);
 			out.close();
-		}catch(Exception e)
-		{
-			System.out.println("Failed!");
+
+			// if it does not work it prints the
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
-		
+
 		String finalOutput = output + temp;
 		System.out.println(finalOutput);
 	}
-	
+
 	/**
-	 * this methods saves the inventory information of the game.
+	 * This methods saves the inventory information of the game.
 	 * 
-	 * @param lvl the GameBoard instance
+	 * @param lvl   the GameBoard instance
 	 * @param board the board instance
 	 */
-	public void setRemain(GameBoard lvl, Element[][] board)
-	{
+	public void setRemain(GameBoard lvl, Element[][] board) {
 		int[] inventory = ((Player) board[lvl.getPlayerY()][lvl.getPlayerX()]).getInventory();
-		temp+="0,0,INVENTORY,";
-		temp+="TOKEN,"+inventory[0]+",";
-		temp+="RKEY,"+inventory[1]+",";
-		temp+="GKEY,"+inventory[2]+",";
-		temp+="BKEY,"+inventory[3]+",";
-		temp+="YKEY,"+inventory[4]+",";
-		temp+="BOOT,"+inventory[5]+",";
-		temp+="FLIPPER,"+inventory[6]+"\r\n";
-		temp+="////";
+		temp += "0,0,INVENTORY,";
+		temp += "TOKEN," + inventory[0] + ",";
+		temp += "RKEY," + inventory[1] + ",";
+		temp += "GKEY," + inventory[2] + ",";
+		temp += "BKEY," + inventory[3] + ",";
+		temp += "YKEY," + inventory[4] + ",";
+		temp += "BOOT," + inventory[5] + ",";
+		temp += "FLIPPER," + inventory[6] + "\r\n";
+		temp += "////";
 	}
-	
+
 	/**
-	 * this method sets part of the output
+	 * This method sets part of the output.
 	 * 
-	 * @param board the current board instance
+	 * @param board      the current board instance
 	 * @param background the current background
 	 */
-	public void setOutput(Element[][] board, Element[][] background)
-	{
-		getSwitch(board,background);
+	public void setOutput(Element[][] board, Element[][] background) {
+		getSwitch(board, background);
 	}
-	
+
 	/**
-	 * this method sets part of the output
+	 * This method get the current board to save as a file. Does not get all
+	 * information required.
 	 * 
-	 * @param board the current board instance
+	 * @param board      the current board instance
 	 * @param background the current background
 	 */
-	public void setTemp(Element[][] board, Element[][] background)
-	{
-		getSwitch(board,background);
+	public void setTemp(Element[][] board, Element[][] background) {
+		getSwitch(board, background);
 	}
-	
+
 	/**
-	 * Switchs lots of board and background information to a String value.
+	 * Turns the current board and background into a string that can be used to
+	 * restore the current game.
 	 * 
-	 * @param board board instance
+	 * @param board      board instance
 	 * @param background background instance
 	 */
-	
-	public void getSwitch(Element[][] board,Element[][] background)
-	{
-		for (int y = 0; y < board.length; y++)
-		{
-			for (int x = 0; x < board[y].length; x++)
-			{
-				switch (board[y][x].getString())
-				{
+
+	public void getSwitch(Element[][] board, Element[][] background) {
+		for (int y = 0; y < board.length; y++) {
+			//Gets board information
+			for (int x = 0; x < board[y].length; x++) {
+				switch (board[y][x].getString()) {
 				case "T":
 					background[y][x] = board[y][x];
 					break;
@@ -136,13 +130,15 @@ public class FileOutputer
 					background[y][x] = board[y][x];
 					break;
 				case "START":
-					temp+=""+x+","+y+",START"+"\r\n";
+					temp += "" + x + "," + y + ",START" + "\r\n";
 					break;
 				case "STRAIGHT":
-					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + ((StraightLineEnemy) board[y][x]).getDirection() + "\r\n";
+					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + ((StraightLineEnemy) board[y][x]).getDirection()
+							+ "\r\n";
 					break;
 				case "WALLHUG":
-					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + ((WallFollowingEnemy) board[y][x]).getDirection()+","+((WallFollowingEnemy)board[y][x]).getHand() + "\r\n";
+					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + ((WallFollowingEnemy) board[y][x]).getDirection()
+							+ "," + ((WallFollowingEnemy) board[y][x]).getHand() + "\r\n";
 					break;
 				case "DUMB":
 					temp += "" + x + "," + y + ",ENEMY,DUMB" + "\r\n";
@@ -151,18 +147,15 @@ public class FileOutputer
 					temp += "" + x + "," + y + ",ENEMY,SMART" + "\r\n";
 					break;
 				case "D":
-					
+
 					break;
 				}
 			}
 		}
-
-		for (int y = 0; y < background.length; y++)
-		{
-			for (int x = 0; x < background[y].length; x++)
-			{
-				switch (background[y][x].getString())
-				{
+		//gets background information
+		for (int y = 0; y < background.length; y++) {
+			for (int x = 0; x < background[y].length; x++) {
+				switch (background[y][x].getString()) {
 				case "#":
 					output += "#";
 					break;
@@ -180,13 +173,13 @@ public class FileOutputer
 					break;
 				case "@":
 					output += " ";
-					int tempX = ((Teleporter)background[y][x]).getPairX();
-					int tempY = ((Teleporter)background[y][x]).getPairY();
-					temp+=""+x+","+y+",TELEPORTER,"+tempX+","+tempY+"\r\n";
+					int tempX = ((Teleporter) background[y][x]).getPairX();
+					int tempY = ((Teleporter) background[y][x]).getPairY();
+					temp += "" + x + "," + y + ",TELEPORTER," + tempX + "," + tempY + "\r\n";
 					break;
 				case "D":
-					output+=" ";
-					temp+= "" + x + "," + y + ",DOOR,"+((TokenDoor)background[y][x]).getTokenNum()+"\r\n";
+					output += " ";
+					temp += "" + x + "," + y + ",DOOR," + ((TokenDoor) background[y][x]).getTokenNum() + "\r\n";
 					break;
 				case "REDDOOR":
 					output += " ";
