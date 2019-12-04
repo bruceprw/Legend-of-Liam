@@ -54,6 +54,7 @@ public class HowToPlayScreen extends Screen {
 		
 		root.setTop(view);
 		root.setCenter(displayText);
+		root.setAlignment(displayText, Pos.TOP_LEFT);
 		
 		scene = new Scene(root, HOW_TO_PLAY_WIDTH, HOW_TO_PLAY_HEIGHT);
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, event ->
