@@ -3,7 +3,6 @@ package application;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 import application.DailyMessage;
@@ -14,8 +13,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
@@ -28,52 +25,31 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-public class TitleScreen extends Screen
-{
+public class TitleScreen extends Screen {
 	private BorderPane root;
 
 	private VBox topPane;
-	private Text title;
-	private Text dailyMessage;
 	private Image titleImage;
 	private VBox menuPane;
 	private Text welcome;
-	private Button loadGame;
-	private Button selectLevel;
-	private Button howToPlay;
-	private Button leaderboards;
-	private Button options;
-	private Button logout;
-	private ImageView a ;
 	private GridPane loginPane;
-	private Text loginPrompt;
-	private Text usernameLabel;
-	private Text passwordLabel;
-	private TextField username;
-	private PasswordField password;
-	private Button submit;
-	private Button newProfile;
 	private static Media music = new Media(new File("Sound\\BGM\\Aurora_CurrentsINTRO.mp3").toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	private UserProfile currentUser = null;
 
-
-	public TitleScreen()
-	{
+	public TitleScreen() {
 		root = new BorderPane();
-		try
-		{
+		try {
 			titleImage = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
-		}
-		catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		a = new ImageView(titleImage);
+
+		ImageView a = new ImageView(titleImage);
 		a.setFitHeight(730);
 		a.setFitWidth(900);
+
 		buildTopPane();
 
 		buildLoginPane();
@@ -83,8 +59,7 @@ public class TitleScreen extends Screen
 		mediaPlayer.setAutoPlay(true);
 		mediaPlayer.setVolume(0.2);
 		mediaPlayer.play();
-		
-		
+
 		root.setTop(topPane);
 		root.setCenter(loginPane);
 
@@ -93,68 +68,66 @@ public class TitleScreen extends Screen
 		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 	}
 
-	private void buildTopPane()
-	{
+	/**
+	 * Constructs the elements for the {@link #topPane}.
+	 */
+	private void buildTopPane() {
 		topPane = new VBox();
 		topPane.setMaxWidth(WINDOW_WIDTH);
 		topPane.setAlignment(Pos.CENTER);
 
-		title = new Text("Legend of Liam");
+		Text title = new Text("Legend of Liam");
 		title.setFont(Font.font(100));
 		title.setFill(Color.CHARTREUSE);
 
-		dailyMessage = new Text(DailyMessage.getMessage());
+		Text dailyMessage = new Text(DailyMessage.getMessage());
 		dailyMessage.setFill(Color.CHARTREUSE);
 		dailyMessage.setWrappingWidth(WINDOW_WIDTH);
 		dailyMessage.setTextAlignment(TextAlignment.CENTER);
-		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
 		topPane.setBackground(new Background(b));
 		topPane.getChildren().addAll(title, dailyMessage);
 	}
 
-	private void buildLoginPane()
-	{
-		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
+	/**
+	 * Construct the elements of the {@link #loginPane}.
+	 */
+	private void buildLoginPane() {
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
 		loginPane = new GridPane();
 		loginPane.setHgap(10);
 		loginPane.setVgap(5);
 		loginPane.setAlignment(Pos.CENTER);
 		loginPane.setBackground(new Background(b));
-		loginPrompt = new Text("Please enter your login details, or");
+		Text loginPrompt = new Text("Please enter your login details, or");
 		loginPrompt.setFill(Color.CHARTREUSE);
-		usernameLabel = new Text("Username:");
+		Text usernameLabel = new Text("Username:");
 		usernameLabel.setFill(Color.CHARTREUSE);
-		passwordLabel = new Text("Password:");
+		Text passwordLabel = new Text("Password:");
 		passwordLabel.setFill(Color.CHARTREUSE);
-		username = new TextField();
-		password = new PasswordField();
-		submit = new Button("Submit");
-		//let's let the user allowed to press "Enter key" to login
-		submit.setOnAction(event ->
-		{
+		TextField username = new TextField();
+		PasswordField password = new PasswordField();
+		Button submit = new Button("Submit");
+		// let's let the user allowed to press "Enter key" to login
+		submit.setOnAction(event -> {
 			boolean found = false;
-			
+
 			File f = new File("UserProfiles\\profiles.txt");
 			Scanner s = null;
-			try
-			{
+			try {
 				s = new Scanner(f);
-			}
-			catch (FileNotFoundException e)
-			{
+			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 
-			while (s.hasNext())
-			{
+			while (s.hasNext()) {
 				Scanner line = new Scanner(s.nextLine());
 				line.useDelimiter(",");
 				String nextUser = line.next();
 				String nextPass = line.next();
 				int nextProgress = line.nextInt();
 
-				if(username.getText().equals(nextUser) && password.getText().equals(nextPass))
-				{
+				if (username.getText().equals(nextUser) && password.getText().equals(nextPass)) {
 					currentUser = new UserProfile(nextUser, nextPass, nextProgress);
 					root.setCenter(menuPane);
 					found = true;
@@ -168,17 +141,15 @@ public class TitleScreen extends Screen
 				line.close();
 			}
 
-			if(!found)
-			{
+			if (!found) {
 				loginPrompt.setText("User not found. Please try again.");
 				username.setText("");
 				password.setText("");
 			}
 
 		});
-		newProfile = new Button("Create Profile");
-		newProfile.setOnAction(event ->
-		{
+		Button newProfile = new Button("Create Profile");
+		newProfile.setOnAction(event -> {
 			createPopup(new NewUserScreen());
 		});
 
@@ -188,30 +159,33 @@ public class TitleScreen extends Screen
 		loginPane.addRow(3, submit);
 	}
 
-	private void buildMenuPane()
-	{
-		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null); 
+	/**
+	 * Constructs the elements to add to {@link #menuPane}.
+	 */
+	private void buildMenuPane() {
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
 		menuPane = new VBox();
 		menuPane.setBackground(new Background(b));
 		welcome = new Text("Welcome!");
 		welcome.setFill(Color.CHARTREUSE);
 
-		loadGame = new Button("Load Game");
-		loadGame.setOnAction(event ->
-		{
+		Button loadGame = new Button("Load Game");
+		Button selectLevel = new Button("Select Level");
+		Button howToPlay = new Button("How To Play");
+		Button leaderboards = new Button("Leaderboards");
+		Button options = new Button("Options");
+		Button logout = new Button("Log Out");
+
+		loadGame.setOnAction(event -> {
 			switchScreen(new GameScreen(currentUser.getName(), currentUser));
 		});
 
-		selectLevel = new Button("Select Level");
-		selectLevel.setOnAction(event ->
-		{
+		selectLevel.setOnAction(event -> {
 			switchScreen(new LevelScreen(currentUser));
 			mediaPlayer.stop();
 		});
-		
-		howToPlay = new Button("How To Play");
-		howToPlay.setOnAction(event ->
-		{
+
+		howToPlay.setOnAction(event -> {
 			try {
 				createPopup(new HowToPlayScreen());
 			} catch (FileNotFoundException e) {
@@ -219,27 +193,25 @@ public class TitleScreen extends Screen
 			}
 		});
 
-		leaderboards = new Button("Leaderboards");
-		leaderboards.setOnAction(event ->
-		{
+		leaderboards.setOnAction(event -> {
 			switchScreen(new LeaderboardsScreen("1"));
 		});
-		
-		options = new Button("Options");
-		options.setOnAction(event -> 
-		{
+
+		options.setOnAction(event -> {
 			createPopup(new OptionsScreen(currentUser));
 		});
 
-		logout = new Button("Log Out");
-		logout.setOnAction(event ->
-		{
+		logout.setOnAction(event -> {
 			root.setCenter(loginPane);
 		});
 
 		menuPane.getChildren().addAll(welcome, loadGame, selectLevel, howToPlay, leaderboards, options, logout);
 	}
-	
+
+	/**
+	 * Show the {@link menuPane} on the title screen.
+	 * @param currentUser The user who is logged in.
+	 */
 	public void switchToMenu(UserProfile currentUser) {
 		this.currentUser = currentUser;
 		root.setCenter(menuPane);
