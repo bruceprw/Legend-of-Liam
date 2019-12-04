@@ -23,56 +23,47 @@ public class LevelScreen extends Screen {
 	private static final int GAME_HEIGHT = 700;
 	private Image bg;
 	private BorderPane root;
-	private Media music ;
-	private MediaPlayer mediaPlayer ;
+	private Media music;
+	private MediaPlayer mediaPlayer;
 	private Canvas game;
 
 	private GameBoard level;
 	private UserProfile user;
 
 	/**
-	 * 
-	 * @param levelNo Number of the level to be loaded.
-	 * @throws InterruptedException
+	 * Creates the canvas, music and other elements for the LevelScreen.
+	 * @param levelNo
+	 *            Number of the level to be loaded.
 	 */
-	
-	public LevelScreen(UserProfile user)
-	{
-		this.user=user;
+	public LevelScreen(UserProfile user) {
+		this.user = user;
 
-		music= new Media(new File("Sound\\BGM\\bg.mp3").toURI().toString());
-		
+		music = new Media(new File("Sound\\BGM\\bg.mp3").toURI().toString());
+
 		mediaPlayer = new MediaPlayer(music);
 		mediaPlayer.setAutoPlay(true);
 		mediaPlayer.play();
-		try
-		{
+		try {
 			bg = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
-		}catch(FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		try
-		{
+
+		try {
 			level = new GameBoard("LevelFiles\\levelSelect.txt");
-		}
-		catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		root = new BorderPane();
-		root.setBackground(new Background(new BackgroundImage(bg,null,null,null,null)));
+		root.setBackground(new Background(new BackgroundImage(bg, null, null, null, null)));
 		game = new Canvas(GAME_WIDTH, GAME_HEIGHT);
 
 		// Initial Call of drawGame() (can delete if you want)
 		drawGame();
 
 		root.setCenter(game);
-		
+
 		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 			try {
@@ -84,11 +75,14 @@ public class LevelScreen extends Screen {
 		});
 	}
 
-	private void keyPressed(KeyEvent event) throws IOException
-
-	{
-		switch (event.getCode())
-		{
+	/**
+	 * Processes key presses that interact with the level.
+	 * @param event The key press action.
+	 * @throws IOException
+	 */
+	private void keyPressed(KeyEvent event) throws IOException {
+		// Check which key was pressed.
+		switch (event.getCode()) {
 		case RIGHT:
 			level.move("right");
 			break;
@@ -96,61 +90,68 @@ public class LevelScreen extends Screen {
 		case LEFT:
 			level.move("left");
 			break;
-			
+
 		case UP:
 			level.move("up");
 			break;
-			
+
 		case DOWN:
 			level.move("down");
 			break;
-			
+
 		case SPACE:
+			// Space bar used to select a level
 			Element space = level.getBackground()[level.getPlayerY()][level.getPlayerX()];
+			
+			// If pressed on a LevelDoor, enter it if the user can access it.
 			if (space.getClass() == LevelDoor.class) {
 				LevelDoor door = (LevelDoor) space;
 				int levelNo = door.getLevelNo();
-				
+
 				if (levelNo == 0) {
 					TitleScreen t = new TitleScreen();
 					switchScreen(t);
 					t.switchToMenu(user);
 				} else {
-					switchScreen(new GameScreen(levelNo + "", user));
+					if (levelNo <= user.getLevelProg() + 1) {
+						switchScreen(new GameScreen(levelNo + "", user));
+					} else {
+						// Test
+						System.out.println("Locked");
+					}
 				}
 			}
 			mediaPlayer.stop();
 			break;
-			
+
 		default:
 			break;
 		}
 
 		drawGame();
 
-		// Consume key press event so that arrow keys don't interact with Buttons.
+		// Consume key press event so that arrow keys don't interact with
+		// Buttons.
 		event.consume();
 	}
 
-	private void drawGame()
-	{
+	/**
+	 * Draws the game state onto the canvas.
+	 */
+	private void drawGame() {
+		// Clear the canvas
 		GraphicsContext gc = game.getGraphicsContext2D();
 		gc.clearRect(0, 0, game.getWidth(), game.getHeight());
 
-		try
-		{
+		try {
 			level.drawGame(gc);
-		}
-		catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		// TEST - get rid of this
 		gc.setFill(Color.BLACK);
 		gc.strokeRect(0, 0, game.getWidth(), game.getHeight());
 	}
-	
-	
+
 }
