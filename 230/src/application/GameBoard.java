@@ -97,8 +97,8 @@ public class GameBoard
 			{
 				background[y][x].draw(gc, i, j);
 				board[y][x].draw(gc, i, j);
-				background[y][x].drawPlayer(gc, x, y, rotation);
-				board[y][x].drawPlayer(gc, x, y, rotation);
+				background[y][x].drawPlayer(gc, i, j, rotation);
+				board[y][x].drawPlayer(gc, i, j, rotation);
 			}
 		}
 		drawItem(gc);

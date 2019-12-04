@@ -135,11 +135,10 @@ public class Player extends Element {
 		gc.save();
 		gc.translate(x, y);
 		gc.rotate(r);
-		//gc.translate(-x, -y);
 		//gc.drawImage(image, -(1), -(1));
 		gc.drawImage(image, -(100/2), -(100/2));
 		gc.restore();
-	}
+	} 
 
 	/**
 	 * 
