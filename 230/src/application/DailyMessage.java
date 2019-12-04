@@ -13,19 +13,9 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class DailyMessage {
-	/**
-	 * The URL where the puzzle is found.
-	 */
+
 	private static final String PUZZLE_URL = "http://cswebcat.swan.ac.uk/puzzle";
-
-	/**
-	 * The (partial) URL where the solution is inputed.
-	 */
 	private static final String SOLUTION_URL = "http://cswebcat.swan.ac.uk/message?solution=";
-
-	/**
-	 * The default daily message should any connection fail.
-	 */
 	private static final String DEFAULT_MESSAGE = "Welcome to Legend of Liam!";
 
 	/**
@@ -46,8 +36,7 @@ public class DailyMessage {
 	 * Connects to {@link #PUZZLE_URL} and retrieves a puzzle.
 	 * 
 	 * @return A puzzle as a String of capital letters.
-	 * @throws IOException
-	 *             if the connection fails.
+	 * @throws IOException if the connection fails.
 	 */
 	private static String getPuzzle() throws IOException {
 		// Establish a connection to PUZZLE_URL
@@ -64,11 +53,9 @@ public class DailyMessage {
 	}
 
 	/**
-	 * Solves the input puzzle using the method described at
-	 * cswebcat.swan.ac.uk.
+	 * Solves the input puzzle using the method described at cswebcat.swan.ac.uk.
 	 * 
-	 * @param puzzle
-	 *            The string of capital letters to be solved.
+	 * @param puzzle The string of capital letters to be solved.
 	 * @return The puzzle solution.
 	 */
 	private static String solvePuzzle(String puzzle) {
@@ -100,7 +87,7 @@ public class DailyMessage {
 				}
 
 			}
-			
+
 			// Add the changed letter to the solution string.
 			solution += puzzleChars[i];
 		}
@@ -109,21 +96,19 @@ public class DailyMessage {
 	}
 
 	/**
-	 * Inputs a puzzle solution to the url and retrieves the daily message from
-	 * the page.
+	 * Inputs a puzzle solution to the url and retrieves the daily message from the
+	 * page.
 	 * 
-	 * @param solution
-	 *            The solution to the puzzle.
+	 * @param solution The solution to the puzzle.
 	 * @return The daily message.
-	 * @throws IOException
-	 *             if the connection fails.
+	 * @throws IOException if the connection fails.
 	 */
 	private static String inputSolution(String solution) throws IOException {
 		// Establish a connection. Solution added to URL.
 		URL url = new URL(SOLUTION_URL + solution);
 		HttpURLConnection connect = (HttpURLConnection) url.openConnection();
 		connect.setRequestMethod("GET");
-		
+
 		// Read the message from the page.
 		Scanner scan = new Scanner(connect.getInputStream());
 		String message = "";
@@ -132,12 +117,12 @@ public class DailyMessage {
 			message += scan.nextLine();
 		}
 		scan.close();
-		
+
 		return message;
 	}
 
 	/**
-	 * This method retrieves the daily message from the website.
+	 * This method retrieves the daily message from the web-site.
 	 * 
 	 * @return The daily message.
 	 */
