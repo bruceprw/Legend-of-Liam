@@ -24,6 +24,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+/**
+ * Holds all the methods and instance of the leaderboards screen.
+ * Inherits from the screen class E.g. things such as methods and 
+ * constants for window sizes. Additionally holds data structures for
+ * holding the formatted data of user name and time to be displayed to the 
+ * user in the actually leaderboard screen.
+ * @author LV-ThinkPD
+ *
+ */
 public class LeaderboardsScreen extends Screen {
 	private static final double LEVEL_BUTTON_SIZE = 50;
 	private static final int BTNS_PER_ROW = 5;
@@ -43,10 +52,28 @@ public class LeaderboardsScreen extends Screen {
 	private Button back;
 	private static Leaderboard ld;
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-
+	
+	/**
+	 * The constructor for the class. Used to initialise the 
+	 * screen using other methods generate the screen.
+	 * @param level The leaderboards is split into levels and 
+	 * thus for correct level times to be displayed the required
+	 * level must know and it passed as a parameter.
+	 */
 	public LeaderboardsScreen(String level){
 		screenInit(level);
 	}
+	/**
+	 * Used to create all the visual and interactive elements on
+	 * the screen. The settings and options for these visual elements
+	 * are also specified, such as the insets for the table.
+	 * Ensures every button correctly calls the 
+	 * right level file by assigning it a level and button label.
+	 * A new instance of the class is called when the button is pressed.
+	 * This is to re initialise the table and display the next levels'
+	 * leaderboard. 
+	 * @param level
+	 */
 	private void screenInit(String level) {
 		System.out.println(level);
 		ld=new Leaderboard(level);
@@ -101,11 +128,16 @@ public class LeaderboardsScreen extends Screen {
 		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 	}
 
-
+	/**
+	 * A helper function that increases code readability.
+	 */
 	private void buildAdd() {
 		buildTable();
 		addItems();
 	}
+	/**
+	 * Used to initially set the column names and size of the table.
+	 */
 	private void buildTable() {
 		leaderboard = new TableView<LevelTime>();
 		leaderboard.setMinWidth(WINDOW_WIDTH/2);
@@ -129,6 +161,10 @@ public class LeaderboardsScreen extends Screen {
 		leaderboard.getColumns().addAll(rank, username, time);
 	}
 	
+	/**
+	 * Used to look through the list of elements and tranpose
+	 * them to the table list.
+	 */
 	private void addItems() {
 		// TODO: Load list of users function.
 
