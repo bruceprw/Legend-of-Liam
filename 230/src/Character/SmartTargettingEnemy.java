@@ -1,211 +1,85 @@
 package Character;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Queue;
-import java.util.Set;
-
-import application.Element;
 import application.GameBoard;
-import cell.Cell;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 /**
  * Smart targeting enemies uses BFS to find player and chase
  * 
  * @author Miles Singleton
- * @version 0.0
+ * @version 1.0
  */
-public class SmartTargettingEnemy extends Enemy
-{
+public class SmartTargettingEnemy extends Enemy {
+
 	private String path = "Images\\smart.png";
-	private Image image;
-
-	public SmartTargettingEnemy(int currentX, int currentY, String movDirection) throws FileNotFoundException
-	{
-		this.currentPositionX = currentX;
-		this.currentPositionY = currentY;
-		this.movDirection = UP;
-
-		setImage();
-	}
-
-	public SmartTargettingEnemy(int currentX, int currentY) throws FileNotFoundException
-	{
-		this.currentPositionX = currentX;
-		this.currentPositionY = currentY;
-
-		setImage();
-	}
-
-	//Is this still needed?
-	public Node findPath(Element[][] matrix, int x, int y, int playerX, int playerY)
-	{
-		// make queue
-		// visited set
-		// root add to queue/set
-
-		// while queue is not empty
-		// is the current x,y the player
-		// yes return
-
-		// no get adjacent (child) nodes
-		// have they been visited
-		// are they movable
-		// yes - add to queue
-
-		// with the shortest path return pair [1]
-		// move to pair[1]
-
-		Queue<Node> nodeQueue = new ArrayDeque<>();
-		Node root = new Node(x, y, null);
-		nodeQueue.add(root);
-
-		int[] newXPositions =
-		{ 1, -1, 0, 0 };
-		int[] newYPositions =
-		{ 0, 0, 1, -1 };
-
-		// set of visited nodes, each value in a set is unique, more efficient then
-		// boolean
-		Set<String> visited = new HashSet<>();
-
-		String key = root.x + "," + root.y;
-		visited.add(key);
-
-		while (!nodeQueue.isEmpty())
-		{
-			// pop front node from queue and process it
-			Node currentNode = nodeQueue.poll();
-			// current node X and Y
-			int cNX = currentNode.x;
-			int cNY = currentNode.y;
-
-			// return if player has been found
-			if(cNX == playerX && cNY == playerY)
-			{
-				// refactor this
-				return currentNode.getGoodNode(currentNode);
-			}
-
-			// find next node
-			for (int k = 0; k < 4; k++)
-			{
-				x = cNX + newXPositions[k];
-				y = cNY + newYPositions[k];
-
-				if(this.isMovable((Cell) matrix[x][y]))
-				{
-					Node nextNode = new Node(x, y, currentNode);
-
-					key = nextNode.x + "," + nextNode.y;
-
-					// if it not visited yet
-					if(!visited.contains(key))
-					{
-						// add it to queue and mark as visited
-						nodeQueue.add(nextNode);
-						visited.add(key);
-					}
-				}
-
-			}
-
-		}
-		// return null if path is impossible
-		return null;
-
-	}
-
-	// Utility function to print path from source to destination
-	public static int printPath(Node node)
-	{
-		if(node == null)
-		{
-			return 0;
-		}
-		int len = printPath(node.parent);
-		System.out.print(node + " ");
-		return len + 1;
-	}
-	public String getString()
-	{
-		return "SMART";
-	}
-
-	public void setImage() throws FileNotFoundException
-	{
-		image = new Image(new FileInputStream(path));
-	}
-
-	public void draw(GraphicsContext gc, int x, int y)
-	{
-		gc.drawImage(image, x, y, 100, 100);
-	}
-
+	private final String SMART = "SMART";
 
 	/**
-	 * Gets the that the enemy shall go according to the player's position and enemy's position.
-	 * @param gb the Gameboard info. As the enemy can't go through other elements.
-	 * @param x enemy's x-coordinate.
-	 * @param y enemy's y-coordinate.
+	 * Creates a new instance of a smart enemy.
+	 * 
+	 * @param newX The X positon for the enemy
+	 * @param newY The Y positon for the enemy
+	 * @throws FileNotFoundException
+	 */
+	public SmartTargettingEnemy(int newX, int newY) throws FileNotFoundException {
+		this.currentPositionX = newX;
+		this.currentPositionY = newY;
+		this.name = SMART;
+
+		setImage(path);
+	}
+
+	/**
+	 * Gets the path the enemy follows towards the player
+	 * 
+	 * @param gb      The gameboard info. As the enemy can't go through other
+	 *                elements.
+	 * @param x       enemy's x-coordinate.
+	 * @param y       enemy's y-coordinate.
 	 * @param playerX player's x-coordinate.
 	 * @param playerY player's y-coordinate.
-	 * @return the next path that enemy shall go.
+	 * @return the next path the enemy will follow.
 	 */
-	public Path getPath(GameBoard gb, int x, int y, int playerX, int playerY)
-	{
+	public Path getPath(GameBoard gb, int x, int y, int playerX, int playerY) {
 		ArrayList<Path> temp = new ArrayList<Path>();
 		setPaths(gb, x, y, playerX, playerY, 0, temp);
 		int counter = 0;
 		ArrayList<Path> fl = new ArrayList<Path>();
-		
-		
-		for(int i=0;i<temp.size();i++)
-		{
-			if(temp.get(i).getX()==x&&temp.get(i).getY()==y)
-			{
-				counter=temp.get(i).getCount();
+
+		for (int i = 0; i < temp.size(); i++) {
+			if (temp.get(i).getX() == x && temp.get(i).getY() == y) {
+				counter = temp.get(i).getCount();
 				fl.add(temp.get(i));
 			}
 		}
-		for(int i=0;i<temp.size();i++)
-		{
-			if(temp.get(i).getCount()<counter)
+		for (int i = 0; i < temp.size(); i++) {
+			if (temp.get(i).getCount() < counter)
 				fl.add(temp.get(i));
 		}
-		if(fl.size()==0)
-		{
-			return new Path(gb, x,y,0);
-		}
-		else
-		{
+		if (fl.size() == 0) {
+			return new Path(gb, x, y, 0);
+		} else {
 			Path f = fl.get(0);
 			ArrayList<Path> ad = new ArrayList<Path>();
 
-			for (int i = 0; i < fl.size(); i++)
-			{
+			for (int i = 0; i < fl.size(); i++) {
 				if (isAdjacent(fl.get(i), f))
 					ad.add(fl.get(i));
 			}
-			//System.out.println(ad.get(0));
+			// System.out.println(ad.get(0));
 			return ad.get(0);
 		}
 	}
 
-
 	/**
 	 * Checks whether two paths are adjacent to each other.
-	 * @param a Path one 
+	 * 
+	 * @param a Path one
 	 * @param b Path two
 	 * @return true if they are adjacent
 	 */
-	public boolean isAdjacent(Path a, Path b)
-	{
+	private boolean isAdjacent(Path a, Path b) {
 		boolean c = a.getX() == b.getX();
 		boolean d = a.getY() == b.getY();
 		boolean e = (a.getX() - 1 == b.getX()) && d;
@@ -218,95 +92,72 @@ public class SmartTargettingEnemy extends Enemy
 	}
 
 	/**
-	 * Set the path by Breadth-first-search algorithms.
-	 * @param gb the gameboard instance
-	 * @param x the x-coordinate of enemy.
-	 * @param y the y-coordinate of enemy.
+	 * Set the path by the Breadth-first-search algorithms.
+	 * 
+	 * @param gb      the gameboard instance
+	 * @param x       the x-coordinate of enemy.
+	 * @param y       the y-coordinate of enemy.
 	 * @param playerX the player's x-coordinate.
 	 * @param playerY the player's y-coordinate.
 	 * @param counter the steps taken from the enemy's position
-	 * @param path the list of path information.
+	 * @param path    the list of path information.
 	 */
-	public void setPaths(GameBoard gb, int x, int y, int playerX, int playerY, int counter, ArrayList<Path> path)
-	{
+	public void setPaths(GameBoard gb, int x, int y, int playerX, int playerY, int counter, ArrayList<Path> path) {
 		path.add(new Path(gb, playerX, playerY, counter));
-		if(x == playerX && y == playerY)
-		{
+		if (x == playerX && y == playerY) {
 			return;
 		}
 		// System.out.println(x+","+y);
-		if(Enemy.checkMove(gb, playerX + 1, playerY)||(playerX+1==x&&playerY==y))
-		{
-			if(checkVisited(path, playerX + 1, playerY, counter + 1))
-			{
+		if (Enemy.checkMove(gb, playerX + 1, playerY) || (playerX + 1 == x && playerY == y)) {
+			if (checkVisited(path, playerX + 1, playerY, counter + 1)) {
 
-			}
-			else
-			{
-				setPaths(gb, x, y, playerX+1, playerY, counter + 1, path);
+			} else {
+				setPaths(gb, x, y, playerX + 1, playerY, counter + 1, path);
 			}
 
 		}
 
-		if(Enemy.checkMove(gb, playerX-1, playerY)||(playerX-1==x&&playerY==y))
-		{
-			if(checkVisited(path, playerX - 1, playerY, counter + 1))
-			{
+		if (Enemy.checkMove(gb, playerX - 1, playerY) || (playerX - 1 == x && playerY == y)) {
+			if (checkVisited(path, playerX - 1, playerY, counter + 1)) {
 				;
-			}
-			else
-			{
-				setPaths(gb, x, y, playerX-1, playerY, counter + 1, path);
+			} else {
+				setPaths(gb, x, y, playerX - 1, playerY, counter + 1, path);
 			}
 		}
 
-		if(Enemy.checkMove(gb, playerX, playerY + 1)||(playerX==x&&playerY+1==y))
-		{
-			if(checkVisited(path, playerX, playerY + 1, counter + 1))
-			{
+		if (Enemy.checkMove(gb, playerX, playerY + 1) || (playerX == x && playerY + 1 == y)) {
+			if (checkVisited(path, playerX, playerY + 1, counter + 1)) {
 
-			}
-			else
-				setPaths(gb, x, y , playerX, playerY+1, counter + 1, path);
+			} else
+				setPaths(gb, x, y, playerX, playerY + 1, counter + 1, path);
 		}
 
-		if(Enemy.checkMove(gb, playerX, playerY - 1)||(playerX==x&&playerY-1==y))
-		{
-			if(checkVisited(path, playerX, playerY - 1, counter + 1))
+		if (Enemy.checkMove(gb, playerX, playerY - 1) || (playerX == x && playerY - 1 == y)) {
+			if (checkVisited(path, playerX, playerY - 1, counter + 1))
 				;
 			else
-				setPaths(gb, x, y , playerX, playerY-1, counter + 1, path);
+				setPaths(gb, x, y, playerX, playerY - 1, counter + 1, path);
 		}
 
 	}
 
 	/**
 	 * Check whether the list includes the same path.
-	 * @param p the list to be checked
-	 * @param x the x-coordinate of enemy.
-	 * @param y the y-coordinate of enemy.
-	 * @param counter the 
-	 * @return
+	 * 
+	 * @param p       the list to be checked
+	 * @param x       the x-coordinate of enemy.
+	 * @param y       the y-coordinate of enemy.
+	 * @param counter the
+	 * @return true if its in the list else false
 	 */
-	public boolean checkVisited(ArrayList<Path> p, int x, int y, int counter)
-	{
-		for (int i = 0; i < p.size(); i++)
-		{
+	public boolean checkVisited(ArrayList<Path> p, int x, int y, int counter) {
+		for (int i = 0; i < p.size(); i++) {
 			boolean xB = p.get(i).getX() == x;
 			boolean yB = p.get(i).getY() == y;
 			p.get(i).getCount();
-			if(xB && yB )
+			if (xB && yB)
 				return true;
 		}
 		return false;
 	}
-/*	delete or implement this
-	public boolean checkCount(ArrayList<Path> p,int x,int y,int counter)
-	{
-		for(int i=0;i<p.size();i++)
-		{
-			if(((p.get(i).getX()==x)&&(p.get(i).getY()==y))&&p.get(i).getCount()<counter)
-		}
-	}
-( */
 }

@@ -1,31 +1,28 @@
 package application;
 
-
 import cell.Cell;
 import cell.Item;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
  * The empty cell just for complete an array.
+ * 
  * @author user
+ * @version 1.0
  *
  */
-public class Empty extends Cell
-{
+public class Empty extends Cell {
 	/**
 	 * Create instance of empty cell.
 	 */
-	public Empty()
-	{
+	public Empty() {
 		super(false, true, true, "", Item.NONE);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * Draw nothing.
 	 */
-	public void draw(GraphicsContext gc,int x, int y)
-	{
-		
+	public void draw(GraphicsContext gc, int x, int y) {
+
 	}
 }

@@ -1,14 +1,10 @@
 package Character;
-
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import application.Element;
 import application.Empty;
 import application.GameBoard;
 import cell.Ground;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 /**
  * Straight line enemy moves in a straight line
@@ -17,11 +13,8 @@ import javafx.scene.image.Image;
  */
 public class StraightLineEnemy extends Enemy {
 
-	private String path = "Images\\straightE.png";
-	private Image image;
-	private String movDirection;
-
-	private final String TYPE = "STRAIGHT";
+	private final String path = "Images\\straightE.png";
+	private final String STARIGHT = "STRAIGHT";
 
 	/**
 	 * Constructor for straight line enemy
@@ -34,9 +27,10 @@ public class StraightLineEnemy extends Enemy {
 	public StraightLineEnemy(int currentX, int currentY, String movDirection) throws FileNotFoundException {
 		this.currentPositionX = currentX;
 		this.currentPositionY = currentY;
+		this.name = STARIGHT;
 
 		this.movDirection = movDirection;
-		setImage();
+		setImage(path);
 	}
 
 	/**
@@ -52,43 +46,10 @@ public class StraightLineEnemy extends Enemy {
 		this.currentPositionY = currentY;
 
 		this.movDirection = UP;
-		setImage();
+		setImage(path);
 	}
 
-	/**
-	 * @return the move direction
-	 */
-	public String getDirection() {
-		return movDirection;
-	}
-
-	/**
-	 * @return the subclass of enemy
-	 */
-	public String getString() {
-		return TYPE;
-	}
-
-	/**
-	 * sets the image for enemy
-	 * 
-	 * @throws FileNotFoundException Thrown if file not found
-	 */
-	public void setImage() throws FileNotFoundException {
-		image = new Image(new FileInputStream(path));
-	}
-
-	/**
-	 * Draws the enemy sprite on screen
-	 * 
-	 * @param gc
-	 * @param x  X coordinate on screen to draw at
-	 * @param y  Y coordinate on screen to draw at
-	 */
-	public void draw(GraphicsContext gc, int x, int y) {
-		gc.drawImage(image, x, y, HUNDRED, HUNDRED);
-	}
-
+	
 	/**
 	 * Works out the new X coordinate
 	 * 
@@ -187,8 +148,7 @@ public class StraightLineEnemy extends Enemy {
 	 * @param gb current game board in play
 	 * @return true if its valid else false
 	 */
-	//TODO variable not used, still needed?
-	public boolean horizontalNoMove(GameBoard gb,int x,int y) {
+	public boolean horizontalNoMove(GameBoard gb) {
 		Element[][] board = gb.getBoard();
 		Element[][] bg = gb.getBackground();
 		boolean left = board[currentPositionY][currentPositionX - ONE] instanceof Empty;
@@ -204,7 +164,7 @@ public class StraightLineEnemy extends Enemy {
 	 * @param gb current game board in play
 	 * @return true if its valid else false
 	 */
-	public boolean verticalNoMove(GameBoard gb,int x,int y) {
+	public boolean verticalNoMove(GameBoard gb) {
 		Element[][] board = gb.getBoard();
 		Element[][] bg = gb.getBackground();
 		boolean up = board[currentPositionY - ONE][currentPositionX] instanceof Empty;

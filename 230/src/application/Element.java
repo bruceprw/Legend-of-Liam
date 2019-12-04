@@ -4,35 +4,47 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  * The super-class of all other elements.
+ * 
  * @author user
+ * @version 1.0
  *
  */
-public class Element
-{
+public abstract class Element {
 	/**
+	 * returns the class as a string
 	 * 
-	 * @return String for output purpose.
+	 * @return class name.
 	 */
-	public String getString()
-	{
-		return"";
-	}
-	
-	/**
-	 * Draw the image according to the x,y position.
-	 * @param gc the graphics context of canvas.
-	 * @param x the x coordinate
-	 * @param y the y coordinate
-	 */
-	public void draw(GraphicsContext gc, int x,int y)
-	{
-		
+	public String getString() {
+		return "";
 	}
 
 	/**
-	 * Plays sound.
+	 * Draw the image according to the x,y position.
+	 * 
+	 * @param gc the graphics context of canvas.
+	 * @param x  the x coordinate
+	 * @param y  the y coordinate
+	 */
+	public void draw(GraphicsContext gc, int x, int y) {
+
+	}
+
+	/**
+	 * Draw the image according to the x,y position.
+	 * 
+	 * @param gc the graphics context of canvas.
+	 * @param x  the x coordinate
+	 * @param y  the y coordinate
+	 */
+	public void drawPlayer(GraphicsContext gc, int x, int y, int r) {
+
+	}
+
+	/**
+	 * Plays sound from stored sound file.
 	 */
 	public void playSound() {
-		
+
 	}
 }
