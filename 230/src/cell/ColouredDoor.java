@@ -9,6 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+/**
+ * Stores image and sound of ColouredDoor.
+ * 
+ * @author user
+ *
+ */
 public class ColouredDoor extends Cell
 {
 
@@ -86,7 +92,6 @@ public class ColouredDoor extends Cell
 			}
 			catch (FileNotFoundException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -97,7 +102,6 @@ public class ColouredDoor extends Cell
 			}
 			catch (FileNotFoundException e2)
 			{
-				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 			break;
@@ -108,7 +112,6 @@ public class ColouredDoor extends Cell
 			}
 			catch (FileNotFoundException e1)
 			{
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			break;
@@ -119,7 +122,6 @@ public class ColouredDoor extends Cell
 			}
 			catch (FileNotFoundException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;

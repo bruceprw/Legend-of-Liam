@@ -3,6 +3,12 @@ package cell;
 import application.Element;
 import javafx.scene.media.MediaPlayer;
 
+/**
+ * Class is used to create a player on the screen 
+ * 
+ * @author Lee Hin Man (690479)
+ * @version 1.1
+ */
 public class Cell extends Element
 {
 	// whether the cell can kill the user
@@ -24,27 +30,7 @@ public class Cell extends Element
 		this.enemyAllowed = enemyAllowed;
 		this.texturePath = texturePath;
 		this.itemRequiredForCell = itemRequiredForCell;
-		
-		//item = Item.NONE;
 	}
-
-	/*
-	 * public boolean isItemAdded() {
-	 * 
-	 * }
-	 * 
-	 * public boolean isItemDeducted() {
-	 * 
-	 * }
-	 * 
-	 * public boolean isPlayerMoved() {
-	 * 
-	 * }
-	 * 
-	 * public boolean isPlayerKilled() {
-	 * 
-	 * }
-	 */
 
 	public boolean getIsHarmable()
 	{
@@ -89,10 +75,4 @@ public class Cell extends Element
 	{
 		return mediaPlayer;
 	}
-	
-/*
-	public void setItem(Item item)
-	{
-		this.item = item;
-	}*/
 }

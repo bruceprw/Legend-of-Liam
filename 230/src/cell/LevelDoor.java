@@ -18,7 +18,6 @@ import javafx.scene.text.Font;
  * @author user
  *
  */
-
 public class LevelDoor extends Cell {
 
 	private String path = "Images\\blue_door.jpg";
