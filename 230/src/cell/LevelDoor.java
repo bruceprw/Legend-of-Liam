@@ -39,22 +39,41 @@ public class LevelDoor extends Cell {
 		setImage();
 	}
 
+    /**
+     * Checks whether able to move to this cell.
+     * @return
+     */
 	public boolean moveToCell() {
 		return true;
 	}
 
+    /**
+     * Get the level number.
+     * @return levelNo.
+     */
 	public int getLevelNo() {
 		return levelNo;
 	}
 
+    /**
+     * Get the sound player of LevelDoor.
+     * @return the mediaplayer.
+     */
 	public MediaPlayer getSound() {
 		return mediaPlayer;
 	}
 
+    /**
+     * Set image.
+     * @throws FileNotFoundException
+     */
 	public void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));
 	}
 
+    /**
+     * Draw LevelDoor.
+     */
 	public void draw(GraphicsContext gc, int x, int y) {
 		gc.drawImage(image, x, y, 100, 100);
 
@@ -66,10 +85,16 @@ public class LevelDoor extends Cell {
 		}
 	}
 
+    /**
+     * Plays sound of open door.
+     */
 	public void playSound() {
 		mediaPlayer.play();
 	}
 
+    /**
+     * String for output purpose.
+     */
 	public String getString() {
 		return " ";
 	}
