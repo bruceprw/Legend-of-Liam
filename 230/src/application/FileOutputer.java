@@ -147,7 +147,6 @@ public class FileOutputer {
 					temp += "" + x + "," + y + ",ENEMY,SMART" + "\r\n";
 					break;
 				case "D":
-
 					break;
 				}
 			}

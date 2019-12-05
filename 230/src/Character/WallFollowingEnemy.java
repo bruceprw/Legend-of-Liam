@@ -1,6 +1,5 @@
 package Character;
 
-
 import java.io.FileNotFoundException;
 import application.Element;
 import application.Empty;
@@ -14,7 +13,8 @@ import cell.Ground;
  * @author Miles Singleton
  *
  */
-public class WallFollowingEnemy extends Enemy {
+public class WallFollowingEnemy extends Enemy
+{
 
 	private String path = "Images\\wallHugE.png";
 	private String hand;
@@ -30,7 +30,8 @@ public class WallFollowingEnemy extends Enemy {
 	 *                     determining.
 	 * @throws FileNotFoundException
 	 */
-	public WallFollowingEnemy(int newX, int newY, String movDirection, String hand) throws FileNotFoundException {
+	public WallFollowingEnemy(int newX, int newY, String movDirection, String hand) throws FileNotFoundException
+	{
 		this.currentPositionX = newX;
 		this.currentPositionY = newY;
 		this.movDirection = movDirection;
@@ -47,41 +48,59 @@ public class WallFollowingEnemy extends Enemy {
 	 * @param y  current Y position of the enemy.
 	 * @return new X position
 	 */
-	public int getsNewX(GameBoard gb, int x, int y) {
-		switch (movDirection) {
+	public int getsNewX(GameBoard gb, int x, int y)
+	{
+		switch (movDirection)
+		{
 		case UP:
-			if (checkHandWall(gb, x, y)) {
-				if (checkMove(gb, x, y - 1))
+			if(checkHandWall(gb, x, y))
+			{
+				if(checkMove(gb, x, y - 1))
 					return x;
-				else {
-					if (hand.equals(LEFT)) {
-						if (checkMove(gb, x + 1, y)) {
+				else
+				{
+					if(hand.equals(LEFT))
+					{
+						if(checkMove(gb, x + 1, y))
+						{
 							// movDirection=RIGHT;
 							// hand=UP;
 							return x + 1;
-						} else {
+						}
+						else
+						{
 							// movDirection=DOWN;
 							// hand=RIGHT;
 							return x;
 						}
-					} else {
-						if (checkMove(gb, x - 1, y)) {
+					}
+					else
+					{
+						if(checkMove(gb, x - 1, y))
+						{
 							// movDirection=LEFT;
 							// hand=UP;
 							return x - 1;
-						} else {
+						}
+						else
+						{
 							// movDirection=DOWN;
 							// hand=LEFT;
 							return x;
 						}
 					}
 				}
-			} else {
-				if (hand.equals(LEFT)) {
+			}
+			else
+			{
+				if(hand.equals(LEFT))
+				{
 					// movDirection=LEFT;
 					// hand=DOWN;
 					return x - 1;
-				} else {
+				}
+				else
+				{
 					// movDirection=RIGHT;
 					// hand=DOWN;
 					return x + 1;
@@ -89,38 +108,54 @@ public class WallFollowingEnemy extends Enemy {
 			}
 
 		case DOWN:
-			if (checkHandWall(gb, x, y)) {
-				if (checkMove(gb, x, y + 1))
+			if(checkHandWall(gb, x, y))
+			{
+				if(checkMove(gb, x, y + 1))
 					return x;
-				else {
-					if (hand.equals(LEFT)) {
-						if (checkMove(gb, x + 1, y)) {
+				else
+				{
+					if(hand.equals(LEFT))
+					{
+						if(checkMove(gb, x + 1, y))
+						{
 							// movDirection=RIGHT;
 							// hand=DOWN;
 							return x + 1;
-						} else {
+						}
+						else
+						{
 							// movDirection=UP;
 							// hand=RIGHT;
 							return x;
 						}
-					} else {
-						if (checkMove(gb, x - 1, y)) {
+					}
+					else
+					{
+						if(checkMove(gb, x - 1, y))
+						{
 							// movDirection=LEFT;
 							// hand=DOWN;
 							return x - 1;
-						} else {
+						}
+						else
+						{
 							// movDirection=UP;
 							// hand=LEFT;
 							return x;
 						}
 					}
 				}
-			} else {
-				if (hand.equals(LEFT)) {
+			}
+			else
+			{
+				if(hand.equals(LEFT))
+				{
 					// movDirection=LEFT;
 					// hand=UP;
 					return x - 1;
-				} else {
+				}
+				else
+				{
 					// movDirection=RIGHT;
 					// hand=UP;
 					return x + 1;
@@ -128,39 +163,58 @@ public class WallFollowingEnemy extends Enemy {
 			}
 
 		case LEFT:
-			if (checkHandWall(gb, x, y)) {
+			System.out.println(checkHandWall(gb, x, y));
+			if(checkHandWall(gb, x, y))
+			{
 				System.out.println(checkHandWall(gb, x, y));
-				if (checkMove(gb, x - 1, y)) {
+				if(checkMove(gb, x - 1, y))
+				{
 					return x - 1;
-				} else {
-					if (hand.equals(UP)) {
-						if (checkMove(gb, x, y + 1)) {
+				}
+				else
+				{
+					if(hand.equals(UP))
+					{
+						if(checkMove(gb, x, y + 1))
+						{
 							// movDirection=DOWN;
 							// hand=LEFT;
 							return x;
-						} else {
+						}
+						else
+						{
 							// movDirection=RIGHT;
 							// hand=DOWN;
 							return x + 1;
 						}
-					} else {
-						if (checkMove(gb, x, y - 1)) {
+					}
+					else
+					{
+						if(checkMove(gb, x, y - 1))
+						{
 							// movDirection=UP;
 							// hand=LEFT;
 							return x;
-						} else {
+						}
+						else
+						{
 							// movDirection=RIGHT;
 							// hand=UP;
 							return x + 1;
 						}
 					}
 				}
-			} else {
-				if (hand.equals(UP)) {
+			}
+			else
+			{
+				if(hand.equals(UP))
+				{
 					// movDirection=UP;
 					// hand=RIGHT;
 					return x;
-				} else {
+				}
+				else
+				{
 					// movDirection=DOWN;
 					// hand=RIGHT;
 					return x;
@@ -168,39 +222,57 @@ public class WallFollowingEnemy extends Enemy {
 			}
 
 		case RIGHT:
-			if (checkHandWall(gb, x, y)) {
-				if (checkMove(gb, x + 1, y)) {
+			if(checkHandWall(gb, x, y))
+			{
+				if(checkMove(gb, x + 1, y))
+				{
 
 					return x + 1;
-				} else {
-					if (hand.equals(UP)) {
-						if (checkMove(gb, x, y + 1)) {
+				}
+				else
+				{
+					if(hand.equals(UP))
+					{
+						if(checkMove(gb, x, y + 1))
+						{
 							// movDirection=DOWN;
 							// hand=RIGHT;
 							return x;
-						} else {
+						}
+						else
+						{
 							// movDirection=LEFT;
 							// hand=DOWN;
 							return x - 1;
 						}
-					} else {
-						if (checkMove(gb, x, y - 1)) {
+					}
+					else
+					{
+						if(checkMove(gb, x, y - 1))
+						{
 							// movDirection=UP;
 							// hand=RIGHT;
 							return x;
-						} else {
+						}
+						else
+						{
 							// movDirection=LEFT;
 							// hand=UP;
 							return x - 1;
 						}
 					}
 				}
-			} else {
-				if (hand.equals(UP)) {
+			}
+			else
+			{
+				if(hand.equals(UP))
+				{
 					// movDirection=UP;
 					// hand=LEFT;
 					return x;
-				} else {
+				}
+				else
+				{
 					// movDirection=DOWN;
 					// hand=LEFT;
 					return x;
@@ -221,42 +293,62 @@ public class WallFollowingEnemy extends Enemy {
 	 * @param y  current Y position of the enemy.
 	 * @return new Y position
 	 */
-	public int getNewY(GameBoard gb, int x, int y) {
-		switch (movDirection) {
+	public int getNewY(GameBoard gb, int x, int y)
+	{
+		switch (movDirection)
+		{
 		case UP:
-			if (checkHandWall(gb, x, y)) {
-				if (checkMove(gb, x, y - 1)) {
+			if(checkHandWall(gb, x, y))
+			{
+				if(checkMove(gb, x, y - 1))
+				{
 					return y - 1;
-				} else {
-					if (hand.equals(LEFT)) {
-						if (checkMove(gb, x + 1, y)) {
+				}
+				else
+				{
+					if(hand.equals(LEFT))
+					{
+						if(checkMove(gb, x + 1, y))
+						{
 							movDirection = RIGHT;
 
 							hand = UP;
 							return y;
-						} else {
+						}
+						else
+						{
 							movDirection = DOWN;
 							hand = RIGHT;
 							return y + 1;
 						}
-					} else {
-						if (checkMove(gb, x - 1, y)) {
+					}
+					else
+					{
+						if(checkMove(gb, x - 1, y))
+						{
 							movDirection = LEFT;
 							hand = UP;
 							return y;
-						} else {
+						}
+						else
+						{
 							movDirection = DOWN;
 							hand = LEFT;
 							return y + 1;
 						}
 					}
 				}
-			} else {
-				if (hand.equals(LEFT)) {
+			}
+			else
+			{
+				if(hand.equals(LEFT))
+				{
 					movDirection = LEFT;
 					hand = DOWN;
 					return y;
-				} else {
+				}
+				else
+				{
 					movDirection = RIGHT;
 					hand = DOWN;
 					return y;
@@ -264,39 +356,57 @@ public class WallFollowingEnemy extends Enemy {
 			}
 
 		case DOWN:
-			if (checkHandWall(gb, x, y)) {
-				if (checkMove(gb, x, y + 1)) {
+			if(checkHandWall(gb, x, y))
+			{
+				if(checkMove(gb, x, y + 1))
+				{
 
 					return y + 1;
-				} else {
-					if (hand.equals(LEFT)) {
-						if (checkMove(gb, x + 1, y)) {
+				}
+				else
+				{
+					if(hand.equals(LEFT))
+					{
+						if(checkMove(gb, x + 1, y))
+						{
 							movDirection = RIGHT;
 							hand = DOWN;
 							return y;
-						} else {
+						}
+						else
+						{
 							movDirection = UP;
 							hand = RIGHT;
 							return y - 1;
 						}
-					} else {
-						if (checkMove(gb, x - 1, y)) {
+					}
+					else
+					{
+						if(checkMove(gb, x - 1, y))
+						{
 							movDirection = LEFT;
 							hand = DOWN;
 							return y;
-						} else {
+						}
+						else
+						{
 							movDirection = UP;
 							hand = LEFT;
 							return y - 1;
 						}
 					}
 				}
-			} else {
-				if (hand.equals(LEFT)) {
+			}
+			else
+			{
+				if(hand.equals(LEFT))
+				{
 					movDirection = LEFT;
 					hand = UP;
 					return y;
-				} else {
+				}
+				else
+				{
 					movDirection = RIGHT;
 					hand = UP;
 					return y;
@@ -304,27 +414,40 @@ public class WallFollowingEnemy extends Enemy {
 			}
 
 		case LEFT:
-			if (checkHandWall(gb, x, y)) {
-				if (checkMove(gb, x - 1, y)) {
+			if(checkHandWall(gb, x, y))
+			{
+				if(checkMove(gb, x - 1, y))
+				{
 					return y;
-				} else {
-					if (hand.equals(UP)) {
-						if (checkMove(gb, x, y + 1)) {
+				}
+				else
+				{
+					if(hand.equals(UP))
+					{
+						if(checkMove(gb, x, y + 1))
+						{
 							movDirection = DOWN;
 							hand = LEFT;
 							return y + 1;
-						} else {
+						}
+						else
+						{
 							movDirection = RIGHT;
 							hand = DOWN;
 							return y;
 						}
-					} else {
-						if (checkMove(gb, x, y - 1)) {
+					}
+					else
+					{
+						if(checkMove(gb, x, y - 1))
+						{
 							movDirection = UP;
 							hand = LEFT;
 
 							return y - 1;
-						} else {
+						}
+						else
+						{
 							movDirection = RIGHT;
 							hand = UP;
 
@@ -332,13 +455,18 @@ public class WallFollowingEnemy extends Enemy {
 						}
 					}
 				}
-			} else {
-				if (hand.equals(UP)) {
+			}
+			else
+			{
+				if(hand.equals(UP))
+				{
 					movDirection = UP;
 					hand = RIGHT;
 
 					return y - 1;
-				} else {
+				}
+				else
+				{
 					movDirection = DOWN;
 					hand = RIGHT;
 
@@ -347,29 +475,40 @@ public class WallFollowingEnemy extends Enemy {
 			}
 
 		case RIGHT:
-			if (checkHandWall(gb, x, y)) {
-				if (checkMove(gb, x + 1, y))
+			if(checkHandWall(gb, x, y))
+			{
+				if(checkMove(gb, x + 1, y))
 					return y;
-				else {
-					if (hand.equals(UP)) {
-						if (checkMove(gb, x, y + 1)) {
+				else
+				{
+					if(hand.equals(UP))
+					{
+						if(checkMove(gb, x, y + 1))
+						{
 							movDirection = DOWN;
 							hand = RIGHT;
 
 							return y + 1;
-						} else {
+						}
+						else
+						{
 							movDirection = LEFT;
 							hand = DOWN;
 
 							return y;
 						}
-					} else {
-						if (checkMove(gb, x, y - 1)) {
+					}
+					else
+					{
+						if(checkMove(gb, x, y - 1))
+						{
 							movDirection = UP;
 							hand = RIGHT;
 
 							return y - 1;
-						} else {
+						}
+						else
+						{
 							movDirection = LEFT;
 							hand = UP;
 
@@ -377,13 +516,18 @@ public class WallFollowingEnemy extends Enemy {
 						}
 					}
 				}
-			} else {
-				if (hand.equals(UP)) {
+			}
+			else
+			{
+				if(hand.equals(UP))
+				{
 					movDirection = UP;
 					hand = LEFT;
 
 					return y - 1;
-				} else {
+				}
+				else
+				{
 					movDirection = DOWN;
 					hand = LEFT;
 
@@ -398,18 +542,20 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Checks the enemy will move to a space next to a wall.
+	 * Checks whether the enemy's hand touching the wall.
 	 * 
 	 * @param gb the current gameboard in play.
 	 * @param x  current X position of the enemy.
 	 * @param y  current Y position of the enemy.
 	 * @return True if next move will be next to a wall.
 	 */
-	public boolean checkHandWall(GameBoard gb, int x, int y) {
+	public boolean checkHandWall(GameBoard gb, int x, int y)
+	{
 		Element[][] board = gb.getBoard();
 		Element[][] bg = gb.getBackground();
 
-		switch (hand) {
+		switch (hand)
+		{
 		case UP:
 			return (!(board[y - 1][x] instanceof Empty)) || (!(bg[y - 1][x] instanceof Ground));
 		case DOWN:
@@ -423,11 +569,14 @@ public class WallFollowingEnemy extends Enemy {
 		}
 	}
 
+	
 	/**
 	 * Get where the hand is, only used by the file outputer class
+	 * 
 	 * @return the hand
 	 */
-	public String getHand() {
+	public String getHand()
+	{
 		return this.hand;
 	}
 }
