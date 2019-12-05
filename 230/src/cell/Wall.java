@@ -50,7 +50,9 @@ public class Wall extends Cell {
     }
 	
     /**
-     * @return the media player of the sound stored.
+     * Gets the media player of the door.
+     * @return media player that stores the sound.
+     * 
      */
     public MediaPlayer getSound()
     {

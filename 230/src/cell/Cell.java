@@ -1,6 +1,8 @@
 package cell;
 
 import application.Element;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 
 /**
@@ -11,68 +13,55 @@ import javafx.scene.media.MediaPlayer;
  */
 public class Cell extends Element
 {
-	// whether the cell can kill the user
-	private boolean harmable;
-	// sets if player is allowed to move to cell
-	private boolean playerAllowed;
-	// sets if enemy is allowed to move to cell
-	private boolean enemyAllowed;
-	// the path of the texture for the cell
-	private String texturePath;
-	// will contain the item required to access this cell
-	private Item itemRequiredForCell;
 	private MediaPlayer mediaPlayer;
+	protected Image image;
 
 	public Cell(boolean harmable, boolean playerAllowed, boolean enemyAllowed, String texturePath, Item itemRequiredForCell)
 	{
-		this.harmable = harmable;
-		this.playerAllowed = playerAllowed;
-		this.enemyAllowed = enemyAllowed;
-		this.texturePath = texturePath;
-		this.itemRequiredForCell = itemRequiredForCell;
-	}
-
-	public boolean getIsHarmable()
-	{
-		return harmable;
-	}
-
-	public boolean getIsPlayerAllowed()
-	{
-		return playerAllowed;
-	}
-
-	public boolean getIsEnemyAllowed()
-	{
-		return enemyAllowed;
-	}
-
-	public String getTexturePath()
-	{
-		return texturePath;
-	}
-
-	public Item getItemRequiredForCell()
-	{
-		return itemRequiredForCell;
-	}
-
-	public void setConsumesItem(boolean consumeableItem)
-	{
-	}
-
-	public void setPlayerAllowed(boolean playerAllowed)
-	{
-		this.playerAllowed = playerAllowed;
-	}
-
-	public void setEnemyAllowed(boolean enemyAllowed)
-	{
-		this.enemyAllowed = enemyAllowed;
 	}
 	
+	/**
+	 * Get the image of the collectible.
+	 * @return
+	 */
+	public Image getImage()
+	{
+		return image;
+	}
+	
+	/**
+	 * Draw the image.
+	 */
+    public void draw(GraphicsContext gc,int x,int y)
+    {
+		gc.drawImage(image,x,y,100,100);
+    }
+	
+    /**
+     * Gets the media player of the door.
+     * @return media player that stores the sound.
+     * 
+     */
 	public MediaPlayer getSound()
 	{
 		return mediaPlayer;
+	}
+	
+	/**
+	 * Plays the sound.
+	 */
+    public void playSound()
+    {
+
+    }
+    
+	/**
+	 * returns the class as a string
+	 * 
+	 * @return class name.
+	 */
+	public String getString() 
+	{
+		return "";
 	}
 }

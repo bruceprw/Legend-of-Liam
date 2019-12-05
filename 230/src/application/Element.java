@@ -10,14 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
  *
  */
 public abstract class Element {
-	/**
-	 * returns the class as a string
-	 * 
-	 * @return class name.
-	 */
-	public String getString() {
-		return "";
-	}
+
 
 	/**
 	 * Draw the image according to the x,y position.
