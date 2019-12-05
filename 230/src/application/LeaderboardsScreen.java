@@ -54,7 +54,7 @@ public class LeaderboardsScreen extends Screen {
 	}
 
 	/**
-	 * Used to draw the leaderbaord to the screen. When the button is pressed the
+	 * Used to draw the leaderboard to the screen. When the button is pressed the
 	 * next level is shown.
 	 * 
 	 * @param level

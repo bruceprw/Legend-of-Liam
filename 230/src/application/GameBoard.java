@@ -54,7 +54,8 @@ public class GameBoard {
 	 * Reads in info from level file and set the important information.
 	 * 
 	 * @param filePath the name of the level file you wanted to retrieve.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Indicates that the 
+	 * an error whereby the file is not found could occur.
 	 */
 	public GameBoard(String filePath) throws FileNotFoundException {
 		FileReader lvl = new FileReader(filePath);
@@ -72,7 +73,7 @@ public class GameBoard {
 	/**
 	 * Gets how much time has passed in the level.
 	 * 
-	 * @return the time passed.
+	 * @return The elapsed time.
 	 */
 	public long getTime() {
 		return time;
@@ -81,8 +82,9 @@ public class GameBoard {
 	/**
 	 * Draws the maps and the board elements. Also the items held by player.
 	 * 
-	 * @param gc the canvas graphics context
-	 * @throws FileNotFoundException
+	 * @param gc the canvas graphics context.
+	 * @throws FileNotFoundException Indicates that the 
+	 * an error whereby the file is not found could occur.
 	 */
 	public void drawGame(GraphicsContext gc) throws FileNotFoundException {
 
@@ -100,7 +102,7 @@ public class GameBoard {
 	/**
 	 * Get the player's x-coordinate.
 	 * 
-	 * @return player's x-coordinate
+	 * @return player's x-coordinate.
 	 */
 	public int getPlayerX() {
 		return playerX;
@@ -109,14 +111,14 @@ public class GameBoard {
 	/**
 	 * Get player's y-coordinate.
 	 * 
-	 * @return player's y-coordinate
+	 * @return player's y-coordinate.
 	 */
 	public int getPlayerY() {
 		return playerY;
 	}
 
 	/**
-	 * Checks whether the player got to the goal
+	 * Checks whether the player got to the goal.
 	 * 
 	 * @return true if player got to the goal.
 	 */
@@ -128,7 +130,8 @@ public class GameBoard {
 	 * Draws the items on the board.
 	 * 
 	 * @param gc canvas's graphics context.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Indicates that the 
+	 * an error whereby the file is not found could occur.
 	 */
 	public void drawItem(GraphicsContext gc) throws FileNotFoundException {
 		int[] temp = ((Player) board[playerY][playerX]).getInventory();
@@ -163,8 +166,8 @@ public class GameBoard {
 	/**
 	 * Plays the sound of board element that player steps on.
 	 * 
-	 * @param x the next step that player steps on
-	 * @param y the next step that player steps on
+	 * @param x the next step that player steps on.
+	 * @param y the next step that player steps on.
 	 */
 	public void playBoardSound(int x, int y) {
 		board[y][x].playSound();
@@ -173,8 +176,8 @@ public class GameBoard {
 	/**
 	 * Plays the sound of background element that player steps on.
 	 * 
-	 * @param x the next step that player steps on
-	 * @param y the next step that player steps on
+	 * @param x the next step that player steps on.
+	 * @param y the next step that player steps on.
 	 */
 	public void playBackSound(int x, int y) {
 		background[y][x].playSound();
@@ -197,7 +200,7 @@ public class GameBoard {
 	 * enemy Checks whether the player is dead or not.
 	 * 
 	 * @param way Where the player wants to move to.
-	 * @return 0 if nothing happens
+	 * @return 0 if nothing happens.
 	 * @return 1 if player got to the goal.
 	 * @return 2 if the player is dead.
 	 */
@@ -473,9 +476,9 @@ public class GameBoard {
 	/**
 	 * Get the cell at X,Y coordinate to retrieve other info.
 	 * 
-	 * @param X X-coordinate
-	 * @param Y Y-coordinate
-	 * @return the cell from the background
+	 * @param X X-coordinate.
+	 * @param Y Y-coordinate.
+	 * @return the cell from the background.
 	 */
 	public Cell getCell(int X, int Y) {
 		return (Cell) background[Y][X];
@@ -491,7 +494,7 @@ public class GameBoard {
 	}
 
 	/**
-	 * Get the game board
+	 * Get the game board.
 	 * 
 	 * @return the board.
 	 */

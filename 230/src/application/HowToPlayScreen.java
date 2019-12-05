@@ -17,8 +17,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 /**
- * Generates a screen that allows the user to navigate
- * through images that are informative about the controls/gameplay
+ * Generates a screen that allows the user to navigate.
+ * through images that are informative about the controls/gameplay.
  * @author User
  *
  */
@@ -44,7 +44,7 @@ public class HowToPlayScreen extends Screen {
 	
 	/**
 	 * Creates the information screen and sets the default image.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException.
 	 */
 	@SuppressWarnings("static-access")
 	public HowToPlayScreen() throws FileNotFoundException {
@@ -118,7 +118,8 @@ public class HowToPlayScreen extends Screen {
 	
 	/**
 	 * Gets the descriptions that correspond to the how to images.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error whereby the file cannot be located.
 	 */
 	private void readFile() throws FileNotFoundException {
 		File file = new File("Images\\How-To images\\text for the how to sections.txt");
@@ -139,8 +140,8 @@ public class HowToPlayScreen extends Screen {
 	}
 	/**
 	 * Splits up the descriptions into discrete sub headings.
-	 * @param page
-	 * @return
+	 * @param page passes in the next line to be read.
+	 * @return Returns the description within the sub heading.
 	 */
 	private String readPage(Scanner page) {
 		page.useDelimiter("//");
