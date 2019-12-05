@@ -136,7 +136,7 @@ public class TitleScreen extends Screen {
 				String nextPass = line.next();
 				int nextProgress = line.nextInt();
 
-				if (username.getText().equals(nextUser) && password.getText().equals(nextPass)) {
+				if (username.getText().equalsIgnoreCase(nextUser) && password.getText().equals(nextPass)) {
 					currentUser = new UserProfile(nextUser, nextPass, nextProgress);
 					root.setCenter(menuPane);
 					found = true;
