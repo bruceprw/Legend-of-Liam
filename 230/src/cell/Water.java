@@ -10,7 +10,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * The class for the water tile, can only be accessed by the player when they acquire the flipper item
+ * Stores information about a water.
  * @author user
  *
  */
@@ -18,18 +18,34 @@ public class Water extends Cell {
 	
 	private String path = "Images\\\\updateimage\\water.png";
 	private String soundPath = "Sound\\water_splash.mp3";
+	private Image image;
 	private Media music = new Media(new File(soundPath).toURI().toString());
 	private MediaPlayer mediaPlayer = new MediaPlayer(music);
 	
-	
 	/**
-	 * Constructor for water class, 
+	 * Create instance of water.
 	 * @throws FileNotFoundException
 	 */
     public Water() throws FileNotFoundException {
         super(true, true, false, "", Item.FLIPPER);
-        setImage(path);
-        this.name = "W";
+        setImage();
+    }
+	
+    /**
+     * Set image.
+     * @throws FileNotFoundException
+     */
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image (new FileInputStream(path));
+	}
+    
+    /**
+     * Draw water.
+     */
+    public void draw(GraphicsContext gc,int x,int y)
+    {
+		gc.drawImage(image,x,y,100,100);
     }
     
     /**
@@ -38,6 +54,14 @@ public class Water extends Cell {
     public void playSound()
     {
     	mediaPlayer.play();
+    }
+    
+    /**
+     * String for output purpose.
+     */
+    public String getString()
+    {
+    	return "W";
     }
     
     /**

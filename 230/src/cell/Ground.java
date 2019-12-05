@@ -1,16 +1,16 @@
 package cell;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * Ground class used as just default ground cell, a majority of maps are made up
- * with this cell.
- * 
+ * Stores the image and the sound of ground.
  * @author user
  *
  */
@@ -18,50 +18,67 @@ public class Ground extends Cell {
 
 	private String path = "Images\\updateimage\\ground.png";
 	private static String soundPath = "Sound\\foot_step.mp3";
+	private Image image;
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
-
+	
 	/**
 	 * Create instance of ground.
-	 * 
 	 * @throws FileNotFoundException
 	 */
-	public Ground() throws FileNotFoundException {
-		super(false, true, true, "", Item.NONE);
-		setImage(path);
-	}
+    public Ground() throws FileNotFoundException{
+        super(false, true, true, "", Item.NONE);
+        setImage();
+    }
 
-	/**
-	 * Checks whether player of enemy is able to move to this cell.
-	 * 
-	 * @return always true
-	 */
-	public boolean moveToCell() {
-		return true;
+    /**
+     * Get the media player of sound stored.
+     * @return media player.
+     */
+    public MediaPlayer getSound()
+    {
+    	return mediaPlayer;
+    }
+    
+    /**
+     * Checks whether able to move to this cell.
+     * @return
+     */
+    public boolean moveToCell() {
+        return true;
+    }
+    
+    /**
+     * Set image.
+     * @throws FileNotFoundException
+     */
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image (new FileInputStream(path));
 	}
-
+    
 	/**
-	 * Plays cell sound effect.
+	 * Draw image.
 	 */
-	public void playSound() {
-		mediaPlayer.play();
-	}
-
-	/**
-	 * Get the media player of sound stored.
-	 * 
-	 * @return media player.
-	 */
-	public MediaPlayer getSound() {
-		return mediaPlayer;
-	}
-
-	/**
-	 * Return a string that indicates the type to the fileOutputer class.
-	 * 
-	 * @return string in output format.
-	 */
-	public String getString() {
-		return " ";
-	}
+    public void draw(GraphicsContext gc,int x,int y) 
+    {
+		gc.drawImage(image,x,y,100,100);
+    }
+    
+    /**
+     * Plays sound.
+     */
+    public void playSound()
+    {
+    	mediaPlayer.play();
+    }
+    
+    /**
+     * Get String for output purpose.
+     * @return string in output format.
+     */
+    public String getString()
+    {
+    	return " ";
+    }
 }

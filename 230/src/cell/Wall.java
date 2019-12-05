@@ -1,50 +1,75 @@
 package cell;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * Class for the wall class, eneimies or players can pass through it
- * 
+ * The player and enemy cannot pass through the wall.
  * @author user
  *
  */
 public class Wall extends Cell {
-
+	
 	private String path = "Images\\wall.png";
 	private static String soundPath = "Sound\\wall_hit.mp3";
+	private Image image;
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
-
+	
 	/**
 	 * Sets the instance of the wall.
-	 * 
 	 * @throws FileNotFoundException
 	 */
-	public Wall() throws FileNotFoundException {
-		super(false, false, false, "", Item.NONE);
-		setImage(path);
-		this.name = "#";
+    public Wall() throws FileNotFoundException {
+        super(false, false, false, "", Item.NONE);
+        setImage();
+    } 
+    
+    /**
+     * Get the image from the path.
+     * @throws FileNotFoundException
+     */
+	public void setImage() throws FileNotFoundException
+	{
+		image = new Image (new FileInputStream(path));
 	}
-
+    
 	/**
 	 * Plays the sound when the player intended to go to the door.
 	 */
-	@Override
-	public void playSound() {
-		mediaPlayer.setAutoPlay(true);
-		mediaPlayer.play();
-	}
-
-	/**
-	 * Gets the sound to play for the cell
-	 * 
-	 * @return the mediaPlayer object to do so
-	 */
-	public MediaPlayer getSound() {
-		return mediaPlayer;
-	}
-
+    public void playSound()
+    {
+    	mediaPlayer.setAutoPlay(true);
+    	mediaPlayer.play();
+    }
+	
+    /**
+     * @return the media player of the sound stored.
+     */
+    public MediaPlayer getSound()
+    {
+    	return mediaPlayer;
+    }
+    
+    /**
+     * draw the door image.
+     */
+    public void draw(GraphicsContext gc,int x,int y)
+    {
+		gc.drawImage(image,x,y,100,100);
+    }
+    
+    /**
+     * Get the string for file outputer.
+     */
+    public String getString()
+    {
+    	return "#";
+    }
 }

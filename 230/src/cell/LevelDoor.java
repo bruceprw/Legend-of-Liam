@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
  * @author user
  *
  */
+
 public class LevelDoor extends Cell {
 
 	private String path = "Images\\blue_door.jpg";
@@ -26,9 +27,6 @@ public class LevelDoor extends Cell {
 	private int levelNo;
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
-	private static final int NUM_Y_OFFSET = 90;
-	private static final int SINGLE_DIGIT_X_OFFSET = 15;
-	private static final int DOUBLE_DIGIT_X_OFFSET = 8;
 
 	/**
 	 * Create the instance of the level door.
@@ -39,21 +37,17 @@ public class LevelDoor extends Cell {
 	public LevelDoor(int levelNo) throws FileNotFoundException {
 		super(false, true, false, "", Item.NONE);
 		this.levelNo = levelNo;
-		setImage(path);
-		this.name = " ";
+		setImage();
 	}
 
-	/**
-	 * Gets the level number 
-	 * @return level number
-	 */
+	public boolean moveToCell() {
+		return true;
+	}
+
 	public int getLevelNo() {
 		return levelNo;
 	}
-	/**
-	 * Gets the sound to play for the cell
-	 * @return the mediaPlayer object to do so
-	 */
+
 	public MediaPlayer getSound() {
 		return mediaPlayer;
 	}
@@ -62,26 +56,22 @@ public class LevelDoor extends Cell {
 		image = new Image(new FileInputStream(path));
 	}
 
-	/**
-	 * Draws the door to the screen 
-	 */
-	@Override
-	public void draw(GraphicsContext gc,int x,int y) 
-    {
-		gc.drawImage(image,x,y,100,100);
-		
-		gc.setFont(new Font("Arial", 30));
-		if (levelNo > 0 && levelNo < 10) {
-			gc.fillText(levelNo + "", x + SINGLE_DIGIT_X_OFFSET, y + NUM_Y_OFFSET);
-		} else if (levelNo >= 10) {
-			gc.fillText(levelNo + "", x + DOUBLE_DIGIT_X_OFFSET, y + NUM_Y_OFFSET);
-		}
-    }
+	public void draw(GraphicsContext gc, int x, int y) {
+		gc.drawImage(image, x, y, 100, 100);
 
-	/**
-	 * Plays the sound of the tile
-	 */
+		gc.setFont(new Font("Arial", 30));
+		if (levelNo == 0) {
+			gc.fillText("Back", x, y + 75);
+		} else {
+			gc.fillText(levelNo + "", x, y + 75);
+		}
+	}
+
 	public void playSound() {
 		mediaPlayer.play();
+	}
+
+	public String getString() {
+		return " ";
 	}
 }
