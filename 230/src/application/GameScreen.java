@@ -19,8 +19,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class GameScreen extends Screen
-{
+/**
+ * The GUI for the game screen.
+ * 
+ * @author
+ *
+ */
+public class GameScreen extends Screen {
 	private static final int GAME_WIDTH = 700;
 	private static final int GAME_HEIGHT = 700;
 
@@ -41,24 +46,20 @@ public class GameScreen extends Screen
 	private MediaPlayer bg = new MediaPlayer(music);
 	// int time = 0;
 
-
 	/**
+	 * Draws the game screen.
 	 * 
 	 * @param levelNo Number of the level to be loaded.
 	 * @throws InterruptedException
 	 */
 
-	public GameScreen(String levelNo, UserProfile user)
-	{
+	public GameScreen(String levelNo, UserProfile user) {
 		bg.play();
-		
-		try
-		{
+
+		try {
 			new Image(new FileInputStream("Images\\game_over.png"));
 			new Image(new FileInputStream("Images\\gameoverbg.png"));
-		}
-		catch (FileNotFoundException e1)
-		{
+		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -66,22 +67,17 @@ public class GameScreen extends Screen
 		this.levelNo = levelNo;
 		this.user = user;
 
-		try
-		{
+		try {
 			level = new GameBoard("LevelFiles\\" + levelNo + ".txt");
-		}
-		catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		Label timeLabel = new Label();
 		long startTime = System.currentTimeMillis() - level.getTime();
 
-		new AnimationTimer()
-		{
-			public void handle(long now)
-			{
+		new AnimationTimer() {
+			public void handle(long now) {
 				long elapsedMillis = System.currentTimeMillis() - startTime;
 				time = elapsedMillis;
 				// System.out.println(time);
@@ -109,14 +105,10 @@ public class GameScreen extends Screen
 		root.setBottom(buttonsPane);
 
 		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-		scene.addEventHandler(KeyEvent.KEY_PRESSED, event ->
-		{
-			try
-			{
+		scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+			try {
 				keyPressed(event);
-			}
-			catch (IOException e)
-			{
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -124,14 +116,18 @@ public class GameScreen extends Screen
 	}
 
 	// when its a game over it fades back to the title screen
-	public void RestartLevel()
-	{
+	/**
+	 * Restarts the level and draws a new game screen.
+	 */
+	public void RestartLevel() {
 		bg.stop();
 		switchScreen(new GameScreen(levelNo, user));
 	}
 
-	public void NextLevel()
-	{
+	/**
+	 * Loads and draws the next game screen.
+	 */
+	public void NextLevel() {
 		bg.stop();
 		switchScreen(new LevelScreen(user));
 		Leaderboard ld = new Leaderboard(levelNo);
@@ -139,20 +135,23 @@ public class GameScreen extends Screen
 		ld.addLevelTime(user.getName(), time);
 	}
 
+	/**
+	 * Handles input from the player
+	 * 
+	 * @param event Key press from the player
+	 * @throws IOException
+	 */
 	private void keyPressed(KeyEvent event) throws IOException
 
 	{
 		int a = 0;
-		switch (event.getCode())
-		{
+		switch (event.getCode()) {
 		case RIGHT:
 			a = level.move("right");
-			if(a == 2)
-			{
+			if (a == 2) {
 				// RestartLevel();
 			}
-			if(a == 1)
-			{
+			if (a == 1) {
 
 				NextLevel();
 			}
@@ -160,38 +159,32 @@ public class GameScreen extends Screen
 
 		case LEFT:
 			a = level.move("left");
-			if(a == 2)
-			{
+			if (a == 2) {
 				// RestartLevel();
 			}
-			if(a == 1)
-			{
+			if (a == 1) {
 				NextLevel();
 			}
 			break;
 
 		case UP:
 			a = level.move("up");
-			if(a == 2)
-			{
+			if (a == 2) {
 
 				// RestartLevel();
 			}
-			if(a == 1)
-			{
+			if (a == 1) {
 				NextLevel();
 			}
 			break;
 
 		case DOWN:
 			a = level.move("down");
-			if(a == 2)
-			{
+			if (a == 2) {
 
 				// RestartLevel();
 			}
-			if(a == 1)
-			{
+			if (a == 1) {
 				NextLevel();
 			}
 			break;
@@ -203,12 +196,9 @@ public class GameScreen extends Screen
 		default:
 			break;
 		}
-		if(a == 2)
-		{
+		if (a == 2) {
 			RestartLevel();
-		}
-		else
-		{
+		} else {
 			drawGame();
 		}
 
@@ -216,39 +206,39 @@ public class GameScreen extends Screen
 		event.consume();
 	}
 
-	private void drawGame()
-	{
+	/**
+	 * Draws the game screen.
+	 */
+	private void drawGame() {
 		GraphicsContext gc = game.getGraphicsContext2D();
 		gc.clearRect(0, 0, game.getWidth(), game.getHeight());
 
-		try
-		{
+		try {
 			level.drawGame(gc);
-		}
-		catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void buildButtons()
-	{
+	/**
+	 * Builds the buttons and adds functionality to them.
+	 */
+	private void buildButtons() {
 		save = new Button("Save and Quit");
-		save.setOnAction(event ->
-		{
+		save.setOnAction(event -> {
 			new FileOutputer(level, new LevelTime(user.getName(), time));
-			
+
 			TitleScreen s = null;
-			// TODO Not sure if exception should be caught here or in TitleScreen constructor.
+			// TODO Not sure if exception should be caught here or in TitleScreen
+			// constructor.
 			s = new TitleScreen();
 			switchScreen(s);
 			s.switchToMenu(user);
 		});
 
 		levelSelect = new Button("Back to Level Select");
-		levelSelect.setOnAction(event ->
-		{
+		levelSelect.setOnAction(event -> {
 			// Switch to Level Select Screen
 			switchScreen(new LevelScreen(user));
 		});
