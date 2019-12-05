@@ -16,6 +16,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * The window for creating a new user
+ * 
+ * @author 
+ *
+ */
 public class NewUserScreen extends Screen
 {
 	BorderPane root;
@@ -44,6 +50,9 @@ public class NewUserScreen extends Screen
 	Button submit;
 	Button cancel;
 
+	/**
+	 * Creates a new window and adds the elements for adding a new user.
+	 */
 	public NewUserScreen()
 	{
 		root = new BorderPane();
@@ -141,6 +150,10 @@ public class NewUserScreen extends Screen
 		scene = new Scene(root, POPUP_WIDTH, POPUP_HEIGHT);
 	}
 
+	/**
+	 * Confirms the password is correct
+	 * @return True if its correct else false
+	 */
 	public boolean passwordConfirm()
 	{
 		return this.checkPassword.getText().equals(password.getText());
