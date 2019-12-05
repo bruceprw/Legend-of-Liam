@@ -35,7 +35,6 @@ import javafx.scene.text.Font;
 public class GameBoard {
 	private Element[][] board;
 	private Element[][] background;
-	private Element[][] fog;
 	private int playerX;
 	private int playerY;
 	private int goalX;

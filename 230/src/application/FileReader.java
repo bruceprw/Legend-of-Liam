@@ -28,7 +28,6 @@ public class FileReader {
 	private Element[][] background;
 	private int playerX;
 	private int playerY;
-	private Element[][] fog;
 	private ArrayList<Integer> enemyX = new ArrayList<Integer>();
 	private ArrayList<Integer> enemyY = new ArrayList<Integer>();
 	private int goalX;

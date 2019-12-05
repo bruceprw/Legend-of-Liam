@@ -1,13 +1,9 @@
 package application;
 
-import java.io.FileNotFoundException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import application.LevelTime;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,14 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.util.Callback;
 
 /**
  * Holds all the methods and instance of the leaderboards screen.
@@ -38,9 +31,6 @@ public class LeaderboardsScreen extends Screen {
 	private static final int BTNS_PER_ROW = 5;
 	private static final double GRID_H_GAP = 30;
 	private static final double GRID_V_GAP = 20;
-	private static final double GRID_PADDING_X = 50;
-	private static final double GRID_PADDING_TOP = 50;
-
 	private BorderPane root;
 	private HBox centerBox;
 	private VBox scrollBox;

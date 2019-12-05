@@ -14,9 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class HowToPlayScreen extends Screen {
@@ -39,6 +37,7 @@ public class HowToPlayScreen extends Screen {
 	Button next;
 	Button previous;
 	
+	@SuppressWarnings("static-access")
 	public HowToPlayScreen() throws FileNotFoundException {
 		readFile();
 		root = new BorderPane();

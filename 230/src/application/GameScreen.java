@@ -37,8 +37,6 @@ public class GameScreen extends Screen
 	private UserProfile user;
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 
-	private Image ggImage;
-	private Image ggBGImage;
 	private Media music = new Media(new File("Sound\\BGM\\bg.mp3").toURI().toString());
 	private MediaPlayer bg = new MediaPlayer(music);
 	// int time = 0;
@@ -56,8 +54,8 @@ public class GameScreen extends Screen
 		
 		try
 		{
-			Image ggImage = new Image(new FileInputStream("Images\\game_over.png"));
-			Image ggBGImage = new Image(new FileInputStream("Images\\gameoverbg.png"));
+			new Image(new FileInputStream("Images\\game_over.png"));
+			new Image(new FileInputStream("Images\\gameoverbg.png"));
 		}
 		catch (FileNotFoundException e1)
 		{
@@ -239,10 +237,7 @@ public class GameScreen extends Screen
 		save = new Button("Save and Quit");
 		save.setOnAction(event ->
 		{
-			// TODO: Create Save and add to User.
-			// System.out.println(Long.toString(time));
-			FileOutputer f = new FileOutputer(level, new LevelTime(user.getName(), time));
-			// Switch to Title Screen
+			new FileOutputer(level, new LevelTime(user.getName(), time));
 			
 			TitleScreen s = null;
 			// TODO Not sure if exception should be caught here or in TitleScreen constructor.
