@@ -94,6 +94,7 @@ public class StraightLineEnemy extends Enemy {
 
 	}
 
+	
 	/**
 	 * Works out the new Y coordinate
 	 * 

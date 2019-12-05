@@ -160,4 +160,6 @@ public class SmartTargettingEnemy extends Enemy {
 		}
 		return false;
 	}
+	
+
 }

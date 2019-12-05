@@ -402,7 +402,7 @@ public class GameBoard {
 	 */
 	private void moveEnemy() {
 		for (int i = 0; i < enemyX.size(); i++) {
-			switch (board[enemyY.get(i)][enemyX.get(i)].toString()) {
+			switch (board[enemyY.get(i)][enemyX.get(i)].getString()) {
 			case "STRAIGHT":
 				StraightLineEnemy a = (StraightLineEnemy) board[enemyY.get(i)][enemyX.get(i)];
 				boolean hori = a.horizontalNoMove(this);
@@ -424,6 +424,7 @@ public class GameBoard {
 				}
 				break;
 			case "WALLHUG":
+				System.out.println("success");
 				WallFollowingEnemy b = (WallFollowingEnemy) board[enemyY.get(i)][enemyX.get(i)];
 				int newX = b.getsNewX(this, enemyX.get(i), enemyY.get(i));
 				int newY = b.getNewY(this, enemyX.get(i), enemyY.get(i));

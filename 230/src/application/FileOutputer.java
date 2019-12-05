@@ -51,8 +51,8 @@ public class FileOutputer {
 			e.printStackTrace();
 		}
 
-		String finalOutput = output + temp;
-		System.out.println(finalOutput);
+		//String finalOutput = output + temp;
+		//System.out.println(finalOutput);
 	}
 
 	/**
@@ -147,7 +147,6 @@ public class FileOutputer {
 					temp += "" + x + "," + y + ",ENEMY,SMART" + "\r\n";
 					break;
 				case "D":
-
 					break;
 				}
 			}
