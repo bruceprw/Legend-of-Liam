@@ -18,6 +18,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
+/**
+ * Class used to create and display the level screen
+ * 
+ * @author
+ *
+ */
 public class LevelScreen extends Screen {
 	private static final int GAME_WIDTH = 700;
 	private static final int GAME_HEIGHT = 700;
@@ -32,8 +38,8 @@ public class LevelScreen extends Screen {
 
 	/**
 	 * Creates the canvas, music and other elements for the LevelScreen.
-	 * @param levelNo
-	 *            Number of the level to be loaded.
+	 * 
+	 * @param levelNo Number of the level to be loaded.
 	 */
 	public LevelScreen(UserProfile user) {
 		this.user = user;
@@ -77,6 +83,7 @@ public class LevelScreen extends Screen {
 
 	/**
 	 * Processes key presses that interact with the level.
+	 * 
 	 * @param event The key press action.
 	 * @throws IOException
 	 */
@@ -102,7 +109,7 @@ public class LevelScreen extends Screen {
 		case SPACE:
 			// Space bar used to select a level
 			Element space = level.getBackground()[level.getPlayerY()][level.getPlayerX()];
-			
+
 			// If pressed on a LevelDoor, enter it if the user can access it.
 			if (space.getClass() == LevelDoor.class) {
 				LevelDoor door = (LevelDoor) space;
