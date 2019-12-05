@@ -146,8 +146,8 @@ public class LeaderboardsScreen extends Screen {
 	}
 
 	/**
-	 * Used to look through the list of elements and tranpose them to the table
-	 * list.
+	 * Used to loop through the list leaderboard data elements and tranpose them to the
+	 * leaderboard table list.
 	 */
 	private void addItems() {
 		// TODO: Load list of users function.
