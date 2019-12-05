@@ -30,7 +30,7 @@ public class HowToPlayScreen extends Screen {
 	protected final static int HOW_TO_PLAY_HEIGHT = 700;
 	
 	ArrayList<String> texts = new ArrayList<String>();
-	private int textIndex = 0;
+	private int pageIndex = 0;
 	
 	BorderPane root;
 	ImageView view;
@@ -46,14 +46,15 @@ public class HowToPlayScreen extends Screen {
 		view = new ImageView();
 		view.setFitWidth(600);
 		view.setFitHeight(500);
-		view.setImage(new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg")));
+		view.setImage(new Image(new FileInputStream("Images\\How-To images\\" + pageIndex + ".png")));
 		
-		displayText = new Text(texts.get(textIndex));
+		displayText = new Text(texts.get(pageIndex));
 		displayText.setWrappingWidth(600);
 		root.setPadding(new Insets(50, 50, 50, 50));
 		
 		root.setTop(view);
 		root.setCenter(displayText);
+		root.setAlignment(displayText, Pos.TOP_LEFT);
 		
 		scene = new Scene(root, HOW_TO_PLAY_WIDTH, HOW_TO_PLAY_HEIGHT);
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, event ->
@@ -75,20 +76,18 @@ public class HowToPlayScreen extends Screen {
 		switch (event.getCode())
 		{
 		case LEFT:
-			// TODO: Change image
-			
-			if (textIndex > 0) {
-				textIndex--;
-				displayText.setText(texts.get(textIndex));
+			if (pageIndex > 0) {
+				pageIndex--;
+				displayText.setText(texts.get(pageIndex));
+				view.setImage(new Image(new FileInputStream("Images\\How-To images\\" + pageIndex + ".png")));
 			}
 			break;
 
 		case RIGHT:
-			// TODO: Change image
-			
-			if (textIndex < texts.size() - 1) {
-				textIndex++;
-				displayText.setText(texts.get(textIndex));
+			if (pageIndex < texts.size() - 1) {
+				pageIndex++;
+				displayText.setText(texts.get(pageIndex));
+				view.setImage(new Image(new FileInputStream("Images\\How-To images\\" + pageIndex + ".png")));
 			}
 			break;
 

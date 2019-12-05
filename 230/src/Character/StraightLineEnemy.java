@@ -148,7 +148,7 @@ public class StraightLineEnemy extends Enemy {
 	 * @param gb current game board in play
 	 * @return true if its valid else false
 	 */
-	public boolean horizontalNoMove(GameBoard gb,int x,int y) {
+	public boolean horizontalNoMove(GameBoard gb) {
 		Element[][] board = gb.getBoard();
 		Element[][] bg = gb.getBackground();
 		boolean left = board[currentPositionY][currentPositionX - ONE] instanceof Empty;
@@ -164,7 +164,7 @@ public class StraightLineEnemy extends Enemy {
 	 * @param gb current game board in play
 	 * @return true if its valid else false
 	 */
-	public boolean verticalNoMove(GameBoard gb,int x,int y) {
+	public boolean verticalNoMove(GameBoard gb) {
 		Element[][] board = gb.getBoard();
 		Element[][] bg = gb.getBackground();
 		boolean up = board[currentPositionY - ONE][currentPositionX] instanceof Empty;

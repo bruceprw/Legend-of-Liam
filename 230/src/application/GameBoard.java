@@ -347,6 +347,31 @@ public class GameBoard {
 		return 0;
 	}
 
+	
+	/**
+	 * 
+	 */
+	public void moveUP()
+	{
+		
+	}
+	
+	public void moveDown()
+	{
+		
+	}
+	
+	public void moveLeft()
+	{
+		
+	}
+	
+	public void moveRight()
+	{
+		
+	}
+	
+	
 	/**
 	 * Checks if the next position the enemy will move to is the player.
 	 * 
@@ -378,9 +403,9 @@ public class GameBoard {
 			switch (board[enemyY.get(i)][enemyX.get(i)].getString()) {
 			case "STRAIGHT":
 				StraightLineEnemy a = (StraightLineEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				boolean hori = a.horizontalNoMove(this, enemyX.get(i), enemyY.get(i));
+				boolean hori = a.horizontalNoMove(this);
 				boolean lOR = a.getMovDirection().equals("LEFT") || a.getMovDirection().equals("RIGHT");
-				boolean verti = a.verticalNoMove(this, enemyX.get(i), enemyY.get(i));
+				boolean verti = a.verticalNoMove(this);
 				boolean UD = a.getMovDirection().equals("UP") || a.getMovDirection().equals("DOWN");
 				if ((hori && lOR) || (verti && UD)) {
 
