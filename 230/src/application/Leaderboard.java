@@ -17,7 +17,7 @@ public class Leaderboard
 	private ArrayList<LevelTime> list = new ArrayList<LevelTime>();
 
 	/**
-	 * Creates instance of leaderboard
+	 * Creates instance of leaderboard.
 	 * @param level the level and file title of each leaderboard.
 	 */
 	public Leaderboard(String level)
@@ -95,7 +95,7 @@ public class Leaderboard
 
 	/**
 	 * Update the list by adding new value.
-	 * @param name the name of player
+	 * @param name the name of player.
 	 * @param time the time taken to finish the game.
 	 */
 	public void addLevelTime(String name, long time)

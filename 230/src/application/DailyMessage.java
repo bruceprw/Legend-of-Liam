@@ -26,7 +26,7 @@ public class DailyMessage {
 	/**
 	 * Get the daily message.
 	 * 
-	 * @return The daily message
+	 * @return The daily message.
 	 */
 	public static String getMessage() {
 		return dailyMessage;

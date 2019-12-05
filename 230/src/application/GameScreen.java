@@ -46,13 +46,12 @@ public class GameScreen extends Screen {
 	private MediaPlayer bg = new MediaPlayer(music);
 	// int time = 0;
 
+
 	/**
 	 * Draws the game screen.
-	 * 
-	 * @param levelNo Number of the level to be loaded.
-	 * @throws InterruptedException
+	 * @param levelNo levelNo Number of the level to be loaded.
+	 * @param user User that is currently playing
 	 */
-
 	public GameScreen(String levelNo, UserProfile user) {
 		bg.play();
 
@@ -138,10 +137,11 @@ public class GameScreen extends Screen {
 	}
 
 	/**
-	 * Handles input from the player
+	 * Handles input from the player.
 	 * 
-	 * @param event Key press from the player
-	 * @throws IOException
+	 * @param event Key press from the player.
+	 * @throws IOException Allows the system to
+	 * handle errors associated with IO operations.
 	 */
 	private void keyPressed(KeyEvent event) throws IOException
 
