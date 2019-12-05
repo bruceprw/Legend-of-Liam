@@ -172,7 +172,7 @@ public class OptionsScreen extends Screen{
 			// Unsure if exception should be caught here or in titlescreen constructor
 			try {
 				switchScreen(new TitleScreen());
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			// Closes the popup
