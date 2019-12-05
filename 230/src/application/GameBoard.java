@@ -399,7 +399,7 @@ public class GameBoard {
 	 */
 	private void moveEnemy() {
 		for (int i = 0; i < enemyX.size(); i++) {
-			switch (board[enemyY.get(i)][enemyX.get(i)].getString()) {
+			switch (board[enemyY.get(i)][enemyX.get(i)].toString()) {
 			case "STRAIGHT":
 				StraightLineEnemy a = (StraightLineEnemy) board[enemyY.get(i)][enemyX.get(i)];
 				boolean hori = a.horizontalNoMove(this);

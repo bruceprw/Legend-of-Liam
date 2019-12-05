@@ -38,10 +38,6 @@ public class TokenDoor extends Cell {
         this.opened=false;
         setImage();
     }
-    /*
-    @Override
-    public boolean isPlayerMoved() {
-    }*/
 
     /**
      * Gets the media player of the door.
