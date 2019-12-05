@@ -25,9 +25,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * The GUI for the title screen
+ * 
+ * @author
+ *
+ */
 public class TitleScreen extends Screen {
 	private BorderPane root;
-
 	private VBox topPane;
 	private Image titleImage;
 	private VBox menuPane;
@@ -37,6 +42,10 @@ public class TitleScreen extends Screen {
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	private UserProfile currentUser = null;
 
+	/**
+	 * Constructor for the title screen. Creates a window and adds all the elements
+	 * to it.
+	 */
 	public TitleScreen() {
 		root = new BorderPane();
 		try {
@@ -210,6 +219,7 @@ public class TitleScreen extends Screen {
 
 	/**
 	 * Show the {@link menuPane} on the title screen.
+	 * 
 	 * @param currentUser The user who is logged in.
 	 */
 	public void switchToMenu(UserProfile currentUser) {
