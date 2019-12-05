@@ -34,6 +34,11 @@ public abstract class Element {
 
 	}
 
+	public String getString()
+	{
+		return null;
+	}
+	
 	/**
 	 * Plays sound from stored sound file.
 	 */

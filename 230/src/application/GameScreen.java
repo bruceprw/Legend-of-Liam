@@ -129,6 +129,8 @@ public class GameScreen extends Screen {
 	 */
 	public void NextLevel() {
 		bg.stop();
+		int level = Integer.parseInt(this.levelNo);
+		UserProfile.updateUserProfile(user.getName(), user.getName(), user.getPassword(), level+1);
 		switchScreen(new LevelScreen(user));
 		Leaderboard ld = new Leaderboard(levelNo);
 
