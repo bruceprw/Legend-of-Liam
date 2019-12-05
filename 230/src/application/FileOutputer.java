@@ -51,8 +51,8 @@ public class FileOutputer {
 			e.printStackTrace();
 		}
 
-		String finalOutput = output + temp;
-		System.out.println(finalOutput);
+		//String finalOutput = output + temp;
+		//System.out.println(finalOutput);
 	}
 
 	/**
