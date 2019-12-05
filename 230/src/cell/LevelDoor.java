@@ -27,7 +27,6 @@ public class LevelDoor extends Cell {
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	private static final int NUM_Y_OFFSET = 90;
-	private static final int BACK_X_OFFSET = 8;
 	private static final int SINGLE_DIGIT_X_OFFSET = 15;
 	private static final int DOUBLE_DIGIT_X_OFFSET = 8;
 	
@@ -66,11 +65,9 @@ public class LevelDoor extends Cell {
 		gc.drawImage(image,x,y,100,100);
 		
 		gc.setFont(new Font("Arial", 30));
-		if (levelNo == 0) {
-			gc.fillText("<-", x + BACK_X_OFFSET, y + NUM_Y_OFFSET);
-		} else if (levelNo > 0 && levelNo < 10){
+		if (levelNo > 0 && levelNo < 10) {
 			gc.fillText(levelNo + "", x + SINGLE_DIGIT_X_OFFSET, y + NUM_Y_OFFSET);
-		} else {
+		} else if (levelNo >= 10) {
 			gc.fillText(levelNo + "", x + DOUBLE_DIGIT_X_OFFSET, y + NUM_Y_OFFSET);
 		}
     }
