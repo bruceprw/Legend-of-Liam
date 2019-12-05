@@ -16,7 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-
+/**
+ * Generates a screen that allows the user to navigate
+ * through images that are informative about the controls/gameplay
+ * @author User
+ *
+ */
 public class HowToPlayScreen extends Screen {
 	/**
 	 * Width of the HowToPlayScreen.
@@ -37,6 +42,10 @@ public class HowToPlayScreen extends Screen {
 	Button next;
 	Button previous;
 	
+	/**
+	 * Creates the information screen and sets the default image.
+	 * @throws FileNotFoundException
+	 */
 	@SuppressWarnings("static-access")
 	public HowToPlayScreen() throws FileNotFoundException {
 		readFile();
@@ -69,6 +78,16 @@ public class HowToPlayScreen extends Screen {
 		});
 	}
 	
+	/**
+	 * This function is called whenever a key is pressed and 
+	 * decides the appropriate action to take. In this case
+	 * in which way to navigate images.
+	 * @param event This is the constant of the
+	 * given key the user has pressed.
+	 * @throws IOException Ensures that the system
+	 * expects a potential error of this type such as
+	 * a file not existing or file access being blocked.
+	 */
 	private void keyPressed(KeyEvent event) throws IOException
 
 	{
@@ -97,6 +116,10 @@ public class HowToPlayScreen extends Screen {
 		event.consume();
 	}
 	
+	/**
+	 * Gets the descriptions that correspond to the how to images.
+	 * @throws FileNotFoundException
+	 */
 	private void readFile() throws FileNotFoundException {
 		File file = new File("Images\\How-To images\\text for the how to sections.txt");
 		Scanner in = new Scanner(file);
@@ -114,7 +137,11 @@ public class HowToPlayScreen extends Screen {
 		
 		in.close();
 	}
-	
+	/**
+	 * Splits up the descriptions into discrete sub headings.
+	 * @param page
+	 * @return
+	 */
 	private String readPage(Scanner page) {
 		page.useDelimiter("//");
 		
