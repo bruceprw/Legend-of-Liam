@@ -1,17 +1,17 @@
 package Character;
 
 import application.Element;
-import application.GameBoard;
 
 /**
  * Stores the path information for the smart enemy.
+ * 
  * @author user
  *
  */
-public class Path extends Element
-{
+public class Path extends Element {
 	private int x;
 	private int y;
+	
 	/**
 	 * The number of steps taken from the start of the enemy.
 	 */
@@ -20,17 +20,14 @@ public class Path extends Element
 	Path down;
 	Path left;
 	Path right;
-	
+
 	/**
 	 * Stores the information of the path.
-	 * @param gb the gameboard
-	 * @param x the x-coordinate
-	 * @param y the y-coordinate
+	 * @param x       the x-coordinate 
+	 * @param y       the y-coordinate
 	 * @param counter counter of the current path from the start of the enemy.
 	 */
-	Path(GameBoard gb, int x, int y, int counter)
-	{
-		//temp.add(this);
+	Path(int x, int y, int counter) {
 		this.x = x;
 		this.y = y;
 		this.counter = counter;
@@ -39,47 +36,46 @@ public class Path extends Element
 
 	/**
 	 * Checks whether two paths has the same distance from the start of the enemy.
+	 * 
 	 * @param p the other path
 	 * @return true if they are the same.
 	 */
-	public boolean equals(Path p)
-	{
+	public boolean equals(Path p) {
 		return this.x == p.getX() && this.y == p.getY() && this.counter == p.getCount();
 	}
 
 	/**
 	 * Get the x-coordinate.
+	 * 
 	 * @return x-coordinate.
 	 */
-	public int getX()
-	{
+	public int getX() {
 		return x;
 	}
 
 	/**
-	 * Get the y-coordinate 
+	 * Get the y-coordinate
+	 * 
 	 * @return y-coordinate
 	 */
-	public int getY()
-	{
+	public int getY() {
 		return y;
 
 	}
 
 	/**
 	 * Get the counter
+	 * 
 	 * @return the counter
 	 */
-	public int getCount()
-	{
+	public int getCount() {
 		return counter;
 	}
 
 	/**
 	 * Switch the information to string.
 	 */
-	public String toString()
-	{
+	public String toString() {
 		return "" + x + "," + y + "," + counter;
 	}
 

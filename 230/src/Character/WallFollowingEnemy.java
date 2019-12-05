@@ -23,8 +23,8 @@ public class WallFollowingEnemy extends Enemy {
 	/**
 	 * Creates a new instance of a Wall following enemy.
 	 * 
-	 * @param newX         Enemy X positon
-	 * @param newY         Enemy Y positon
+	 * @param newX         Enemy X position
+	 * @param newY         Enemy Y position
 	 * @param movDirection the direction that this enemy is moving
 	 * @param hand         the hand that's touching the wall for direction
 	 *                     determining.
@@ -40,10 +40,10 @@ public class WallFollowingEnemy extends Enemy {
 	}
 
 	/**
-	 * Gets new X positon for the wall following enemy.
+	 * Gets new X position for the wall following enemy.
 	 * 
 	 * @param gb the current gameboard in play
-	 * @param x  current X positon of the enemy
+	 * @param x  current X position of the enemy
 	 * @param y  current Y position of the enemy.
 	 * @return new X position
 	 */
@@ -401,7 +401,7 @@ public class WallFollowingEnemy extends Enemy {
 	 * Checks the enemy will move to a space next to a wall.
 	 * 
 	 * @param gb the current gameboard in play.
-	 * @param x  current X positon of the enemy.
+	 * @param x  current X position of the enemy.
 	 * @param y  current Y position of the enemy.
 	 * @return True if next move will be next to a wall.
 	 */

@@ -18,8 +18,8 @@ public class SmartTargettingEnemy extends Enemy {
 	/**
 	 * Creates a new instance of a smart enemy.
 	 * 
-	 * @param newX The X positon for the enemy
-	 * @param newY The Y positon for the enemy
+	 * @param newX The X position for the enemy
+	 * @param newY The Y position for the enemy
 	 * @throws FileNotFoundException
 	 */
 	public SmartTargettingEnemy(int newX, int newY) throws FileNotFoundException {
@@ -58,7 +58,7 @@ public class SmartTargettingEnemy extends Enemy {
 				fl.add(temp.get(i));
 		}
 		if (fl.size() == 0) {
-			return new Path(gb, x, y, 0);
+			return new Path(x, y, 0);
 		} else {
 			Path f = fl.get(0);
 			ArrayList<Path> ad = new ArrayList<Path>();
@@ -75,18 +75,18 @@ public class SmartTargettingEnemy extends Enemy {
 	/**
 	 * Checks whether two paths are adjacent to each other.
 	 * 
-	 * @param a Path one
-	 * @param b Path two
-	 * @return true if they are adjacent
+	 * @param firstPath First path to compare.
+	 * @param secondPath second path to compare to.
+	 * @return true if they are adjacent, else false
 	 */
-	private boolean isAdjacent(Path a, Path b) {
-		boolean c = a.getX() == b.getX();
-		boolean d = a.getY() == b.getY();
-		boolean e = (a.getX() - 1 == b.getX()) && d;
-		boolean f = (a.getX() + 1 == b.getX()) && d;
+	private boolean isAdjacent(Path firstPath, Path secondPath) {
+		boolean c = firstPath.getX() == secondPath.getX();
+		boolean d = firstPath.getY() == secondPath.getY();
+		boolean e = (firstPath.getX() - 1 == secondPath.getX()) && d;
+		boolean f = (firstPath.getX() + 1 == secondPath.getX()) && d;
 		boolean g = e || f;
-		boolean h = (a.getY() - 1 == b.getY()) && c;
-		boolean i = (a.getY() + 1 == b.getY()) && c;
+		boolean h = (firstPath.getY() - 1 == secondPath.getY()) && c;
+		boolean i = (firstPath.getY() + 1 == secondPath.getY()) && c;
 		boolean j = h || i;
 		return g || j;
 	}
@@ -103,7 +103,7 @@ public class SmartTargettingEnemy extends Enemy {
 	 * @param path    the list of path information.
 	 */
 	public void setPaths(GameBoard gb, int x, int y, int playerX, int playerY, int counter, ArrayList<Path> path) {
-		path.add(new Path(gb, playerX, playerY, counter));
+		path.add(new Path(playerX, playerY, counter));
 		if (x == playerX && y == playerY) {
 			return;
 		}
