@@ -25,7 +25,7 @@ public class Player extends Element
 
 	private final String START = "START";
 
-	private String path = "Images\\Player.png";
+	private String path = "Images\\Player2.png";
 	// private java.awt.Image img;
 
 	/**
@@ -157,10 +157,10 @@ public class Player extends Element
 	public void drawPlayer(GraphicsContext gc, int x, int y, int r)
 	{
 		gc.save();
-		gc.translate(x, y);
+		gc.translate(x+50, y+50);
 		gc.rotate(r);
 		// gc.drawImage(image, -(1), -(1));
-		gc.drawImage(image, -(100 / 2), -(100 / 2));
+		gc.drawImage(image, -(100 / 2), -62);
 		gc.restore();
 	}
 
