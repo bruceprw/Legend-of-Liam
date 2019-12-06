@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * The window for creating a new user
+ * The window for creating a new user.
  * 
  * @author 
  *
@@ -151,8 +151,8 @@ public class NewUserScreen extends Screen
 	}
 
 	/**
-	 * Confirms the password is correct
-	 * @return True if its correct else false
+	 * Confirms the password is correct.
+	 * @return True if its correct else false.
 	 */
 	public boolean passwordConfirm()
 	{

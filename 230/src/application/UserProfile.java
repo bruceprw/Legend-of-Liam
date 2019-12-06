@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Class used to create and store user's profiles
+ * Class used to create and store user's profiles.
  * 
  * @author Andy Kuo
  *
@@ -20,11 +20,11 @@ public class UserProfile {
 	private static ArrayList<UserProfile> list = new ArrayList<UserProfile>();
 
 	/**
-	 * Creates a new user profile
+	 * Creates a new user profile.
 	 * 
-	 * @param name      The name of the profile
-	 * @param password  The password of the profile
-	 * @param levelProg what level they have made it to
+	 * @param name      The name of the profile.
+	 * @param password  The password of the profile.
+	 * @param levelProg What level they have made it to.
 	 */
 	public UserProfile(String name, String password, int levelProg) {
 		this.name = name;
@@ -36,9 +36,9 @@ public class UserProfile {
 	 * Deletes the user profile. Requires there user name, password and level
 	 * progress to delete.
 	 * 
-	 * @param username  The name of the profile
-	 * @param password  The password of the file
-	 * @param levelProg There level progress in the game
+	 * @param username  The name of the profile.
+	 * @param password  The password of the file.
+	 * @param levelProg There level progress in the game.
 	 */
 	public static void deleteUserProfile(String username, String password, int levelProg) {
 		readList();
@@ -51,11 +51,11 @@ public class UserProfile {
 
 	/**
 	 * Updates the user profile Uses initialName to find the profile and enter the
-	 * new information in to change
+	 * new information in to change.
 	 * 
-	 * @param initialName The name before the change
-	 * @param username    The new user name of the profile
-	 * @param password    The new password for the profile
+	 * @param initialName The name before the change.
+	 * @param username    The new user name of the profile.
+	 * @param password    The new password for the profile.
 	 * @param levelProg   The updated level progress.
 	 */
 	public static void updateUserProfile(String initialName, String username, String password, int levelProg) {
@@ -125,11 +125,12 @@ public class UserProfile {
 	/**
 	 * Used to create a new user profile, used in the title screen.
 	 * 
-	 * @param name      The name of the profile
-	 * @param password  The password of the profile
-	 * @param levelProg The level progress made by the user
-	 * @return True if the user already exists else False
-	 * @throws FileNotFoundException
+	 * @param name      The name of the profile.
+	 * @param password  The password of the profile.
+	 * @param levelProg The level progress made by the user.
+	 * @return True if the user already exists else False.
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error whereby the file cannot be located.
 	 */
 	public static boolean createUserProfile(String name, String password, int levelProg) throws FileNotFoundException {
 		readList();
@@ -149,36 +150,36 @@ public class UserProfile {
 	}
 
 	/**
-	 * Used to set the level progress
+	 * Used to set the level progress.
 	 * 
-	 * @param l What level the user has gotten to
+	 * @param l What level the user has gotten to.
 	 */
 	public void setLevelProg(int l) {
 		this.levelProg = l;
 	}
 
 	/**
-	 * Gets the level progress
+	 * Gets the level progress.
 	 * 
-	 * @return Which level the user has gotten to
+	 * @return Which level the user has gotten to.
 	 */
 	public int getLevelProg() {
 		return levelProg;
 	}
 
 	/**
-	 * Sets the name of the user
+	 * Sets the name of the user.
 	 * 
-	 * @param name Name of the user
+	 * @param name Name of the user.
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * Returns the user profiles name
+	 * Returns the user profiles name.
 	 * 
-	 * @return Name of the user
+	 * @return Name of the user.
 	 */
 	public String getName() {
 		return name;
@@ -186,16 +187,16 @@ public class UserProfile {
 	}
 
 	/**
-	 * Sets the password for a user profile
+	 * Sets the password for a user profile.
 	 * 
-	 * @param password The password for the profile
+	 * @param password The password for the profile.
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * Returns the password of the user profile
+	 * Returns the password of the user profile.
 	 * 
 	 * @return Password for the profile.
 	 */
@@ -204,9 +205,9 @@ public class UserProfile {
 	}
 
 	/**
-	 * Checks if a profile exists by the name of the profile
+	 * Checks if a profile exists by the name of the profile.
 	 * 
-	 * @param name The name of the profile
+	 * @param name The name of the requested profile.
 	 * @return True if it exists else false.
 	 */
 	public static boolean exists(String name) {

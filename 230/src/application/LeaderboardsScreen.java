@@ -46,7 +46,7 @@ public class LeaderboardsScreen extends Screen {
 	 * methods generate the screen.
 	 * 
 	 * @param level The leaderboards is split into levels and thus for correct level
-	 *              times to be displayed the required level must know and it passed
+	 *              times to be displayed the required level must be known and it passed
 	 *              as a parameter.
 	 */
 	public LeaderboardsScreen(String level) {
@@ -57,7 +57,8 @@ public class LeaderboardsScreen extends Screen {
 	 * Used to draw the leaderboard to the screen. When the button is pressed the
 	 * next level is shown.
 	 * 
-	 * @param level
+	 * @param level The level for which the corresponding
+	 * leaderboard file to be displayed
 	 */
 	private void screenInit(String level) {
 		System.out.println(level);

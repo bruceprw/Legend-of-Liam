@@ -27,7 +27,8 @@ public class Leaderboard
 	
 	/**
 	 * Initiate the file reading.
-	 * @param level
+	 * @param level Which levels leadboard should be 
+	 * displayed
 	 */
 	public void initLeaderboard(String level) {
 		this.filePath = "Leaderboard\\leaderboard" + level + ".txt";

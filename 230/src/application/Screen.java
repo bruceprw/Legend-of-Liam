@@ -6,10 +6,10 @@ import javafx.stage.Stage;
 
 /**
  * Screen is the abstract superclass of all screens in the game. It contains
- * window dimension constants, and methods required for transitioning between
+ * window dimension constants, and methods required for the transition between
  * screens.
  * 
- * @author Gideon Davies
+ * @author Gideon Davies.
  * @version 2.0
  */
 public abstract class Screen {
@@ -45,7 +45,7 @@ public abstract class Screen {
 	protected Scene scene;
 
 	/**
-	 * The additional stylesheet for this screen. (Optional)
+	 * The additional stylesheet for this screen. (Optional).
 	 */
 	protected String stylesheet;
 

@@ -26,7 +26,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
- * The GUI for the title screen
+ * The GUI for the title screen.
  * 
  * @author
  *

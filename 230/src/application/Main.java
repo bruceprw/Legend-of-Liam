@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 /**
- * Main class, first class ran by Java
+ * Main class, first class ran by Java.
  * 
  * @author
  *
@@ -28,7 +28,7 @@ public class Main extends Application {
 	}
 
 	/**
-	 * Launches the program
+	 * Launches the program.
 	 * 
 	 * @param args argument fore the program. Launches the GUI.
 	 */

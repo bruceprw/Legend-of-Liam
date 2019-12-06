@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 /**
- * Generates GUI for the options screen
+ * Generates GUI for the options screen.
  * @author User
  *
  */

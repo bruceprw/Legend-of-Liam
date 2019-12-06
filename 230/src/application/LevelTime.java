@@ -4,7 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * used to work out and store the time it takes to do level by a user.
+ * used to work out and store the time it takes to complete a
+ * given level by a user.
  * 
  * @author
  *
@@ -16,10 +17,10 @@ public class LevelTime {
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
 
 	/**
-	 * Creates a new instance of the LevelTime and outputs the time
+	 * Creates a new instance of the LevelTime and outputs the time.
 	 * 
-	 * @param u The username of the user profile
-	 * @param t The time to be stored
+	 * @param u The username of the current player.
+	 * @param t The time to complete the level.
 	 */
 	public LevelTime(String u, long t) {
 		username = u;
@@ -28,16 +29,16 @@ public class LevelTime {
 	}
 
 	/**
-	 * gets the stored username
+	 * Gets the stored username.
 	 * 
-	 * @return the user name
+	 * @return the user name.
 	 */
 	public String getUsername() {
 		return username;
 	}
 
 	/**
-	 * Gets the time and formats its correctly
+	 * Gets the time and formats its correctly.
 	 * 
 	 * @return The time it took to do the level.
 	 */
@@ -48,9 +49,9 @@ public class LevelTime {
 	}
 
 	/**
-	 * Gets the time but as a string formated correctly
+	 * Gets the time but as a string formated correctly.
 	 * 
-	 * @return The time it took to complete the level as a string
+	 * @return The time it took to complete the level as a string.
 	 */
 	public String getStringTime() {
 		Date d = new Date(time);

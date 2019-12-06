@@ -19,7 +19,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 /**
- * Class used to create and display the level screen
+ * Class used to create and display the level screen.
  * 
  * @author
  *
@@ -84,8 +84,9 @@ public class LevelScreen extends Screen {
 	/**
 	 * Processes key presses that interact with the level.
 	 * 
-	 * @param event The key press action.
-	 * @throws IOException
+	 * @param event The key press action by the user.
+	 * @throws IOException Tells the system that this
+	 * method could cause an error such as unable to access a file.
 	 */
 	private void keyPressed(KeyEvent event) throws IOException {
 		// Check which key was pressed.
