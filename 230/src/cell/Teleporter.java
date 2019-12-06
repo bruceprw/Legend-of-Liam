@@ -10,7 +10,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * Stores image, position of the other door and the sound of passing through the teleporter. 
+ * Stores image, position of the other door and the sound of
+ * passing through the teleporter. 
  * @author user
  *
  */
@@ -25,10 +26,11 @@ public class Teleporter extends Cell{
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 
 	/**
-	 * Creates a teleporter instance
-	 * @param pairX the x-coordinate of the pair.
-	 * @param pairY the y-coordinate of the pair.
-	 * @throws FileNotFoundException
+	 * Creates a teleporter instance.
+	 * @param pairX Tthe x-coordinate of the pair.
+	 * @param pairY The y-coordinate of the pair.
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
 	public Teleporter(int pairX,int pairY) throws FileNotFoundException
 	{
@@ -47,8 +49,8 @@ public class Teleporter extends Cell{
     }
 	
     /**
-     * Get the pair's x-coordinate.
-     * @return the x-coordinate
+     * Gets the pair's x-coordinate.
+     * @return The x-coordinate.
      */
 	public int getPairX()
 	{
@@ -56,8 +58,8 @@ public class Teleporter extends Cell{
 	}
 	
 	/**
-	 * Get the pair's y-coordinate.
-	 * @return the y-coordinate.
+	 * Gets the pair's y-coordinate.
+	 * @return The y-coordinate.
 	 */
 	public int getPairY()
 	{
@@ -65,8 +67,9 @@ public class Teleporter extends Cell{
 	}
 	
 	/**
-	 * Set the image.
-	 * @throws FileNotFoundException
+	 * Sets the image.
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
 	public void setImage() throws FileNotFoundException
 	{
@@ -82,7 +85,7 @@ public class Teleporter extends Cell{
     }
 	
     /**
-     * draw the image.
+     * Draw this elements image.
      */
     public void draw(GraphicsContext gc,int x,int y)
     {

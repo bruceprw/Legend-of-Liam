@@ -33,8 +33,9 @@ public class LevelDoor extends Cell {
 	/**
 	 * Create the instance of the level door.
 	 * 
-	 * @param levelNo
-	 * @throws FileNotFoundException
+	 * @param levelNo The level number the door corresponds to.
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
 	public LevelDoor(int levelNo) throws FileNotFoundException {
 		super(false, true, false, "", Item.NONE);
@@ -44,7 +45,7 @@ public class LevelDoor extends Cell {
 
     /**
      * Checks whether able to move to this cell.
-     * @return
+     * @return Allows the player to move\
      */
 	public boolean moveToCell() {
 		return true;

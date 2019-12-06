@@ -24,7 +24,8 @@ public class Wall extends Cell {
 	
 	/**
 	 * Sets the instance of the wall.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
     public Wall() throws FileNotFoundException {
         super(false, false, false, "", Item.NONE);
@@ -33,7 +34,8 @@ public class Wall extends Cell {
     
     /**
      * Get the image from the path.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
      */
 	public void setImage() throws FileNotFoundException
 	{
@@ -60,7 +62,7 @@ public class Wall extends Cell {
     }
     
     /**
-     * draw the door image.
+     * Draw the door image.
      */
     public void draw(GraphicsContext gc,int x,int y)
     {

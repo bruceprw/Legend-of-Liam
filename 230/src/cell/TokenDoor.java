@@ -30,7 +30,8 @@ public class TokenDoor extends Cell {
     /**
      * Create instance of the door.
      * @param tokenNumToUnlockDoor number of tokens need to open the door.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
      */
     public TokenDoor(int tokenNumToUnlockDoor) throws FileNotFoundException {
         super(false, true, false, "", Item.NONE);
@@ -59,7 +60,7 @@ public class TokenDoor extends Cell {
     
     /**
      * Get the token number needed to open door.
-     * @return the number
+     * @return Number of tokens.
      */
 	public int getTokenNum()
 	{
@@ -94,7 +95,8 @@ public class TokenDoor extends Cell {
 	
 	/**
 	 * Set the image.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
 	public void setImage() throws FileNotFoundException
 	{

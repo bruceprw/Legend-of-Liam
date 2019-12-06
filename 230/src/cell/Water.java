@@ -24,7 +24,8 @@ public class Water extends Cell {
 	
 	/**
 	 * Create instance of water.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
     public Water() throws FileNotFoundException {
         super(true, true, false, "", Item.FLIPPER);
@@ -33,7 +34,8 @@ public class Water extends Cell {
 	
     /**
      * Set image.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundExceptionTells the system that this
+	 * method could cause an error of this type.
      */
 	public void setImage() throws FileNotFoundException
 	{
