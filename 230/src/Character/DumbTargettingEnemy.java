@@ -7,7 +7,7 @@ import application.GameBoard;
  * Class for dumb enemy, always moves towards the player even if its into a
  * wall.
  * 
- * @author Miles Singleton
+ * @author Miles Singleton, Andy Kuo
  * @version 1.0
  */
 public class DumbTargettingEnemy extends Enemy {

@@ -20,13 +20,16 @@ import javafx.scene.text.Font;
  */
 public class LevelDoor extends Cell {
 
-	private String path = "Images\\blue_door.jpg";
+	private String path = "Images\\updateimage\\closed_blue_door.png";
 	private static String soundPath = "Sound\\creaking_door.mp3";
 	private Image image;
 	private int levelNo;
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
-
+	private static final int NUM_Y_OFFSET = 90;
+	private static final int ONE_DIGIT_X_OFFSET = 15;
+	private static final int TWO_DIGIT_X_OFFSET = 8;
+	
 	/**
 	 * Create the instance of the level door.
 	 * 
@@ -78,10 +81,10 @@ public class LevelDoor extends Cell {
 		gc.drawImage(image, x, y, 100, 100);
 
 		gc.setFont(new Font("Arial", 30));
-		if (levelNo == 0) {
-			gc.fillText("Back", x, y + 75);
-		} else {
-			gc.fillText(levelNo + "", x, y + 75);
+		if (levelNo > 0 && levelNo < 10) {
+			gc.fillText(levelNo + "", x + ONE_DIGIT_X_OFFSET, y + NUM_Y_OFFSET);
+		} else if (levelNo >= 10) {
+			gc.fillText(levelNo + "", x + TWO_DIGIT_X_OFFSET, y + NUM_Y_OFFSET);
 		}
 	}
 

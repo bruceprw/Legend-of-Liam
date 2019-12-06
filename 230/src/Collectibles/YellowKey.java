@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores the image and sounds of a yellow key.
- * @author user
+ * @author Andy Kuo
  *
  */
 public class YellowKey extends Collectible

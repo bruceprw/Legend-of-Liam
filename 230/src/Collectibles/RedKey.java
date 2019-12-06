@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores the info. of red key.
- * @author user
+ * @author Andy Kuo
  *
  */
 public class RedKey extends Collectible

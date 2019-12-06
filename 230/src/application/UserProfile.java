@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Class used to create and store user's profiles
  * 
- * @author
+ * @author Andy Kuo
  *
  */
 public class UserProfile {

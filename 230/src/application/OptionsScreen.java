@@ -14,7 +14,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**
+ * Generates GUI for the options screen
+ * @author User
+ *
+ */
 public class OptionsScreen extends Screen{
 	BorderPane root;
 	
@@ -49,7 +53,12 @@ public class OptionsScreen extends Screen{
 	Button delete;
 	Button deleteCancel;
 	
-	
+	/**
+	 * Create an instance of the options screen for a given user,
+	 * mainly calling other methods within the class.
+	 * @param user allows the screen to determine which users'
+	 * options to change or display.
+	 */
 	public OptionsScreen(UserProfile user) {
 		root = new BorderPane();
 		root.setPadding(new Insets(20));
@@ -69,6 +78,10 @@ public class OptionsScreen extends Screen{
 		scene = new Scene(root, POPUP_WIDTH, POPUP_HEIGHT);
 	}
 	
+	/**
+	 * Creates the creates the 'background' for the screen
+	 * and all the buttons/interactive features.
+	 */
 	private void buildOptionsPane() {
 		optionsPane = new VBox();
 		optionsPane.setAlignment(Pos.CENTER);
@@ -96,7 +109,10 @@ public class OptionsScreen extends Screen{
 		
 		optionsPane.getChildren().addAll(editUserPass, resetProgress, deleteProfile);
 	}
-
+	/**
+	 * Used to update the screen with fields for the user
+	 * to alter or change their password and save those changes.
+	 */
 	private void buildEdit() {
 		editGrid = new GridPane();
 		
@@ -137,7 +153,11 @@ public class OptionsScreen extends Screen{
 		editButtonsPane.getChildren().addAll(submit, editCancel);
 		editButtonsPane.setAlignment(Pos.CENTER_RIGHT);
 	}
-
+	
+	/**
+	 * Allows the user to reset their level progress.
+	 * Displays a yes/no popup screen to user.
+	 */
 	private void buildReset() {
 		resetPrompt = new Text("Are you sure you want to reset level progress?");
 		resetButtonsPane = new HBox();
@@ -159,6 +179,10 @@ public class OptionsScreen extends Screen{
 		resetButtonsPane.setAlignment(Pos.CENTER_RIGHT);
 	}
 	
+	/**
+	 * Allows the user to delete their profile.
+	 * Displays a yes/no popup screen to user.
+	 */
 	private void buildDelete() {
 		deletePrompt = new Text("Are you sure you want to delete " + user.getName() + "?");
 		deleteButtonsPane = new HBox();
@@ -172,7 +196,7 @@ public class OptionsScreen extends Screen{
 			// Unsure if exception should be caught here or in titlescreen constructor
 			try {
 				switchScreen(new TitleScreen());
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			// Closes the popup

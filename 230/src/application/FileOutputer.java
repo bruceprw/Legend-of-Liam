@@ -22,10 +22,10 @@ public class FileOutputer {
 	private Element[][] board;
 
 	/**
-	 * Outputs the file with the game board
+	 * Outputs the file with the game board.
 	 * 
-	 * @param lvl the game board
-	 * @param lt  the current level time
+	 * @param lvl the game board.
+	 * @param lt  the current level time.
 	 */
 	public FileOutputer(GameBoard lvl, LevelTime lt) {
 		background = lvl.getBackground();
@@ -51,15 +51,15 @@ public class FileOutputer {
 			e.printStackTrace();
 		}
 
-		String finalOutput = output + temp;
-		System.out.println(finalOutput);
+		//String finalOutput = output + temp;
+		//System.out.println(finalOutput);
 	}
 
 	/**
 	 * This methods saves the inventory information of the game.
 	 * 
-	 * @param lvl   the GameBoard instance
-	 * @param board the board instance
+	 * @param lvl   the GameBoard instance.
+	 * @param board the board instance.
 	 */
 	public void setRemain(GameBoard lvl, Element[][] board) {
 		int[] inventory = ((Player) board[lvl.getPlayerY()][lvl.getPlayerX()]).getInventory();
@@ -77,8 +77,8 @@ public class FileOutputer {
 	/**
 	 * This method sets part of the output.
 	 * 
-	 * @param board      the current board instance
-	 * @param background the current background
+	 * @param board      the current board instance.
+	 * @param background the current background.
 	 */
 	public void setOutput(Element[][] board, Element[][] background) {
 		getSwitch(board, background);
@@ -88,8 +88,8 @@ public class FileOutputer {
 	 * This method get the current board to save as a file. Does not get all
 	 * information required.
 	 * 
-	 * @param board      the current board instance
-	 * @param background the current background
+	 * @param board      the current board instance.
+	 * @param background the current background.
 	 */
 	public void setTemp(Element[][] board, Element[][] background) {
 		getSwitch(board, background);
@@ -99,8 +99,8 @@ public class FileOutputer {
 	 * Turns the current board and background into a string that can be used to
 	 * restore the current game.
 	 * 
-	 * @param board      board instance
-	 * @param background background instance
+	 * @param board      board instance.
+	 * @param background background instance.
 	 */
 
 	public void getSwitch(Element[][] board, Element[][] background) {
@@ -147,7 +147,6 @@ public class FileOutputer {
 					temp += "" + x + "," + y + ",ENEMY,SMART" + "\r\n";
 					break;
 				case "D":
-
 					break;
 				}
 			}

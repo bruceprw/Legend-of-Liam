@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Store information of flippers
- * @author user
+ * @author Andy Kuo
  *
  */
 public class Flipper extends Collectible

@@ -9,7 +9,7 @@ import cell.Ground;
 /**
  * Straight line enemy moves in a straight line
  * 
- * @author Miles Singleton
+ * @author Miles Singleton, Andy Kuo
  */
 public class StraightLineEnemy extends Enemy {
 
@@ -94,6 +94,7 @@ public class StraightLineEnemy extends Enemy {
 
 	}
 
+	
 	/**
 	 * Works out the new Y coordinate
 	 * 

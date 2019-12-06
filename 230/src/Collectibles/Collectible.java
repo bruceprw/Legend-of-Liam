@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 
 /**
  * The super-class of all Collectibles.
- * @author user
+ * @author Andy Kuo
  *
  */
 public class Collectible extends Element
