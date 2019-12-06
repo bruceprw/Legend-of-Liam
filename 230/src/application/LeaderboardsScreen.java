@@ -30,6 +30,7 @@ public class LeaderboardsScreen extends Screen {
 	private static final double GRID_H_GAP = 30;
 	private static final double GRID_V_GAP = 20;
 	private BorderPane root;
+	private UserProfile user;
 	private HBox centerBox;
 	private VBox scrollBox;
 	private ScrollPane levels;
@@ -49,8 +50,9 @@ public class LeaderboardsScreen extends Screen {
 	 *              times to be displayed the required level must be known and it passed
 	 *              as a parameter.
 	 */
-	public LeaderboardsScreen(String level) {
+	public LeaderboardsScreen(String level, UserProfile user) {
 		screenInit(level);
+		this.user = user;
 	}
 
 	/**
@@ -73,7 +75,9 @@ public class LeaderboardsScreen extends Screen {
 
 		back = new Button("Back");
 		back.setOnAction(event -> {
-			switchScreen(new TitleScreen());
+			TitleScreen t = new TitleScreen();
+			switchScreen(t);
+			t.switchToMenu(user);
 		});
 
 		for (int i = 0; i < 10; i++) {
@@ -81,7 +85,7 @@ public class LeaderboardsScreen extends Screen {
 			b.setMinSize(LEVEL_BUTTON_SIZE, LEVEL_BUTTON_SIZE);
 			b.setOnAction(event -> {
 				System.out.println(b.getText());
-				switchScreen(new LeaderboardsScreen(b.getText()));
+				switchScreen(new LeaderboardsScreen(b.getText(), user));
 				System.out.println(ld.getList());
 			});
 			levelButtons.add(b);
@@ -92,7 +96,6 @@ public class LeaderboardsScreen extends Screen {
 
 		levelGrid.setHgap(GRID_H_GAP);
 		levelGrid.setVgap(GRID_V_GAP);
-		levelGrid.setGridLinesVisible(true);
 		levelGrid.setPadding(new Insets(10));
 
 		centerBox.setStyle("-fx-box-border: transparent");

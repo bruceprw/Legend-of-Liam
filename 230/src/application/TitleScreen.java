@@ -203,7 +203,7 @@ public class TitleScreen extends Screen {
 		});
 
 		leaderboards.setOnAction(event -> {
-			switchScreen(new LeaderboardsScreen("1"));
+			switchScreen(new LeaderboardsScreen("1", currentUser));
 		});
 
 		options.setOnAction(event -> {
