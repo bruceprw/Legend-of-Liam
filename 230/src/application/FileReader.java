@@ -16,7 +16,7 @@ import cell.*;
 /**
  * Reads the level files to create the level described in the level file.
  * 
- * @author user
+ * @author Andy Kuo
  *
  */
 

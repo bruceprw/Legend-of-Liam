@@ -10,7 +10,7 @@ import cell.Ground;
  * Class for the wall following enemy. A enemy that at all times must be next to
  * a wall tile.
  * 
- * @author Miles Singleton
+ * @author Miles Singleton, Andy Kuo
  *
  */
 public class WallFollowingEnemy extends Enemy

@@ -11,7 +11,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores image and sound of fire boot.
- * @author user
+ * @author Andy Kuo
  *
  */
 public class FireBoot extends Collectible

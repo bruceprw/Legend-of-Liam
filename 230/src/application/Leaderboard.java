@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * Reads the leader board file and output the leader board to leaderboard page.
- * @author user
+ * @author Andy Kuo
  *
  */
 public class Leaderboard

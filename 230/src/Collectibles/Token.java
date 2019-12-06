@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores the image and the sound of a token.
- * @author user
+ * @author Andy Kuo
  *
  */
 public class Token extends Collectible

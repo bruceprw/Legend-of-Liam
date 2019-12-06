@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores image and sounds of bluekey.
- * @author user
+ * @author Andy Kuo
  *
  */
 public class BlueKey extends Collectible

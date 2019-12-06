@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores information for green key.
- * @author user
+ * @author Andy Kuo
  *
  */
 public class GreenKey extends Collectible

@@ -29,7 +29,7 @@ import javafx.scene.text.Font;
 /**
  * Stores the game board instance and moves the player and enemy.
  * 
- * @author user
+ * @author Andy Kuo
  *
  */
 public class GameBoard {

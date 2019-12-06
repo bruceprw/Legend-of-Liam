@@ -7,7 +7,7 @@ import application.GameBoard;
 /**
  * Smart targeting enemies uses BFS to find player and chase
  * 
- * @author Miles Singleton
+ * @author Miles Singleton, Andy Kuo
  * @version 1.0
  */
 public class SmartTargettingEnemy extends Enemy {
