@@ -30,15 +30,6 @@ public class OptionsScreen extends Screen{
 	Button deleteProfile;
 	
 	GridPane editGrid;
-	Text usernameLabel;
-	Text passwordLabel;
-	Text checkPassLabel;
-	Text oldPassPrompt;
-	Text oldPassLabel;
-	TextField username;
-	PasswordField password;
-	PasswordField checkPass;
-	PasswordField oldPass;
 	HBox editButtonsPane;
 	Button submit;
 	Button editCancel;
@@ -116,16 +107,16 @@ public class OptionsScreen extends Screen{
 	private void buildEdit() {
 		editGrid = new GridPane();
 		
-		usernameLabel = new Text("Username:");
-		passwordLabel = new Text("Password:");
-		checkPassLabel = new Text("Check Password:");
-		oldPassLabel = new Text("Old Password:");
-		oldPassPrompt = new Text("To save changes, please enter your old password.");
+		Text usernameLabel = new Text("Username:");
+		Text passwordLabel = new Text("Password:");
+		Text checkPassLabel = new Text("Check Password:");
+		Text oldPassLabel = new Text("Old Password:");
+		Text oldPassPrompt = new Text("To save changes, please enter your old password.");
 		
-		username = new TextField();
-		password = new PasswordField();
-		checkPass = new PasswordField();
-		oldPass = new PasswordField();
+		TextField username = new TextField();
+		PasswordField password = new PasswordField();
+		PasswordField checkPass = new PasswordField();
+		PasswordField oldPass = new PasswordField();
 		
 		editGrid.addRow(0, usernameLabel, username);
 		editGrid.addRow(1, passwordLabel, password);
