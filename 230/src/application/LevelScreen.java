@@ -89,6 +89,8 @@ public class LevelScreen extends Screen {
 	 * method could cause an error such as unable to access a file.
 	 */
 	private void keyPressed(KeyEvent event) throws IOException {
+		boolean locked = false;
+		
 		// Check which key was pressed.
 		switch (event.getCode()) {
 		case RIGHT:
@@ -124,8 +126,7 @@ public class LevelScreen extends Screen {
 					if (levelNo <= user.getLevelProg() + 1) {
 						switchScreen(new GameScreen(levelNo + "", user));
 					} else {
-						// Test
-						System.out.println("Locked");
+						locked = true;
 					}
 				}
 			}
@@ -137,7 +138,11 @@ public class LevelScreen extends Screen {
 		}
 
 		drawGame();
-
+		if (locked) {
+			GraphicsContext gc = game.getGraphicsContext2D();
+			gc.fillText("Locked", 5, 50);
+		}
+		
 		// Consume key press event so that arrow keys don't interact with
 		// Buttons.
 		event.consume();
