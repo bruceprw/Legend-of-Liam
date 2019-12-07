@@ -146,7 +146,7 @@ public class LeaderboardsScreen extends Screen {
 		// let's not use the rank. the list is sorted by insertion sort. so there is no
 		// reason to show an extra"rank" column...
 
-		leaderboard.getColumns().addAll(rank, username, time);
+		leaderboard.getColumns().addAll(username, time);
 	}
 
 	/**
