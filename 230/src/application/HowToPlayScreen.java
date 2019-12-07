@@ -37,12 +37,12 @@ public class HowToPlayScreen extends Screen {
 	ArrayList<String> texts = new ArrayList<String>();
 	private int pageIndex = 0;
 
-	BorderPane root;
-	ImageView view;
-	Text displayText;
-	Text buttonPrompt;
-	Button next;
-	Button previous;
+	private BorderPane root;
+	private ImageView view;
+	private Text displayText;
+	private Text buttonPrompt;
+	private Button next;
+	private Button previous;
 
 	/**
 	 * Creates the information screen and sets the default image.
