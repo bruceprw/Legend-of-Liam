@@ -24,7 +24,8 @@ public class Goal extends Cell
 
 	/**
 	 * Creates instance of goal.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such not finding given file.
 	 */
 	public Goal() throws FileNotFoundException
 	{
@@ -33,6 +34,7 @@ public class Goal extends Cell
 	}
 
 	/**
+	 * Get the media player of sound stored.
 	 * @return the media player of goal.
 	 */
 	public MediaPlayer getSound()
@@ -42,7 +44,8 @@ public class Goal extends Cell
 
 	/**
 	 * Sets image.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Ensures that the system
+	 * expects that this method could cause an error of this type.
 	 */
 	public void setImage() throws FileNotFoundException
 	{
@@ -50,7 +53,7 @@ public class Goal extends Cell
 	}
 
 	/**
-	 * Draw image.
+	 * Draw the image of the goal.
 	 */
 	public void draw(GraphicsContext gc, int x, int y)
 	{
@@ -58,6 +61,7 @@ public class Goal extends Cell
 	}
 
 	/**
+	 * Gets string for output purpose.
 	 * @return string for output purpose.
 	 */
 	public String getString()

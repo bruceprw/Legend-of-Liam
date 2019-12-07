@@ -39,7 +39,8 @@ public class ColouredDoor extends Cell
 	 * Sets the information of the door.
 	 * 
 	 * @param colour the colour of the door.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such not finding given file.
 	 */
 	public ColouredDoor(String colour) throws FileNotFoundException
 	{
@@ -50,7 +51,7 @@ public class ColouredDoor extends Cell
 	}
 
 	/**
-	 * Plays the sound
+	 * Plays the sound.
 	 */
 	public MediaPlayer getSound()
 	{
@@ -190,8 +191,9 @@ public class ColouredDoor extends Cell
 	/**
 	 * Set the image to different colour according to the colour of the instance.
 	 * 
-	 * @param colour
-	 * @throws FileNotFoundException
+	 * @param colour The required colour of the door.
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error if the file is not found.
 	 */
 	public void setImage(String colour) throws FileNotFoundException
 	{

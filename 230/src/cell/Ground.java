@@ -24,7 +24,8 @@ public class Ground extends Cell {
 	
 	/**
 	 * Create instance of ground.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as unable to access a file.
 	 */
     public Ground() throws FileNotFoundException{
         super(false, true, true, "", Item.NONE);
@@ -42,7 +43,8 @@ public class Ground extends Cell {
     
     /**
      * Checks whether able to move to this cell.
-     * @return
+     * @return Returns true to allow the player to move
+     * to the cell.
      */
     public boolean moveToCell() {
         return true;
@@ -50,7 +52,8 @@ public class Ground extends Cell {
     
     /**
      * Set image.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
      */
 	public void setImage() throws FileNotFoundException
 	{
@@ -58,7 +61,7 @@ public class Ground extends Cell {
 	}
     
 	/**
-	 * Draw image.
+	 * Draw the ground image.
 	 */
     public void draw(GraphicsContext gc,int x,int y) 
     {

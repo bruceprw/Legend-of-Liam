@@ -45,7 +45,8 @@ public class LevelDoor extends Cell {
 
     /**
      * Checks whether able to move to this cell.
-     * @return Allows the player to move\
+     * @return Returns true to allow the 
+     * player to move.
      */
 	public boolean moveToCell() {
 		return true;
@@ -53,7 +54,8 @@ public class LevelDoor extends Cell {
 
     /**
      * Get the level number.
-     * @return levelNo.
+     * @return levelNo. The given doors corresponding
+     * level.
      */
 	public int getLevelNo() {
 		return levelNo;
@@ -61,7 +63,7 @@ public class LevelDoor extends Cell {
 
     /**
      * Get the sound player of LevelDoor.
-     * @return the mediaplayer.
+     * @return The mediaplayer.
      */
 	public MediaPlayer getSound() {
 		return mediaPlayer;
@@ -69,7 +71,8 @@ public class LevelDoor extends Cell {
 
     /**
      * Set image.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as unable to access a file.
      */
 	public void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));

@@ -85,8 +85,8 @@ public class TokenDoor extends Cell {
 	}
 	
 	/** 
-	 * return the state of the door.
-	 * @return true if the door is opened.
+	 * Return the state of the door.
+	 * @return True if the door is opened.
 	 */
 	public boolean getOpened()
 	{
