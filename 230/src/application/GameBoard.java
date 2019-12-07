@@ -30,6 +30,7 @@ import javafx.scene.text.Font;
  * Stores the game board instance and moves the player and enemy.
  * 
  * @author Andy Kuo
+ * @version 1.0
  *
  */
 public class GameBoard {
@@ -42,9 +43,7 @@ public class GameBoard {
 	private int rotation;
 
 	private Media playerDie = new Media(new File("Sound\\player_killed.wav").toURI().toString());
-
 	private MediaPlayer mediaPlayer;
-
 	private ArrayList<Integer> enemyX;
 	private ArrayList<Integer> enemyY;
 
@@ -54,8 +53,8 @@ public class GameBoard {
 	 * Reads in info from level file and set the important information.
 	 * 
 	 * @param filePath the name of the level file you wanted to retrieve.
-	 * @throws FileNotFoundException Indicates that the 
-	 * an error whereby the file is not found could occur.
+	 * @throws FileNotFoundException Indicates that the an error whereby the file is
+	 *                               not found could occur.
 	 */
 	public GameBoard(String filePath) throws FileNotFoundException {
 		FileReader lvl = new FileReader(filePath);
@@ -83,8 +82,8 @@ public class GameBoard {
 	 * Draws the maps and the board elements. Also the items held by player.
 	 * 
 	 * @param gc the canvas graphics context.
-	 * @throws FileNotFoundException Indicates that the 
-	 * an error whereby the file is not found could occur.
+	 * @throws FileNotFoundException Indicates that the an error whereby the file is
+	 *                               not found could occur.
 	 */
 	public void drawGame(GraphicsContext gc) throws FileNotFoundException {
 
@@ -130,8 +129,8 @@ public class GameBoard {
 	 * Draws the items on the board.
 	 * 
 	 * @param gc canvas's graphics context.
-	 * @throws FileNotFoundException Indicates that the 
-	 * an error whereby the file is not found could occur.
+	 * @throws FileNotFoundException Indicates that the an error whereby the file is
+	 *                               not found could occur.
 	 */
 	public void drawItem(GraphicsContext gc) throws FileNotFoundException {
 		int[] temp = ((Player) board[playerY][playerX]).getInventory();
@@ -235,7 +234,6 @@ public class GameBoard {
 					board[playerY][playerX] = new Empty();
 					playerX += 1;
 
-					
 				}
 
 			}
@@ -349,8 +347,6 @@ public class GameBoard {
 		return 0;
 	}
 
-	
-	
 	/**
 	 * Checks if the next position the enemy will move to is the player.
 	 * 
@@ -376,17 +372,19 @@ public class GameBoard {
 
 	/**
 	 * Moves the straight line enemy.
+	 * 
 	 * @param x current x-position of enemy.
 	 * @param y current y-position of enemy.
 	 * @param i the index of the enemy stored in the enemy arrays.
 	 */
-	private void straightMove(int x, int y,int i)
-	{
+	private void straightMove(int x, int y, int i) {
 		StraightLineEnemy a = (StraightLineEnemy) board[y][x];
 		boolean hori = a.horizontalNoMove(this);
-		boolean lOR = a.getMovDirection().equals("LEFT") || a.getMovDirection().equals("RIGHT");
+		boolean lOR = a.getMovDirection().equals("LEFT") 
+			|| a.getMovDirection().equals("RIGHT");
 		boolean verti = a.verticalNoMove(this);
-		boolean UD = a.getMovDirection().equals("UP") || a.getMovDirection().equals("DOWN");
+		boolean UD = a.getMovDirection().equals("UP") 
+			|| a.getMovDirection().equals("DOWN");
 		if ((hori && lOR) || (verti && UD)) {
 
 		} else {
@@ -398,15 +396,15 @@ public class GameBoard {
 			enemyX.set(i, newX);
 		}
 	}
-	
+
 	/**
 	 * Moves the wallhug enemy.
+	 * 
 	 * @param x current x-position of enemy.
 	 * @param y current y-position of enemy.
 	 * @param i the index of the enemy stored in the enemy arrays.
 	 */
-	public void wallhugMove(int x,int y,int i)
-	{
+	public void wallhugMove(int x, int y, int i) {
 		WallFollowingEnemy b = (WallFollowingEnemy) board[y][x];
 		int newX = b.getsNewX(this, x, y);
 		int newY = b.getNewY(this, x, y);
@@ -415,18 +413,18 @@ public class GameBoard {
 		enemyY.set(i, newY);
 		enemyX.set(i, newX);
 	}
-	
+
 	/**
 	 * Moves the dumb enemy.
+	 * 
 	 * @param x current x-position of enemy.
 	 * @param y current y-position of enemy.
 	 * @param i the index of the enemy stored in the enemy arrays.
 	 */
-	public void dumbMove(int x,int y,int i)
-	{
+	public void dumbMove(int x, int y, int i) {
 		DumbTargettingEnemy c = (DumbTargettingEnemy) board[y][x];
 		int newXa = c.getNewX(this, playerX, playerY, x, y);
-		int newYa = c.getNewY(this, playerX, playerY,x, y);
+		int newYa = c.getNewY(this, playerX, playerY, x, y);
 		if (newXa == x && newYa == y) {
 
 		} else {
@@ -436,15 +434,15 @@ public class GameBoard {
 			enemyX.set(i, newXa);
 		}
 	}
-	
+
 	/**
 	 * Moves the smart enemy.
+	 * 
 	 * @param x current x-position of enemy.
 	 * @param y current y-position of enemy.
 	 * @param i the index of the enemy stored in the enemy arrays.
 	 */
-	private void smartMove(int x,int y,int i)
-	{
+	private void smartMove(int x, int y, int i) {
 		SmartTargettingEnemy d = (SmartTargettingEnemy) board[y][x];
 		Path e = d.getPath(this, x, y, playerX, playerY);
 
@@ -462,8 +460,7 @@ public class GameBoard {
 			enemyX.set(i, newXe);
 		}
 	}
-	
-	
+
 	/**
 	 * Calls different method of moveing enemy.
 	 */
@@ -471,17 +468,17 @@ public class GameBoard {
 		for (int i = 0; i < enemyX.size(); i++) {
 			switch (board[enemyY.get(i)][enemyX.get(i)].getString()) {
 			case "STRAIGHT":
-				straightMove(enemyX.get(i),enemyY.get(i),i);
+				straightMove(enemyX.get(i), enemyY.get(i), i);
 				break;
 			case "WALLHUG":
-				wallhugMove(enemyX.get(i),enemyY.get(i),i);
+				wallhugMove(enemyX.get(i), enemyY.get(i), i);
 
 				break;
 			case "DUMB":
-				dumbMove(enemyX.get(i),enemyY.get(i),i);
+				dumbMove(enemyX.get(i), enemyY.get(i), i);
 				break;
 			case "SMART":
-				smartMove(enemyX.get(i),enemyY.get(i),i);
+				smartMove(enemyX.get(i), enemyY.get(i), i);
 				break;
 			}
 		}

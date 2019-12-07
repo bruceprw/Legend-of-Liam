@@ -1,7 +1,6 @@
 package application;
 
 import java.io.FileNotFoundException;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -19,11 +17,11 @@ import javafx.stage.Stage;
 /**
  * The window for creating a new user.
  * 
- * @author 
+ * @author Gideon Davies.
+ * @author Andy Kuo
  *
  */
-public class NewUserScreen extends Screen
-{
+public class NewUserScreen extends Screen {
 	BorderPane root;
 
 	GridPane top;
@@ -53,8 +51,7 @@ public class NewUserScreen extends Screen
 	/**
 	 * Creates a new window and adds the elements for adding a new user.
 	 */
-	public NewUserScreen()
-	{
+	public NewUserScreen() {
 		root = new BorderPane();
 
 		top = new GridPane();
@@ -95,28 +92,24 @@ public class NewUserScreen extends Screen
 
 		// UserProfile user = new UserProfile(input,);
 
-		submit.setOnAction(event ->
-		{
-			boolean exists =
-			false;
+		submit.setOnAction(event -> {
+			boolean exists = false;
 			// TODO: CREATE USER FUNCTION GOES HERE
 			if (!passwordConfirm())
 				passwordWarning.setVisible(true);
-			else
-			{
-				try
-				{
-					exists = UserProfile.createUserProfile(username.getText(), password.getText(), 0);
-				} catch (FileNotFoundException e)
-				{
+			else {
+				try {
+					exists = UserProfile.createUserProfile
+						(username.getText(), password.getText(), 0);
+				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				if (exists)
 					error.setVisible(true);
-				else
-				{
-					user = new UserProfile(username.getText(), password.getText(), 0);
+				else {
+					user = new UserProfile(username.getText(), 
+						password.getText(), 0);
 					switchScreen(new LevelScreen(user));
 					Stage popup = (Stage) this.scene.getWindow();
 					popup.close();// Closes the popup
@@ -126,8 +119,7 @@ public class NewUserScreen extends Screen
 
 		});
 
-		cancel.setOnAction(event ->
-		{
+		cancel.setOnAction(event -> {
 
 			// Closes the popup
 			Stage popup = (Stage) this.scene.getWindow();
@@ -152,10 +144,10 @@ public class NewUserScreen extends Screen
 
 	/**
 	 * Confirms the password is correct.
+	 * 
 	 * @return True if its correct else false.
 	 */
-	public boolean passwordConfirm()
-	{
+	public boolean passwordConfirm() {
 		return this.checkPassword.getText().equals(password.getText());
 	}
 }

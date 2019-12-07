@@ -2,7 +2,6 @@ package application;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import application.LevelTime;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +20,7 @@ import javafx.scene.layout.VBox;
  * 
  * GUI for the leaderboard screen.
  * 
- * @author LV-ThinkPD
+ * @author Gideon Davies
  *
  */
 public class LeaderboardsScreen extends Screen {
@@ -47,8 +46,8 @@ public class LeaderboardsScreen extends Screen {
 	 * methods generate the screen.
 	 * 
 	 * @param level The leaderboards is split into levels and thus for correct level
-	 *              times to be displayed the required level must be known and it passed
-	 *              as a parameter.
+	 *              times to be displayed the required level must be known and it
+	 *              passed as a parameter.
 	 */
 	public LeaderboardsScreen(String level, UserProfile user) {
 		screenInit(level);
@@ -59,8 +58,8 @@ public class LeaderboardsScreen extends Screen {
 	 * Used to draw the leaderboard to the screen. When the button is pressed the
 	 * next level is shown.
 	 * 
-	 * @param level The level for which the corresponding
-	 * leaderboard file to be displayed
+	 * @param level The level for which the corresponding leaderboard file to be
+	 *              displayed
 	 */
 	private void screenInit(String level) {
 		System.out.println(level);
@@ -150,8 +149,8 @@ public class LeaderboardsScreen extends Screen {
 	}
 
 	/**
-	 * Used to loop through the list leaderboard data elements and tranpose them to the
-	 * leaderboard table list.
+	 * Used to loop through the list leaderboard data elements and tranpose them to
+	 * the leaderboard table list.
 	 */
 	private void addItems() {
 		// TODO: Load list of users function.

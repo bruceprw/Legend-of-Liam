@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * The empty cell just for complete an array.
  * 
- * @author user
+ * @author Andy Kuo
  * @version 1.0
  *
  */
@@ -20,7 +20,7 @@ public class Empty extends Cell {
 	}
 
 	/**
-	 * Draw nothing.
+	 * Draw nothing as the tile is empty.
 	 */
 	public void draw(GraphicsContext gc, int x, int y) {
 

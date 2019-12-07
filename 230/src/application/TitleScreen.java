@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import application.DailyMessage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,7 +27,7 @@ import javafx.scene.text.TextAlignment;
 /**
  * The GUI for the title screen.
  * 
- * @author
+ * @author Gideon Davies.
  *
  */
 public class TitleScreen extends Screen {
@@ -38,7 +37,8 @@ public class TitleScreen extends Screen {
 	private VBox menuPane;
 	private Text welcome;
 	private GridPane loginPane;
-	private static Media music = new Media(new File("Sound\\BGM\\Aurora_CurrentsINTRO.mp3").toURI().toString());
+	private static Media music = new Media(
+		new File("Sound\\BGM\\Aurora_CurrentsINTRO.mp3").toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 	private UserProfile currentUser = null;
 
@@ -49,9 +49,9 @@ public class TitleScreen extends Screen {
 	public TitleScreen() {
 		root = new BorderPane();
 		try {
-			titleImage = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
+			titleImage = new Image(new FileInputStream(
+				"Images\\updateimage\\titlescreenimage.jpg"));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -94,7 +94,8 @@ public class TitleScreen extends Screen {
 		dailyMessage.setFill(Color.CHARTREUSE);
 		dailyMessage.setWrappingWidth(WINDOW_WIDTH);
 		dailyMessage.setTextAlignment(TextAlignment.CENTER);
-		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
+		BackgroundImage b = new BackgroundImage(
+			titleImage, null, null, null, null);
 		topPane.setBackground(new Background(b));
 		topPane.getChildren().addAll(title, dailyMessage);
 	}
@@ -103,7 +104,8 @@ public class TitleScreen extends Screen {
 	 * Construct the elements of the {@link #loginPane}.
 	 */
 	private void buildLoginPane() {
-		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
+		BackgroundImage b = new BackgroundImage(
+			titleImage, null, null, null, null);
 		loginPane = new GridPane();
 		loginPane.setHgap(10);
 		loginPane.setVgap(5);
@@ -173,7 +175,8 @@ public class TitleScreen extends Screen {
 	 * Constructs the elements to add to {@link #menuPane}.
 	 */
 	private void buildMenuPane() {
-		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
+		BackgroundImage b = new BackgroundImage(
+			titleImage, null, null, null, null);
 		menuPane = new VBox();
 		menuPane.setId("minWidthButtons");
 		menuPane.setBackground(new Background(b));
@@ -216,7 +219,8 @@ public class TitleScreen extends Screen {
 			root.setCenter(loginPane);
 		});
 
-		menuPane.getChildren().addAll(welcome, loadGame, selectLevel, howToPlay, leaderboards, options, logout);
+		menuPane.getChildren().addAll(welcome, loadGame, 
+			selectLevel, howToPlay, leaderboards, options, logout);
 	}
 
 	/**

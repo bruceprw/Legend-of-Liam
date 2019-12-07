@@ -7,7 +7,8 @@ import javafx.scene.Scene;
 /**
  * Main class, first class ran by Java.
  * 
- * @author
+ * @author Gideon Davies.
+ * @version 1.0
  *
  */
 public class Main extends Application {

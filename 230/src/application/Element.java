@@ -5,12 +5,11 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * The super-class of all other elements.
  * 
- * @author user
+ * @author Andy Kuo
  * @version 1.0
  *
  */
 public abstract class Element {
-
 
 	/**
 	 * Draw the image according to the x,y position.
@@ -34,11 +33,10 @@ public abstract class Element {
 
 	}
 
-	public String getString()
-	{
+	public String getString() {
 		return null;
 	}
-	
+
 	/**
 	 * Plays sound from stored sound file.
 	 */
