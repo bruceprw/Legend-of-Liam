@@ -7,7 +7,7 @@ import application.GameBoard;
 import cell.Ground;
 
 /**
- * Straight line enemy moves in a straight line
+ * Straight line enemy moves in a straight line.
  * 
  * @author Miles Singleton, Andy Kuo
  */
@@ -17,12 +17,12 @@ public class StraightLineEnemy extends Enemy {
 	private final String STARIGHT = "STRAIGHT";
 
 	/**
-	 * Constructor for straight line enemy
+	 * Constructor for straight line enemy.
 	 * 
-	 * @param currentX     The X position of enemy on game board
-	 * @param currentY     The Y position of enemy on game board
-	 * @param movDirection the move direction of the enemy
-	 * @throws FileNotFoundException Only thrown if image can't be loaded
+	 * @param currentX     The X position of enemy on game board.
+	 * @param currentY     The Y position of enemy on game board.
+	 * @param movDirection The move direction of the enemy.
+	 * @throws FileNotFoundException Only thrown if image can't be loaded.
 	 */
 	public StraightLineEnemy(int currentX, int currentY, String movDirection) throws FileNotFoundException {
 		this.currentPositionX = currentX;
@@ -35,11 +35,11 @@ public class StraightLineEnemy extends Enemy {
 
 	/**
 	 * Constructor for straight line enemy, used if move direction has not be
-	 * defined
+	 * defined.
 	 * 
-	 * @param currentX The X position of enemy on game board
-	 * @param currentY The Y position of enemy on game board
-	 * @throws FileNotFoundException Only thrown if image can't be loaded
+	 * @param currentX The X position of enemy on game board.
+	 * @param currentY The Y position of enemy on game board.
+	 * @throws FileNotFoundException Only thrown if image can't be loaded.
 	 */
 	public StraightLineEnemy(int currentX, int currentY) throws FileNotFoundException {
 		this.currentPositionX = currentX;
@@ -51,12 +51,12 @@ public class StraightLineEnemy extends Enemy {
 
 	
 	/**
-	 * Works out the new X coordinate
+	 * Works out the new X coordinate.
 	 * 
-	 * @param gb the game board currently in play
-	 * @param x  the X position of the enemy
-	 * @param y  the Y position of the enemy
-	 * @return the new X position
+	 * @param gb The game board currently in play.
+	 * @param x  The X position of the enemy.
+	 * @param y  The Y position of the enemy.
+	 * @return The new X position.
 	 */
 	public int getX(GameBoard gb, int x, int y) {
 
@@ -96,12 +96,12 @@ public class StraightLineEnemy extends Enemy {
 
 	
 	/**
-	 * Works out the new Y coordinate
+	 * Works out the new Y coordinate.
 	 * 
-	 * @param gb the game board currently in play
-	 * @param x  the X position of the enemy
-	 * @param y  the Y position of the enemy
-	 * @return the new Y position
+	 * @param gb The game board currently in play.
+	 * @param x  The X position of the enemy.
+	 * @param y  The Y position of the enemy.
+	 * @return The new Y position.
 	 */
 	public int getY(GameBoard gb, int x, int y) {
 
@@ -144,10 +144,10 @@ public class StraightLineEnemy extends Enemy {
 	}
 
 	/**
-	 * Checks if the next horizontal move is possible
+	 * Checks if the next horizontal move is possible.
 	 * 
-	 * @param gb current game board in play
-	 * @return true if its valid else false
+	 * @param gb Current game board in play.
+	 * @return True if its valid else false.
 	 */
 	public boolean horizontalNoMove(GameBoard gb) {
 		Element[][] board = gb.getBoard();
@@ -160,10 +160,10 @@ public class StraightLineEnemy extends Enemy {
 	}
 
 	/**
-	 * Checks if the next horizontal move is valid
+	 * Checks if the next horizontal move is valid.
 	 * 
-	 * @param gb current game board in play
-	 * @return true if its valid else false
+	 * @param gb Current game board in play.
+	 * @return True if its valid else false.
 	 */
 	public boolean verticalNoMove(GameBoard gb) {
 		Element[][] board = gb.getBoard();

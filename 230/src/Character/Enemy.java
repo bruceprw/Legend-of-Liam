@@ -63,9 +63,9 @@ public abstract class Enemy extends Element {
 	/**
 	 * Draws the enemy's sprite.
 	 * 
-	 * @param gc The graphics context's canvas buffer, used to draw to
-	 * @param X  The X coordinate of where it needs to be drawn to
-	 * @param Y  The Y coordinate of where it needs to be drawn to
+	 * @param gc The graphics context's canvas buffer, used to draw to.
+	 * @param X  The X coordinate of where it needs to be drawn to.
+	 * @param Y  The Y coordinate of where it needs to be drawn to.
 	 */
 	public void draw(GraphicsContext gc, int X, int Y) {
 		gc.drawImage(image, X, Y, HUNDRED, HUNDRED);
@@ -80,7 +80,7 @@ public abstract class Enemy extends Element {
 	}
 	
 	/**
-	 * gets the current move direction.
+	 * Gets the current move direction.
 	 * @return current move direction.
 	 */
 	public String getMovDirection() {
@@ -113,10 +113,10 @@ public abstract class Enemy extends Element {
 	/**
 	 * Checks if next move is possible.
 	 * 
-	 * @param gb the game board in play
-	 * @param x  the X coordinate of new position
-	 * @param y  the Y coordinate of new position
-	 * @return true if next move is valid else false
+	 * @param gb The game board in play.
+	 * @param x  The X coordinate of new position.
+	 * @param y  The Y coordinate of new position.
+	 * @return True if next move is valid else false.
 	 */
 	public static boolean checkMove(GameBoard gb, int x, int y) {
 		Element[][] board = gb.getBoard();
@@ -133,8 +133,9 @@ public abstract class Enemy extends Element {
 	/**
 	 * Sets the image for the enemy's sprite.
 	 * 
-	 * @param path The path to the image file, stored in sub class
-	 * @throws FileNotFoundException
+	 * @param path The path to the image file, stored in sub class.
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
 	protected void setImage(String path) throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));

@@ -10,7 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 /**
- * Class is used to create a player on the screen
+ * Class is used to create a player on the screen.
  * 
  * @author Bruce Williams (972648)
  * @version 1.2
@@ -38,7 +38,7 @@ public class Player extends Element {
 	}
 
 	/**
-	 * Sets the players name
+	 * Sets the players name.
 	 * 
 	 * @param name
 	 *            name of player.
@@ -48,16 +48,16 @@ public class Player extends Element {
 	}
 
 	/**
-	 * Gets the players name
+	 * Gets the players name.
 	 * 
 	 * @return name name of player.
 	 */
 	public String getName() {
 		return name;
 	}
-
+//TODO start variable name no idea what it does
 	/**
-	 * Returns player string
+	 * Returns player string.
 	 * 
 	 * @return START
 	 */
@@ -68,6 +68,7 @@ public class Player extends Element {
 	/*
 	 * Guide to the items code 0=Token, 1=RedKey, 2=GreenKey, 3=BlueKey,
 	 * 4=YellowKey, 5=Fireboot, 6=Flipper.
+	 * See item.java.
 	 */
 
 	/**
@@ -93,7 +94,7 @@ public class Player extends Element {
 	}
 
 	/**
-	 * Gets the number of tokens the player has
+	 * Gets the number of tokens the player has.
 	 * 
 	 * @return number of tokens.
 	 */
@@ -103,9 +104,9 @@ public class Player extends Element {
 
 	/**
 	 * Returns the inventory array, containing all items currently collected by
-	 * the player
+	 * the player.
 	 * 
-	 * @return inventory int array, each item is represented by its item code
+	 * @return inventory int array, each item is represented by its item code.
 	 */
 	public int[] getInventory() {
 		return inventory;
@@ -115,7 +116,7 @@ public class Player extends Element {
 	 * updates position of player.
 	 * 
 	 * @param pos
-	 *            position of player
+	 *            position of player.
 	 */
 	public void setPos(int[][] pos) {
 		this.pos = pos;
@@ -125,16 +126,17 @@ public class Player extends Element {
 	/**
 	 * Gets the position of the player.
 	 * 
-	 * @return pos position of player on board
+	 * @return pos position of player on board.
 	 */
 	public int[][] getPos() {
 		return pos;
 	}
 
 	/**
-	 * Sets the player's sprite
+	 * Sets the player's sprite.
 	 * 
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
 	public void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));
@@ -144,13 +146,13 @@ public class Player extends Element {
 	 * Draws the player sprite to screen
 	 * 
 	 * @param gc
-	 *            the graphics buffer of the canvas to be drawn to
+	 *            the graphics buffer of the canvas to be drawn to.
 	 * @param x
-	 *            width of image
+	 *            width of image.
 	 * @param y
-	 *            height of image
+	 *            height of image.
 	 * @param r
-	 *            the rotation of the image
+	 *            the rotation of the image.
 	 */
 	public void drawPlayer(GraphicsContext gc, int x, int y, int r) {
 		gc.save();
@@ -163,10 +165,10 @@ public class Player extends Element {
 
 	/**
 	 * checks if a specific item is in the inventory of the player. Item is
-	 * specified by an int
+	 * specified by an int.
 	 * 
 	 * @param i
-	 *            itemID
+	 *            itemID.
 	 * @return TRUE if inventory contains that specified item, else FALSE.
 	 */
 	public boolean checkInventory(int i) {
@@ -174,10 +176,10 @@ public class Player extends Element {
 	}
 
 	/**
-	 * Removes a specified item from inventory
+	 * Removes a specified item from inventory.
 	 * 
 	 * @param i
-	 *            itemID
+	 *           The itemID.
 	 */
 	public void dropCol(int i) {
 		inventory[i]--;
@@ -188,7 +190,7 @@ public class Player extends Element {
 	 * 
 	 * @param cell
 	 *            cell on board.
-	 * @return True if given tile is movable, else false
+	 * @return True if given tile is movable, else false.
 	 */
 	public boolean movable(Cell cell) {
 		switch (cell.getString()) {

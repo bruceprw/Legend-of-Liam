@@ -23,12 +23,13 @@ public class WallFollowingEnemy extends Enemy
 	/**
 	 * Creates a new instance of a Wall following enemy.
 	 * 
-	 * @param newX         Enemy X position
-	 * @param newY         Enemy Y position
-	 * @param movDirection the direction that this enemy is moving
-	 * @param hand         the hand that's touching the wall for direction
+	 * @param newX         Enemy X position.
+	 * @param newY         Enemy Y position.
+	 * @param movDirection The direction that this enemy is moving
+	 * @param hand         The hand that's touching the wall for direction
 	 *                     determining.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
 	public WallFollowingEnemy(int newX, int newY, String movDirection, String hand) throws FileNotFoundException
 	{
@@ -43,10 +44,10 @@ public class WallFollowingEnemy extends Enemy
 	/**
 	 * Gets new X position for the wall following enemy.
 	 * 
-	 * @param gb the current gameboard in play
-	 * @param x  current X position of the enemy
-	 * @param y  current Y position of the enemy.
-	 * @return new X position
+	 * @param gb The current gameboard in play.
+	 * @param x  Current X position of the enemy.
+	 * @param y  Current Y position of the enemy.
+	 * @return New X position.
 	 */
 	public int getsNewX(GameBoard gb, int x, int y)
 	{
@@ -284,12 +285,12 @@ public class WallFollowingEnemy extends Enemy
 	}
 
 	/**
-	 * Gets new Y positon for the wall following enemy.
+	 * Gets new Y position for the wall following enemy.
 	 * 
-	 * @param gb the current gameboard in play
-	 * @param x  current X positon of the enemy
-	 * @param y  current Y position of the enemy.
-	 * @return new Y position
+	 * @param gb The current gameboard in play
+	 * @param x  Current X position of the enemy
+	 * @param y  Current Y position of the enemy.
+	 * @return New Y position.
 	 */
 	public int getNewY(GameBoard gb, int x, int y)
 	{
@@ -542,9 +543,9 @@ public class WallFollowingEnemy extends Enemy
 	/**
 	 * Checks whether the enemy's hand touching the wall.
 	 * 
-	 * @param gb the current gameboard in play.
-	 * @param x  current X position of the enemy.
-	 * @param y  current Y position of the enemy.
+	 * @param gb The current gameboard in play.
+	 * @param x  Current X position of the enemy.
+	 * @param y  Current Y position of the enemy.
 	 * @return True if next move will be next to a wall.
 	 */
 	public boolean checkHandWall(GameBoard gb, int x, int y)
@@ -569,9 +570,9 @@ public class WallFollowingEnemy extends Enemy
 
 	
 	/**
-	 * Get where the hand is, only used by the file outputer class
+	 * Obtain where the hand is, only used by the file outputer class.
 	 * 
-	 * @return the hand
+	 * @return The hand.
 	 */
 	public String getHand()
 	{

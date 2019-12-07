@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import application.GameBoard;
 
 /**
- * Smart targeting enemies uses BFS to find player and chase
+ * Smart targeting enemies uses BFS to find player and chase.
  * 
  * @author Miles Singleton, Andy Kuo
  * @version 1.0
@@ -18,9 +18,10 @@ public class SmartTargettingEnemy extends Enemy {
 	/**
 	 * Creates a new instance of a smart enemy.
 	 * 
-	 * @param newX The X position for the enemy
-	 * @param newY The Y position for the enemy
-	 * @throws FileNotFoundException
+	 * @param newX The X position for the enemy.
+	 * @param newY The Y position for the enemy.
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
 	public SmartTargettingEnemy(int newX, int newY) throws FileNotFoundException {
 		this.currentPositionX = newX;
@@ -31,15 +32,15 @@ public class SmartTargettingEnemy extends Enemy {
 	}
 
 	/**
-	 * Gets the path the enemy follows towards the player
+	 * Gets the path the enemy follows towards the player.
 	 * 
 	 * @param gb      The gameboard info. As the enemy can't go through other
 	 *                elements.
-	 * @param x       enemy's x-coordinate.
-	 * @param y       enemy's y-coordinate.
-	 * @param playerX player's x-coordinate.
-	 * @param playerY player's y-coordinate.
-	 * @return the next path the enemy will follow.
+	 * @param x       Enemy's x-coordinate.
+	 * @param y       Enemy's y-coordinate.
+	 * @param playerX Player's x-coordinate.
+	 * @param playerY Player's y-coordinate.
+	 * @return The next path the enemy will follow.
 	 */
 	public Path getPath(GameBoard gb, int x, int y, int playerX, int playerY) {
 		ArrayList<Path> temp = new ArrayList<Path>();
@@ -74,13 +75,13 @@ public class SmartTargettingEnemy extends Enemy {
 	/**
 	 * Set the path by the Breadth-first-search algorithms.
 	 * 
-	 * @param gb      the gameboard instance
-	 * @param x       the x-coordinate of enemy.
-	 * @param y       the y-coordinate of enemy.
-	 * @param playerX the player's x-coordinate.
-	 * @param playerY the player's y-coordinate.
-	 * @param counter the steps taken from the enemy's position
-	 * @param path    the list of path information.
+	 * @param gb      The gameboard instance.
+	 * @param x       The x-coordinate of enemy.
+	 * @param y       The y-coordinate of enemy.
+	 * @param playerX The player's x-coordinate.
+	 * @param playerY The player's y-coordinate.
+	 * @param counter The steps taken from the enemy's position.
+	 * @param path    The list of path information.
 	 */
 	public void setPaths(GameBoard gb, int x, int y, int playerX, int playerY, int counter, ArrayList<Path> path) {
 		path.add(new Path(playerX, playerY, counter));
@@ -123,11 +124,11 @@ public class SmartTargettingEnemy extends Enemy {
 	/**
 	 * Check whether the list includes the same path.
 	 * 
-	 * @param p       the list to be checked
-	 * @param x       the x-coordinate of enemy.
-	 * @param y       the y-coordinate of enemy.
-	 * @param counter the
-	 * @return true if its in the list else false
+	 * @param p       The list to be checked.
+	 * @param x       The x-coordinate of enemy.
+	 * @param y       The y-coordinate of enemy.
+	 * @param counter The number of visited cells.
+	 * @return True if its in the list else false.
 	 */
 	public boolean checkVisited(ArrayList<Path> p, int x, int y, int counter) {
 		for (int i = 0; i < p.size(); i++) {
@@ -144,8 +145,8 @@ public class SmartTargettingEnemy extends Enemy {
 	 * Checks whether two paths are adjacent to each other.
 	 * 
 	 * @param firstPath First path to compare.
-	 * @param secondPath second path to compare to.
-	 * @return true if they are adjacent, else false
+	 * @param secondPath Second path to compare to.
+	 * @return True if they are adjacent, else false.
 	 */
 	private boolean isAdjacent(Path firstPath, Path secondPath) {
 		boolean c = firstPath.getX() == secondPath.getX();
