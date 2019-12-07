@@ -15,25 +15,24 @@ import javafx.scene.image.Image;
  * @author Bruce Williams (972648)
  * @version 1.2
  */
-public class Player extends Element
-{
+public class Player extends Element {
+	private static final String START = "START";
+
 	private String name;
-	private int[] inventory =
-	{ 0, 0, 0, 0, 0, 0, 0 };
+	private int[] inventory = { 0, 0, 0, 0, 0, 0, 0 };
 	private int[][] pos;
 	private Image image;
-
-	private final String START = "START";
 
 	private String path = "Images\\Player2.png";
 	// private java.awt.Image img;
 
 	/**
-	 * @param name name of player.
-	 * @throws FileNotFoundException if file not found.
+	 * @param name
+	 *            name of player.
+	 * @throws FileNotFoundException
+	 *             if file not found.
 	 */
-	public Player(String name) throws FileNotFoundException
-	{
+	public Player(String name) throws FileNotFoundException {
 		setName(name);
 		setImage();
 	}
@@ -41,10 +40,10 @@ public class Player extends Element
 	/**
 	 * Sets the players name
 	 * 
-	 * @param name name of player.
+	 * @param name
+	 *            name of player.
 	 */
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -53,8 +52,7 @@ public class Player extends Element
 	 * 
 	 * @return name name of player.
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
@@ -63,8 +61,7 @@ public class Player extends Element
 	 * 
 	 * @return START
 	 */
-	public String getString()
-	{
+	public String getString() {
 		return START;
 	}
 
@@ -76,21 +73,22 @@ public class Player extends Element
 	/**
 	 * Adds a item to inventory, position corresponds to itemID:
 	 * 
-	 * @param position position of player.
+	 * @param position
+	 *            position of player.
 	 */
-	public void acquireInventory(int position)
-	{
+	public void acquireInventory(int position) {
 		inventory[position]++;
 	}
 
 	/**
 	 * updates number of specified item to given number of items.
 	 * 
-	 * @param position itemID.
-	 * @param number   number of items.
+	 * @param position
+	 *            itemID.
+	 * @param number
+	 *            number of items.
 	 */
-	public void setInventory(int position, int number)
-	{
+	public void setInventory(int position, int number) {
 		inventory[position] += number;
 	}
 
@@ -99,29 +97,27 @@ public class Player extends Element
 	 * 
 	 * @return number of tokens.
 	 */
-	public int getTokenNum()
-	{
+	public int getTokenNum() {
 		return inventory[0];
 	}
 
 	/**
-	 * Returns the inventory array, containing all items currently collected by the
-	 * player
+	 * Returns the inventory array, containing all items currently collected by
+	 * the player
 	 * 
 	 * @return inventory int array, each item is represented by its item code
 	 */
-	public int[] getInventory()
-	{
+	public int[] getInventory() {
 		return inventory;
 	}
 
 	/**
 	 * updates position of player.
 	 * 
-	 * @param pos position of player
+	 * @param pos
+	 *            position of player
 	 */
-	public void setPos(int[][] pos)
-	{
+	public void setPos(int[][] pos) {
 		this.pos = pos;
 
 	}
@@ -131,8 +127,7 @@ public class Player extends Element
 	 * 
 	 * @return pos position of player on board
 	 */
-	public int[][] getPos()
-	{
+	public int[][] getPos() {
 		return pos;
 	}
 
@@ -141,23 +136,25 @@ public class Player extends Element
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	public void setImage() throws FileNotFoundException
-	{
+	public void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));
 	}
 
 	/**
 	 * Draws the player sprite to screen
 	 * 
-	 * @param gc the graphics buffer of the canvas to be drawn to
-	 * @param x  width of image
-	 * @param y  height of image
-	 * @param r  the rotation of the image
+	 * @param gc
+	 *            the graphics buffer of the canvas to be drawn to
+	 * @param x
+	 *            width of image
+	 * @param y
+	 *            height of image
+	 * @param r
+	 *            the rotation of the image
 	 */
-	public void drawPlayer(GraphicsContext gc, int x, int y, int r)
-	{
+	public void drawPlayer(GraphicsContext gc, int x, int y, int r) {
 		gc.save();
-		gc.translate(x+50, y+50);
+		gc.translate(x + 50, y + 50);
 		gc.rotate(r);
 		// gc.drawImage(image, -(1), -(1));
 		gc.drawImage(image, -(100 / 2), -62);
@@ -168,173 +165,135 @@ public class Player extends Element
 	 * checks if a specific item is in the inventory of the player. Item is
 	 * specified by an int
 	 * 
-	 * @param i itemID
+	 * @param i
+	 *            itemID
 	 * @return TRUE if inventory contains that specified item, else FALSE.
 	 */
-	public boolean checkInventory(int i)
-	{
+	public boolean checkInventory(int i) {
 		return inventory[i] > 0;
 	}
 
 	/**
 	 * Removes a specified item from inventory
 	 * 
-	 * @param i itemID
+	 * @param i
+	 *            itemID
 	 */
-	public void dropCol(int i)
-	{
+	public void dropCol(int i) {
 		inventory[i]--;
 	}
 
 	/**
 	 * checks if player can move onto specified cell and responds appropriately.
 	 * 
-	 * @param cell cell on board.
+	 * @param cell
+	 *            cell on board.
 	 * @return True if given tile is movable, else false
 	 */
-	public boolean movable(Cell cell)
-	{
-		switch (cell.getString())
-		{
+	public boolean movable(Cell cell) {
+		switch (cell.getString()) {
 		case "GREENDOOR":
-			if(((ColouredDoor) cell).getOpened())
-			{
-				return true;
-			}
-			else
-			{
-				if(checkInventory(2))
-				{
-					dropCol(2);
-					((ColouredDoor) cell).playOpenSound();
-					((ColouredDoor) cell).openDoor();
-					return true;
-				}
-				else
-				{
-					((ColouredDoor) cell).playKnockSound();
-					return false;
-				}
-			}
-
 		case "REDDOOR":
-			if(((ColouredDoor) cell).getOpened())
-			{
-				return true;
-			}
-			else
-			{
-				if(checkInventory(1))
-				{
-					dropCol(1);
-					((ColouredDoor) cell).playOpenSound();
-					((ColouredDoor) cell).openDoor();
-					return true;
-				}
-				else
-				{
-					((ColouredDoor) cell).playKnockSound();
-					return false;
-				}
-			}
-
 		case "YELLOWDOOR":
-			if(((ColouredDoor) cell).getOpened())
-			{
-				return true;
-			}
-			else
-			{
-				if(checkInventory(4))
-				{
-					dropCol(4);
-					((ColouredDoor) cell).playOpenSound();
-					((ColouredDoor) cell).openDoor();
-					return true;
-				}
-				else
-				{
-					((ColouredDoor) cell).playKnockSound();
-					return false;
-				}
-			}
-
 		case "BLUEDOOR":
-			if(((ColouredDoor) cell).getOpened())
-			{
-				return true;
-			}
-			else
-			{
-				if(checkInventory(3))
-				{
-					dropCol(3);
-					((ColouredDoor) cell).playOpenSound();
-					((ColouredDoor) cell).openDoor();
-					return true;
-				}
-				else
-				{
-					((ColouredDoor) cell).playKnockSound();
-					return false;
-				}
-			}
+			return movableColouredDoor((ColouredDoor) cell);
 
 		case "W":
-			if(checkInventory(6))
-			{
+			if (checkInventory(6)) {
 				cell.playSound();
 				return true;
-			}
-			else
+			} else
 				return false;
+			
 		case "#":
 			cell.playSound();
 			return false;
+			
 		case "D":
-			if(((TokenDoor) cell).getOpened())
-			{
-				return true;
-			}
-			else
-			{
-				if(getTokenNum() >= (((TokenDoor) cell).getTokenNum()))
-				{
-					for (int i = 0; i < (((TokenDoor) cell).getTokenNum()); i++)
-					{
-						dropCol(0);
-					}
-					((TokenDoor) cell).playOpenSound();
-					((TokenDoor) cell).openDoor();
-					return true;
-				}
-				else
-				{
-					((TokenDoor) cell).playKnockSound();
-					return false;
-				}
-			}
+			return movableTokenDoor((TokenDoor) cell);
 
-		case "@":
-			cell.playSound();
-			return true;
 		case "L":
-			if(checkInventory(5))
-			{
+			if (checkInventory(5)) {
 				cell.playSound();
 				return true;
-			}
-			else
+			} else
 				return false;
+			
+		case "@":
 		case " ":
-			cell.playSound();
-			return true;
 		case "G":
 			cell.playSound();
 			return true;
+			
 		default:
 			return false;
 		}
 	}
 
+	/**
+	 * Checks whether the coloured door can be walked onto. Potentially
+	 * opens the ColouredDoor if the right key is in the inventory.
+	 * 
+	 * @param cell The ColouredDoor to be checked.
+	 * @return True if the cell can be walked on. False, otherwise.
+	 */
+	private boolean movableColouredDoor(ColouredDoor cell) {
+		int inventoryNum;
+
+		switch (cell.getString()) {
+		case "REDDOOR":
+			inventoryNum = 1;
+			break;
+		case "GREENDOOR":
+			inventoryNum = 2;
+			break;
+		case "BLUEDOOR":
+			inventoryNum = 3;
+			break;
+		case "YELLOWDOOR":
+			inventoryNum = 4;
+			break;
+		default:
+			throw new IllegalArgumentException("Method called on wrong cell.");
+		}
+
+		if (cell.getOpened()) {
+			return true;
+		} else {
+			if (checkInventory(inventoryNum)) {
+				dropCol(inventoryNum);
+				cell.playOpenSound();
+				cell.openDoor();
+				return true;
+			} else {
+				cell.playKnockSound();
+				return false;
+			}
+		}
+	}
+	
+	/**
+	 * Checks whether the given token door can be walked onto. Potentially
+	 * opens the token door if there are enough tokens in the inventory. 
+	 * 
+	 * @param cell The TokenDoor to be checked.
+	 * @return True if the cell can be walked on. False otherwise.
+	 */
+	private boolean movableTokenDoor(TokenDoor cell) {
+		if (cell.getOpened()) {
+			return true;
+		} else {
+			if (getTokenNum() >= cell.getTokenNum()) {
+				for (int i = 0; i < (((TokenDoor) cell).getTokenNum()); i++) {
+					dropCol(0);
+				}
+				cell.playOpenSound();
+				cell.openDoor();
+				return true;
+			} else {
+				cell.playKnockSound();
+				return false;
+			}
+		}
+	}
 }
