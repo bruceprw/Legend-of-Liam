@@ -24,7 +24,6 @@ public class LevelTime {
 	 */
 	public LevelTime(String u, long t) {
 		username = u;
-		System.out.println(t);
 		time = t;
 	}
 
