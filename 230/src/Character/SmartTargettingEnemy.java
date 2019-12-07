@@ -12,8 +12,8 @@ import application.GameBoard;
  */
 public class SmartTargettingEnemy extends Enemy {
 
-	private String path = "Images\\smart.png";
 	private final String SMART = "SMART";
+	private String path = "Images\\smart.png";
 
 	/**
 	 * Creates a new instance of a smart enemy.
@@ -69,25 +69,6 @@ public class SmartTargettingEnemy extends Enemy {
 			}
 			return ad.get(0);
 		}
-	}
-
-	/**
-	 * Checks whether two paths are adjacent to each other.
-	 * 
-	 * @param firstPath First path to compare.
-	 * @param secondPath second path to compare to.
-	 * @return true if they are adjacent, else false
-	 */
-	private boolean isAdjacent(Path firstPath, Path secondPath) {
-		boolean c = firstPath.getX() == secondPath.getX();
-		boolean d = firstPath.getY() == secondPath.getY();
-		boolean e = (firstPath.getX() - 1 == secondPath.getX()) && d;
-		boolean f = (firstPath.getX() + 1 == secondPath.getX()) && d;
-		boolean g = e || f;
-		boolean h = (firstPath.getY() - 1 == secondPath.getY()) && c;
-		boolean i = (firstPath.getY() + 1 == secondPath.getY()) && c;
-		boolean j = h || i;
-		return g || j;
 	}
 
 	/**
@@ -159,5 +140,22 @@ public class SmartTargettingEnemy extends Enemy {
 		return false;
 	}
 	
-
+	/**
+	 * Checks whether two paths are adjacent to each other.
+	 * 
+	 * @param firstPath First path to compare.
+	 * @param secondPath second path to compare to.
+	 * @return true if they are adjacent, else false
+	 */
+	private boolean isAdjacent(Path firstPath, Path secondPath) {
+		boolean c = firstPath.getX() == secondPath.getX();
+		boolean d = firstPath.getY() == secondPath.getY();
+		boolean e = (firstPath.getX() - 1 == secondPath.getX()) && d;
+		boolean f = (firstPath.getX() + 1 == secondPath.getX()) && d;
+		boolean g = e || f;
+		boolean h = (firstPath.getY() - 1 == secondPath.getY()) && c;
+		boolean i = (firstPath.getY() + 1 == secondPath.getY()) && c;
+		boolean j = h || i;
+		return g || j;
+	}
 }
