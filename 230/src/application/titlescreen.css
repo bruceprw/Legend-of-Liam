@@ -2,3 +2,13 @@
 #minWidthButtons > .button {
 	-fx-min-width: 95;
 }
+
+#loginPane {
+	-fx-hgap: 10px;
+	-fx-vgap: 5px;
+	-fx-alignment: center;
+}
+
+.label {
+	-fx-text-fill: "#7FFF00";
+}
