@@ -122,7 +122,7 @@ public class HowToPlayScreen extends Screen {
 	 * method could cause an error whereby the file cannot be located.
 	 */
 	private void readFile() throws FileNotFoundException {
-		File file = new File("Images\\How-To images\\text for the how to sections.txt");
+		File file = new File("Images\\How-To images\\how-to-text.txt");
 		Scanner in = new Scanner(file);
 		in.useDelimiter("#");
 		
@@ -130,7 +130,6 @@ public class HowToPlayScreen extends Screen {
 			in.next();
 		
 			if (in.hasNext()) {
-				//texts.add(in.next());
 				texts.add(readPage(new Scanner(in.next())));
 			}
 			

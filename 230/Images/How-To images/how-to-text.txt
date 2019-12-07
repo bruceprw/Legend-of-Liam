@@ -1,0 +1,81 @@
+NOTE: Only text between hash-tags are read. Use // to mark newLines you don't want to be read.
+
+--General description 
+#You are stuck in Liam's maze and you can't leave until you reach the goal. //
+Sadly for you his poor students have been forced to create cruel and determined //
+enemies to chase you down. If they catch you, you'll face the cruelest punishment of //
+all: the level restarts and you have to start that level from the beginning. 
+
+Can you escape Liam's cruel maze and escape his deadly enemies?# 
+
+--User Profile
+#Each user has a profile to store their level times, used for the leaderboards, and to //
+save and load the game. You can create a new profile at the title screen, or edit your //
+current profile through the options menu.#
+
+--Movement  
+#The arrows keys move the player in their corresponding direction:
+The up key moves the player up,
+The down key moves the player down,
+The left key moves the player left,
+The right key moves the player right.
+
+The space is used to confirm which door to go into on the level select, //
+as well as to quit the level when in the game.#
+
+--Cell types
+#Wall: The player and enemies cannot stand on or pass through a wall.
+
+Ground: These are spaces where the player and enemies can stand.
+
+Goal: This is the space you need to get to in order to win the level.
+
+Water: You need to get your hands on some flippers to be able to traverse //
+this tile. Enemies cannot swim at all, however.#
+
+#Lava: You need a pair of fire boots to walk on these tiles, but the enemies //
+cannot stand on lava.
+
+Doors: There are different coloured doors which require a key of the same colour //
+to get through.
+
+Token Doors: These requires a certain amount of tokens to be able to pass through. 
+
+Teleporter: If you lucky enough to find one, walking on the tile will teleport you // 
+to somewhere else on the map. Who knows where?#
+
+--Collectable item
+#Tokens: Collecting a certain amount of these tokens allow you to pass through //
+a token door.
+
+Flippers: These allow you to swim across water cells. 
+
+Fire boots: These fiery boots allow you to coolly traverse across lava tiles. 
+
+Key: A key allows you to open the door of its corresponding colour.# 
+
+--enemies
+#-Straight Line Enemies: Moves in a straight line and will only change direction //
+when they meet with a tile they can't walk on.
+
+Wall Following Enemies: These enemies will only walk next to a wall, as well as some //
+cells such as teleporters, water etc.#
+
+#Dumb Following Enemies: They will follow your every move to pursue you. You move up, //
+he moves up. You move left, he moves left. Even if he can't reach you he will still //
+follow you, even if he ends up walking into a wall.
+
+Smart Following Enemies: These cruel fiends will find the fastest path to you and //
+follow you to the ends of the earth. Or if it can't reach you then their poor //
+brain goes hay wire and he just stumbles in a random direction.#
+
+--save & load
+#You can save and load the game. This will save the current state of the game, //
+including your position, the enemies' positions, all the items you have and haven't //
+collected and all locked and unlocked doors.
+
+You progress can then be resumed by clicking 'Load Game' from the main menu.#
+
+--Leader board
+#The three quickest players will be displayed on the leaderboard. Can you get //
+the quickest times in each level?#
