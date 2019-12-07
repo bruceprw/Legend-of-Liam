@@ -64,7 +64,6 @@ public class TitleScreen extends Screen {
 		buildLoginPane();
 
 		buildMenuPane();
-		mediaPlayer = new MediaPlayer(music);
 		mediaPlayer.setAutoPlay(true);
 		mediaPlayer.setVolume(0.2);
 		mediaPlayer.play();
@@ -192,6 +191,7 @@ public class TitleScreen extends Screen {
 
 		loadGame.setOnAction(event -> {
 			switchScreen(new GameScreen(currentUser.getName(), currentUser));
+			mediaPlayer.stop();
 		});
 
 		selectLevel.setOnAction(event -> {

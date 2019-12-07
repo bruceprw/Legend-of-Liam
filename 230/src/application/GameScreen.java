@@ -227,16 +227,17 @@ public class GameScreen extends Screen {
 			new FileOutputer(level, new LevelTime(user.getName(), time));
 
 			TitleScreen s = null;
-			// constructor.
 			s = new TitleScreen();
 			switchScreen(s);
 			s.switchToMenu(user);
+			bg.stop();
 		});
 
 		levelSelect = new Button("Back to Level Select");
 		levelSelect.setOnAction(event -> {
 			// Switch to Level Select Screen
 			switchScreen(new LevelScreen(user));
+			bg.stop();
 		});
 
 	}
