@@ -21,19 +21,20 @@ import javafx.scene.media.MediaPlayer;
  */
 public abstract class Enemy extends Element {
 
-	private final String soundPath = "Sound\\creaking_door.mp3";
-	protected String movDirection = "UP";
+	protected static final String UP = "UP";
+	protected static final String LEFT = "LEFT";
+	protected static final String DOWN = "DOWN";
+	protected static final String RIGHT = "RIGHT";
 
-	final protected String UP = "UP";
-	final protected String LEFT = "LEFT";
-	final protected String DOWN = "DOWN";
-	final protected String RIGHT = "RIGHT";
-
-	protected final int ONE = 1;
-	protected final int TWO = 2;
-	protected final int ZERO = 0;
-	protected final int HUNDRED = 100;
+	protected static final int ONE = 1;
+	protected static final int TWO = 2;
+	protected static final int ZERO = 0;
+	protected static final int HUNDRED = 100;
 	
+	// is this a constant?
+	private final String soundPath = "Sound\\creaking_door.mp3";
+	
+	protected String movDirection = "UP";
 	protected String name = "Enemy";
 
 	protected int currentPositionX;
@@ -50,6 +51,11 @@ public abstract class Enemy extends Element {
 		mediaPlayer.play();
 	}
 	
+	/**
+	 * Gets the name of the Enemy.
+	 * 
+	 * @return The name of the Enemy.
+	 */
 	public String getString() {
 		return name;
 	}
@@ -63,16 +69,6 @@ public abstract class Enemy extends Element {
 	 */
 	public void draw(GraphicsContext gc, int X, int Y) {
 		gc.drawImage(image, X, Y, HUNDRED, HUNDRED);
-	}
-
-	/**
-	 * Sets the image for the enemy's sprite.
-	 * 
-	 * @param path The path to the image file, stored in sub class
-	 * @throws FileNotFoundException
-	 */
-	protected void setImage(String path) throws FileNotFoundException {
-		image = new Image(new FileInputStream(path));
 	}
 	
 	/**
@@ -91,6 +87,9 @@ public abstract class Enemy extends Element {
 		return this.movDirection;
 	}
 	
+	/**
+	 * Reverses the enemy's current move direction.
+	 */
 	public void reverseDirection() {
 		switch (this.getMovDirection()) {
 		case (UP):
@@ -129,5 +128,15 @@ public abstract class Enemy extends Element {
 		else
 			return false;
 
+	}
+	
+	/**
+	 * Sets the image for the enemy's sprite.
+	 * 
+	 * @param path The path to the image file, stored in sub class
+	 * @throws FileNotFoundException
+	 */
+	protected void setImage(String path) throws FileNotFoundException {
+		image = new Image(new FileInputStream(path));
 	}
 }
