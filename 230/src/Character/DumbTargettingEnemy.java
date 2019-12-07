@@ -12,8 +12,8 @@ import application.GameBoard;
  */
 public class DumbTargettingEnemy extends Enemy {
 
+	private static final String DUMB = "DUMB";
 	private String path = "Images\\idiot.png";
-	private final String DUMB = "DUMB";
 
 	/**
 	 * Create a new instance of dumb enemy.
