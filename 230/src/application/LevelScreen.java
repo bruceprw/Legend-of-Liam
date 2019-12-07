@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import cell.LevelDoor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -21,7 +20,7 @@ import javafx.scene.paint.Color;
 /**
  * Class used to create and display the level screen.
  * 
- * @author
+ * @author Andy Kuo
  *
  */
 public class LevelScreen extends Screen {
@@ -50,7 +49,8 @@ public class LevelScreen extends Screen {
 		mediaPlayer.setAutoPlay(true);
 		mediaPlayer.play();
 		try {
-			bg = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
+			bg = new Image(new FileInputStream
+				("Images\\updateimage\\titlescreenimage.jpg"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -75,7 +75,6 @@ public class LevelScreen extends Screen {
 			try {
 				keyPressed(event);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
@@ -85,12 +84,12 @@ public class LevelScreen extends Screen {
 	 * Processes key presses that interact with the level.
 	 * 
 	 * @param event The key press action by the user.
-	 * @throws IOException Tells the system that this
-	 * method could cause an error such as unable to access a file.
+	 * @throws IOException Tells the system that this method could cause an error
+	 *                     such as unable to access a file.
 	 */
 	private void keyPressed(KeyEvent event) throws IOException {
 		boolean locked = false;
-		
+
 		// Check which key was pressed.
 		switch (event.getCode()) {
 		case RIGHT:
@@ -142,7 +141,7 @@ public class LevelScreen extends Screen {
 			GraphicsContext gc = game.getGraphicsContext2D();
 			gc.fillText("Locked", 5, 50);
 		}
-		
+
 		// Consume key press event so that arrow keys don't interact with
 		// Buttons.
 		event.consume();
@@ -159,7 +158,6 @@ public class LevelScreen extends Screen {
 		try {
 			level.drawGame(gc);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -21,6 +21,14 @@ public class FileOutputer {
 	private Element[][] background;
 	private Element[][] board;
 
+	private final int TOKEN_POSTION = 0;
+	private final int RKEY_POSTION = 1;
+	private final int GKEY_POSTION = 2;
+	private final int BKEY_POSTION = 3;
+	private final int YKEY_POSTION = 4;
+	private final int BOOT_POSTION = 5;
+	private final int FLIPPER_POSTION = 6;
+
 	/**
 	 * Outputs the file with the game board.
 	 * 
@@ -61,13 +69,13 @@ public class FileOutputer {
 	public void setRemain(GameBoard lvl, Element[][] board) {
 		int[] inventory = ((Player) board[lvl.getPlayerY()][lvl.getPlayerX()]).getInventory();
 		temp += "0,0,INVENTORY,";
-		temp += "TOKEN," + inventory[0] + ",";
-		temp += "RKEY," + inventory[1] + ",";
-		temp += "GKEY," + inventory[2] + ",";
-		temp += "BKEY," + inventory[3] + ",";
-		temp += "YKEY," + inventory[4] + ",";
-		temp += "BOOT," + inventory[5] + ",";
-		temp += "FLIPPER," + inventory[6] + "\r\n";
+		temp += "TOKEN," + inventory[TOKEN_POSTION] + ",";
+		temp += "RKEY," + inventory[RKEY_POSTION] + ",";
+		temp += "GKEY," + inventory[GKEY_POSTION] + ",";
+		temp += "BKEY," + inventory[BKEY_POSTION] + ",";
+		temp += "YKEY," + inventory[YKEY_POSTION] + ",";
+		temp += "BOOT," + inventory[BOOT_POSTION] + ",";
+		temp += "FLIPPER," + inventory[FLIPPER_POSTION] + "\r\n";
 		temp += "////";
 	}
 
@@ -102,7 +110,7 @@ public class FileOutputer {
 
 	public void getSwitch(Element[][] board, Element[][] background) {
 		for (int y = 0; y < board.length; y++) {
-			//Gets board information
+			// Gets board information
 			for (int x = 0; x < board[y].length; x++) {
 				switch (board[y][x].getString()) {
 				case "T":
@@ -130,12 +138,15 @@ public class FileOutputer {
 					temp += "" + x + "," + y + ",START" + "\r\n";
 					break;
 				case "STRAIGHT":
-					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + ((StraightLineEnemy) board[y][x]).getMovDirection()
+					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + 
+					((StraightLineEnemy) board[y][x]).getMovDirection()
 							+ "\r\n";
 					break;
 				case "WALLHUG":
-					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + ((WallFollowingEnemy) board[y][x]).getMovDirection()
-							+ "," + ((WallFollowingEnemy) board[y][x]).getHand() + "\r\n";
+					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + 
+					((WallFollowingEnemy) board[y][x]).getMovDirection()
+							+ "," + 
+							((WallFollowingEnemy) board[y][x]).getHand() + "\r\n";
 					break;
 				case "DUMB":
 					temp += "" + x + "," + y + ",ENEMY,DUMB" + "\r\n";
@@ -148,7 +159,7 @@ public class FileOutputer {
 				}
 			}
 		}
-		//gets background information
+		// gets background information
 		for (int y = 0; y < background.length; y++) {
 			for (int x = 0; x < background[y].length; x++) {
 				switch (background[y][x].getString()) {
@@ -171,11 +182,13 @@ public class FileOutputer {
 					output += " ";
 					int tempX = ((Teleporter) background[y][x]).getPairX();
 					int tempY = ((Teleporter) background[y][x]).getPairY();
-					temp += "" + x + "," + y + ",TELEPORTER," + tempX + "," + tempY + "\r\n";
+					temp += "" + x + "," + y + ",TELEPORTER," 
+					+ tempX + "," + tempY + "\r\n";
 					break;
 				case "D":
 					output += " ";
-					temp += "" + x + "," + y + ",DOOR," + ((TokenDoor) background[y][x]).getTokenNum() + "\r\n";
+					temp += "" + x + "," + y + ",DOOR," + 
+					((TokenDoor) background[y][x]).getTokenNum() + "\r\n";
 					break;
 				case "REDDOOR":
 					output += " ";

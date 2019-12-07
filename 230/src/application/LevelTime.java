@@ -4,10 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * used to work out and store the time it takes to complete a
- * given level by a user.
+ * used to work out and store the time it takes to complete a given level by a
+ * user.
  * 
- * @author
+ * @author Andy Kuo
  *
  */
 public class LevelTime {
