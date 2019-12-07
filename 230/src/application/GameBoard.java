@@ -235,7 +235,7 @@ public class GameBoard {
 					board[playerY][playerX] = new Empty();
 					playerX += 1;
 
-					// System.out.println(playerX);
+					
 				}
 
 			}
@@ -350,29 +350,6 @@ public class GameBoard {
 	}
 
 	
-	/**
-	 * 
-	 */
-	public void moveUP()
-	{
-		
-	}
-	
-	public void moveDown()
-	{
-		
-	}
-	
-	public void moveLeft()
-	{
-		
-	}
-	
-	public void moveRight()
-	{
-		
-	}
-	
 	
 	/**
 	 * Checks if the next position the enemy will move to is the player.
@@ -398,76 +375,113 @@ public class GameBoard {
 	}
 
 	/**
-	 * Moves every enemy on the game board.
+	 * Moves the straight line enemy.
+	 * @param x current x-position of enemy.
+	 * @param y current y-position of enemy.
+	 * @param i the index of the enemy stored in the enemy arrays.
+	 */
+	private void straightMove(int x, int y,int i)
+	{
+		StraightLineEnemy a = (StraightLineEnemy) board[y][x];
+		boolean hori = a.horizontalNoMove(this);
+		boolean lOR = a.getMovDirection().equals("LEFT") || a.getMovDirection().equals("RIGHT");
+		boolean verti = a.verticalNoMove(this);
+		boolean UD = a.getMovDirection().equals("UP") || a.getMovDirection().equals("DOWN");
+		if ((hori && lOR) || (verti && UD)) {
+
+		} else {
+			int newX = a.getX(this, x, y);
+			int newY = a.getY(this, x, y);
+			board[newY][newX] = board[y][x];
+			board[y][x] = new Empty();
+			enemyY.set(i, newY);
+			enemyX.set(i, newX);
+		}
+	}
+	
+	/**
+	 * Moves the wallhug enemy.
+	 * @param x current x-position of enemy.
+	 * @param y current y-position of enemy.
+	 * @param i the index of the enemy stored in the enemy arrays.
+	 */
+	public void wallhugMove(int x,int y,int i)
+	{
+		WallFollowingEnemy b = (WallFollowingEnemy) board[y][x];
+		int newX = b.getsNewX(this, x, y);
+		int newY = b.getNewY(this, x, y);
+		board[newY][newX] = board[y][x];
+		board[y][x] = new Empty();
+		enemyY.set(i, newY);
+		enemyX.set(i, newX);
+	}
+	
+	/**
+	 * Moves the dumb enemy.
+	 * @param x current x-position of enemy.
+	 * @param y current y-position of enemy.
+	 * @param i the index of the enemy stored in the enemy arrays.
+	 */
+	public void dumbMove(int x,int y,int i)
+	{
+		DumbTargettingEnemy c = (DumbTargettingEnemy) board[y][x];
+		int newXa = c.getNewX(this, playerX, playerY, x, y);
+		int newYa = c.getNewY(this, playerX, playerY,x, y);
+		if (newXa == x && newYa == y) {
+
+		} else {
+			board[newYa][newXa] = board[y][x];
+			board[y][x] = new Empty();
+			enemyY.set(i, newYa);
+			enemyX.set(i, newXa);
+		}
+	}
+	
+	/**
+	 * Moves the smart enemy.
+	 * @param x current x-position of enemy.
+	 * @param y current y-position of enemy.
+	 * @param i the index of the enemy stored in the enemy arrays.
+	 */
+	private void smartMove(int x,int y,int i)
+	{
+		SmartTargettingEnemy d = (SmartTargettingEnemy) board[y][x];
+		Path e = d.getPath(this, x, y, playerX, playerY);
+
+		int newXe = e.getX();
+		int newYe = e.getY();
+
+		// Checks whether there are path that goes to player as if there are no path the
+		// enemy won't move.
+		if (newXe == x && newYe == y) {
+
+		} else {
+			board[newYe][newXe] = board[y][x];
+			board[y][x] = new Empty();
+			enemyY.set(i, newYe);
+			enemyX.set(i, newXe);
+		}
+	}
+	
+	
+	/**
+	 * Calls different method of moveing enemy.
 	 */
 	private void moveEnemy() {
 		for (int i = 0; i < enemyX.size(); i++) {
 			switch (board[enemyY.get(i)][enemyX.get(i)].getString()) {
 			case "STRAIGHT":
-				StraightLineEnemy a = (StraightLineEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				boolean hori = a.horizontalNoMove(this);
-				boolean lOR = a.getMovDirection().equals("LEFT") || a.getMovDirection().equals("RIGHT");
-				boolean verti = a.verticalNoMove(this);
-				boolean UD = a.getMovDirection().equals("UP") || a.getMovDirection().equals("DOWN");
-				if ((hori && lOR) || (verti && UD)) {
-
-				} else {
-					int newX = a.getX(this, enemyX.get(i), enemyY.get(i));
-					int newY = a.getY(this, enemyX.get(i), enemyY.get(i));
-					board[newY][newX] = board[enemyY.get(i)][enemyX.get(i)];
-					board[enemyY.get(i)][enemyX.get(i)] = new Empty();
-					enemyY.set(i, newY);
-					enemyX.set(i, newX);
-					// System.out.print(enemyX.get(i));
-					// System.out.print(","+enemyY.get(i));
-					// System.out.println(",straight");
-				}
+				straightMove(enemyX.get(i),enemyY.get(i),i);
 				break;
 			case "WALLHUG":
-				System.out.println("success");
-				WallFollowingEnemy b = (WallFollowingEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				int newX = b.getsNewX(this, enemyX.get(i), enemyY.get(i));
-				int newY = b.getNewY(this, enemyX.get(i), enemyY.get(i));
-				// System.out.println(newY);
-				board[newY][newX] = board[enemyY.get(i)][enemyX.get(i)];
-				board[enemyY.get(i)][enemyX.get(i)] = new Empty();
-				enemyY.set(i, newY);
-				enemyX.set(i, newX);
-				// System.out.println(Enemy.checkMove(this,22,21));
+				wallhugMove(enemyX.get(i),enemyY.get(i),i);
 
 				break;
 			case "DUMB":
-				DumbTargettingEnemy c = (DumbTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				int newXa = c.getNewX(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
-				// System.out.print(newXa+",");
-				int newYa = c.getNewY(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
-				// System.out.println(newYa);
-				if (newXa == enemyX.get(i) && newYa == enemyY.get(i)) {
-
-				} else {
-					board[newYa][newXa] = board[enemyY.get(i)][enemyX.get(i)];
-					board[enemyY.get(i)][enemyX.get(i)] = new Empty();
-					enemyY.set(i, newYa);
-					enemyX.set(i, newXa);
-				}
+				dumbMove(enemyX.get(i),enemyY.get(i),i);
 				break;
 			case "SMART":
-				SmartTargettingEnemy d = (SmartTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				Path e = d.getPath(this, enemyX.get(i), enemyY.get(i), playerX, playerY);
-
-				int newXe = e.getX();
-				int newYe = e.getY();
-
-				// Checks whether there are path that goes to player as if there are no path the
-				// enemy won't move.
-				if (newXe == enemyX.get(i) && newYe == enemyY.get(i)) {
-
-				} else {
-					board[newYe][newXe] = board[enemyY.get(i)][enemyX.get(i)];
-					board[enemyY.get(i)][enemyX.get(i)] = new Empty();
-					enemyY.set(i, newYe);
-					enemyX.set(i, newXe);
-				}
+				smartMove(enemyX.get(i),enemyY.get(i),i);
 				break;
 			}
 		}

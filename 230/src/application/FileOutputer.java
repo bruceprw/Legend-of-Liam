@@ -50,9 +50,6 @@ public class FileOutputer {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
-		//String finalOutput = output + temp;
-		//System.out.println(finalOutput);
 	}
 
 	/**

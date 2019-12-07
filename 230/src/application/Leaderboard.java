@@ -32,7 +32,6 @@ public class Leaderboard
 	 */
 	public void initLeaderboard(String level) {
 		this.filePath = "Leaderboard\\leaderboard" + level + ".txt";
-		System.out.println(list);
 		readLevelTime();
 		sortList();
 	}
@@ -74,7 +73,6 @@ public class Leaderboard
 	 */
 	public void outputList(){
 		File file = new File(filePath);
-		System.out.println(list);
 		PrintWriter out =
 		null;
 		try
