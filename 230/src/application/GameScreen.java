@@ -79,8 +79,6 @@ public class GameScreen extends Screen {
 			public void handle(long now) {
 				long elapsedMillis = System.currentTimeMillis() - startTime;
 				time = elapsedMillis;
-				// System.out.println(time);
-				// System.out.println(elapsedMillis);
 				Date d = new Date(elapsedMillis);
 				timeLabel.setText(sdf.format(d));
 			}

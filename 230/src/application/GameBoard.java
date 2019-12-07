@@ -40,8 +40,9 @@ public class GameBoard {
 	private int goalX;
 	private int goalY;
 	private int rotation;
+	private File muFile = new File("Sound\\player_killed.wav");
 
-	private Media playerDie = new Media(new File("Sound\\player_killed.wav").toURI().toString());
+	private Media playerDie = new Media(muFile.toURI().toString());
 
 	private MediaPlayer mediaPlayer;
 
@@ -160,7 +161,6 @@ public class GameBoard {
 		gc.fillText(": " + temp[4], 525, 570);
 		gc.fillText(": " + temp[5], 225, 670);
 		gc.fillText(": " + temp[6], 375, 670);
-
 	}
 
 	/**
@@ -205,7 +205,6 @@ public class GameBoard {
 	 * @return 2 if the player is dead.
 	 */
 	public int move(String way) {
-		// moveEnemy();
 		switch (way) {
 		case "right":
 			mediaPlayer = ((Cell) background[playerY][playerX + 1]).getSound();
@@ -234,10 +233,7 @@ public class GameBoard {
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX += 1;
-
-					
 				}
-
 			}
 			break;
 		case "left":
@@ -248,7 +244,6 @@ public class GameBoard {
 				if (touchEnemy(playerX - 1, playerY)) {
 					return 2;
 				}
-
 				if (((Cell) background[playerY][playerX - 1]) instanceof Teleporter) {
 					rotation = 270;
 					Teleporter temp = ((Teleporter) background[playerY][playerX - 1]);
@@ -269,7 +264,6 @@ public class GameBoard {
 					board[playerY][playerX] = new Empty();
 					playerX = playerX - 1;
 				}
-
 			}
 			break;
 		case "up":
@@ -280,7 +274,6 @@ public class GameBoard {
 				if (touchEnemy(playerX, playerY - 1)) {
 					return 2;
 				}
-
 				if (((Cell) background[playerY - 1][playerX]) instanceof Teleporter) {
 					rotation = 0;
 					Teleporter temp = ((Teleporter) background[playerY - 1][playerX]);
@@ -291,7 +284,6 @@ public class GameBoard {
 					playerY = tempY;
 					playerX = tempX;
 				} else {
-
 					if (board[playerY - 1][playerX] instanceof Collectible) {
 						playBoardSound(playerX, playerY - 1);
 						board[playerY][playerX + 1].playSound();
@@ -312,7 +304,6 @@ public class GameBoard {
 				if (touchEnemy(playerX, playerY + 1)) {
 					return 2;
 				}
-
 				if (((Cell) background[playerY + 1][playerX]) instanceof Teleporter) {
 					rotation = 180;
 					Teleporter temp = ((Teleporter) background[playerY + 1][playerX]);
@@ -323,7 +314,6 @@ public class GameBoard {
 					playerY = tempY;
 					playerX = tempX;
 				} else {
-
 					if (board[playerY + 1][playerX] instanceof Collectible) {
 						playBoardSound(playerX, playerY + 1);
 						board[playerY][playerX + 1].playSound();
@@ -341,7 +331,6 @@ public class GameBoard {
 		if (playerDead() || checkPlayerDead()) {
 			mediaPlayer = new MediaPlayer(playerDie);
 			mediaPlayer.play();
-			// mediaPlayer.stop();
 			return 2;
 		}
 		if (end())
@@ -384,9 +373,13 @@ public class GameBoard {
 	{
 		StraightLineEnemy a = (StraightLineEnemy) board[y][x];
 		boolean hori = a.horizontalNoMove(this);
-		boolean lOR = a.getMovDirection().equals("LEFT") || a.getMovDirection().equals("RIGHT");
+		boolean left=a.getMovDirection().equals("LEFT");
+		boolean right=a.getMovDirection().equals("RIGHT");
+		boolean lOR = left||right;
 		boolean verti = a.verticalNoMove(this);
-		boolean UD = a.getMovDirection().equals("UP") || a.getMovDirection().equals("DOWN");
+		boolean up = a.getMovDirection().equals("UP");
+		boolean down = a.getMovDirection().equals("DOWN");
+		boolean UD = up||down;
 		if ((hori && lOR) || (verti && UD)) {
 
 		} else {
