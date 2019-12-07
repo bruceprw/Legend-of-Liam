@@ -1,5 +1,9 @@
 package application;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,6 +35,10 @@ public class OptionsScreen extends Screen{
 	HBox editButtonsPane;
 	Button submit;
 	Button editCancel;
+	TextField username = new TextField();
+	PasswordField password = new PasswordField();
+	PasswordField checkPass = new PasswordField();
+	PasswordField oldPass = new PasswordField();
 	
 	Text resetPrompt;
 	HBox resetButtonsPane;
@@ -111,11 +119,6 @@ public class OptionsScreen extends Screen{
 		Text oldPassLabel = new Text("Old Password:");
 		Text oldPassPrompt = new Text("To save changes, please enter your old password.");
 		
-		TextField username = new TextField();
-		PasswordField password = new PasswordField();
-		PasswordField checkPass = new PasswordField();
-		PasswordField oldPass = new PasswordField();
-		
 		editGrid.addRow(0, usernameLabel, username);
 		editGrid.addRow(1, passwordLabel, password);
 		editGrid.addRow(2, checkPassLabel, checkPass);
@@ -130,11 +133,18 @@ public class OptionsScreen extends Screen{
 		
 		submit = new Button("Save Changes");
 		submit.setOnAction(event -> {
-			// TODO
+			if (fieldsFilled() && uniqueUsername() && passwordsMatch() && oldPassCorrect()) {
+				UserProfile.updateUserProfile(user.getName(), username.getText(), password.getText(), user.getLevelProg());
+				user = new UserProfile(username.getText(), password.getText(), user.getLevelProg());
+				clearTextBoxes();
+				root.setCenter(optionsPane);
+				root.setBottom(null);
+			}
 		});
 		
 		editCancel = new Button("Cancel");
 		editCancel.setOnAction(event -> {
+			clearTextBoxes();
 			root.setCenter(optionsPane);
 			root.setBottom(null);
 		});
@@ -201,5 +211,40 @@ public class OptionsScreen extends Screen{
 		
 		deleteButtonsPane.getChildren().addAll(delete, deleteCancel);
 		deleteButtonsPane.setAlignment(Pos.CENTER_RIGHT);
+	}
+	
+	private boolean fieldsFilled() {
+		boolean userEmpty = username.getText().isEmpty();
+		boolean newPassEmpty = password.getText().isEmpty();
+		boolean checkPassEmpty = checkPass.getText().isEmpty();
+		boolean oldPassEmpty = oldPass.getText().isEmpty();
+		
+		return !(userEmpty || newPassEmpty || checkPassEmpty || oldPassEmpty);
+	}
+	
+	private boolean uniqueUsername() {
+		UserProfile.readList();
+		
+		boolean unique = !(UserProfile.exists(username.getText())); 
+		boolean sameName = username.getText().equals(user.getName());
+		
+		UserProfile.outputList();
+		
+		return unique || sameName;
+	}
+	
+	private boolean passwordsMatch() {
+		return password.getText().equals(checkPass.getText());
+	}
+	
+	private boolean oldPassCorrect() {
+		return oldPass.getText().equals(user.getPassword());
+	}
+	
+	private void clearTextBoxes() {
+		username.setText("");
+		password.setText("");
+		checkPass.setText("");
+		oldPass.setText("");
 	}
 }
