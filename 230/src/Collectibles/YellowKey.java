@@ -22,7 +22,8 @@ public class YellowKey extends Collectible
 	
 	/**
 	 * Set the image of the key.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such not finding given file.
 	 */
 	public YellowKey() throws FileNotFoundException
 	{
@@ -40,6 +41,7 @@ public class YellowKey extends Collectible
 	
     /**
      * Get the string for output purpose.
+     * @return The String representation of the key.
      */
 	public String getString()
 	{
@@ -48,7 +50,8 @@ public class YellowKey extends Collectible
 	
 	/**
 	 * Set the image.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
 	private void setImage() throws FileNotFoundException
 	{
