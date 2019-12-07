@@ -57,6 +57,19 @@ public abstract class Screen {
 	public Scene getScene() {
 		return scene;
 	}
+	
+	/**
+	 * Gets the optional stylesheet of this Screen.
+	 * 
+	 * @return The name of the extra stylesheet for this Screen, or null if it doesn't exist.
+	 */
+	public String getStyleSheet() {
+		if (hasStylesheet()) {
+			return stylesheet;
+		} else {
+			return null;
+		}
+	}
 
 	/**
 	 * Checks whether the screen has an additional stylesheet.
@@ -92,7 +105,7 @@ public abstract class Screen {
 
 		// Add additional stylesheet (if it exists)
 		if (hasStylesheet()) {
-			s.getStylesheets().add(getClass().getResource(stylesheet).toExternalForm());
+			s.getStylesheets().add(getClass().getResource(screen.getStyleSheet()).toExternalForm());
 		}
 
 		primaryStage.setScene(s);

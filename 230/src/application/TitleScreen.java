@@ -75,6 +75,7 @@ public class TitleScreen extends Screen {
 		menuPane.setAlignment(Pos.CENTER);
 
 		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+		stylesheet = "titlescreen.css";
 	}
 
 	/**
@@ -174,6 +175,7 @@ public class TitleScreen extends Screen {
 	private void buildMenuPane() {
 		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
 		menuPane = new VBox();
+		menuPane.setId("minWidthButtons");
 		menuPane.setBackground(new Background(b));
 		welcome = new Text("Welcome!");
 		welcome.setFill(Color.CHARTREUSE);
