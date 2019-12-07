@@ -164,6 +164,7 @@ public class OptionsScreen extends Screen{
 		reset = new Button("Yes, reset.");
 		reset.setOnAction(event -> {
 			user.setLevelProg(0);
+			UserProfile.updateUserProfile(user.getName(), user.getName(), user.getPassword(), 0);
 			root.setCenter(optionsPane);
 			root.setBottom(null);
 		});
