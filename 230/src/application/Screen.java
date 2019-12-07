@@ -104,7 +104,7 @@ public abstract class Screen {
 		s.getStylesheets().add(getClass().getResource(DEFAULT_STYLESHEET).toExternalForm());
 
 		// Add additional stylesheet (if it exists)
-		if (hasStylesheet()) {
+		if (screen.hasStylesheet()) {
 			s.getStylesheets().add(getClass().getResource(screen.getStyleSheet()).toExternalForm());
 		}
 
