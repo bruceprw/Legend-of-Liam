@@ -47,7 +47,7 @@ public abstract class Screen {
 	/**
 	 * The additional stylesheet for this screen. (Optional).
 	 */
-	protected String stylesheet;
+	protected String stylesheet = null;
 
 	/**
 	 * Gets the Scene of this Screen.
