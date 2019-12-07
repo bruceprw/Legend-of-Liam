@@ -67,7 +67,8 @@ public class FileOutputer {
 	 * @param board the board instance.
 	 */
 	public void setRemain(GameBoard lvl, Element[][] board) {
-		int[] inventory = ((Player) board[lvl.getPlayerY()][lvl.getPlayerX()]).getInventory();
+		Player player = ((Player)board[lvl.getPlayerY()][lvl.getPlayerX()]);
+		int[] inventory = player.getInventory();
 		temp += "0,0,INVENTORY,";
 		temp += "TOKEN," + inventory[TOKEN_POSTION] + ",";
 		temp += "RKEY," + inventory[RKEY_POSTION] + ",";
