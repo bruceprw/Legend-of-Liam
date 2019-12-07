@@ -68,7 +68,7 @@ public class Water extends Cell {
     
     /**
      * Get the sound player of water.
-     * @return the mediaplayer.
+     * @return The mediaplayer.
      */
     public MediaPlayer getSound()
     {

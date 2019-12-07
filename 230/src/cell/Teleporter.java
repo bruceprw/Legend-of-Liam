@@ -27,7 +27,7 @@ public class Teleporter extends Cell{
 
 	/**
 	 * Creates a teleporter instance.
-	 * @param pairX Tthe x-coordinate of the pair.
+	 * @param pairX The x-coordinate of the pair.
 	 * @param pairY The y-coordinate of the pair.
 	 * @throws FileNotFoundException Tells the system that this
 	 * method could cause an error of this type.
