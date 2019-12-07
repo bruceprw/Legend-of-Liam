@@ -50,7 +50,7 @@ public class BlueKey extends Collectible
 	 * Set the image of blue key.
 	 * @throws FileNotFoundException
 	 */
-	public void setImage() throws FileNotFoundException
+	private void setImage() throws FileNotFoundException
 	{
 		this.image = new Image (new FileInputStream(path));
 	}

@@ -67,7 +67,6 @@ public class SmartTargettingEnemy extends Enemy {
 				if (isAdjacent(fl.get(i), f))
 					ad.add(fl.get(i));
 			}
-			// System.out.println(ad.get(0));
 			return ad.get(0);
 		}
 	}
@@ -107,7 +106,6 @@ public class SmartTargettingEnemy extends Enemy {
 		if (x == playerX && y == playerY) {
 			return;
 		}
-		// System.out.println(x+","+y);
 		if (Enemy.checkMove(gb, playerX + 1, playerY) || (playerX + 1 == x && playerY == y)) {
 			if (checkVisited(path, playerX + 1, playerY, counter + 1)) {
 

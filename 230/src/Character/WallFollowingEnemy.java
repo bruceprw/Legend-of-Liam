@@ -163,10 +163,8 @@ public class WallFollowingEnemy extends Enemy
 			}
 
 		case LEFT:
-			System.out.println(checkHandWall(gb, x, y));
 			if(checkHandWall(gb, x, y))
 			{
-				System.out.println(checkHandWall(gb, x, y));
 				if(checkMove(gb, x - 1, y))
 				{
 					return x - 1;

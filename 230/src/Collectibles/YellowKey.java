@@ -50,7 +50,7 @@ public class YellowKey extends Collectible
 	 * Set the image.
 	 * @throws FileNotFoundException
 	 */
-	public void setImage() throws FileNotFoundException
+	private void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
 	}
