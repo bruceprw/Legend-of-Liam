@@ -9,6 +9,10 @@ import application.Element;
  *
  */
 public class Path extends Element {
+	Path up;
+	Path down;
+	Path left;
+	Path right;
 	private int x;
 	private int y;
 	
@@ -16,10 +20,6 @@ public class Path extends Element {
 	 * The number of steps taken from the start of the enemy.
 	 */
 	private int counter;
-	Path up;
-	Path down;
-	Path left;
-	Path right;
 
 	/**
 	 * Stores the information of the path.
@@ -27,7 +27,7 @@ public class Path extends Element {
 	 * @param y       the y-coordinate
 	 * @param counter counter of the current path from the start of the enemy.
 	 */
-	Path(int x, int y, int counter) {
+	public Path(int x, int y, int counter) {
 		this.x = x;
 		this.y = y;
 		this.counter = counter;
@@ -74,6 +74,8 @@ public class Path extends Element {
 
 	/**
 	 * Switch the information to string.
+	 * 
+	 * @return A String representation of the Path.
 	 */
 	public String toString() {
 		return "" + x + "," + y + "," + counter;
