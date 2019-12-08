@@ -55,11 +55,10 @@ public class Player extends Element {
 	public String getName() {
 		return name;
 	}
-//TODO start variable name no idea what it does
 	/**
 	 * Returns player string.
 	 * 
-	 * @return START
+	 * @return START used in level loading.
 	 */
 	public String getString() {
 		return START;
