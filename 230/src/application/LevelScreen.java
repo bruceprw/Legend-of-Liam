@@ -38,7 +38,7 @@ public class LevelScreen extends Screen {
 	/**
 	 * Creates the canvas, music and other elements for the LevelScreen.
 	 * 
-	 * @param levelNo Number of the level to be loaded.
+	 * @param user the current user playing the game.
 	 */
 	public LevelScreen(UserProfile user) {
 		this.user = user;

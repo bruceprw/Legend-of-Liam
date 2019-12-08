@@ -23,7 +23,7 @@ public class Cell extends Element {
 	/**
 	 * Get the image of the collectible.
 	 * 
-	 * @return
+	 * @return the image.
 	 */
 	public Image getImage() {
 		return image;

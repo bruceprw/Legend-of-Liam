@@ -39,7 +39,7 @@ public class HowToPlayScreen extends Screen {
 	/**
 	 * Creates the information screen and sets the default image.
 	 * 
-	 * @throws FileNotFoundException.
+	 * @throws FileNotFoundException if the file is not founded.
 	 */
 	@SuppressWarnings("static-access")
 	public HowToPlayScreen() throws FileNotFoundException {

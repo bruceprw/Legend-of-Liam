@@ -18,8 +18,8 @@ public class DumbTargettingEnemy extends Enemy {
 	/**
 	 * Create a new instance of dumb enemy.
 	 * 
-	 * @param newX The X position of the enemy.
-	 * @param newY The Y position of the enemy.
+	 * @param currentX The X position of the enemy.
+	 * @param currentY The Y position of the enemy.
 	 */
 	public DumbTargettingEnemy(int currentX, int currentY) {
 		this.currentPositionX = currentX;

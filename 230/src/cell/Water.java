@@ -38,7 +38,7 @@ public class Water extends Cell {
 	/**
 	 * Set image.
 	 * 
-	 * @throws FileNotFoundExceptionTells the system that this method could cause an
+	 * @throws FileNotFoundException Tells the system that this method could cause an
 	 *                                    error of this type.
 	 */
 	public void setImage() throws FileNotFoundException {

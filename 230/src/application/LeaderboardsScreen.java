@@ -49,6 +49,8 @@ public class LeaderboardsScreen extends Screen {
 	 * @param level The leaderboards is split into levels and thus for correct level
 	 *              times to be displayed the required level must be known and it
 	 *              passed as a parameter.
+	 *              
+	 * @param user This is the current user that is playing the game.
 	 */
 	public LeaderboardsScreen(String level, UserProfile user) {
 		screenInit(level);

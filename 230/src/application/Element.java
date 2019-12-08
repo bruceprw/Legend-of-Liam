@@ -28,6 +28,7 @@ public abstract class Element {
 	 * @param gc the graphics context of canvas.
 	 * @param x  the x coordinate.
 	 * @param y  the y coordinate.
+	 * @param r  the rotation.
 	 */
 	public void drawPlayer(GraphicsContext gc, int x, int y, int r) {
 
