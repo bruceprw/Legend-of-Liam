@@ -17,7 +17,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Generates GUI for the options screen.
+ * Generates GUI for the options screen. Builds UI element
+ * that allows the user to edit their profile details.
  * 
  * @author Gideon Davies.
  *
@@ -28,14 +29,9 @@ public class OptionsScreen extends Screen {
 	private UserProfile user;
 
 	private VBox optionsPane;
-	private Button editUserPass;
-	private Button resetProgress;
-	private Button deleteProfile;
 
 	private GridPane editGrid;
 	private HBox editButtonsPane;
-	private Button submit;
-	private Button editCancel;
 	private TextField username = new TextField();
 	private PasswordField password = new PasswordField();
 	private PasswordField checkPass = new PasswordField();
@@ -43,13 +39,9 @@ public class OptionsScreen extends Screen {
 
 	private Text resetPrompt;
 	private HBox resetButtonsPane;
-	private Button reset;
-	private Button resetCancel;
 
 	private Text deletePrompt;
 	private HBox deleteButtonsPane;
-	private Button delete;
-	private Button deleteCancel;
 
 	/**
 	 * Create an instance of the options screen for a given user, mainly calling
@@ -86,19 +78,19 @@ public class OptionsScreen extends Screen {
 		optionsPane = new VBox();
 		optionsPane.setAlignment(Pos.CENTER);
 
-		editUserPass = new Button("Edit Username/Password");
+		Button editUserPass = new Button("Edit Username/Password");
 		editUserPass.setOnAction(event -> {
 			root.setCenter(editGrid);
 			root.setBottom(editButtonsPane);
 		});
 
-		resetProgress = new Button("Reset Progress");
+		Button resetProgress = new Button("Reset Progress");
 		resetProgress.setOnAction(event -> {
 			root.setCenter(resetPrompt);
 			root.setBottom(resetButtonsPane);
 		});
 
-		deleteProfile = new Button("Delete Profile");
+		Button deleteProfile = new Button("Delete Profile");
 		deleteProfile.setOnAction(event -> {
 			root.setCenter(deletePrompt);
 			root.setBottom(deleteButtonsPane);
@@ -112,45 +104,44 @@ public class OptionsScreen extends Screen {
 	 * their password and save those changes.
 	 */
 	private void buildEdit() {
-		editGrid = new GridPane();
-
 		Text usernameLabel = new Text("Username:");
 		Text passwordLabel = new Text("Password:");
 		Text checkPassLabel = new Text("Check Password:");
 		Text oldPassLabel = new Text("Old Password:");
 		Text oldPassPrompt = new Text("To save changes, please enter your old password.");
-
+		
+		editGrid = new GridPane();
 		editGrid.addRow(0, usernameLabel, username);
 		editGrid.addRow(1, passwordLabel, password);
 		editGrid.addRow(2, checkPassLabel, checkPass);
-		// Spans two columns
 		editGrid.add(oldPassPrompt, 0, 4, 2, 1);
 		editGrid.addRow(5, oldPassLabel, oldPass);
-
 		editGrid.setVgap(10);
 		editGrid.setHgap(30);
 
-		editButtonsPane = new HBox();
-
-		submit = new Button("Save Changes");
+		Button submit = new Button("Save Changes");
 		submit.setOnAction(event -> {
 			if (fieldsFilled() && uniqueUsername() && passwordsMatch() && oldPassCorrect()) {
+				// Update UserProfile
 				UserProfile.updateUserProfile(user.getName(), username.getText(), password.getText(),
 						user.getLevelProg());
 				user = new UserProfile(username.getText(), password.getText(), user.getLevelProg());
+				
+				// Transition back to optionPane
 				clearTextBoxes();
 				root.setCenter(optionsPane);
 				root.setBottom(null);
 			}
 		});
 
-		editCancel = new Button("Cancel");
+		Button editCancel = new Button("Cancel");
 		editCancel.setOnAction(event -> {
 			clearTextBoxes();
 			root.setCenter(optionsPane);
 			root.setBottom(null);
 		});
 
+		editButtonsPane = new HBox();
 		editButtonsPane.getChildren().addAll(submit, editCancel);
 		editButtonsPane.setAlignment(Pos.CENTER_RIGHT);
 	}
@@ -163,7 +154,7 @@ public class OptionsScreen extends Screen {
 		resetPrompt = new Text("Are you sure you want to reset level progress?");
 		resetButtonsPane = new HBox();
 
-		reset = new Button("Yes, reset.");
+		Button reset = new Button("Yes, reset.");
 		reset.setOnAction(event -> {
 			user.setLevelProg(0);
 			UserProfile.updateUserProfile(user.getName(), user.getName(), user.getPassword(), 0);
@@ -171,7 +162,7 @@ public class OptionsScreen extends Screen {
 			root.setBottom(null);
 		});
 
-		resetCancel = new Button("No, cancel.");
+		Button resetCancel = new Button("No, cancel.");
 		resetCancel.setOnAction(event -> {
 			root.setCenter(optionsPane);
 			root.setBottom(null);
@@ -187,9 +178,8 @@ public class OptionsScreen extends Screen {
 	 */
 	private void buildDelete() {
 		deletePrompt = new Text("Are you sure you want to delete " + user.getName() + "?");
-		deleteButtonsPane = new HBox();
 
-		delete = new Button("Yes, delete.");
+		Button delete = new Button("Yes, delete.");
 		delete.setOnAction(event -> {
 			UserProfile.deleteUserProfile(user.getName(), user.getPassword(), user.getLevelProg());
 			root.setCenter(optionsPane);
@@ -205,12 +195,13 @@ public class OptionsScreen extends Screen {
 			popup.close();
 		});
 
-		deleteCancel = new Button("No, cancel.");
+		Button deleteCancel = new Button("No, cancel.");
 		deleteCancel.setOnAction(event -> {
 			root.setCenter(optionsPane);
 			root.setBottom(null);
 		});
 
+		deleteButtonsPane = new HBox();
 		deleteButtonsPane.getChildren().addAll(delete, deleteCancel);
 		deleteButtonsPane.setAlignment(Pos.CENTER_RIGHT);
 	}
