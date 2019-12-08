@@ -215,7 +215,6 @@ public class GameBoard {
 					return 2;
 				}
 				if (((Cell) background[playerY][playerX + 1]) instanceof Teleporter) {
-					rotation = 90;
 					Teleporter temp = ((Teleporter) background[playerY][playerX + 1]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -229,7 +228,6 @@ public class GameBoard {
 						// board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY][playerX + 1]);
 					}
-					rotation = 90;
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX += 1;
@@ -245,7 +243,7 @@ public class GameBoard {
 					return 2;
 				}
 				if (((Cell) background[playerY][playerX - 1]) instanceof Teleporter) {
-					rotation = 270;
+
 					Teleporter temp = ((Teleporter) background[playerY][playerX - 1]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -259,7 +257,6 @@ public class GameBoard {
 						acquire((Collectible) board[playerY][playerX - 1]);
 						board[playerY][playerX - 1].playSound();
 					}
-					rotation = 270;
 					board[playerY][playerX - 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX = playerX - 1;
@@ -275,7 +272,6 @@ public class GameBoard {
 					return 2;
 				}
 				if (((Cell) background[playerY - 1][playerX]) instanceof Teleporter) {
-					rotation = 0;
 					Teleporter temp = ((Teleporter) background[playerY - 1][playerX]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -289,7 +285,6 @@ public class GameBoard {
 						board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY - 1][playerX]);
 					}
-					rotation = 0;
 					board[playerY - 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY - 1;
@@ -305,7 +300,6 @@ public class GameBoard {
 					return 2;
 				}
 				if (((Cell) background[playerY + 1][playerX]) instanceof Teleporter) {
-					rotation = 180;
 					Teleporter temp = ((Teleporter) background[playerY + 1][playerX]);
 					int tempX = temp.getPairX();
 					int tempY = temp.getPairY();
@@ -319,7 +313,6 @@ public class GameBoard {
 						board[playerY][playerX + 1].playSound();
 						acquire((Collectible) board[playerY + 1][playerX]);
 					}
-					rotation = 180;
 					board[playerY + 1][playerX] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerY = playerY + 1;
