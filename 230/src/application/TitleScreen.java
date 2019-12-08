@@ -85,6 +85,17 @@ public class TitleScreen extends Screen {
 		scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 		stylesheet = STYLESHEET_FILE;
 	}
+	
+	/**
+	 * Show the {@link menuPane} on the title screen.
+	 * 
+	 * @param currentUser The user who is logged in.
+	 */
+	public void switchToMenu(UserProfile currentUser) {
+		this.currentUser = currentUser;
+		root.setCenter(menuPane);
+		welcome.setText("Welcome " + currentUser.getName() + "!");
+	}
 
 	/**
 	 * Constructs the elements for the {@link #topPane}.
@@ -252,16 +263,4 @@ public class TitleScreen extends Screen {
 
 		menuPane.getChildren().addAll(welcome, loadGame, selectLevel, howToPlay, leaderboards, options, logout);
 	}
-
-	/**
-	 * Show the {@link menuPane} on the title screen.
-	 * 
-	 * @param currentUser The user who is logged in.
-	 */
-	public void switchToMenu(UserProfile currentUser) {
-		this.currentUser = currentUser;
-		root.setCenter(menuPane);
-		welcome.setText("Welcome " + currentUser.getName() + "!");
-	}
-
 }

@@ -21,7 +21,7 @@ import javafx.scene.paint.Color;
  * Class used to create and display the level screen.
  * 
  * @author Andy Kuo
- *
+ * @author Gideon Davies
  */
 public class LevelScreen extends Screen {
 	private static final int GAME_WIDTH = 700;
