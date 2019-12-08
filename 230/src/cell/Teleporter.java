@@ -12,7 +12,9 @@ import javafx.scene.media.MediaPlayer;
 /**
  * Stores image, position of the other door and the sound of
  * passing through the teleporter. 
- * @author user
+ * 
+ * @author Lee Hin Man (690479)
+ * @version 1.1
  *
  */
 public class Teleporter extends Cell{

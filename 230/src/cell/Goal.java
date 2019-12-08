@@ -10,7 +10,9 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores the image and sound of goal.
- * @author user
+ * 
+ * @author Lee Hin Man (690479)
+ * @version 1.1
  *
  */
 public class Goal extends Cell

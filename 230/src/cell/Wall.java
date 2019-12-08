@@ -11,7 +11,9 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * The player and enemy cannot pass through the wall.
- * @author user
+ * 
+ * @author Lee Hin Man (690479)
+ * @version 1.1
  *
  */
 public class Wall extends Cell {

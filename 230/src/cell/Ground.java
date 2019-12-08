@@ -11,7 +11,9 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores the image and the sound of ground.
- * @author user
+ * 
+ * @author Lee Hin Man (690479)
+ * @version 1.1
  *
  */
 public class Ground extends Cell {

@@ -18,6 +18,7 @@ public class Cell extends Element
 
 	public Cell(boolean harmable, boolean playerAllowed, boolean enemyAllowed, String texturePath, Item itemRequiredForCell)
 	{
+		
 	}
 	
 	/**

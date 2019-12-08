@@ -15,7 +15,8 @@ import javafx.scene.text.Font;
 /**
  * The door that the player pass to get to different level.
  * 
- * @author user
+ * @author Lee Hin Man (690479)
+ * @version 1.1
  *
  */
 public class LevelDoor extends Cell {

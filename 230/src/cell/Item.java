@@ -2,9 +2,10 @@ package cell;
 
 
 /**
- * An enum to describe all collectible items that can be on a cell
- * including having no item('NONE').
- * @author 
+ * An enum shows all collectible items in cell include "NONE" option.
+ * 
+ * @author Lee Hin Man (690479)
+ * @version 1.1
  *
  */
 public enum Item {

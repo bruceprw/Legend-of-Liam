@@ -11,7 +11,9 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores information about a water.
- * @author user
+ * 
+ * @author Lee Hin Man (690479)
+ * @version 1.1
  *
  */
 public class Water extends Cell {

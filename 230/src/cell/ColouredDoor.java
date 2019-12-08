@@ -12,8 +12,8 @@ import javafx.scene.media.MediaPlayer;
 /**
  * Stores image and sound of ColouredDoor.
  * 
- * @author user
- *
+ * @author Lee Hin Man (690479)
+ * @version 1.1
  */
 public class ColouredDoor extends Cell
 {
