@@ -47,9 +47,7 @@ public class Leaderboard {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		if (!in.hasNext()) {
-			System.out.println("aa");
-		}
+
 		while (in.hasNext()) {
 			String line = in.nextLine();
 			Scanner curLine = new Scanner(line);

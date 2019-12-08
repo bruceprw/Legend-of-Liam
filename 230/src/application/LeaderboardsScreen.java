@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
  * 
  * GUI for the leaderboard screen.
  * 
- * @author Gideon Davies
+ * @author Gideon Davies & Salter Heffron
  *
  */
 public class LeaderboardsScreen extends Screen {
@@ -62,7 +62,6 @@ public class LeaderboardsScreen extends Screen {
 	 *              displayed
 	 */
 	private void screenInit(String level) {
-		System.out.println(level);
 		ld = new Leaderboard(level);
 		list = ld.getList();
 		root = new BorderPane();
@@ -83,9 +82,7 @@ public class LeaderboardsScreen extends Screen {
 			Button b = new Button("" + (i + 1));
 			b.setMinSize(LEVEL_BUTTON_SIZE, LEVEL_BUTTON_SIZE);
 			b.setOnAction(event -> {
-				System.out.println(b.getText());
 				switchScreen(new LeaderboardsScreen(b.getText(), user));
-				System.out.println(ld.getList());
 			});
 			levelButtons.add(b);
 			levelGrid.add(b, i % BTNS_PER_ROW, i / BTNS_PER_ROW);
