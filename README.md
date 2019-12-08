@@ -9,7 +9,7 @@ Authors:
   <br> Gideon Davies
   <br> George Stallard
 
-<h1>How to run the game.</h1>
+# How to run the game.
   <br>1.Open eclipse and select your workspace
   <br>2.Go to the menu bar at the top left 
   <br>3.Then file -> import -> General -> Projects from Folder or Archive 
