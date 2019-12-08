@@ -24,6 +24,7 @@ import javafx.scene.media.MediaPlayer;
  * 
  * @author Andy Kuo
  * @version 1.5
+ * @author George Stallard
  *
  */
 public class GameScreen extends Screen {
