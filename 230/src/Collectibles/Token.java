@@ -10,60 +10,59 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores the image and the sound of a token.
+ * 
  * @author Andy Kuo
  *
  */
-public class Token extends Collectible
-{
+public class Token extends Collectible {
 	private String path = "Images\\token.png";
-    private static String soundPath = "Sound\\coin_sound.mp3";
+	private static String soundPath = "Sound\\coin_sound.mp3";
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
-	
+
 	/**
 	 * Create a instance.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error such as not finding given file.
+	 * 
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error such as not finding given file.
 	 */
-	public Token() throws FileNotFoundException
-	{
-		index=0;
+	public Token() throws FileNotFoundException {
+		index = 0;
 		setImage();
 	}
-	
+
 	/**
 	 * Plays the sound of the token.
 	 */
-    public void playSound()
-    {
-    	mediaPlayer.play();
-    }
-	
-    /**
-     * Get the image of the token.
-     * @return The image of the collectible.
-     */
-	public Image getImage()
-	{
+	public void playSound() {
+		mediaPlayer.play();
+	}
+
+	/**
+	 * Get the image of the token.
+	 * 
+	 * @return The image of the collectible.
+	 */
+	public Image getImage() {
 		return image;
 	}
-	
+
 	/**
 	 * Set the image of the token
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error such as not finding given file.
+	 * 
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error such as not finding given file.
 	 */
-	private void setImage() throws FileNotFoundException
-	{
+	private void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));
 	}
-	
+
 	/**
 	 * Get the string of file output purpose.
+	 * 
 	 * @return The string representation of the collectible.
 	 */
-	public String getString()
-	{
+	public String getString() {
 		return "T";
 	}
 

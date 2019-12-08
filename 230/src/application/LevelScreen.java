@@ -49,8 +49,7 @@ public class LevelScreen extends Screen {
 		mediaPlayer.setAutoPlay(true);
 		mediaPlayer.play();
 		try {
-			bg = new Image(new FileInputStream
-				("Images\\updateimage\\titlescreenimage.jpg"));
+			bg = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

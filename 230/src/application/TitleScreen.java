@@ -26,8 +26,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
- * The GUI for the title screen. Contains the UI elements
- * that make up the title screen, and methods to build them.
+ * The GUI for the title screen. Contains the UI elements that make up the title
+ * screen, and methods to build them.
  * 
  * @author Gideon Davies.
  *
@@ -58,8 +58,8 @@ public class TitleScreen extends Screen {
 	private UserProfile currentUser = null;
 
 	/**
-	 * Constructor for the title screen. Creates a window and adds all the
-	 * elements to it.
+	 * Constructor for the title screen. Creates a window and adds all the elements
+	 * to it.
 	 */
 	public TitleScreen() {
 		try {
@@ -93,8 +93,7 @@ public class TitleScreen extends Screen {
 		topPane.setMaxWidth(WINDOW_WIDTH);
 		topPane.setAlignment(Pos.CENTER);
 
-		BackgroundImage b = 
-				new BackgroundImage(titleImage, null, null, null, null);
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
 
 		Text title = new Text(TITLE_STRING);
 		title.setFont(Font.font(100));
@@ -113,8 +112,7 @@ public class TitleScreen extends Screen {
 	 * Construct the elements of the {@link #loginPane}.
 	 */
 	private void buildLoginPane() {
-		BackgroundImage b = 
-				new BackgroundImage(titleImage, null, null, null, null);
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
 
 		loginPane = new GridPane();
 		loginPane.setBackground(new Background(b));
@@ -160,10 +158,8 @@ public class TitleScreen extends Screen {
 	 * Checks that the entered login details are valid and match to an existing
 	 * profile.
 	 * 
-	 * @param username
-	 *            The username of the profile to be searched.
-	 * @param password
-	 *            The password of the profile to be searched.
+	 * @param username The username of the profile to be searched.
+	 * @param password The password of the profile to be searched.
 	 * @return The matching user profile, or null if it can't be found.
 	 */
 	private UserProfile checkLogin(String username, String password) {
@@ -200,8 +196,7 @@ public class TitleScreen extends Screen {
 	 * Constructs the elements to add to {@link #menuPane}.
 	 */
 	private void buildMenuPane() {
-		BackgroundImage b = 
-				new BackgroundImage(titleImage, null, null, null, null);
+		BackgroundImage b = new BackgroundImage(titleImage, null, null, null, null);
 		menuPane.setBackground(new Background(b));
 		menuPane.setAlignment(Pos.CENTER);
 		welcome = new Text();
@@ -255,15 +250,13 @@ public class TitleScreen extends Screen {
 			root.setCenter(loginPane);
 		});
 
-		menuPane.getChildren().addAll(welcome, loadGame, selectLevel, 
-				howToPlay, leaderboards, options, logout);
+		menuPane.getChildren().addAll(welcome, loadGame, selectLevel, howToPlay, leaderboards, options, logout);
 	}
 
 	/**
 	 * Show the {@link menuPane} on the title screen.
 	 * 
-	 * @param currentUser
-	 *            The user who is logged in.
+	 * @param currentUser The user who is logged in.
 	 */
 	public void switchToMenu(UserProfile currentUser) {
 		this.currentUser = currentUser;

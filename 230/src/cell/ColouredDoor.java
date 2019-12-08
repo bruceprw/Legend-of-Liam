@@ -15,8 +15,7 @@ import javafx.scene.media.MediaPlayer;
  * @author Lee Hin Man (690479)
  * @version 1.1
  */
-public class ColouredDoor extends Cell
-{
+public class ColouredDoor extends Cell {
 
 	private String colour;
 	private String greenPath = "Images\\updateimage\\closed_green_door.png";
@@ -39,11 +38,10 @@ public class ColouredDoor extends Cell
 	 * Sets the information of the door.
 	 * 
 	 * @param colour the colour of the door.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error such not finding given file.
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error such not finding given file.
 	 */
-	public ColouredDoor(String colour) throws FileNotFoundException
-	{
+	public ColouredDoor(String colour) throws FileNotFoundException {
 		super(false, true, false, "", Item.GREEN_KEY);
 		this.colour = colour;
 		this.opened = false;
@@ -53,15 +51,11 @@ public class ColouredDoor extends Cell
 	/**
 	 * Plays the sound.
 	 */
-	public MediaPlayer getSound()
-	{
+	public MediaPlayer getSound() {
 		// Change the sound track as there are different "door" condition.
-		if(opened)
-		{
+		if (opened) {
 			playOpenSound();
-		}
-		else
-		{
+		} else {
 			playKnockSound();
 		}
 
@@ -73,56 +67,41 @@ public class ColouredDoor extends Cell
 	 * 
 	 * @return the colour
 	 */
-	public String getColour()
-	{
+	public String getColour() {
 		return colour;
 	}
 
 	/**
 	 * Open the door.
 	 */
-	public void openDoor()
-	{
+	public void openDoor() {
 		opened = true;
-		switch (colour)
-		{
+		switch (colour) {
 		case "GREENDOOR":
-			try
-			{
+			try {
 				image = new Image(new FileInputStream(openedGPath));
-			}
-			catch (FileNotFoundException e)
-			{
+			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 			break;
 		case "REDDOOR":
-			try
-			{
+			try {
 				image = new Image(new FileInputStream(openedRPath));
-			}
-			catch (FileNotFoundException e2)
-			{
+			} catch (FileNotFoundException e2) {
 				e2.printStackTrace();
 			}
 			break;
 		case "YELLOWDOOR":
-			try
-			{
+			try {
 				image = new Image(new FileInputStream(openedYPath));
-			}
-			catch (FileNotFoundException e1)
-			{
+			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
 			break;
 		case "BLUEDOOR":
-			try
-			{
+			try {
 				image = new Image(new FileInputStream(openedBPath));
-			}
-			catch (FileNotFoundException e)
-			{
+			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 			break;
@@ -135,18 +114,15 @@ public class ColouredDoor extends Cell
 	 * 
 	 * @return true if the door is opened.
 	 */
-	public boolean getOpened()
-	{
+	public boolean getOpened() {
 		return opened;
 	}
 
 	/**
 	 * Draw the door according to different colour instance.
 	 */
-	public void draw(GraphicsContext gc, int x, int y)
-	{
-		switch (colour)
-		{
+	public void draw(GraphicsContext gc, int x, int y) {
+		switch (colour) {
 		case "GREENDOOR":
 			gc.drawImage(image, x, y, 100, 100);
 			break;
@@ -165,8 +141,7 @@ public class ColouredDoor extends Cell
 	/**
 	 * Plays the sound that the door is closed.
 	 */
-	public void playKnockSound()
-	{
+	public void playKnockSound() {
 		mediaPlayer = new MediaPlayer(knockMusic);
 		mediaPlayer.play();
 	}
@@ -174,8 +149,7 @@ public class ColouredDoor extends Cell
 	/**
 	 * Plays the sound that the door is opened.
 	 */
-	public void playOpenSound()
-	{
+	public void playOpenSound() {
 		mediaPlayer = new MediaPlayer(openMusic);
 		mediaPlayer.play();
 	}
@@ -183,8 +157,7 @@ public class ColouredDoor extends Cell
 	/**
 	 * Get the string of the door.
 	 */
-	public String getString()
-	{
+	public String getString() {
 		return colour;
 	}
 
@@ -192,13 +165,11 @@ public class ColouredDoor extends Cell
 	 * Set the image to different colour according to the colour of the instance.
 	 * 
 	 * @param colour The required colour of the door.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error if the file is not found.
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error if the file is not found.
 	 */
-	public void setImage(String colour) throws FileNotFoundException
-	{
-		switch (colour)
-		{
+	public void setImage(String colour) throws FileNotFoundException {
+		switch (colour) {
 		case "GREENDOOR":
 			image = new Image(new FileInputStream(greenPath));
 			break;

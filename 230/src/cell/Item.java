@@ -1,6 +1,5 @@
 package cell;
 
-
 /**
  * An enum shows all collectible items in cell include "NONE" option.
  * 
@@ -9,5 +8,5 @@ package cell;
  *
  */
 public enum Item {
-    NONE, FLIPPER, FIRE_BOOTS, TOKEN, RED_KEY, YELLOW_KEY, GREEN_KEY
+	NONE, FLIPPER, FIRE_BOOTS, TOKEN, RED_KEY, YELLOW_KEY, GREEN_KEY
 }

@@ -30,10 +30,10 @@ public abstract class Enemy extends Element {
 	protected static final int TWO = 2;
 	protected static final int ZERO = 0;
 	protected static final int HUNDRED = 100;
-	
+
 	// is this a constant?
 	private final String soundPath = "Sound\\creaking_door.mp3";
-	
+
 	protected String movDirection = "UP";
 	protected String name = "Enemy";
 
@@ -50,7 +50,7 @@ public abstract class Enemy extends Element {
 		MediaPlayer mediaPlayer = new MediaPlayer(music);
 		mediaPlayer.play();
 	}
-	
+
 	/**
 	 * Gets the name of the Enemy.
 	 * 
@@ -70,23 +70,25 @@ public abstract class Enemy extends Element {
 	public void draw(GraphicsContext gc, int X, int Y) {
 		gc.drawImage(image, X, Y, HUNDRED, HUNDRED);
 	}
-	
+
 	/**
 	 * Set the move direction of the enemy.
+	 * 
 	 * @param movDirection New move direction.
 	 */
 	public void setMovDirection(String movDirection) {
 		this.movDirection = movDirection;
 	}
-	
+
 	/**
 	 * Gets the current move direction.
+	 * 
 	 * @return current move direction.
 	 */
 	public String getMovDirection() {
 		return this.movDirection;
 	}
-	
+
 	/**
 	 * Reverses the enemy's current move direction.
 	 */
@@ -109,7 +111,6 @@ public abstract class Enemy extends Element {
 		}
 	}
 
-
 	/**
 	 * Checks if next move is possible.
 	 * 
@@ -129,13 +130,13 @@ public abstract class Enemy extends Element {
 			return false;
 
 	}
-	
+
 	/**
 	 * Sets the image for the enemy's sprite.
 	 * 
 	 * @param path The path to the image file, stored in sub class.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error of this type.
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error of this type.
 	 */
 	protected void setImage(String path) throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));

@@ -1,4 +1,5 @@
 package Character;
+
 import java.io.FileNotFoundException;
 
 import application.Element;
@@ -49,7 +50,6 @@ public class StraightLineEnemy extends Enemy {
 		setImage(path);
 	}
 
-	
 	/**
 	 * Works out the new X coordinate.
 	 * 
@@ -94,7 +94,6 @@ public class StraightLineEnemy extends Enemy {
 
 	}
 
-	
 	/**
 	 * Works out the new Y coordinate.
 	 * 

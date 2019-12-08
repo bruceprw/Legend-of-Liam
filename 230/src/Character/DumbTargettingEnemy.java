@@ -33,11 +33,8 @@ public class DumbTargettingEnemy extends Enemy {
 		}
 	}
 
-	
-
 	/**
-	/**
-	 * Get the next X-coordinate for the dumb enemy.
+	 * /** Get the next X-coordinate for the dumb enemy.
 	 * 
 	 * @param gb      The game board for checking elements.
 	 * @param playerX The player's x-coordinate.

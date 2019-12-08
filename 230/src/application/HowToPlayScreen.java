@@ -25,8 +25,7 @@ import javafx.scene.text.Text;
  *
  */
 public class HowToPlayScreen extends Screen {
-	private static final String TEXT_FILE = 
-			"Images\\How-To images\\how-to-text.txt";
+	private static final String TEXT_FILE = "Images\\How-To images\\how-to-text.txt";
 	private static final int HOW_TO_PLAY_WIDTH = 700;
 	private static final int HOW_TO_PLAY_HEIGHT = 700;
 
@@ -87,8 +86,7 @@ public class HowToPlayScreen extends Screen {
 			if (pageIndex > 0) {
 				pageIndex--;
 				displayText.setText(texts.get(pageIndex));
-				view.setImage(new Image(new FileInputStream
-					("Images\\How-To images\\" + pageIndex + ".png")));
+				view.setImage(new Image(new FileInputStream("Images\\How-To images\\" + pageIndex + ".png")));
 			}
 			break;
 
@@ -96,8 +94,7 @@ public class HowToPlayScreen extends Screen {
 			if (pageIndex < texts.size() - 1) {
 				pageIndex++;
 				displayText.setText(texts.get(pageIndex));
-				view.setImage(new Image(new FileInputStream
-					("Images\\How-To images\\" + pageIndex + ".png")));
+				view.setImage(new Image(new FileInputStream("Images\\How-To images\\" + pageIndex + ".png")));
 			}
 			break;
 

@@ -17,8 +17,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Generates GUI for the options screen. Builds UI element
- * that allows the user to edit their profile details.
+ * Generates GUI for the options screen. Builds UI element that allows the user
+ * to edit their profile details.
  * 
  * @author Gideon Davies.
  *
@@ -47,9 +47,8 @@ public class OptionsScreen extends Screen {
 	 * Create an instance of the options screen for a given user, mainly calling
 	 * other methods within the class.
 	 * 
-	 * @param user
-	 *            allows the screen to determine which users' options to change
-	 *            or display.
+	 * @param user allows the screen to determine which users' options to change or
+	 *             display.
 	 */
 	public OptionsScreen(UserProfile user) {
 		root = new BorderPane();
@@ -100,8 +99,8 @@ public class OptionsScreen extends Screen {
 	}
 
 	/**
-	 * Used to update the screen with fields for the user to alter or change
-	 * their password and save those changes.
+	 * Used to update the screen with fields for the user to alter or change their
+	 * password and save those changes.
 	 */
 	private void buildEdit() {
 		Text usernameLabel = new Text("Username:");
@@ -109,7 +108,7 @@ public class OptionsScreen extends Screen {
 		Text checkPassLabel = new Text("Check Password:");
 		Text oldPassLabel = new Text("Old Password:");
 		Text oldPassPrompt = new Text("To save changes, please enter your old password.");
-		
+
 		editGrid = new GridPane();
 		editGrid.addRow(0, usernameLabel, username);
 		editGrid.addRow(1, passwordLabel, password);
@@ -126,7 +125,7 @@ public class OptionsScreen extends Screen {
 				UserProfile.updateUserProfile(user.getName(), username.getText(), password.getText(),
 						user.getLevelProg());
 				user = new UserProfile(username.getText(), password.getText(), user.getLevelProg());
-				
+
 				// Transition back to optionPane
 				clearTextBoxes();
 				root.setCenter(optionsPane);
@@ -147,8 +146,8 @@ public class OptionsScreen extends Screen {
 	}
 
 	/**
-	 * Allows the user to reset their level progress. Displays a yes/no popup
-	 * screen to user.
+	 * Allows the user to reset their level progress. Displays a yes/no popup screen
+	 * to user.
 	 */
 	private void buildReset() {
 		resetPrompt = new Text("Are you sure you want to reset level progress?");
@@ -173,8 +172,8 @@ public class OptionsScreen extends Screen {
 	}
 
 	/**
-	 * Allows the user to delete their profile. Displays a yes/no popup screen
-	 * to user.
+	 * Allows the user to delete their profile. Displays a yes/no popup screen to
+	 * user.
 	 */
 	private void buildDelete() {
 		deletePrompt = new Text("Are you sure you want to delete " + user.getName() + "?");

@@ -23,57 +23,55 @@ public class Lava extends Cell {
 	private Image image;
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
-	
+
 	/**
 	 * Creates instance of lava.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error of this type.
+	 * 
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error of this type.
 	 */
-    public Lava() throws FileNotFoundException {
-        super(true, true, false, "", Item.FIRE_BOOTS);
-        setImage();
-    }
-
-    /**
-     * Get the media player of the stored sound.
-     */
-    public MediaPlayer getSound()
-    {
-    	return mediaPlayer;
-    }
-    
-    /**
-     * Returns the lava map character.
-     * @return the string for output purpose.
-     */
-    public String getString()
-    {
-    	return"L";
-    }
-    
-    /**
-     * Set to the lava image.
-     * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error such as unable to access a file.
-     */
-	public void setImage() throws FileNotFoundException
-	{
-		image = new Image (new FileInputStream(path));
+	public Lava() throws FileNotFoundException {
+		super(true, true, false, "", Item.FIRE_BOOTS);
+		setImage();
 	}
-    
+
+	/**
+	 * Get the media player of the stored sound.
+	 */
+	public MediaPlayer getSound() {
+		return mediaPlayer;
+	}
+
+	/**
+	 * Returns the lava map character.
+	 * 
+	 * @return the string for output purpose.
+	 */
+	public String getString() {
+		return "L";
+	}
+
+	/**
+	 * Set to the lava image.
+	 * 
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error such as unable to access a file.
+	 */
+	public void setImage() throws FileNotFoundException {
+		image = new Image(new FileInputStream(path));
+	}
+
 	/**
 	 * Plays sound stored.
 	 */
-    public void playSound()
-    {
-    	mediaPlayer.play();
-    }
-	
-    /**
-     * Draw the lava image.
-     */
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
+	public void playSound() {
+		mediaPlayer.play();
+	}
+
+	/**
+	 * Draw the lava image.
+	 */
+	public void draw(GraphicsContext gc, int x, int y) {
+		gc.drawImage(image, x, y, 100, 100);
+	}
 }

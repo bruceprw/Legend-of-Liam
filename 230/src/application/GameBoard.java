@@ -371,13 +371,13 @@ public class GameBoard {
 		StraightLineEnemy a = (StraightLineEnemy) board[y][x];
 		boolean hori = a.horizontalNoMove(this);
 
-		boolean left=a.getMovDirection().equals("LEFT");
-		boolean right=a.getMovDirection().equals("RIGHT");
-		boolean lOR = left||right;
+		boolean left = a.getMovDirection().equals("LEFT");
+		boolean right = a.getMovDirection().equals("RIGHT");
+		boolean lOR = left || right;
 		boolean verti = a.verticalNoMove(this);
 		boolean up = a.getMovDirection().equals("UP");
 		boolean down = a.getMovDirection().equals("DOWN");
-		boolean UD = up||down;
+		boolean UD = up || down;
 
 		if ((hori && lOR) || (verti && UD)) {
 

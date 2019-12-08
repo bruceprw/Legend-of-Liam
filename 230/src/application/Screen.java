@@ -100,13 +100,11 @@ public abstract class Screen {
 		Scene s = screen.getScene();
 
 		// Add default stylesheet
-		s.getStylesheets().add(getClass().getResource
-			(DEFAULT_STYLESHEET).toExternalForm());
+		s.getStylesheets().add(getClass().getResource(DEFAULT_STYLESHEET).toExternalForm());
 
 		// Add additional stylesheet (if it exists)
 		if (screen.hasStylesheet()) {
-			s.getStylesheets().add(getClass().getResource
-				(screen.getStyleSheet()).toExternalForm());
+			s.getStylesheets().add(getClass().getResource(screen.getStyleSheet()).toExternalForm());
 		}
 
 		primaryStage.setScene(s);
@@ -128,13 +126,11 @@ public abstract class Screen {
 		Scene s = screen.getScene();
 
 		// Add default stylesheet
-		s.getStylesheets().add(getClass().getResource
-			(DEFAULT_STYLESHEET).toExternalForm());
+		s.getStylesheets().add(getClass().getResource(DEFAULT_STYLESHEET).toExternalForm());
 
 		// Add additional stylesheet (if it exists)
 		if (hasStylesheet()) {
-			s.getStylesheets().add(getClass().getResource
-				(stylesheet).toExternalForm());
+			s.getStylesheets().add(getClass().getResource(stylesheet).toExternalForm());
 		}
 
 		popupStage.setScene(s);

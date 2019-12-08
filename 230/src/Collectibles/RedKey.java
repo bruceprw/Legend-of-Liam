@@ -10,51 +10,50 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Stores the info. of red key.
+ * 
  * @author Andy Kuo
  *
  */
-public class RedKey extends Collectible
-{
+public class RedKey extends Collectible {
 	private String path = "Images\\RK.png";
-    private static String soundPath = "Sound\\pickup_keys.mp3";
+	private static String soundPath = "Sound\\pickup_keys.mp3";
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
-	
+
 	/**
 	 * Create the instance of red key.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error such as not finding given file.
+	 * 
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error such as not finding given file.
 	 */
-	public RedKey() throws FileNotFoundException
-	{
-		index=1;
+	public RedKey() throws FileNotFoundException {
+		index = 1;
 		setImage();
 	}
-	
+
 	/**
 	 * Plays the sound of red key.
 	 */
-    public void playSound()
-    {
-    	mediaPlayer.play();
-    }
-	
-    /**
-     * Get the string of output purpose.
-     * @return The key string format.
-     */
-	public String getString()
-	{
+	public void playSound() {
+		mediaPlayer.play();
+	}
+
+	/**
+	 * Get the string of output purpose.
+	 * 
+	 * @return The key string format.
+	 */
+	public String getString() {
 		return "RKEY";
 	}
-	
+
 	/**
 	 * Set the image.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error such as not finding given file.
+	 * 
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error such as not finding given file.
 	 */
-	private void setImage() throws FileNotFoundException
-	{
+	private void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));
 	}
 

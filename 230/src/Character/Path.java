@@ -15,7 +15,7 @@ public class Path extends Element {
 	Path right;
 	private int x;
 	private int y;
-	
+
 	/**
 	 * The number of steps taken from the start of the enemy.
 	 */
@@ -23,7 +23,8 @@ public class Path extends Element {
 
 	/**
 	 * Stores the information of the path.
-	 * @param x       The x-coordinate. 
+	 * 
+	 * @param x       The x-coordinate.
 	 * @param y       The y-coordinate.
 	 * @param counter Counter of the current path from the start of the enemy.
 	 */

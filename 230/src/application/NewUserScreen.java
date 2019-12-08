@@ -76,8 +76,8 @@ public class NewUserScreen extends Screen {
 	}
 
 	/**
-	 * Builds the javafx elements for {{@link #top}. Which contains
-	 * UI elements for entering a username and password.
+	 * Builds the javafx elements for {{@link #top}. Which contains UI elements for
+	 * entering a username and password.
 	 */
 	private void buildTopPane() {
 		top = new GridPane();

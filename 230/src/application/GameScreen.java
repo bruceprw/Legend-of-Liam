@@ -123,8 +123,7 @@ public class GameScreen extends Screen {
 		int level = Integer.parseInt(this.levelNo);
 		if (level > user.getLevelProg()) {
 			user.setLevelProg(level);
-			UserProfile.updateUserProfile(user.getName(), user.getName(), 
-				user.getPassword(), user.getLevelProg());
+			UserProfile.updateUserProfile(user.getName(), user.getName(), user.getPassword(), user.getLevelProg());
 		}
 		switchScreen(new LevelScreen(user));
 		Leaderboard ld = new Leaderboard(levelNo);

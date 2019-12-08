@@ -27,10 +27,8 @@ public class Player extends Element {
 	// private java.awt.Image img;
 
 	/**
-	 * @param name
-	 *            name of player.
-	 * @throws FileNotFoundException
-	 *             if file not found.
+	 * @param name name of player.
+	 * @throws FileNotFoundException if file not found.
 	 */
 	public Player(String name) throws FileNotFoundException {
 		setName(name);
@@ -40,8 +38,7 @@ public class Player extends Element {
 	/**
 	 * Sets the players name.
 	 * 
-	 * @param name
-	 *            name of player.
+	 * @param name name of player.
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -55,6 +52,7 @@ public class Player extends Element {
 	public String getName() {
 		return name;
 	}
+
 	/**
 	 * Returns player string.
 	 * 
@@ -66,15 +64,13 @@ public class Player extends Element {
 
 	/*
 	 * Guide to the items code 0=Token, 1=RedKey, 2=GreenKey, 3=BlueKey,
-	 * 4=YellowKey, 5=Fireboot, 6=Flipper.
-	 * See item.java.
+	 * 4=YellowKey, 5=Fireboot, 6=Flipper. See item.java.
 	 */
 
 	/**
 	 * Adds a item to inventory, position corresponds to itemID:
 	 * 
-	 * @param position
-	 *            position of player.
+	 * @param position position of player.
 	 */
 	public void acquireInventory(int position) {
 		inventory[position]++;
@@ -83,10 +79,8 @@ public class Player extends Element {
 	/**
 	 * updates number of specified item to given number of items.
 	 * 
-	 * @param position
-	 *            itemID.
-	 * @param number
-	 *            number of items.
+	 * @param position itemID.
+	 * @param number   number of items.
 	 */
 	public void setInventory(int position, int number) {
 		inventory[position] += number;
@@ -102,8 +96,8 @@ public class Player extends Element {
 	}
 
 	/**
-	 * Returns the inventory array, containing all items currently collected by
-	 * the player.
+	 * Returns the inventory array, containing all items currently collected by the
+	 * player.
 	 * 
 	 * @return inventory int array, each item is represented by its item code.
 	 */
@@ -114,8 +108,7 @@ public class Player extends Element {
 	/**
 	 * updates position of player.
 	 * 
-	 * @param pos
-	 *            position of player.
+	 * @param pos position of player.
 	 */
 	public void setPos(int[][] pos) {
 		this.pos = pos;
@@ -134,8 +127,8 @@ public class Player extends Element {
 	/**
 	 * Sets the player's sprite.
 	 * 
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error of this type.
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error of this type.
 	 */
 	public void setImage() throws FileNotFoundException {
 		image = new Image(new FileInputStream(path));
@@ -144,14 +137,10 @@ public class Player extends Element {
 	/**
 	 * Draws the player sprite to screen
 	 * 
-	 * @param gc
-	 *            the graphics buffer of the canvas to be drawn to.
-	 * @param x
-	 *            width of image.
-	 * @param y
-	 *            height of image.
-	 * @param r
-	 *            the rotation of the image.
+	 * @param gc the graphics buffer of the canvas to be drawn to.
+	 * @param x  width of image.
+	 * @param y  height of image.
+	 * @param r  the rotation of the image.
 	 */
 	public void drawPlayer(GraphicsContext gc, int x, int y, int r) {
 		gc.save();
@@ -166,8 +155,7 @@ public class Player extends Element {
 	 * checks if a specific item is in the inventory of the player. Item is
 	 * specified by an int.
 	 * 
-	 * @param i
-	 *            itemID.
+	 * @param i itemID.
 	 * @return TRUE if inventory contains that specified item, else FALSE.
 	 */
 	public boolean checkInventory(int i) {
@@ -177,8 +165,7 @@ public class Player extends Element {
 	/**
 	 * Removes a specified item from inventory.
 	 * 
-	 * @param i
-	 *           The itemID.
+	 * @param i The itemID.
 	 */
 	public void dropCol(int i) {
 		inventory[i]--;
@@ -187,8 +174,7 @@ public class Player extends Element {
 	/**
 	 * checks if player can move onto specified cell and responds appropriately.
 	 * 
-	 * @param cell
-	 *            cell on board.
+	 * @param cell cell on board.
 	 * @return True if given tile is movable, else false.
 	 */
 	public boolean movable(Cell cell) {
@@ -205,11 +191,11 @@ public class Player extends Element {
 				return true;
 			} else
 				return false;
-			
+
 		case "#":
 			cell.playSound();
 			return false;
-			
+
 		case "D":
 			return movableTokenDoor((TokenDoor) cell);
 
@@ -219,21 +205,21 @@ public class Player extends Element {
 				return true;
 			} else
 				return false;
-			
+
 		case "@":
 		case " ":
 		case "G":
 			cell.playSound();
 			return true;
-			
+
 		default:
 			return false;
 		}
 	}
 
 	/**
-	 * Checks whether the coloured door can be walked onto. Potentially
-	 * opens the ColouredDoor if the right key is in the inventory.
+	 * Checks whether the coloured door can be walked onto. Potentially opens the
+	 * ColouredDoor if the right key is in the inventory.
 	 * 
 	 * @param cell The ColouredDoor to be checked.
 	 * @return True if the cell can be walked on. False, otherwise.
@@ -272,10 +258,10 @@ public class Player extends Element {
 			}
 		}
 	}
-	
+
 	/**
-	 * Checks whether the given token door can be walked onto. Potentially
-	 * opens the token door if there are enough tokens in the inventory. 
+	 * Checks whether the given token door can be walked onto. Potentially opens the
+	 * token door if there are enough tokens in the inventory.
 	 * 
 	 * @param cell The TokenDoor to be checked.
 	 * @return True if the cell can be walked on. False otherwise.

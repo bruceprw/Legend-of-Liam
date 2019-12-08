@@ -67,7 +67,7 @@ public class FileOutputer {
 	 * @param board the board instance.
 	 */
 	public void setRemain(GameBoard lvl, Element[][] board) {
-		Player player = ((Player)board[lvl.getPlayerY()][lvl.getPlayerX()]);
+		Player player = ((Player) board[lvl.getPlayerY()][lvl.getPlayerX()]);
 		int[] inventory = player.getInventory();
 		temp += "0,0,INVENTORY,";
 		temp += "TOKEN," + inventory[TOKEN_POSTION] + ",";
@@ -139,15 +139,12 @@ public class FileOutputer {
 					temp += "" + x + "," + y + ",START" + "\r\n";
 					break;
 				case "STRAIGHT":
-					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + 
-					((StraightLineEnemy) board[y][x]).getMovDirection()
+					temp += "" + x + "," + y + ",ENEMY,STRAIGHT," + ((StraightLineEnemy) board[y][x]).getMovDirection()
 							+ "\r\n";
 					break;
 				case "WALLHUG":
-					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + 
-					((WallFollowingEnemy) board[y][x]).getMovDirection()
-							+ "," + 
-							((WallFollowingEnemy) board[y][x]).getHand() + "\r\n";
+					temp += "" + x + "," + y + ",ENEMY,WALLHUG," + ((WallFollowingEnemy) board[y][x]).getMovDirection()
+							+ "," + ((WallFollowingEnemy) board[y][x]).getHand() + "\r\n";
 					break;
 				case "DUMB":
 					temp += "" + x + "," + y + ",ENEMY,DUMB" + "\r\n";
@@ -183,13 +180,11 @@ public class FileOutputer {
 					output += " ";
 					int tempX = ((Teleporter) background[y][x]).getPairX();
 					int tempY = ((Teleporter) background[y][x]).getPairY();
-					temp += "" + x + "," + y + ",TELEPORTER," 
-					+ tempX + "," + tempY + "\r\n";
+					temp += "" + x + "," + y + ",TELEPORTER," + tempX + "," + tempY + "\r\n";
 					break;
 				case "D":
 					output += " ";
-					temp += "" + x + "," + y + ",DOOR," + 
-					((TokenDoor) background[y][x]).getTokenNum() + "\r\n";
+					temp += "" + x + "," + y + ",DOOR," + ((TokenDoor) background[y][x]).getTokenNum() + "\r\n";
 					break;
 				case "REDDOOR":
 					output += " ";

@@ -108,8 +108,7 @@ public class UserProfile {
 		}
 
 		for (int i = 0; i < list.size(); i++) {
-			out.print("" + list.get(i).getName() + "," + 
-			list.get(i).getPassword() + "," + list.get(i).getLevelProg()
+			out.print("" + list.get(i).getName() + "," + list.get(i).getPassword() + "," + list.get(i).getLevelProg()
 					+ "\r\n");
 		}
 

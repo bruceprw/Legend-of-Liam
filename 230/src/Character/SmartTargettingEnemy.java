@@ -20,8 +20,8 @@ public class SmartTargettingEnemy extends Enemy {
 	 * 
 	 * @param newX The X position for the enemy.
 	 * @param newY The Y position for the enemy.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error of this type.
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error of this type.
 	 */
 	public SmartTargettingEnemy(int newX, int newY) throws FileNotFoundException {
 		this.currentPositionX = newX;
@@ -140,11 +140,11 @@ public class SmartTargettingEnemy extends Enemy {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Checks whether two paths are adjacent to each other.
 	 * 
-	 * @param firstPath First path to compare.
+	 * @param firstPath  First path to compare.
 	 * @param secondPath Second path to compare to.
 	 * @return True if they are adjacent, else false.
 	 */

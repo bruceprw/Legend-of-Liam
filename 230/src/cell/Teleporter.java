@@ -10,15 +10,15 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * Stores image, position of the other door and the sound of
- * passing through the teleporter. 
+ * Stores image, position of the other door and the sound of passing through the
+ * teleporter.
  * 
  * @author Lee Hin Man (690479)
  * @version 1.1
  *
  */
-public class Teleporter extends Cell{
-	
+public class Teleporter extends Cell {
+
 	private String path = "Images\\teleporter.png";
 	private static String soundPath = "Sound\\teleport.wav";
 	private Image image;
@@ -29,76 +29,72 @@ public class Teleporter extends Cell{
 
 	/**
 	 * Creates a teleporter instance.
+	 * 
 	 * @param pairX The x-coordinate of the pair.
 	 * @param pairY The y-coordinate of the pair.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error of this type.
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error of this type.
 	 */
-	public Teleporter(int pairX,int pairY) throws FileNotFoundException
-	{
+	public Teleporter(int pairX, int pairY) throws FileNotFoundException {
 		super(false, true, true, "", Item.NONE);
 		setImage();
-		this.pairX=pairX;
-		this.pairY=pairY;
-	}
-	
-	/**
-	 * Plays the sound.
-	 */
-    public MediaPlayer getSound()
-    {
-    	return mediaPlayer;
-    }
-	
-    /**
-     * Gets the pair's x-coordinate.
-     * @return The x-coordinate.
-     */
-	public int getPairX()
-	{
-		return pairX;
-	}
-	
-	/**
-	 * Gets the pair's y-coordinate.
-	 * @return The y-coordinate.
-	 */
-	public int getPairY()
-	{
-		return pairY;
-	}
-	
-	/**
-	 * Sets the image.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error of this type.
-	 */
-	public void setImage() throws FileNotFoundException
-	{
-		image = new Image (new FileInputStream(path));
+		this.pairX = pairX;
+		this.pairY = pairY;
 	}
 
 	/**
 	 * Plays the sound.
 	 */
-    public void playSound()
-    {
-    	mediaPlayer.play();
-    }
-	
-    /**
-     * Draw this elements image.
-     */
-    public void draw(GraphicsContext gc,int x,int y)
-    {
-		gc.drawImage(image,x,y,100,100);
-    }
-    
-    /**
-     * Get the string for output purpose.
-     */
-    public String getString()
-    {
-    	return "@";
-    }
+	public MediaPlayer getSound() {
+		return mediaPlayer;
+	}
+
+	/**
+	 * Gets the pair's x-coordinate.
+	 * 
+	 * @return The x-coordinate.
+	 */
+	public int getPairX() {
+		return pairX;
+	}
+
+	/**
+	 * Gets the pair's y-coordinate.
+	 * 
+	 * @return The y-coordinate.
+	 */
+	public int getPairY() {
+		return pairY;
+	}
+
+	/**
+	 * Sets the image.
+	 * 
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error of this type.
+	 */
+	public void setImage() throws FileNotFoundException {
+		image = new Image(new FileInputStream(path));
+	}
+
+	/**
+	 * Plays the sound.
+	 */
+	public void playSound() {
+		mediaPlayer.play();
+	}
+
+	/**
+	 * Draw this elements image.
+	 */
+	public void draw(GraphicsContext gc, int x, int y) {
+		gc.drawImage(image, x, y, 100, 100);
+	}
+
+	/**
+	 * Get the string for output purpose.
+	 */
+	public String getString() {
+		return "@";
+	}
 }
