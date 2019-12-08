@@ -9,7 +9,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * Store information of flippers
+ * Store information of flippers.
  * @author Andy Kuo
  *
  */
@@ -22,7 +22,8 @@ public class Flipper extends Collectible
 	
 	/**
 	 * Create instance of flipper.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
 	public Flipper() throws FileNotFoundException
 	{
@@ -48,9 +49,10 @@ public class Flipper extends Collectible
 	
 	/**
 	 * Set the image of flipper.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
-	public void setImage() throws FileNotFoundException
+	private void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
 	}

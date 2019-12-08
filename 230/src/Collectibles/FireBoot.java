@@ -23,7 +23,8 @@ public class FireBoot extends Collectible
 	
 	/**
 	 * Creates instance of a fireboot.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
 	public FireBoot() throws FileNotFoundException
 	{
@@ -41,6 +42,7 @@ public class FireBoot extends Collectible
 	
     /**
      * Get the string of the fireboot for output purpose.
+     * @return The string representation of fireboot.
      */
 	public String getString()
 	{
@@ -49,9 +51,10 @@ public class FireBoot extends Collectible
 	
 	/**
 	 * Set the image.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
-	public void setImage() throws FileNotFoundException
+	private void setImage() throws FileNotFoundException
 	{
 		image = new Image (new FileInputStream(path));
 	}

@@ -22,7 +22,8 @@ public class GreenKey extends Collectible
     
 	/**
 	 * Create instance of the key.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
 	public GreenKey() throws FileNotFoundException
 	{
@@ -49,9 +50,10 @@ public class GreenKey extends Collectible
 	
 	/**
 	 * Set the image of green key.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
-	public void setImage() throws FileNotFoundException
+	private void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
 	}

@@ -9,6 +9,10 @@ import application.Element;
  *
  */
 public class Path extends Element {
+	Path up;
+	Path down;
+	Path left;
+	Path right;
 	private int x;
 	private int y;
 	
@@ -16,18 +20,14 @@ public class Path extends Element {
 	 * The number of steps taken from the start of the enemy.
 	 */
 	private int counter;
-	Path up;
-	Path down;
-	Path left;
-	Path right;
 
 	/**
 	 * Stores the information of the path.
-	 * @param x       the x-coordinate 
-	 * @param y       the y-coordinate
-	 * @param counter counter of the current path from the start of the enemy.
+	 * @param x       The x-coordinate. 
+	 * @param y       The y-coordinate.
+	 * @param counter Counter of the current path from the start of the enemy.
 	 */
-	Path(int x, int y, int counter) {
+	public Path(int x, int y, int counter) {
 		this.x = x;
 		this.y = y;
 		this.counter = counter;
@@ -37,8 +37,8 @@ public class Path extends Element {
 	/**
 	 * Checks whether two paths has the same distance from the start of the enemy.
 	 * 
-	 * @param p the other path
-	 * @return true if they are the same.
+	 * @param p The other path.
+	 * @return True if they are the same.
 	 */
 	public boolean equals(Path p) {
 		return this.x == p.getX() && this.y == p.getY() && this.counter == p.getCount();
@@ -54,9 +54,9 @@ public class Path extends Element {
 	}
 
 	/**
-	 * Get the y-coordinate
+	 * Get the y-coordinate.
 	 * 
-	 * @return y-coordinate
+	 * @return y-coordinate.
 	 */
 	public int getY() {
 		return y;
@@ -64,9 +64,9 @@ public class Path extends Element {
 	}
 
 	/**
-	 * Get the counter
+	 * Get the counter.
 	 * 
-	 * @return the counter
+	 * @return the counter.
 	 */
 	public int getCount() {
 		return counter;
@@ -74,6 +74,8 @@ public class Path extends Element {
 
 	/**
 	 * Switch the information to string.
+	 * 
+	 * @return A String representation of the Path.
 	 */
 	public String toString() {
 		return "" + x + "," + y + "," + counter;

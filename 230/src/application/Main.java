@@ -7,7 +7,8 @@ import javafx.scene.Scene;
 /**
  * Main class, first class ran by Java.
  * 
- * @author
+ * @author Gideon Davies.
+ * @version 1.0
  *
  */
 public class Main extends Application {
@@ -18,6 +19,7 @@ public class Main extends Application {
 		try {
 			// Replace TitleScreen() to change the starting screen.
 			Scene scene = new TitleScreen().getScene();
+			scene.getStylesheets().add(getClass().getResource("titlescreen.css").toExternalForm());
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();

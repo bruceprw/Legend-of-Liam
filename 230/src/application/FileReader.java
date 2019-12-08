@@ -17,6 +17,7 @@ import cell.*;
  * Reads the level files to create the level described in the level file.
  * 
  * @author Andy Kuo
+ * @version 1.0
  *
  */
 
@@ -39,8 +40,8 @@ public class FileReader {
 	 * different Class instance that works to each other.
 	 * 
 	 * @param filePath The file path of the level.
-	 * @throws FileNotFoundException Ensures the system can expect an
-	 * error of this type.
+	 * @throws FileNotFoundException Ensures the system can expect an error of this
+	 *                               type.
 	 */
 	public FileReader(String filePath) throws FileNotFoundException {
 		File file = new File(filePath);
@@ -153,8 +154,8 @@ public class FileReader {
 	 * Read the level file and create objects on the game board based off this.
 	 * 
 	 * @param line The current line being read.
-	 * @throws FileNotFoundException Ensures the system can expect an
-	 * error of this type.
+	 * @throws FileNotFoundException Ensures the system can expect an error of this
+	 *                               type.
 	 */
 	private void substituteBoard(Scanner line) throws FileNotFoundException {
 		line.useDelimiter(",");
@@ -284,8 +285,8 @@ public class FileReader {
 	 * Used to create class on the background array.
 	 * 
 	 * @param temp the information of the map in String array.
-	 * @throws FileNotFoundException Ensures the system can expect an
-	 * error of this type.
+	 * @throws FileNotFoundException Ensures the system can expect an error of this
+	 *                               type.
 	 */
 	private void substituteBackground(String[] temp) throws FileNotFoundException {
 

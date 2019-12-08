@@ -47,7 +47,7 @@ public abstract class Screen {
 	/**
 	 * The additional stylesheet for this screen. (Optional).
 	 */
-	protected String stylesheet;
+	protected String stylesheet = null;
 
 	/**
 	 * Gets the Scene of this Screen.
@@ -56,6 +56,20 @@ public abstract class Screen {
 	 */
 	public Scene getScene() {
 		return scene;
+	}
+
+	/**
+	 * Gets the optional stylesheet of this Screen.
+	 * 
+	 * @return The name of the extra stylesheet for this Screen, or null if it
+	 *         doesn't exist.
+	 */
+	public String getStyleSheet() {
+		if (hasStylesheet()) {
+			return stylesheet;
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -70,40 +84,39 @@ public abstract class Screen {
 	/**
 	 * Sets the primary stage for all Screens.
 	 * 
-	 * @param stage
-	 *            The stage to be used.
+	 * @param stage The stage to be used.
 	 */
 	public static void setPrimaryStage(Stage stage) {
 		primaryStage = stage;
 	}
 
 	/**
-	 * Changes the Scene of the primary stage to the Scene of the Screen entered
-	 * in the parameter.
+	 * Changes the Scene of the primary stage to the Scene of the Screen entered in
+	 * the parameter.
 	 * 
-	 * @param screen
-	 *            The screen containing the new Scene to be shown.
+	 * @param screen The screen containing the new Scene to be shown.
 	 */
 	public void switchScreen(Screen screen) {
 		Scene s = screen.getScene();
 
 		// Add default stylesheet
-		s.getStylesheets().add(getClass().getResource(DEFAULT_STYLESHEET).toExternalForm());
+		s.getStylesheets().add(getClass().getResource
+			(DEFAULT_STYLESHEET).toExternalForm());
 
 		// Add additional stylesheet (if it exists)
-		if (hasStylesheet()) {
-			s.getStylesheets().add(getClass().getResource(stylesheet).toExternalForm());
+		if (screen.hasStylesheet()) {
+			s.getStylesheets().add(getClass().getResource
+				(screen.getStyleSheet()).toExternalForm());
 		}
 
 		primaryStage.setScene(s);
 	}
 
 	/**
-	 * Create a new popup window, that uses the Scene from the Screen entered as
-	 * a parameter.
+	 * Create a new popup window, that uses the Scene from the Screen entered as a
+	 * parameter.
 	 * 
-	 * @param screen
-	 *            The screen containing the new Scene to be shown.
+	 * @param screen The screen containing the new Scene to be shown.
 	 */
 	public void createPopup(Screen screen) {
 		// Create additional stage for the popup.
@@ -115,11 +128,13 @@ public abstract class Screen {
 		Scene s = screen.getScene();
 
 		// Add default stylesheet
-		s.getStylesheets().add(getClass().getResource(DEFAULT_STYLESHEET).toExternalForm());
+		s.getStylesheets().add(getClass().getResource
+			(DEFAULT_STYLESHEET).toExternalForm());
 
 		// Add additional stylesheet (if it exists)
 		if (hasStylesheet()) {
-			s.getStylesheets().add(getClass().getResource(stylesheet).toExternalForm());
+			s.getStylesheets().add(getClass().getResource
+				(stylesheet).toExternalForm());
 		}
 
 		popupStage.setScene(s);

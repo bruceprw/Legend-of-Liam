@@ -22,17 +22,15 @@ import javafx.scene.media.MediaPlayer;
 /**
  * The GUI for the game screen.
  * 
- * @author
+ * @author Andy Kuo
+ * @version 1.5
  *
  */
 public class GameScreen extends Screen {
 	private static final int GAME_WIDTH = 700;
 	private static final int GAME_HEIGHT = 700;
-
 	private BorderPane root;
-
 	private Canvas game;
-
 	private HBox buttonsPane;
 	private Button save;
 	private String levelNo;
@@ -41,16 +39,14 @@ public class GameScreen extends Screen {
 	private GameBoard level;
 	private UserProfile user;
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-
 	private Media music = new Media(new File("Sound\\BGM\\bg.mp3").toURI().toString());
 	private MediaPlayer bg = new MediaPlayer(music);
-	// int time = 0;
-
 
 	/**
 	 * Draws the game screen.
+	 * 
 	 * @param levelNo levelNo Number of the level to be loaded.
-	 * @param user User that is currently playing
+	 * @param user    User that is currently playing
 	 */
 	public GameScreen(String levelNo, UserProfile user) {
 		bg.play();
@@ -59,7 +55,6 @@ public class GameScreen extends Screen {
 			new Image(new FileInputStream("Images\\game_over.png"));
 			new Image(new FileInputStream("Images\\gameoverbg.png"));
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -79,8 +74,6 @@ public class GameScreen extends Screen {
 			public void handle(long now) {
 				long elapsedMillis = System.currentTimeMillis() - startTime;
 				time = elapsedMillis;
-				// System.out.println(time);
-				// System.out.println(elapsedMillis);
 				Date d = new Date(elapsedMillis);
 				timeLabel.setText(sdf.format(d));
 			}
@@ -108,7 +101,6 @@ public class GameScreen extends Screen {
 			try {
 				keyPressed(event);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
@@ -129,7 +121,11 @@ public class GameScreen extends Screen {
 	public void NextLevel() {
 		bg.stop();
 		int level = Integer.parseInt(this.levelNo);
-		UserProfile.updateUserProfile(user.getName(), user.getName(), user.getPassword(), level+1);
+		if (level > user.getLevelProg()) {
+			user.setLevelProg(level);
+			UserProfile.updateUserProfile(user.getName(), user.getName(), 
+				user.getPassword(), user.getLevelProg());
+		}
 		switchScreen(new LevelScreen(user));
 		Leaderboard ld = new Leaderboard(levelNo);
 
@@ -140,8 +136,8 @@ public class GameScreen extends Screen {
 	 * Handles input from the player.
 	 * 
 	 * @param event Key press from the player.
-	 * @throws IOException Allows the system to
-	 * handle errors associated with IO operations.
+	 * @throws IOException Allows the system to handle errors associated with IO
+	 *                     operations.
 	 */
 	private void keyPressed(KeyEvent event) throws IOException
 
@@ -218,7 +214,6 @@ public class GameScreen extends Screen {
 		try {
 			level.drawGame(gc);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -232,17 +227,17 @@ public class GameScreen extends Screen {
 			new FileOutputer(level, new LevelTime(user.getName(), time));
 
 			TitleScreen s = null;
-			// TODO Not sure if exception should be caught here or in TitleScreen
-			// constructor.
 			s = new TitleScreen();
 			switchScreen(s);
 			s.switchToMenu(user);
+			bg.stop();
 		});
 
 		levelSelect = new Button("Back to Level Select");
 		levelSelect.setOnAction(event -> {
 			// Switch to Level Select Screen
 			switchScreen(new LevelScreen(user));
+			bg.stop();
 		});
 
 	}

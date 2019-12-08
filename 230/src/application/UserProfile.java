@@ -108,7 +108,8 @@ public class UserProfile {
 		}
 
 		for (int i = 0; i < list.size(); i++) {
-			out.print("" + list.get(i).getName() + "," + list.get(i).getPassword() + "," + list.get(i).getLevelProg()
+			out.print("" + list.get(i).getName() + "," + 
+			list.get(i).getPassword() + "," + list.get(i).getLevelProg()
 					+ "\r\n");
 		}
 
@@ -129,8 +130,8 @@ public class UserProfile {
 	 * @param password  The password of the profile.
 	 * @param levelProg The level progress made by the user.
 	 * @return True if the user already exists else False.
-	 * @throws FileNotFoundException Tells the system that this
-	 * method could cause an error whereby the file cannot be located.
+	 * @throws FileNotFoundException Tells the system that this method could cause
+	 *                               an error whereby the file cannot be located.
 	 */
 	public static boolean createUserProfile(String name, String password, int levelProg) throws FileNotFoundException {
 		readList();

@@ -22,7 +22,8 @@ public class BlueKey extends Collectible
 	
 	/**
 	 * Create the instance of bluekey.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system
+	 * to expect an error of this type from the method.
 	 */
 	public BlueKey() throws FileNotFoundException
 	{
@@ -48,9 +49,10 @@ public class BlueKey extends Collectible
 	
 	/**
 	 * Set the image of blue key.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
-	public void setImage() throws FileNotFoundException
+	private void setImage() throws FileNotFoundException
 	{
 		this.image = new Image (new FileInputStream(path));
 	}

@@ -16,7 +16,7 @@ public class Collectible extends Element
 	
 	/**
 	 * Get the image of the collectible.
-	 * @return
+	 * @return Return said image.
 	 */
 	public Image getImage()
 	{
@@ -24,16 +24,16 @@ public class Collectible extends Element
 	}
 	
 	/**
-	 * Draw the image.
+	 * Draw the image of the collectible.
 	 */
-    public void draw(GraphicsContext gc,int x,int y)
+    public void draw(GraphicsContext gc, int x,int y)
     {
 		gc.drawImage(image,x,y,100,100);
     }
     
     /**
-     * Index.
-     * @return
+     * Obtain the Index.
+     * @return The index.
      */
     public int getIndex()
     {

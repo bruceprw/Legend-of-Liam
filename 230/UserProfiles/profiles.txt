@@ -1,5 +1,7 @@
-andyshuo,02040922,2
+andyshuo,02040922,6
 gids,gids,0
 test,test,3
 andyshuo,02040922,2
+test,test,0
+andyshuo,02040922,6
 miles,password,0

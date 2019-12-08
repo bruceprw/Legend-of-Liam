@@ -24,7 +24,8 @@ public class Lava extends Cell {
 	
 	/**
 	 * Creates instance of lava.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
 	 */
     public Lava() throws FileNotFoundException {
         super(true, true, false, "", Item.FIRE_BOOTS);
@@ -40,6 +41,7 @@ public class Lava extends Cell {
     }
     
     /**
+     * Returns the lava map character.
      * @return the string for output purpose.
      */
     public String getString()
@@ -48,8 +50,9 @@ public class Lava extends Cell {
     }
     
     /**
-     * Set image.
-     * @throws FileNotFoundException
+     * Set to the lava image.
+     * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as unable to access a file.
      */
 	public void setImage() throws FileNotFoundException
 	{
@@ -65,7 +68,7 @@ public class Lava extends Cell {
     }
 	
     /**
-     * Draw image.
+     * Draw the lava image.
      */
     public void draw(GraphicsContext gc,int x,int y)
     {

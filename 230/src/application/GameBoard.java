@@ -30,6 +30,7 @@ import javafx.scene.text.Font;
  * Stores the game board instance and moves the player and enemy.
  * 
  * @author Andy Kuo
+ * @version 1.0
  *
  */
 public class GameBoard {
@@ -40,11 +41,10 @@ public class GameBoard {
 	private int goalX;
 	private int goalY;
 	private int rotation;
-
-	private Media playerDie = new Media(new File("Sound\\player_killed.wav").toURI().toString());
+	private File muFile = new File("Sound\\player_killed.wav");
+	private Media playerDie = new Media(muFile.toURI().toString());
 
 	private MediaPlayer mediaPlayer;
-
 	private ArrayList<Integer> enemyX;
 	private ArrayList<Integer> enemyY;
 
@@ -54,8 +54,8 @@ public class GameBoard {
 	 * Reads in info from level file and set the important information.
 	 * 
 	 * @param filePath the name of the level file you wanted to retrieve.
-	 * @throws FileNotFoundException Indicates that the 
-	 * an error whereby the file is not found could occur.
+	 * @throws FileNotFoundException Indicates that the an error whereby the file is
+	 *                               not found could occur.
 	 */
 	public GameBoard(String filePath) throws FileNotFoundException {
 		FileReader lvl = new FileReader(filePath);
@@ -83,8 +83,8 @@ public class GameBoard {
 	 * Draws the maps and the board elements. Also the items held by player.
 	 * 
 	 * @param gc the canvas graphics context.
-	 * @throws FileNotFoundException Indicates that the 
-	 * an error whereby the file is not found could occur.
+	 * @throws FileNotFoundException Indicates that the an error whereby the file is
+	 *                               not found could occur.
 	 */
 	public void drawGame(GraphicsContext gc) throws FileNotFoundException {
 
@@ -130,8 +130,8 @@ public class GameBoard {
 	 * Draws the items on the board.
 	 * 
 	 * @param gc canvas's graphics context.
-	 * @throws FileNotFoundException Indicates that the 
-	 * an error whereby the file is not found could occur.
+	 * @throws FileNotFoundException Indicates that the an error whereby the file is
+	 *                               not found could occur.
 	 */
 	public void drawItem(GraphicsContext gc) throws FileNotFoundException {
 		int[] temp = ((Player) board[playerY][playerX]).getInventory();
@@ -160,7 +160,6 @@ public class GameBoard {
 		gc.fillText(": " + temp[4], 525, 570);
 		gc.fillText(": " + temp[5], 225, 670);
 		gc.fillText(": " + temp[6], 375, 670);
-
 	}
 
 	/**
@@ -205,7 +204,6 @@ public class GameBoard {
 	 * @return 2 if the player is dead.
 	 */
 	public int move(String way) {
-		// moveEnemy();
 		switch (way) {
 		case "right":
 			mediaPlayer = ((Cell) background[playerY][playerX + 1]).getSound();
@@ -234,10 +232,7 @@ public class GameBoard {
 					board[playerY][playerX + 1] = board[playerY][playerX];
 					board[playerY][playerX] = new Empty();
 					playerX += 1;
-
-					// System.out.println(playerX);
 				}
-
 			}
 			break;
 		case "left":
@@ -248,7 +243,6 @@ public class GameBoard {
 				if (touchEnemy(playerX - 1, playerY)) {
 					return 2;
 				}
-
 				if (((Cell) background[playerY][playerX - 1]) instanceof Teleporter) {
 					rotation = 270;
 					Teleporter temp = ((Teleporter) background[playerY][playerX - 1]);
@@ -269,7 +263,6 @@ public class GameBoard {
 					board[playerY][playerX] = new Empty();
 					playerX = playerX - 1;
 				}
-
 			}
 			break;
 		case "up":
@@ -280,7 +273,6 @@ public class GameBoard {
 				if (touchEnemy(playerX, playerY - 1)) {
 					return 2;
 				}
-
 				if (((Cell) background[playerY - 1][playerX]) instanceof Teleporter) {
 					rotation = 0;
 					Teleporter temp = ((Teleporter) background[playerY - 1][playerX]);
@@ -291,7 +283,6 @@ public class GameBoard {
 					playerY = tempY;
 					playerX = tempX;
 				} else {
-
 					if (board[playerY - 1][playerX] instanceof Collectible) {
 						playBoardSound(playerX, playerY - 1);
 						board[playerY][playerX + 1].playSound();
@@ -312,7 +303,6 @@ public class GameBoard {
 				if (touchEnemy(playerX, playerY + 1)) {
 					return 2;
 				}
-
 				if (((Cell) background[playerY + 1][playerX]) instanceof Teleporter) {
 					rotation = 180;
 					Teleporter temp = ((Teleporter) background[playerY + 1][playerX]);
@@ -323,7 +313,6 @@ public class GameBoard {
 					playerY = tempY;
 					playerX = tempX;
 				} else {
-
 					if (board[playerY + 1][playerX] instanceof Collectible) {
 						playBoardSound(playerX, playerY + 1);
 						board[playerY][playerX + 1].playSound();
@@ -341,7 +330,6 @@ public class GameBoard {
 		if (playerDead() || checkPlayerDead()) {
 			mediaPlayer = new MediaPlayer(playerDie);
 			mediaPlayer.play();
-			// mediaPlayer.stop();
 			return 2;
 		}
 		if (end())
@@ -349,31 +337,6 @@ public class GameBoard {
 		return 0;
 	}
 
-	
-	/**
-	 * 
-	 */
-	public void moveUP()
-	{
-		
-	}
-	
-	public void moveDown()
-	{
-		
-	}
-	
-	public void moveLeft()
-	{
-		
-	}
-	
-	public void moveRight()
-	{
-		
-	}
-	
-	
 	/**
 	 * Checks if the next position the enemy will move to is the player.
 	 * 
@@ -398,76 +361,118 @@ public class GameBoard {
 	}
 
 	/**
-	 * Moves every enemy on the game board.
+	 * Moves the straight line enemy.
+	 * 
+	 * @param x current x-position of enemy.
+	 * @param y current y-position of enemy.
+	 * @param i the index of the enemy stored in the enemy arrays.
+	 */
+	private void straightMove(int x, int y, int i) {
+		StraightLineEnemy a = (StraightLineEnemy) board[y][x];
+		boolean hori = a.horizontalNoMove(this);
+
+		boolean left=a.getMovDirection().equals("LEFT");
+		boolean right=a.getMovDirection().equals("RIGHT");
+		boolean lOR = left||right;
+		boolean verti = a.verticalNoMove(this);
+		boolean up = a.getMovDirection().equals("UP");
+		boolean down = a.getMovDirection().equals("DOWN");
+		boolean UD = up||down;
+
+		if ((hori && lOR) || (verti && UD)) {
+
+		} else {
+			int newX = a.getX(this, x, y);
+			int newY = a.getY(this, x, y);
+			board[newY][newX] = board[y][x];
+			board[y][x] = new Empty();
+			enemyY.set(i, newY);
+			enemyX.set(i, newX);
+		}
+	}
+
+	/**
+	 * Moves the wallhug enemy.
+	 * 
+	 * @param x current x-position of enemy.
+	 * @param y current y-position of enemy.
+	 * @param i the index of the enemy stored in the enemy arrays.
+	 */
+	public void wallhugMove(int x, int y, int i) {
+		WallFollowingEnemy b = (WallFollowingEnemy) board[y][x];
+		int newX = b.getsNewX(this, x, y);
+		int newY = b.getNewY(this, x, y);
+		board[newY][newX] = board[y][x];
+		board[y][x] = new Empty();
+		enemyY.set(i, newY);
+		enemyX.set(i, newX);
+	}
+
+	/**
+	 * Moves the dumb enemy.
+	 * 
+	 * @param x current x-position of enemy.
+	 * @param y current y-position of enemy.
+	 * @param i the index of the enemy stored in the enemy arrays.
+	 */
+	public void dumbMove(int x, int y, int i) {
+		DumbTargettingEnemy c = (DumbTargettingEnemy) board[y][x];
+		int newXa = c.getNewX(this, playerX, playerY, x, y);
+		int newYa = c.getNewY(this, playerX, playerY, x, y);
+		if (newXa == x && newYa == y) {
+
+		} else {
+			board[newYa][newXa] = board[y][x];
+			board[y][x] = new Empty();
+			enemyY.set(i, newYa);
+			enemyX.set(i, newXa);
+		}
+	}
+
+	/**
+	 * Moves the smart enemy.
+	 * 
+	 * @param x current x-position of enemy.
+	 * @param y current y-position of enemy.
+	 * @param i the index of the enemy stored in the enemy arrays.
+	 */
+	private void smartMove(int x, int y, int i) {
+		SmartTargettingEnemy d = (SmartTargettingEnemy) board[y][x];
+		Path e = d.getPath(this, x, y, playerX, playerY);
+
+		int newXe = e.getX();
+		int newYe = e.getY();
+
+		// Checks whether there are path that goes to player as if there are no path the
+		// enemy won't move.
+		if (newXe == x && newYe == y) {
+
+		} else {
+			board[newYe][newXe] = board[y][x];
+			board[y][x] = new Empty();
+			enemyY.set(i, newYe);
+			enemyX.set(i, newXe);
+		}
+	}
+
+	/**
+	 * Calls different method of moveing enemy.
 	 */
 	private void moveEnemy() {
 		for (int i = 0; i < enemyX.size(); i++) {
 			switch (board[enemyY.get(i)][enemyX.get(i)].getString()) {
 			case "STRAIGHT":
-				StraightLineEnemy a = (StraightLineEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				boolean hori = a.horizontalNoMove(this);
-				boolean lOR = a.getMovDirection().equals("LEFT") || a.getMovDirection().equals("RIGHT");
-				boolean verti = a.verticalNoMove(this);
-				boolean UD = a.getMovDirection().equals("UP") || a.getMovDirection().equals("DOWN");
-				if ((hori && lOR) || (verti && UD)) {
-
-				} else {
-					int newX = a.getX(this, enemyX.get(i), enemyY.get(i));
-					int newY = a.getY(this, enemyX.get(i), enemyY.get(i));
-					board[newY][newX] = board[enemyY.get(i)][enemyX.get(i)];
-					board[enemyY.get(i)][enemyX.get(i)] = new Empty();
-					enemyY.set(i, newY);
-					enemyX.set(i, newX);
-					// System.out.print(enemyX.get(i));
-					// System.out.print(","+enemyY.get(i));
-					// System.out.println(",straight");
-				}
+				straightMove(enemyX.get(i), enemyY.get(i), i);
 				break;
 			case "WALLHUG":
-				System.out.println("success");
-				WallFollowingEnemy b = (WallFollowingEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				int newX = b.getsNewX(this, enemyX.get(i), enemyY.get(i));
-				int newY = b.getNewY(this, enemyX.get(i), enemyY.get(i));
-				// System.out.println(newY);
-				board[newY][newX] = board[enemyY.get(i)][enemyX.get(i)];
-				board[enemyY.get(i)][enemyX.get(i)] = new Empty();
-				enemyY.set(i, newY);
-				enemyX.set(i, newX);
-				// System.out.println(Enemy.checkMove(this,22,21));
+				wallhugMove(enemyX.get(i), enemyY.get(i), i);
 
 				break;
 			case "DUMB":
-				DumbTargettingEnemy c = (DumbTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				int newXa = c.getNewX(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
-				// System.out.print(newXa+",");
-				int newYa = c.getNewY(this, playerX, playerY, enemyX.get(i), enemyY.get(i));
-				// System.out.println(newYa);
-				if (newXa == enemyX.get(i) && newYa == enemyY.get(i)) {
-
-				} else {
-					board[newYa][newXa] = board[enemyY.get(i)][enemyX.get(i)];
-					board[enemyY.get(i)][enemyX.get(i)] = new Empty();
-					enemyY.set(i, newYa);
-					enemyX.set(i, newXa);
-				}
+				dumbMove(enemyX.get(i), enemyY.get(i), i);
 				break;
 			case "SMART":
-				SmartTargettingEnemy d = (SmartTargettingEnemy) board[enemyY.get(i)][enemyX.get(i)];
-				Path e = d.getPath(this, enemyX.get(i), enemyY.get(i), playerX, playerY);
-
-				int newXe = e.getX();
-				int newYe = e.getY();
-
-				// Checks whether there are path that goes to player as if there are no path the
-				// enemy won't move.
-				if (newXe == enemyX.get(i) && newYe == enemyY.get(i)) {
-
-				} else {
-					board[newYe][newXe] = board[enemyY.get(i)][enemyX.get(i)];
-					board[enemyY.get(i)][enemyX.get(i)] = new Empty();
-					enemyY.set(i, newYe);
-					enemyX.set(i, newXe);
-				}
+				smartMove(enemyX.get(i), enemyY.get(i), i);
 				break;
 			}
 		}

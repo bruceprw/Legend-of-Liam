@@ -10,7 +10,6 @@ import java.util.Scanner;
  * outlined at cswebcat.swan.ac.uk.
  * 
  * @author Gideon Davies
- * @version 1.0
  */
 public class DailyMessage {
 

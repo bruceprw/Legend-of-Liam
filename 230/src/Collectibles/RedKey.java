@@ -22,7 +22,8 @@ public class RedKey extends Collectible
 	
 	/**
 	 * Create the instance of red key.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
 	public RedKey() throws FileNotFoundException
 	{
@@ -40,7 +41,7 @@ public class RedKey extends Collectible
 	
     /**
      * Get the string of output purpose.
-     * @return the string.
+     * @return The key string format.
      */
 	public String getString()
 	{
@@ -49,9 +50,10 @@ public class RedKey extends Collectible
 	
 	/**
 	 * Set the image.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
-	public void setImage() throws FileNotFoundException
+	private void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
 	}

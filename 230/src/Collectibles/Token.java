@@ -22,7 +22,8 @@ public class Token extends Collectible
 	
 	/**
 	 * Create a instance.
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
 	public Token() throws FileNotFoundException
 	{
@@ -39,8 +40,8 @@ public class Token extends Collectible
     }
 	
     /**
-     * Get the image of the token
-     * @return the image.
+     * Get the image of the token.
+     * @return The image of the collectible.
      */
 	public Image getImage()
 	{
@@ -49,15 +50,17 @@ public class Token extends Collectible
 	
 	/**
 	 * Set the image of the token
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error such as not finding given file.
 	 */
-	public void setImage() throws FileNotFoundException
+	private void setImage() throws FileNotFoundException
 	{
 		image = new Image(new FileInputStream(path));
 	}
 	
 	/**
 	 * Get the string of file output purpose.
+	 * @return The string representation of the collectible.
 	 */
 	public String getString()
 	{

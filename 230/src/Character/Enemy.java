@@ -21,19 +21,20 @@ import javafx.scene.media.MediaPlayer;
  */
 public abstract class Enemy extends Element {
 
-	private final String soundPath = "Sound\\creaking_door.mp3";
-	protected String movDirection = "UP";
+	protected static final String UP = "UP";
+	protected static final String LEFT = "LEFT";
+	protected static final String DOWN = "DOWN";
+	protected static final String RIGHT = "RIGHT";
 
-	final protected String UP = "UP";
-	final protected String LEFT = "LEFT";
-	final protected String DOWN = "DOWN";
-	final protected String RIGHT = "RIGHT";
-
-	protected final int ONE = 1;
-	protected final int TWO = 2;
-	protected final int ZERO = 0;
-	protected final int HUNDRED = 100;
+	protected static final int ONE = 1;
+	protected static final int TWO = 2;
+	protected static final int ZERO = 0;
+	protected static final int HUNDRED = 100;
 	
+	// is this a constant?
+	private final String soundPath = "Sound\\creaking_door.mp3";
+	
+	protected String movDirection = "UP";
 	protected String name = "Enemy";
 
 	protected int currentPositionX;
@@ -50,6 +51,11 @@ public abstract class Enemy extends Element {
 		mediaPlayer.play();
 	}
 	
+	/**
+	 * Gets the name of the Enemy.
+	 * 
+	 * @return The name of the Enemy.
+	 */
 	public String getString() {
 		return name;
 	}
@@ -57,22 +63,12 @@ public abstract class Enemy extends Element {
 	/**
 	 * Draws the enemy's sprite.
 	 * 
-	 * @param gc The graphics context's canvas buffer, used to draw to
-	 * @param X  The X coordinate of where it needs to be drawn to
-	 * @param Y  The Y coordinate of where it needs to be drawn to
+	 * @param gc The graphics context's canvas buffer, used to draw to.
+	 * @param X  The X coordinate of where it needs to be drawn to.
+	 * @param Y  The Y coordinate of where it needs to be drawn to.
 	 */
 	public void draw(GraphicsContext gc, int X, int Y) {
 		gc.drawImage(image, X, Y, HUNDRED, HUNDRED);
-	}
-
-	/**
-	 * Sets the image for the enemy's sprite.
-	 * 
-	 * @param path The path to the image file, stored in sub class
-	 * @throws FileNotFoundException
-	 */
-	protected void setImage(String path) throws FileNotFoundException {
-		image = new Image(new FileInputStream(path));
 	}
 	
 	/**
@@ -84,13 +80,16 @@ public abstract class Enemy extends Element {
 	}
 	
 	/**
-	 * gets the current move direction.
+	 * Gets the current move direction.
 	 * @return current move direction.
 	 */
 	public String getMovDirection() {
 		return this.movDirection;
 	}
 	
+	/**
+	 * Reverses the enemy's current move direction.
+	 */
 	public void reverseDirection() {
 		switch (this.getMovDirection()) {
 		case (UP):
@@ -114,10 +113,10 @@ public abstract class Enemy extends Element {
 	/**
 	 * Checks if next move is possible.
 	 * 
-	 * @param gb the game board in play
-	 * @param x  the X coordinate of new position
-	 * @param y  the Y coordinate of new position
-	 * @return true if next move is valid else false
+	 * @param gb The game board in play.
+	 * @param x  The X coordinate of new position.
+	 * @param y  The Y coordinate of new position.
+	 * @return True if next move is valid else false.
 	 */
 	public static boolean checkMove(GameBoard gb, int x, int y) {
 		Element[][] board = gb.getBoard();
@@ -129,5 +128,16 @@ public abstract class Enemy extends Element {
 		else
 			return false;
 
+	}
+	
+	/**
+	 * Sets the image for the enemy's sprite.
+	 * 
+	 * @param path The path to the image file, stored in sub class.
+	 * @throws FileNotFoundException Tells the system that this
+	 * method could cause an error of this type.
+	 */
+	protected void setImage(String path) throws FileNotFoundException {
+		image = new Image(new FileInputStream(path));
 	}
 }

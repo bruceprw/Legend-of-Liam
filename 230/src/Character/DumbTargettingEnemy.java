@@ -12,8 +12,8 @@ import application.GameBoard;
  */
 public class DumbTargettingEnemy extends Enemy {
 
+	private static final String DUMB = "DUMB";
 	private String path = "Images\\idiot.png";
-	private final String DUMB = "DUMB";
 
 	/**
 	 * Create a new instance of dumb enemy.
@@ -36,14 +36,15 @@ public class DumbTargettingEnemy extends Enemy {
 	
 
 	/**
+	/**
 	 * Get the next X-coordinate for the dumb enemy.
 	 * 
-	 * @param gb      the game board for checking elements.
-	 * @param playerX the player's x-coordinate.
-	 * @param playerY the player's y-coordinate.
-	 * @param x       the enemy's x-coordinate.
-	 * @param y       the enemy's y-coordinate.
-	 * @return the position of the next move.
+	 * @param gb      The game board for checking elements.
+	 * @param playerX The player's x-coordinate.
+	 * @param playerY The player's y-coordinate.
+	 * @param x       The enemy's x-coordinate.
+	 * @param y       The enemy's y-coordinate.
+	 * @return The position of the next move.
 	 */
 	public int getNewX(GameBoard gb, int playerX, int playerY, int x, int y) {
 		int xD = playerX - x;
@@ -93,12 +94,12 @@ public class DumbTargettingEnemy extends Enemy {
 	/**
 	 * Get the next Y-coordinate for dumb enemy.
 	 * 
-	 * @param gb      the gameboard for checking elements.
-	 * @param playerX the player's X-coordinate.
-	 * @param playerY the player's Y-coordinate.
-	 * @param x       the enemy's X-coordinate.
-	 * @param y       the enemy's Y-coordinate.
-	 * @return the position of the next move.
+	 * @param gb      The gameboard for checking elements.
+	 * @param playerX The player's X-coordinate.
+	 * @param playerY The player's Y-coordinate.
+	 * @param x       The enemy's X-coordinate.
+	 * @param y       The enemy's Y-coordinate.
+	 * @return The position of the next move.
 	 */
 	public int getNewY(GameBoard gb, int playerX, int playerY, int x, int y) {
 		int xD = playerX - x;

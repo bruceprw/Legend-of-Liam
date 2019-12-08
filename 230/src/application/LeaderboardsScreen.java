@@ -2,7 +2,6 @@ package application;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import application.LevelTime;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +20,8 @@ import javafx.scene.layout.VBox;
  * 
  * GUI for the leaderboard screen.
  * 
- * @author LV-ThinkPD
+ * @author Gideon Davies
+ * @author Salter Heffron
  *
  */
 public class LeaderboardsScreen extends Screen {
@@ -47,8 +47,8 @@ public class LeaderboardsScreen extends Screen {
 	 * methods generate the screen.
 	 * 
 	 * @param level The leaderboards is split into levels and thus for correct level
-	 *              times to be displayed the required level must be known and it passed
-	 *              as a parameter.
+	 *              times to be displayed the required level must be known and it
+	 *              passed as a parameter.
 	 */
 	public LeaderboardsScreen(String level, UserProfile user) {
 		screenInit(level);
@@ -59,11 +59,10 @@ public class LeaderboardsScreen extends Screen {
 	 * Used to draw the leaderboard to the screen. When the button is pressed the
 	 * next level is shown.
 	 * 
-	 * @param level The level for which the corresponding
-	 * leaderboard file to be displayed
+	 * @param level The level for which the corresponding leaderboard file to be
+	 *              displayed
 	 */
 	private void screenInit(String level) {
-		System.out.println(level);
 		ld = new Leaderboard(level);
 		list = ld.getList();
 		root = new BorderPane();
@@ -84,9 +83,7 @@ public class LeaderboardsScreen extends Screen {
 			Button b = new Button("" + (i + 1));
 			b.setMinSize(LEVEL_BUTTON_SIZE, LEVEL_BUTTON_SIZE);
 			b.setOnAction(event -> {
-				System.out.println(b.getText());
 				switchScreen(new LeaderboardsScreen(b.getText(), user));
-				System.out.println(ld.getList());
 			});
 			levelButtons.add(b);
 			levelGrid.add(b, i % BTNS_PER_ROW, i / BTNS_PER_ROW);
@@ -143,21 +140,14 @@ public class LeaderboardsScreen extends Screen {
 		TableColumn<LevelTime, String> time = new TableColumn<LevelTime, String>("Time");
 		time.setCellValueFactory(new PropertyValueFactory<LevelTime, String>("StringTime"));
 
-		// let's not use the rank. the list is sorted by insertion sort. so there is no
-		// reason to show an extra"rank" column...
-
-		leaderboard.getColumns().addAll(rank, username, time);
+		leaderboard.getColumns().addAll(username, time);
 	}
 
 	/**
-	 * Used to loop through the list leaderboard data elements and tranpose them to the
-	 * leaderboard table list.
+	 * Used to loop through the list leaderboard data elements and transpose them to
+	 * the leaderboard table list.
 	 */
 	private void addItems() {
-		// TODO: Load list of users function.
-
-		// E.g., Delete when you need to
-
 		for (int i = 0; i < ld.getList().size(); i++) {
 			leaderboard.getItems().add(ld.getList().get(i));
 		}
