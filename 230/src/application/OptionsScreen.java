@@ -23,40 +23,41 @@ import javafx.stage.Stage;
  *
  */
 public class OptionsScreen extends Screen {
-	BorderPane root;
+	private BorderPane root;
 
-	UserProfile user;
+	private UserProfile user;
 
-	VBox optionsPane;
-	Button editUserPass;
-	Button resetProgress;
-	Button deleteProfile;
+	private VBox optionsPane;
+	private Button editUserPass;
+	private Button resetProgress;
+	private Button deleteProfile;
 
-	GridPane editGrid;
-	HBox editButtonsPane;
-	Button submit;
-	Button editCancel;
-	TextField username = new TextField();
-	PasswordField password = new PasswordField();
-	PasswordField checkPass = new PasswordField();
-	PasswordField oldPass = new PasswordField();
+	private GridPane editGrid;
+	private HBox editButtonsPane;
+	private Button submit;
+	private Button editCancel;
+	private TextField username = new TextField();
+	private PasswordField password = new PasswordField();
+	private PasswordField checkPass = new PasswordField();
+	private PasswordField oldPass = new PasswordField();
 
-	Text resetPrompt;
-	HBox resetButtonsPane;
-	Button reset;
-	Button resetCancel;
+	private Text resetPrompt;
+	private HBox resetButtonsPane;
+	private Button reset;
+	private Button resetCancel;
 
-	Text deletePrompt;
-	HBox deleteButtonsPane;
-	Button delete;
-	Button deleteCancel;
+	private Text deletePrompt;
+	private HBox deleteButtonsPane;
+	private Button delete;
+	private Button deleteCancel;
 
 	/**
 	 * Create an instance of the options screen for a given user, mainly calling
 	 * other methods within the class.
 	 * 
-	 * @param user allows the screen to determine which users' options to change or
-	 *             display.
+	 * @param user
+	 *            allows the screen to determine which users' options to change
+	 *            or display.
 	 */
 	public OptionsScreen(UserProfile user) {
 		root = new BorderPane();
@@ -103,13 +104,12 @@ public class OptionsScreen extends Screen {
 			root.setBottom(deleteButtonsPane);
 		});
 
-		optionsPane.getChildren().addAll
-			(editUserPass, resetProgress, deleteProfile);
+		optionsPane.getChildren().addAll(editUserPass, resetProgress, deleteProfile);
 	}
 
 	/**
-	 * Used to update the screen with fields for the user to alter or change their
-	 * password and save those changes.
+	 * Used to update the screen with fields for the user to alter or change
+	 * their password and save those changes.
 	 */
 	private void buildEdit() {
 		editGrid = new GridPane();
@@ -135,10 +135,9 @@ public class OptionsScreen extends Screen {
 		submit = new Button("Save Changes");
 		submit.setOnAction(event -> {
 			if (fieldsFilled() && uniqueUsername() && passwordsMatch() && oldPassCorrect()) {
-				UserProfile.updateUserProfile(user.getName(),
-					username.getText(), password.getText(), user.getLevelProg());
-				user = new UserProfile(username.getText(), 
-					password.getText(), user.getLevelProg());
+				UserProfile.updateUserProfile(user.getName(), username.getText(), password.getText(),
+						user.getLevelProg());
+				user = new UserProfile(username.getText(), password.getText(), user.getLevelProg());
 				clearTextBoxes();
 				root.setCenter(optionsPane);
 				root.setBottom(null);
@@ -157,8 +156,8 @@ public class OptionsScreen extends Screen {
 	}
 
 	/**
-	 * Allows the user to reset their level progress. Displays a yes/no popup screen
-	 * to user.
+	 * Allows the user to reset their level progress. Displays a yes/no popup
+	 * screen to user.
 	 */
 	private void buildReset() {
 		resetPrompt = new Text("Are you sure you want to reset level progress?");
@@ -167,8 +166,7 @@ public class OptionsScreen extends Screen {
 		reset = new Button("Yes, reset.");
 		reset.setOnAction(event -> {
 			user.setLevelProg(0);
-			UserProfile.updateUserProfile(user.getName(), user.getName(), 
-				user.getPassword(), 0);
+			UserProfile.updateUserProfile(user.getName(), user.getName(), user.getPassword(), 0);
 			root.setCenter(optionsPane);
 			root.setBottom(null);
 		});
@@ -184,22 +182,19 @@ public class OptionsScreen extends Screen {
 	}
 
 	/**
-	 * Allows the user to delete their profile. Displays a yes/no popup screen to
-	 * user.
+	 * Allows the user to delete their profile. Displays a yes/no popup screen
+	 * to user.
 	 */
 	private void buildDelete() {
-		deletePrompt = new Text("Are you sure you want to delete " + 
-			user.getName() + "?");
+		deletePrompt = new Text("Are you sure you want to delete " + user.getName() + "?");
 		deleteButtonsPane = new HBox();
 
 		delete = new Button("Yes, delete.");
 		delete.setOnAction(event -> {
-			UserProfile.deleteUserProfile(user.getName(), 
-				user.getPassword(), user.getLevelProg());
+			UserProfile.deleteUserProfile(user.getName(), user.getPassword(), user.getLevelProg());
 			root.setCenter(optionsPane);
 			root.setBottom(null);
 
-			// Unsure if exception should be caught here or in titlescreen constructor
 			try {
 				switchScreen(new TitleScreen());
 			} catch (Exception e) {
@@ -220,6 +215,11 @@ public class OptionsScreen extends Screen {
 		deleteButtonsPane.setAlignment(Pos.CENTER_RIGHT);
 	}
 
+	/**
+	 * Checks whether all text boxes have something entered into them.
+	 * 
+	 * @return True, if all fields have input. False otherwise.
+	 */
 	private boolean fieldsFilled() {
 		boolean userEmpty = username.getText().isEmpty();
 		boolean newPassEmpty = password.getText().isEmpty();
@@ -229,6 +229,13 @@ public class OptionsScreen extends Screen {
 		return !(userEmpty || newPassEmpty || checkPassEmpty || oldPassEmpty);
 	}
 
+	/**
+	 * Checks whether the username entered is used by another profile (or if the
+	 * username entered is the same as their current username).
+	 * 
+	 * @return True, if the name is unique or is their old username. False
+	 *         otherwise.
+	 */
 	private boolean uniqueUsername() {
 		UserProfile.readList();
 
@@ -240,14 +247,27 @@ public class OptionsScreen extends Screen {
 		return unique || sameName;
 	}
 
+	/**
+	 * Checks whether the passwords entered are matching.
+	 * 
+	 * @return True, if the text in those boxes are the same. False otherwise.
+	 */
 	private boolean passwordsMatch() {
 		return password.getText().equals(checkPass.getText());
 	}
 
+	/**
+	 * Checks whether they have entered their old password correctly.
+	 * 
+	 * @return True, if the password is correct. False otherwise.
+	 */
 	private boolean oldPassCorrect() {
 		return oldPass.getText().equals(user.getPassword());
 	}
 
+	/**
+	 * Clear all the text boxes in the 'Edit Profile' section.
+	 */
 	private void clearTextBoxes() {
 		username.setText("");
 		password.setText("");
