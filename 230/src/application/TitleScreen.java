@@ -26,7 +26,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
- * The GUI for the title screen.
+ * The GUI for the title screen. Contains the UI elements
+ * that make up the title screen, and methods to build them.
  * 
  * @author Gideon Davies.
  *

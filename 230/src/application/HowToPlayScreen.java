@@ -25,24 +25,17 @@ import javafx.scene.text.Text;
  *
  */
 public class HowToPlayScreen extends Screen {
-	/**
-	 * Width of the HowToPlayScreen.
-	 */
-	protected final static int HOW_TO_PLAY_WIDTH = 700;
-	/**
-	 * Height of the HowToPlayScreen.
-	 */
-	protected final static int HOW_TO_PLAY_HEIGHT = 700;
+	private static final String TEXT_FILE = 
+			"Images\\How-To images\\how-to-text.txt";
+	private static final int HOW_TO_PLAY_WIDTH = 700;
+	private static final int HOW_TO_PLAY_HEIGHT = 700;
 
-	ArrayList<String> texts = new ArrayList<String>();
+	private ArrayList<String> texts = new ArrayList<String>();
 	private int pageIndex = 0;
 
 	private BorderPane root;
 	private ImageView view;
 	private Text displayText;
-	private Text buttonPrompt;
-	private Button next;
-	private Button previous;
 
 	/**
 	 * Creates the information screen and sets the default image.
@@ -122,7 +115,7 @@ public class HowToPlayScreen extends Screen {
 	 *                               an error whereby the file cannot be located.
 	 */
 	private void readFile() throws FileNotFoundException {
-		File file = new File("Images\\How-To images\\how-to-text.txt");
+		File file = new File(TEXT_FILE);
 		Scanner in = new Scanner(file);
 		in.useDelimiter("#");
 

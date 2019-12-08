@@ -20,7 +20,8 @@ import javafx.scene.layout.VBox;
  * 
  * GUI for the leaderboard screen.
  * 
- * @author Gideon Davies & Salter Heffron
+ * @author Gideon Davies
+ * @author Salter Heffron
  *
  */
 public class LeaderboardsScreen extends Screen {
@@ -139,21 +140,14 @@ public class LeaderboardsScreen extends Screen {
 		TableColumn<LevelTime, String> time = new TableColumn<LevelTime, String>("Time");
 		time.setCellValueFactory(new PropertyValueFactory<LevelTime, String>("StringTime"));
 
-		// let's not use the rank. the list is sorted by insertion sort. so there is no
-		// reason to show an extra"rank" column...
-
 		leaderboard.getColumns().addAll(username, time);
 	}
 
 	/**
-	 * Used to loop through the list leaderboard data elements and tranpose them to
+	 * Used to loop through the list leaderboard data elements and transpose them to
 	 * the leaderboard table list.
 	 */
 	private void addItems() {
-		// TODO: Load list of users function.
-
-		// E.g., Delete when you need to
-
 		for (int i = 0; i < ld.getList().size(); i++) {
 			leaderboard.getItems().add(ld.getList().get(i));
 		}
