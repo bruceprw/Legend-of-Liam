@@ -16,7 +16,8 @@ public class UserProfile {
 	private String name;
 	private String password;
 	private int levelProg;
-	private static String filePath = "UserProfiles\\profiles.txt";
+	//private static String filePath = "UserProfiles\\profiles.txt";
+	private static String filePath = "230" + File.separatorChar + "UserProfiles" + File.separatorChar + "profiles.txt";
 	private static ArrayList<UserProfile> list = new ArrayList<UserProfile>();
 
 	/**

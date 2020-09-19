@@ -1,5 +1,6 @@
 package Character;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import application.Element;
@@ -14,7 +15,7 @@ import cell.Ground;
  */
 public class StraightLineEnemy extends Enemy {
 
-	private final String path = "Images\\straightE.png";
+	private final String path = "230" + File.separatorChar + "Images" + File.separatorChar + "straightE.png";
 	private final String STARIGHT = "STRAIGHT";
 
 	/**

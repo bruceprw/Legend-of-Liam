@@ -43,19 +43,19 @@ public class LevelScreen extends Screen {
 	public LevelScreen(UserProfile user) {
 		this.user = user;
 
-		music = new Media(new File("Sound\\BGM\\bg.mp3").toURI().toString());
+		music = new Media(new File("230" + File.separatorChar + "Sound" + File.separatorChar + "BGM" + File.separatorChar + "bg.mp3").toURI().toString());
 
 		mediaPlayer = new MediaPlayer(music);
 		mediaPlayer.setAutoPlay(true);
 		mediaPlayer.play();
 		try {
-			bg = new Image(new FileInputStream("Images\\updateimage\\titlescreenimage.jpg"));
+			bg = new Image(new FileInputStream("230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "titlescreenimage.jpg"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		try {
-			level = new GameBoard("LevelFiles\\levelSelect.txt");
+			level = new GameBoard("230" + File.separatorChar + "LevelFiles" + File.separatorChar + "levelSelect.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

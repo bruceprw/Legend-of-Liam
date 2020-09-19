@@ -1,5 +1,6 @@
 package Character;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import application.GameBoard;
@@ -13,7 +14,7 @@ import application.GameBoard;
 public class SmartTargettingEnemy extends Enemy {
 
 	private final String SMART = "SMART";
-	private String path = "Images\\smart.png";
+	private String path = "230" + File.separatorChar + "Images" + File.separatorChar + "smart.png";
 
 	/**
 	 * Creates a new instance of a smart enemy.

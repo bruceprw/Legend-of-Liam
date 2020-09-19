@@ -15,8 +15,8 @@ import javafx.scene.media.MediaPlayer;
  *
  */
 public class Token extends Collectible {
-	private String path = "Images\\token.png";
-	private static String soundPath = "Sound\\coin_sound.mp3";
+	private String path = "230" + File.separatorChar + "Images" + File.separatorChar + "token.png";
+	private static String soundPath = "230" + File.separatorChar + "Sound" + File.separatorChar + "coin_sound.mp3";
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);
 

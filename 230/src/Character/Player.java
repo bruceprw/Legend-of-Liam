@@ -1,5 +1,6 @@
 package Character;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import application.Element;
@@ -23,7 +24,7 @@ public class Player extends Element {
 	private int[][] pos;
 	private Image image;
 
-	private String path = "Images\\Player2.png";
+	private String path = "230" + File.separatorChar + "Images" + File.separatorChar + "Player2.png";
 	// private java.awt.Image img;
 
 	/**

@@ -42,7 +42,7 @@ public class GameBoard {
 	private int goalX;
 	private int goalY;
 	private int rotation;
-	private File muFile = new File("Sound\\player_killed.wav");
+	private File muFile = new File ("230" + File.separatorChar + "Sound" + File.separatorChar + "player_killed.wav");
 	private Media playerDie = new Media(muFile.toURI().toString());
 
 	private MediaPlayer mediaPlayer;

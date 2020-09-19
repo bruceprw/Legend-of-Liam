@@ -1,5 +1,6 @@
 package Character;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import application.Element;
 import application.Empty;
@@ -15,7 +16,7 @@ import cell.Ground;
  */
 public class WallFollowingEnemy extends Enemy {
 
-	private String path = "Images\\wallHugE.png";
+	private String path = "230" + File.separatorChar + "Images" + File.separatorChar + "wallHugE.png";
 	private String hand;
 	private final String WALLHUG = "WALLHUG";
 

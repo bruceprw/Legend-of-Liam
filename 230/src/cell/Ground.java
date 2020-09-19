@@ -18,8 +18,8 @@ import javafx.scene.media.MediaPlayer;
  */
 public class Ground extends Cell {
 
-	private String path = "Images\\updateimage\\ground.png";
-	private static String soundPath = "Sound\\foot_step.mp3";
+	private String path = "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "ground.png";
+	private static String soundPath = "230" + File.separatorChar + "Sound" + File.separatorChar + "foot_step.mp3";
 	private Image image;
 	private static Media music = new Media(new File(soundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer = new MediaPlayer(music);

@@ -49,7 +49,7 @@ public class FileOutputer {
 		// attempts to read in the file
 
 		try {
-			File outputFile = new File("LevelFiles\\" + lt.getUsername() + ".txt");
+			File outputFile = new File("230" + File.separatorChar + "LevelFiles" + File.separatorChar + lt.getUsername() + ".txt");
 			PrintWriter out = new PrintWriter(outputFile);
 			out.print(output + temp);
 			out.close();

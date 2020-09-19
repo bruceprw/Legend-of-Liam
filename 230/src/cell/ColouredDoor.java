@@ -18,21 +18,21 @@ import javafx.scene.media.MediaPlayer;
 public class ColouredDoor extends Cell {
 
 	private String colour;
-	private String greenPath = "Images\\updateimage\\closed_green_door.png";
-	private String redPath = "Images\\updateimage\\closed_red_door.png";
-	private String yellowPath = "Images\\updateimage\\closed_yellow_door.png";
-	private String bluePath = "Images\\updateimage\\closed_blue_door.png";
-	private static String knockSoundPath = "Sound\\door_knock.mp3";
-	private static String openSoundPath = "Sound\\creaking_door.mp3";
+	private String greenPath = "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "closed_green_door.png";
+	private String redPath = "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "closed_red_door.png";
+	private String yellowPath = "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "closed_yellow_door.png";
+	private String bluePath = "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "closed_blue_door.png";
+	private static String knockSoundPath = "230" + File.separatorChar + "Sound" + File.separatorChar + "door_knock.mp3";
+	private static String openSoundPath = "230" + File.separatorChar + "Sound" + File.separatorChar + "creaking_door.mp3";
 	private Image image;
 	private boolean opened;
 	private static Media knockMusic = new Media(new File(knockSoundPath).toURI().toString());
 	private static Media openMusic = new Media(new File(openSoundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer;
-	private static String openedYPath = "Images\\updateimage\\open_yellow_door.png";
-	private static String openedGPath = "Images\\updateimage\\open_green_door.png";
-	private static String openedRPath = "Images\\updateimage\\open_red_door.png";
-	private static String openedBPath = "Images\\updateimage\\open_red_door.png";
+	private static String openedYPath = "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "open_yellow_door.png";
+	private static String openedGPath = "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "open_green_door.png";
+	private static String openedRPath = "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "open_red_door.png";
+	private static String openedBPath = "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "open_red_door.png";
 
 	/**
 	 * Sets the information of the door.

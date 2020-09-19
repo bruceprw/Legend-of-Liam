@@ -13,7 +13,7 @@ public class FileReader
 
 	public Elements[][] read(String filePath) throws FileNotFoundException
 	{
-		File file = new File("C:\\Users\\user\\Desktop\\Map.txt");
+		File file = new File("C:" + File.separatorChar + "Users" + File.separatorChar + "user" + File.separatorChar + "Desktop" + File.separatorChar + "Map.txt");
 		Scanner in = new Scanner(file);
 		String sizeLine = in.nextLine();
 		System.out.println(sizeLine);

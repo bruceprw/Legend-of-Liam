@@ -19,15 +19,15 @@ import javafx.scene.media.MediaPlayer;
 public class TokenDoor extends Cell {
 	/* The token number needed to unlock the door. */
 	private int tokenNumToUnlockDoor;
-	private String path = "Images\\token_door.png";
-	private static String knockSoundPath = "Sound\\door_knock.mp3";
-	private static String openSoundPath = "Sound\\creaking_door.mp3";
+	private String path = "230" + File.separatorChar + "Images" + File.separatorChar + "token_door.png";
+	private static String knockSoundPath = "230" + File.separatorChar + "Sound" + File.separatorChar + "door_knock.mp3";
+	private static String openSoundPath = "230" + File.separatorChar + "Sound" + File.separatorChar + "creaking_door.mp3";
 	private static Media knockMusic = new Media(new File(knockSoundPath).toURI().toString());
 	private static Media openMusic = new Media(new File(openSoundPath).toURI().toString());
 	private static MediaPlayer mediaPlayer;
 	private Image image;
 	private boolean opened;
-	private static String openedDoorPath = "Images\\open_token_door.png";
+	private static String openedDoorPath = "230" + File.separatorChar + "Images" + File.separatorChar + "open_token_door.png";
 
 	/**
 	 * Create instance of the door.

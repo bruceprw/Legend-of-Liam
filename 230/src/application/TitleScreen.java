@@ -3,6 +3,8 @@ package application;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import application.DailyMessage;
 import javafx.geometry.Pos;
@@ -30,15 +32,16 @@ import javafx.scene.text.TextAlignment;
  * screen, and methods to build them.
  * 
  * @author Gideon Davies.
+ * @author Bruce Williams.
  *
  */
 public class TitleScreen extends Screen {
 
 	// Source files
-	private static final String BACKGROUND_FILE = "Images\\updateimage\\titlescreenimage.jpg";
-	private static final String MUSIC_FILE = "Sound\\BGM\\Aurora_CurrentsINTRO.mp3";
+	private static final String BACKGROUND_FILE =  "230" + File.separatorChar + "Images" + File.separatorChar + "updateimage" + File.separatorChar + "titlescreenimage.jpg";
+	private static final String MUSIC_FILE = "230" + File.separatorChar + "Sound" + File.separatorChar + "BGM" + File.separatorChar + "Aurora_CurrentsINTRO.mp3";
 	private static final String STYLESHEET_FILE = "titlescreen.css";
-	private static final String PROFILES_FILE = "UserProfiles\\profiles.txt";
+	private static final String PROFILES_FILE = "230" + File.separatorChar + "UserProfiles" + File.separatorChar + "profiles.txt";
 
 	private static final String TITLE_STRING = "Legend Of Liam";
 	private static final String LOGIN_TEXT = "Please enter your login details, or";
@@ -69,9 +72,11 @@ public class TitleScreen extends Screen {
 		}
 
 		// mediaPlayer settings
+		/*
 		mediaPlayer.setAutoPlay(true);
 		mediaPlayer.setVolume(0.2);
 		mediaPlayer.play();
+		*/
 
 		// Build each Pane
 		buildTopPane();

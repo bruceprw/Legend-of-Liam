@@ -31,7 +31,7 @@ public class Leaderboard {
 	 * @param level Which levels leadboard should be displayed
 	 */
 	public void initLeaderboard(String level) {
-		this.filePath = "Leaderboard\\leaderboard" + level + ".txt";
+		this.filePath = "230" + File.separatorChar + "Leaderboard" + File.separatorChar + "leaderboard" + level + ".txt";
 		readLevelTime();
 		sortList();
 	}

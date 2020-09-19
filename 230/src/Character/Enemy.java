@@ -32,7 +32,7 @@ public abstract class Enemy extends Element {
 	protected static final int HUNDRED = 100;
 
 	// is this a constant?
-	private final String soundPath = "Sound\\creaking_door.mp3";
+	private final String soundPath = "230" + File.separatorChar + "Sound" + File.separatorChar + "creaking_door.mp3";
 
 	protected String movDirection = "UP";
 	protected String name = "Enemy";

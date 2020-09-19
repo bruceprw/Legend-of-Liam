@@ -1,5 +1,6 @@
 package Character;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import application.GameBoard;
 
@@ -13,7 +14,7 @@ import application.GameBoard;
 public class DumbTargettingEnemy extends Enemy {
 
 	private static final String DUMB = "DUMB";
-	private String path = "Images\\idiot.png";
+	private String path = "230" + File.separatorChar + "Images" + File.separatorChar + "idiot.png";
 
 	/**
 	 * Create a new instance of dumb enemy.

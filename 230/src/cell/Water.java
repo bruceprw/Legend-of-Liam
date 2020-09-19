@@ -18,8 +18,8 @@ import javafx.scene.media.MediaPlayer;
  */
 public class Water extends Cell {
 
-	private String path = "Images\\\\updateimage\\water.png";
-	private String soundPath = "Sound\\water_splash.mp3";
+	private String path = "230" + File.separatorChar + "Images"+ File.separatorChar + "updateimage" + File.separatorChar + "water.png";
+	private String soundPath = "230" + File.separatorChar + "Sound" + File.separatorChar + "water_splash.mp3";
 	private Image image;
 	private Media music = new Media(new File(soundPath).toURI().toString());
 	private MediaPlayer mediaPlayer = new MediaPlayer(music);

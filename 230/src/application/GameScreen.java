@@ -40,7 +40,8 @@ public class GameScreen extends Screen {
 	private GameBoard level;
 	private UserProfile user;
 	private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-	private Media music = new Media(new File("Sound\\BGM\\bg.mp3").toURI().toString());
+	private Media music = new Media (new File("230" + File.separatorChar + "Sound" + File.separatorChar + "BGM" +
+			File.separatorChar + "bg.mp3").toURI().toString());
 	private MediaPlayer bg = new MediaPlayer(music);
 
 	/**
@@ -53,8 +54,8 @@ public class GameScreen extends Screen {
 		bg.play();
 
 		try {
-			new Image(new FileInputStream("Images\\game_over.png"));
-			new Image(new FileInputStream("Images\\gameoverbg.png"));
+			new Image(new FileInputStream("Images" + File.separatorChar + "game_over.png"));
+			new Image(new FileInputStream("Images" + File.separatorChar + "gameoverbg.png"));
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
@@ -63,7 +64,7 @@ public class GameScreen extends Screen {
 		this.user = user;
 
 		try {
-			level = new GameBoard("LevelFiles\\" + levelNo + ".txt");
+			level = new GameBoard("LevelFiles" + File.separatorChar + "" + levelNo + ".txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
